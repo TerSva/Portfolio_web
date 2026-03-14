@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tereza — UI/UX & Illustration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ================================
+   RESET & VARS
+================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg: #001F1C;
+  --bg2: #012622;
+  --em: #004D40;
+  --gold: #FFD700;
+  --copper: #E65C00;
+  --ch: #F5F5DC;
+  --ch2: rgba(245,245,220,0.85);
+  --ch3: rgba(245,245,220,0.60);
+  --font-d: 'DM Serif Display', Georgia, serif;
+  --font-s: 'Space Grotesk', sans-serif;
+  --font-m: 'IBM Plex Mono', monospace;
+}
+#liquid-bg {
+  filter: brightness(1.3) saturate(1.2);
+}
+html{overflow:hidden;height:100%;}
+body{
+  background:var(--bg);
+  color:var(--ch);
+  font-family:var(--font-s);
+  font-weight:300;
+  height:100%;
+  overflow:hidden;
+  cursor:auto;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;cursor:auto;}
+button{cursor:auto;background:none;border:none;color:inherit;font:inherit;}
+
+/* ================================
+   GOLDEN SPOTLIGHT REVEAL
+================================ */
+body {
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    700px 450px ellipse at var(--mouse-x) var(--mouse-y),
+    rgba(255, 200, 50, 0.06) 0%,
+    rgba(255, 185, 15, 0.03) 25%,
+    rgba(200, 160, 10, 0.01) 50%
+  );
+  mix-blend-mode: screen;
+}
+
+/* ================================
+   NOISE OVERLAY
+================================ */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.032;pointer-events:none;z-index:1000;
+}
+
+/* Aurora removed — replaced by CSS spotlight */
+
+
+#loader{
+  position:fixed;inset:0;background:var(--bg);
+  z-index:5000;display:flex;align-items:center;justify-content:center;
+  transition:opacity .8s ease, visibility .8s ease;
+}
+#loader.gone{opacity:0;visibility:hidden;}
+.loader-count{
+  font-family:var(--font-d);font-size:clamp(4rem,12vw,10rem);
+  font-weight:400;color:var(--ch);opacity:0.07;
+  font-style:italic;letter-spacing:-0.02em;
+  transition:opacity .4s;
+}
+.loader-line{
+  position:absolute;bottom:0;left:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  width:0%;transition:width 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ================================
+   MAIN WRAPPER — HORIZONTAL SCROLL
+================================ */
+#scroller{
+  position:fixed;inset:0;
+  display:flex;flex-direction:row;
+  will-change:transform;
+}
+
+/* ================================
+   SCÉNICKÝ STÍN (FOCUS MASK)
+================================ */
+@media (min-width: 600px) {
+  #scroller::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    /* Vytváříme divadelní oponu: zleva a zprava tma, střed svítí */
+    background: linear-gradient(
+      to right,
+      rgba(0,31,28, 0.6) 0%,     /* Vlevo: mírný stín */
+      transparent 15%,           
+      transparent 75%,           /* Střed: čistý výhled */
+      rgba(0,31,28, 0.95) 100%   /* Vpravo: silný stín potlačující incoming panel */
+    );
+    pointer-events: none;
+    z-index: 800;
+  }
+}
+#track{
+  display:flex;flex-direction:row;
+  align-items:stretch;
+  height:100%;
+  /* width set by JS */
+}
+
+/* ================================
+   PANEL BASE
+================================ */
+.panel{
+  height:100%;flex-shrink:0;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:3rem 4vw;
+}
+
+/* ================================
+   PANEL 0 — INTRO / HERO
+================================ */
+#p-hero{
+  width:100vw;
+  background: radial-gradient(circle, transparent 20%, rgba(0,31,28,0.65) 100%);
+  justify-content: center;
+}
+.hero-tagline{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-52%);
+  text-align:center;
+  width:85%;
+  pointer-events:none;
+}
+.hero-big{
+  font-family:var(--font-d);
+  font-size:clamp(3.8rem,8.5vw,10.5rem);
+  font-weight:400;
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:var(--ch);
+}
+.hero-big em{
+  font-style: italic;
+  font-weight: 400;
+  /* Dáme tomu velmi jemnou výplň, aby to nezmizelo úplně */
+  color: rgba(245, 245, 220, 0.15); 
+  /* Vrátíme linku, ale tenkou (1px) a lehce průhlednou, aby nedělala zuby */
+  -webkit-text-stroke: 1px rgba(245, 245, 220, 0.6); 
+  /* Záře bude mnohem menší a kontrolovaná */
+  text-shadow: 0 0 15px rgba(245, 245, 220, 0.2); 
+  letter-spacing: -0.02em;
+}
+.hero-sub-row{
+  position:absolute;bottom:3.5rem;left:4vw;right:4vw;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.hero-desc{
+  font-family:var(--font-s);
+  font-size:clamp(.7rem,1vw,.85rem);
+  line-height:1.6;color:var(--ch2);
+  max-width:22rem;letter-spacing:.03em;
+}
+.hero-scroll-hint{
+  font-family:var(--font-m);
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--ch3);
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-scroll-hint::before{
+  content:'';display:block;width:40px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  animation:pulseW 2s ease-in-out infinite;
+}
+@keyframes pulseW{0%,100%{width:40px;opacity:.4}50%{width:70px;opacity:1}}
+
+@keyframes slideMeetRight{
+  from{opacity:0;transform:translateX(-60px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes slideMeetLeft{
+  from{opacity:0;transform:translateX(60px);}
+  to{opacity:1;transform:translateX(0);}
+}
+.hero-line-left{
+  display:inline-block;
+  opacity:0;
+  transform:translateX(-60px);
+  transition: none;
+}
+.hero-line-right{
+  display:inline-block;
+  opacity:0;
+  transform:translateX(60px);
+  transition: none;
+}
+.app-ready .hero-line-left{
+  animation:slideMeetRight 1.1s cubic-bezier(0.16,1,0.3,1) both;
+  animation-delay:.1s;
+}
+.app-ready .hero-line-right{
+  animation:slideMeetLeft 1.1s cubic-bezier(0.16,1,0.3,1) both;
+  animation-delay:.35s;
+}
+
+/* Name top-left */
+.site-name{
+  position:fixed;top:2.5rem;left:4vw;
+  font-family:var(--font-m);font-size:.7rem;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--ch3);
+  z-index:9999!important;
+  background: rgba(0, 31, 28, 0.4); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  border: 1px solid rgba(245, 245, 220, 0.08);
+}
+/* Nav top-right */
+.site-nav{
+  position:fixed;top:2.5rem;right:4vw;
+  display:flex;gap:2.5rem;list-style:none;
+  z-index:9999!important;
+  background: rgba(0, 31, 28, 0.4); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  border: 1px solid rgba(245, 245, 220, 0.08);
+}
+.site-nav a{
+  font-family:var(--font-s);
+  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ch2);transition:color .3s;
+}
+.site-nav a:hover{color:var(--gold);}
+
+/* Panel number */
+.panel-num {
+  display: none !important;
+}
+
+/* ================================
+   PANEL — WORK PANEL (horizontal items)
+================================ */
+.work-panels{
+  display:flex;flex-direction:row;height:100%;
+}
+
+/* ================================
+   PROJECT PANEL
+================================ */
+.p-project{
+  width:55vw;
+  background:var(--bg2);
+  border-left:1px solid var(--em);
+  padding:18vh 5vw 3rem;
+  justify-content:flex-start;
+  transition:background .6s;
+}
+.p-project:hover{background:#01302c;}
+
+.proj-index{
+  position:absolute;top:3rem;left:5vw;
+  font-family:var(--font-m);
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);
+}
+
+.proj-title-wrap{
+  margin-bottom:3rem;
+}
+.proj-title{
+  font-family:var(--font-d);
+  font-size:clamp(3rem,6vw,7.5rem);
+  font-weight:400;line-height:1.1;
+  letter-spacing:-0.02em;
+  overflow:hidden;
+}
+.proj-title-inner{
+  display:block;
+  transform:translateY(110%);
+  transition:transform .9s cubic-bezier(0.16,1,0.3,1);
+}
+.p-project.visible .proj-title-inner{transform:translateY(0);}
+
+.proj-title em{
+  font-style:italic;font-weight:400;
+  display:block;color:var(--ch2);
+  font-size:82%;letter-spacing:-0.01em;
+}
+
+.proj-meta{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin-bottom:3rem;
+}
+.meta-item label{
+  display:block;font-family:var(--font-m);font-size:.65rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ch2);margin-bottom:.4rem;
+}
+.meta-item span{
+  font-family:var(--font-m);font-size:.95rem;color:var(--ch);letter-spacing:.05em;
+}
+
+.proj-links-wrap{
+  display:flex;flex-direction:row;gap:1.2rem;align-items:center;
+}
+.btn-modern{
+  padding:.8rem 1.8rem;
+  border-radius:100px;
+  font-family:var(--font-m);font-size:.65rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  transition:all .4s ease;
+  cursor:pointer;
+  background:rgba(255,215,0,0.1);
+  border:1px solid var(--gold);
+  color:var(--gold);
+}
+.btn-modern:hover{
+  background:var(--gold);
+  color:var(--bg);
+}
+.btn-ghost{
+  padding:.8rem 1.8rem;
+  border-radius:100px;
+  font-family:var(--font-m);font-size:.65rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  transition:all .4s ease;
+  cursor:pointer;
+  background:transparent;
+  border:1px solid var(--em);
+  color:var(--ch2);
+}
+.btn-ghost:hover{
+  background:var(--em);
+  color:var(--ch);
+}
+
+/* ================================
+   VISUAL PANEL (beside each project)
+================================ */
+.p-visual{
+  width:45vw;
+  border-left:1px solid var(--em);
+  padding:0;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:var(--bg);
+  position:relative;
+}
+
+.visual-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+
+/* SVG abstract art per panel */
+.vis-art{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.collage-wrap{
+  position:relative;
+  width:65%;
+  aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.92);
+  transition:opacity .9s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.p-visual.visible .collage-wrap{opacity:1;transform:scale(1);}
+.col-img{
+  position:absolute;
+  width:75%;
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  border:1px solid rgba(255,215,0,0.15);
+  transition:all .8s cubic-bezier(0.16,1,0.3,1);
+}
+.img-back-2{
+  transform:translateX(-15%) scale(0.85) rotate(-6deg);
+  opacity:0.4;z-index:1;
+}
+.img-back-1{
+  transform:translateX(15%) scale(0.9) rotate(4deg);
+  opacity:0.6;z-index:2;
+}
+.img-front{
+  transform:scale(1) rotate(0deg);
+  opacity:1;z-index:3;
+}
+/* Ztmavnutí všech při hover na kontejner + Roztažení vějíře pro snazší kliknutí */
+.collage-wrap:hover .col-img {
+  filter: brightness(0.4);
+  opacity: 0.6;
+}
+.collage-wrap:hover .img-back-2 {
+  transform: translateX(-38%) scale(0.85) rotate(-10deg);
+}
+.collage-wrap:hover .img-back-1 {
+  transform: translateX(38%) scale(0.9) rotate(10deg);
+}
+
+/* Konkrétní karta pod kurzorem (každá má teď zafixovanou svou X pozici) */
+.collage-wrap .img-back-2:hover {
+  z-index: 50 !important;
+  filter: brightness(1) !important;
+  opacity: 1 !important;
+  transform: translateX(-38%) scale(1.05) rotate(-2deg) translateY(-8%) !important;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
+  border: 1px solid rgba(255,215,0,0.5) !important;
+}
+.collage-wrap .img-back-1:hover {
+  z-index: 50 !important;
+  filter: brightness(1) !important;
+  opacity: 1 !important;
+  transform: translateX(38%) scale(1.05) rotate(2deg) translateY(-8%) !important;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
+  border: 1px solid rgba(255,215,0,0.5) !important;
+}
+.collage-wrap .img-front:hover {
+  z-index: 50 !important;
+  filter: brightness(1) !important;
+  opacity: 1 !important;
+  transform: translateX(0%) scale(1.05) rotate(0deg) translateY(-8%) !important;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
+  border: 1px solid rgba(255,215,0,0.5) !important;
+}
+
+/* ================================
+   PANEL 3.5 — QUOTE SEPARATOR
+================================ */
+#p-quote {
+  /* Zúžení na úzký "sloup" */
+  width: 50vw; 
+  /* Použijeme tvůj gradient z Visual Booku pro hloubku, ale velmi tmavý */
+  background: linear-gradient(135deg, var(--bg) 0%, #011512 100%);
+  /* Oživíme to jemnou září uprostřed */
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  /* Drobné odsazení zleva a zprava, ať text nedře o kraje */
+  padding: 0 5vw;
+}
+#p-quote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Jemná smaragdová záře uprostřed panelu */
+  background: radial-gradient(circle at center, rgba(0,77,64,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.quote-wrapper {
+  text-align: center;
+}
+.quote-text {
+  font-family: var(--font-d);
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ch);
+  margin-bottom: 2.5rem;
+}
+.quote-text em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.25); 
+}
+.quote-author {
+  font-family: var(--font-m);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ch3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.quote-author::before,
+.quote-author::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--em);
+}
+
+/* ================================
+   ABOUT PANEL
+================================ */
+#p-about{
+  width:100vw;
+  background:var(--bg);
+  border-left:1px solid var(--em);
+  flex-direction:row;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:0;
+  padding:0;
+}
+
+/* Left col — photo placeholder */
+.about-photo{
+  flex:0 0 38vw;
+  min-width:300px;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg2);
+  border-right:1px solid var(--em);
+  transition:box-shadow .5s ease;
+}
+.about-photo:hover{
+  box-shadow:inset 0 0 60px rgba(255,215,0,0.04);
+}
+.my-portrait {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  width: calc(100% - 5rem);
+  height: calc(100% - 5rem);
+  object-fit: cover;
+  z-index: 0;
+}
+.about-photo-inner{
+  position:absolute;inset:2.5rem;
+  z-index: 1;
+  opacity: 0.6;
+  background:
+    linear-gradient(170deg, rgba(0,77,64,0.4) 0%, rgba(0,31,28,0.85) 65%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 48px,
+      rgba(0,77,64,0.05) 48px,
+      rgba(0,77,64,0.05) 49px
+    );
+}
+.about-photo-border{
+  position:absolute;
+  inset:2.5rem;
+  border:1px solid var(--em);
+  pointer-events:none;
+  transition:border-color .5s ease;
+}
+#p-about:hover .about-photo-border{
+  border-color:rgba(255,215,0,0.2);
+}
+.about-photo-border::before,
+.about-photo-border::after{
+  content:'';position:absolute;
+  width:16px;height:16px;
+}
+.about-photo-border::before{
+  top:-1px;left:-1px;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+}
+.about-photo-border::after{
+  bottom:-1px;right:-1px;
+  border-bottom:1px solid var(--gold);
+  border-right:1px solid var(--gold);
+}
+.about-photo-label{
+  position:absolute;bottom:2.8rem;left:3rem;
+  font-family:var(--font-m);font-size:.52rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,215,0,0.3);
+}
+
+/* Right col — content */
+.about-right{
+  flex:1;
+  display:flex;flex-direction:column;
+  justify-content:flex-start;
+  padding:18vh 7vw 6rem 6vw;
+  gap:0;
+}
+.about-title{
+  font-family:var(--font-d);
+  font-size:clamp(2.6rem,4vw,5.5rem);
+  font-weight:400;font-style:italic;
+  line-height:1.1;letter-spacing:-0.02em;
+  margin-bottom:2rem;
+  color:var(--ch);
+}
+.about-title strong{
+  font-weight:400;font-style:normal;
+  font-family:var(--font-d);
+}
+.about-body{
+  font-family:var(--font-s);
+  font-size:clamp(.78rem,.95vw,.92rem);
+  line-height:1.6;color:var(--ch2);
+  max-width:34rem;
+  margin-bottom:3.5rem;
+}
+
+/* Domain list */
+.domain-list{
+  list-style:none;
+  margin:0;padding:0;
+  border-top:1px solid rgba(255,215,0,0.15);
+}
+.domain-item{
+  border-bottom:1px solid rgba(255,215,0,0.15);
+}
+.domain-item a{
+  display:block;
+  padding:1rem 0;
+  font-family:var(--font-s);
+  font-size:1.5rem;
+  font-weight:400;
+  color:var(--ch2);
+  letter-spacing:-0.01em;
+  transform:translateX(0);
+  transition:transform .4s ease, color .4s ease;
+  cursor:pointer;
+}
+.domain-item a:hover{
+  transform:translateX(15px);
+  color:var(--gold);
+}
+.domain-item:hover{
+  border-bottom-color:var(--gold);
+}
+
+/* ================================
+   ART PANEL
+================================ */
+#p-art{
+  width:120vw;
+  background:var(--bg2);
+  border-left:1px solid var(--em);
+  flex-direction:column;
+  justify-content:center;
+  padding:5rem 6vw;
+  pposition: relative; 
+  z-index: 1;
+}
+ #p-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Vytváří jemnou záři uprostřed sekce, okraje zůstávají v tmavé --bg2 */
+  background: radial-gradient(circle at 50% 55%, rgba(0, 77, 64, 0.25) 0%, transparent 65%);
+  z-index: -1;
+  pointer-events: none;
+}
+.art-heading{
+  font-family: var(--font-d);
+  font-size: clamp(2.5rem, 4.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.1; /* Tvá perfektní úprava */
+  letter-spacing: -0.02em;
+  margin-bottom: 4rem;
+  /* Přechod aplikujeme pouze na stín, takže se s layoutem nic nehne */
+  transition: text-shadow 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+.art-heading em{font-style:italic;font-weight:400;color:var(--ch2);}
+
+.art-heading:hover {
+  text-shadow: 0 0 25px rgba(245, 245, 220, 0.25), 0 0 45px rgba(255, 215, 0, 0.15);
+}
+
+/* ================================
+   ART PANEL — ARISTIDE ACCORDION
+================================ */
+.art-scroll-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw; /* Velmi úzké mezery vytváří pocit celistvého bloku */
+  height: 53vh; /* Výška celé harmoniky */
+  width: 100%;
+}
+
+.art-thumb {
+  position: relative;
+  flex: 1; /* V základu jsou všechny stejně široké */
+  overflow: hidden;
+  border-radius: 8px; /* Mírné zaoblení pro eleganci */
+  cursor: pointer;
+  /* Klíčové: Aristide-like easing pro expanzi */
+  transition: flex 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(245, 245, 220, 0.04); 
+}
+
+.art-thumb:hover {
+  flex: 2; /* Zásadní expanze při najetí */
+}
+
+.real-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Obraz se nikdy nedeformuje, pouze ořezává */
+  filter: grayscale(80%) brightness(0.5);
+  transform: scale(1.1); /* Začíná lehce zazoomovaný */
+  transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
+              transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.art-thumb:hover .real-art {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1); /* Plynule odzoomuje při otevření */
+}
+
+.thumb-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4rem 2rem 2rem;
+  /* Ochranný gradient, aby byl text vždy čitelný */
+  background: linear-gradient(to top, rgba(0,31,28,0.95) 0%, transparent 100%);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+
+.art-thumb:hover .thumb-info {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s; /* Text najede s jemným zpožděním po expanzi karty */
+}
+
+.thumb-title {
+  font-family: var(--font-d);
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ch);
+  margin-bottom: 0.3rem;
+  white-space: nowrap; /* Zabrání nehezkému zalamování během animace */
+}
+
+.thumb-type {
+  font-family: var(--font-m);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ================================
+   CONTACT PANEL
+================================ */
+#p-contact{
+  width:100vw;
+  background:var(--bg);
+  border-left:1px solid var(--em);
+  justify-content:center;align-items:flex-start;
+  padding:0 8vw;
+  flex-direction:column;
+  gap:0;
+}
+.contact-label{
+  font-family:var(--font-m);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--ch2);margin-bottom:3rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.contact-label::before{content:'';display:block;width:2rem;height:1px;background:var(--gold);}
+
+.contact-email-block{margin-bottom:5rem;}
+.contact-email{
+  display:block;
+  font-family:var(--font-d);
+  font-size:clamp(2.2rem,6.5vw,8rem);
+  font-weight:400;line-height:1.15;letter-spacing:-0.03em;
+  color:var(--ch);
+  position:relative;
+  transition:color .5s;
+  padding-bottom: 0.1em;
+}
+.contact-email::after{
+  content:attr(data-text);
+  position:absolute;left:0;top:0;
+  color:var(--gold);
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path .5s cubic-bezier(0.16,1,0.3,1);
+}
+.contact-email:hover::after{clip-path:inset(0 0% 0 0);}
+.contact-email:hover{
+  text-shadow:0 0 80px rgba(255,215,0,.2),0 0 160px rgba(255,215,0,.06);
+}
+
+.contact-socials{
+  display:flex;gap:3rem;list-style:none;
+}
+.contact-socials a{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--ch2);
+  position:relative;
+  transition:color .3s;
+  padding-bottom:3px;
+}
+.contact-socials a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0%;height:1px;background:var(--gold);
+  transition:width .4s cubic-bezier(0.16,1,0.3,1);
+}
+.contact-socials a:hover{color:var(--ch);}
+.contact-socials a:hover::after{width:100%;}
+
+.footer-copy{
+  position:absolute;bottom:3rem;right:4vw;
+  font-family:var(--font-m);font-size:.55rem;letter-spacing:.2em;
+  color:var(--ch3);
+}
+
+/* ================================
+   PROGRESS BAR
+================================ */
+#progress{
+  position:fixed;bottom:0;left:0;right:0;
+  height:1px;background:var(--em);z-index:500;
+}
+#progress-fill{
+  height:100%;background:var(--gold);width:0%;
+  box-shadow:0 0 8px rgba(255,215,0,.6);
+  transition:width .1s linear;
+}
+
+/* ================================
+   PANEL LABEL (bottom left per panel)
+================================ */
+.p-label{
+  position:absolute;bottom:3rem;left:4vw;
+  font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--ch3);
+}
+
+/* ================================
+   MAGNETIC HOVER TEXT EFFECT
+================================ */
+.mag{display:inline-block;transition:transform .4s cubic-bezier(0.16,1,0.3,1);}
+
+/* ================================
+   TRANSITION WIPE
+================================ */
+#wipe{
+  position:fixed;inset:0;
+  background:var(--bg2);z-index:3000;
+  transform:scaleX(0);transform-origin:left;
+  pointer-events:none;
+}
+
+/* ================================
+   SCROLL SECTION COUNTER
+================================ */
+#section-counter{
+  position:fixed;right:3rem;top:50%;
+  transform:translateY(-50%);
+  display:flex;flex-direction:column;
+  gap:.6rem;z-index:200;
+}
+.counter-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--ch3);
+  transition:background .3s, transform .3s;
+}
+.counter-dot.active{background:var(--gold);transform:scale(1.8);}
+
+/* ================================
+   FOCUS VISIBLE
+================================ */
+:focus{outline:none;}
+:focus-visible{box-shadow:0 0 0 3px rgba(255,215,0,.5);border-radius:2px;}
+
+/* ================================
+   MOBILE FALLBACK
+================================ */
+@media (max-width: 768px) {
+  /* 1. RESET PROSTŘEDÍ */
+  html, body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+  }
+  #scroller, #track {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    transform: none !important;
+    position: relative !important;
+    overflow-x: hidden !important;
+  }
+  #section-counter, .hero-scroll-hint, .site-name, .panel-num, .vis-label {
+    display: none !important;
+  }
+
+  /* 2. UNIVERZÁLNÍ PANEL */
+  .panel, .p-project, .p-visual, .p-about, .p-art, .p-contact {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    padding: 120px 8vw 80px !important;
+    border-left: none !important;
+    border-bottom: 1px solid var(--em);
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  /* 3. HERO SEKCE */
+  #p-hero { 
+    justify-content: center !important; 
+    align-items: center !important; /* Vracíme na střed z flex-start */
+    padding: 0 6vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center !important; /* Vracíme na střed z left */
+  }
+
+  .hero-tagline {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    /* Smazáno transform: none !important; */
+    width: 100% !important;
+    margin-bottom: 2.5rem !important;
+    max-width: none !important;
+    text-align: center !important;
+    transform: translateX(10px)  /* Jemný posun doprava */
+  }
+
+  .hero-big {
+    font-size: clamp(2.8rem, 12vw, 3.4rem) !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-sub-row {
+    position: relative !important;
+    bottom: 2rem !important;
+    left: 0.8vw !important;
+    right: 1vw;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.2rem !important;
+    margin-top: 1rem !important;
+    transform: translateX(5px) !important;
+  }
+
+  .hero-desc {
+    text-align: center !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+    line-height: 1.6 !important;
+    color: var(--ch2) !important;
+  }
+
+  /* 4. O MNĚ — OPRAVA FOTKY (TVŮJ PROBLÉM) */
+  #p-about { padding: 0 !important; } /* Fotka bude na celou šířku bez paddingu */
+  .about-photo {
+    flex: none !important;
+    width: 100% !important;
+    height: 380px !important;
+    margin-top: 80px; /* Aby nezačínala pod menu */
+    border-right: none !important;
+  }
+  .my-portrait, .about-photo-inner, .about-photo-border {
+    position: absolute !important;
+    inset: 0 !important; /* Rámeček i fotka teď lícují na pixel */
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+  .about-right { 
+    text-align: left !important; 
+    align-items: flex-start !important; 
+    padding: 40px 8vw !important;
+  }
+  .about-body { margin-left: 0 !important; 
+    margin-right: 0 !important;
+    text-align: left !important; }
+  .domain-list { width: 100%; }
+  .domain-item a { text-align: left !important; 
+    padding: 1.2rem 0 !important; }
+  .about-title { font-size: 2.8rem !important; margin-bottom: 20px; }
+
+  /* 5. JOB TIMER & VISUÁL */
+  .proj-title { font-size: 3.8rem !important; }
+  .p-visual { 
+    height: 450px !important; 
+    padding: 40px 0 !important;
+    min-height: auto !important;
+  }
+  .collage-wrap { width: 85% !important; }
+  /* 6. CITÁT — Posun autora/popisku níž */
+  #p-quote { 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important; 
+  }
+  .quote-author { 
+    margin-top: 5rem !important; /* Výraznější mezera pod citátem */
+    justify-content: center !important;
+    opacity: 0.5 !important;
+  }
+
+  /* 7. GALERIE */
+  .art-scroll-row { gap: 40px !important; }
+  .art-thumb { aspect-ratio: 4/5 !important; }
+  .thumb-info { opacity: 1 !important; transform: none !important; }
+
+  /* 8. KONTAKT & NAVIGACE */
+  .contact-email { font-size: 1.7rem !important; word-break: break-all !important; }
+  .contact-socials { 
+    flex-wrap: wrap !important; 
+    gap: 20px !important; 
+    margin-bottom: 100px; /* Místo pro spodní navigaci */
+  }
+
+  .site-nav {
+    top: auto !important;
+    bottom: 30px !important; /* Menu dáme dolů k palci */
+    right: 50% !important;
+    transform: translateX(50%) !important;
+    width: 92% !important;
+    padding: 12px 20px !important;
+    gap: 1.5rem !important;
+    justify-content: center !important;
+  }
+  .site-nav a { font-size: 0.55rem !important; letter-spacing: 0.15em !important; }
+  /* 9. KONTAKT — VYCENTROVANÝ BLOK, LEVÉ ZAROVNÁNÍ */
+  #p-contact {
+    display: flex !important;
+    justify-content: center !important; /* Horizontální střed stránky */
+    align-items: center !important;     /* Vertikální střed stránky */
+  }
+
+  .contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Obsah uvnitř balíčku zůstane vlevo */
+    text-align: left;
+    width: fit-content;      /* Balíček se smrskne jen na šířku textu */
+  }
+  
+  .contact-socials {
+    justify-content: flex-start !important;
+    width: 100%;
+  }
+}
+/* Liquid canvas removed — replaced by CSS spotlight */
+
+/* ================================
+   VISUAL BARD ENHANCEMENTS
+================================ */
+/* Nav underline reveal */
+.site-nav a{position:relative;padding-bottom:2px;}
+.site-nav a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--gold);
+  transition:width .4s cubic-bezier(0.16,1,0.3,1);
+}
+.site-nav a:hover::after{width:100%;}
+
+/* Project panel subtle bottom glow on hover */
+.p-project::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 40% at 50% 100%,rgba(255,215,0,0.05) 0%,transparent 70%);
+  opacity:0;transition:opacity .8s ease;pointer-events:none;
+}
+.p-project:hover::before{opacity:1;}
+
+/* Hero text depth */
+.hero-big{text-shadow: 0 0 120px rgba(245,245,220,0.15), 0 0 40px rgba(245,245,220,0.05);}
+
+/* Art thumb inner glow */
+.art-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 40% at 50% 100%,rgba(255,215,0,0.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .5s;pointer-events:none;
+}
+.art-thumb:hover::after{opacity:1;}
+
+/* ================================
+   LIGHTBOX
+================================ */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 20, 18, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s ease, visibility .4s ease;
+  cursor: pointer;
+}
+#lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+#lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  transform: scale(0.92);
+  transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+#lightbox.open img {
+  transform: scale(1);
+}
+#lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-s);
+  font-size: 1.5rem;
+  color: var(--ch3);
+  cursor: pointer;
+  transition: color .3s, transform .3s;
+  border: 1px solid rgba(245, 245, 220, 0.1);
+  border-radius: 50%;
+  background: rgba(0, 31, 28, 0.5);
+}
+#lightbox-close:hover {
+  color: var(--gold);
+  transform: rotate(90deg);
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="liquid-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block;"></canvas>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="Načítání">
+  <span class="loader-count" id="lc">0</span>
+  <div class="loader-line" id="ll"></div>
+</div>
+
+<!-- PROGRESS -->
+<div id="progress" aria-hidden="true"><div id="progress-fill"></div></div>
+
+<!-- SECTION DOTS -->
+<nav id="section-counter" aria-label="Navigace sekcemi">
+  <div class="counter-dot active" data-idx="0" title="Intro"></div>
+  <div class="counter-dot" data-idx="1" title="O mně"></div>
+  <div class="counter-dot" data-idx="2" title="Job Timer"></div>
+  <div class="counter-dot" data-idx="3" title="Visuál"></div>
+  <div class="counter-dot" data-idx="4" title="Umění"></div>
+  <div class="counter-dot" data-idx="5" title="Kontakt"></div>
+</nav>
+
+<!-- FIXED NAV — outside scroller so it never moves -->
+<span class="site-name" aria-label="Jméno">Tereza Britta Švanda</span>
+<ul class="site-nav" role="list">
+  <li><a href="#" data-to="2">Práce</a></li>
+  <li><a href="#" data-to="1">O mně</a></li>
+  <li><a href="#" data-to="5">Kontakt</a></li>
+</ul>
+
+<!-- MAIN SCROLLER -->
+<div id="scroller" role="main">
+<div id="track">
+
+  <!-- ===================== PANEL 0 — HERO ===================== -->
+  <section class="panel" id="p-hero" data-idx="0" aria-label="Úvod">
+
+    <div class="hero-tagline">
+      <h1 class="hero-big">
+        <span class="hero-line-left">Kde systém</span><br>
+        <em class="hero-line-right">potkává cit.</em>
+      </h1>
+    </div>
+
+    <div class="hero-sub-row">
+      <p class="hero-desc">
+        UI/UX designérka & ilustrátorka.<br>
+        Technické myšlení,&nbsp;umělecká duše.<br>
+        Karlovarský kraj&nbsp;— svět.
+      </p>
+      <span class="hero-scroll-hint" aria-hidden="true">táhněte doprava</span>
+    </div>
+
+    <span class="panel-num" aria-hidden="true">01</span>
+  </section>
+
+  <!-- ===================== PANEL 1 — ABOUT ===================== -->
+  <section class="panel" id="p-about" data-idx="1" aria-label="O mně">
+
+    <!-- Levý sloupec: foto placeholder -->
+    <div class="about-photo" aria-hidden="true">
+
+  <img src="https://raw.githubusercontent.com/TerSva/Portfolio_web/main/IMG_4944.jpg" alt="Tereza Britta Švanda" class="my-portrait">
+
+  <div class="about-photo-inner"></div>
+  <div class="about-photo-border"></div>
+  <span class="about-photo-label">Tereza — Karlovarský kraj</span>
+</div>
+    
+
+    <!-- Pravý sloupec: nadpis, text, seznam -->
+    <div class="about-right">
+      <h2 class="about-title">
+        Jsem <strong>Tereza.</strong><br>
+        <em>Navrhuju&nbsp;s duší.</em>
+      </h2>
+      <div class="about-body">
+        <p>Spojuji logiku design systémů s empatií kreativní tvůrkyně. Má cesta vedla od čisté kresby s tužkou v ruce až po vývoj komplexních digitálních produktů v Reactu. Přístup se ale nezměnil – ať už tvořím kód nebo grafiku, vždy kladu důraz na detail, emoci a bezchybnou funkčnost.</p>
+      </div>
+      <ul class="domain-list" aria-label="Oblasti práce">
+        <li class="domain-item"><a href="#" tabindex="0">UI/UX Design</a></li>
+        <li class="domain-item"><a href="#" tabindex="0">Branding &amp; Vizuální identita</a></li>
+        <li class="domain-item"><a href="#" tabindex="0">Design Systémy &amp; React</a></li>
+        <li class="domain-item"><a href="#" tabindex="0">Digitální &amp; Tradiční ilustrace</a></li>
+        <li class="domain-item"><a href="#" tabindex="0">Sněhové výlohy &amp; Art instalace</a></li>
+      </ul>
+    </div>
+
+    <span class="panel-num" aria-hidden="true">02</span>
+  </section>
+
+  <!-- ===================== PANEL 2 — PROJECT ===================== -->
+  <section class="panel p-project" id="p-proj1" data-idx="2" aria-label="Projekt Job Timer">
+    <span class="proj-index">01 / Případová studie</span>
+
+    <div class="proj-title-wrap">
+      <h2 class="proj-title">
+        <span class="proj-title-inner">Job</span>
+      </h2>
+      <h2 class="proj-title">
+        <span class="proj-title-inner" style="transition-delay:.08s">
+          <em>Timer</em>
+        </span>
+      </h2>
+    </div>
+
+    <div class="proj-meta">
+      <div class="meta-item">
+        <label>Typ</label>
+        <span>React App &amp; Design System</span>
+      </div>
+      <div class="meta-item">
+        <label>Rok</label>
+        <span>2026</span>
+      </div>
+      <div class="meta-item">
+        <label>Nástroje</label>
+        <span>Claude, Gemini, React</span>
+      </div>
+      <div class="meta-item">
+        <label>Role</label>
+        <span>Art Director &amp; AI Prompting</span>
+      </div>
+    </div>
+
+    <div class="proj-links-wrap">
+      <a href="https://tersva.github.io/Jobtimer/" class="btn-modern" target="_blank" aria-label="Otevřít živou aplikaci Job Timer">
+        Živá aplikace
+      </a>
+      <a href="https://tersva.github.io/Jobtimer/jobtimervisualbook.html" class="btn-ghost" target="_blank" aria-label="Otevřít design systém Job Timer">
+        Design Systém
+      </a>
+    </div>
+
+    <span class="panel-num" aria-hidden="true">03</span>
+  </section>
+
+  <!-- ===================== PANEL 3 — VISUAL ===================== -->
+  <div class="panel p-visual" id="p-vis1" data-idx="3" aria-hidden="true">
+    <div class="visual-placeholder">
+      <div class="vis-art">
+        <div class="collage-wrap">
+          <img src="jobtimer-3.jpg" alt="Náhled historie" class="col-img img-back-2">
+          <img src="jobtimer-2.jpg" alt="Náhled dashboardu" class="col-img img-back-1">
+          <img src="jobtimer-preview.jpg" alt="Náhled detailu" class="col-img img-front">
+        </div>
+      </div>
+      <span class="vis-label">Job Timer — React App & Design System, 2026</span>
+    </div>
+  </div>
+
+  <section class="panel" id="p-quote" aria-label="Citát">
+    <div class="quote-wrapper">
+      <h2 class="quote-text">„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“</h2>
+      <span class="quote-author">Můj přístup k tvorbě</span>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 4 — ART ===================== -->
+  <section class="panel" id="p-art" data-idx="4" aria-label="Galerie umění">
+    <h2 class="art-heading">
+      Umění,<br><em>které dýchá.</em>
+    </h2>
+
+    <div class="art-scroll-row" role="list">
+
+      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Bradavice — sněhová malba na sklo">
+        <img src="IMG_5229.jpg" class="real-art" alt="Sněhová malba Bradavic na okně">
+        <div class="thumb-info">
+          <p class="thumb-title">Bradavice</p>
+          <span class="thumb-type">Sněhová malba na sklo</span>
+        </div>
+      </article>
+
+      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Podzimní chaloupka — tradiční malba">
+        <img src="IMG_3885.jpg" class="real-art" alt="Tradiční malba houbové chaloupky">
+        <div class="thumb-info">
+          <p class="thumb-title">Podzimní chaloupka</p>
+          <span class="thumb-type">Tradiční malba</span>
+        </div>
+      </article>
+
+      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Zimní vesnice — sněhová malba na sklo">
+        <img src="IMG_4723.jpg" class="real-art" alt="Sněhová malba zimní krajiny na okně">
+        <div class="thumb-info">
+          <p class="thumb-title">Zimní vesnice</p>
+          <span class="thumb-type">Sněhová malba na sklo</span>
+        </div>
+      </article>
+
+      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Malá čarodějnice — lineart & markery">
+        <img src="IMG_4259.jpg" class="real-art" alt="Ilustrace markery - malá čarodějnice">
+        <div class="thumb-info">
+          <p class="thumb-title">Malá čarodějnice</p>
+          <span class="thumb-type">Lineart &amp; markery</span>
+        </div>
+      </article>
+
+    </div>
+
+    <span class="panel-num" aria-hidden="true">05</span>
+  </section>
+
+  <!-- ===================== PANEL 5 — CONTACT ===================== -->
+  <section class="panel" id="p-contact" data-idx="5" aria-label="Kontakt">
+    
+    <div class="contact-container">
+      <span class="contact-label">Pojďme tvořit</span>
+
+      <div class="contact-email-block">
+        <a href="mailto:brittasvanda@gmail.com" class="contact-email" data-text="brittasvanda@gmail.com" aria-label="Napište mi e-mail">brittasvanda@gmail.com</a>
+      </div>
+
+      <ul class="contact-socials" role="list" aria-label="Sociální sítě">
+        <li><a href="https://github.com/TerSva" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener noreferrer">Behance</a></li>
+        <li><a href="https://www.instagram.com/brittatereza/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+    </div>
+
+    <span class="footer-copy" aria-label="Copyright">© 2025 Tereza</span>
+    <span class="panel-num" aria-hidden="true">06</span>
+  </section>
+
+</div><!-- end track -->
+</div><!-- end scroller -->
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-label="Zvětšený obrázek">
+  <button id="lightbox-close" aria-label="Zavřít">&times;</button>
+  <img src="" alt="Zvětšený obrázek">
+</div>
+
+<script>
+/* ================================================
+   CORE ENGINE
+================================================ */
+const isMobile = window.matchMedia('(max-width:768px)').matches;
+
+/* ---- LOADER ---- */
+const loader = document.getElementById('loader');
+const lc = document.getElementById('lc');
+const ll = document.getElementById('ll');
+let count = 0;
+
+const loadInterval = setInterval(() => {
+  count += Math.floor(Math.random() * 12) + 4;
+  if (count >= 100) { count = 100; clearInterval(loadInterval); }
+  lc.textContent = count;
+  ll.style.width = count + '%';
+  if (count === 100) {
+    setTimeout(() => {
+      loader.classList.add('gone');
+      document.body.classList.add('app-ready');
+      startApp();
+    }, 400);
+  }
+}, 60);
+
+/* ---- SMOOTH HORIZONTAL SCROLL ENGINE ---- */
+let targetX = 0;
+let currentX = 0;
+let raf = null;
+const track = document.getElementById('track');
+const scroller = document.getElementById('scroller');
+const progressFill = document.getElementById('progress-fill');
+const panels = [...document.querySelectorAll('.panel[data-idx]')];
+const dots = [...document.querySelectorAll('.counter-dot')];
+
+function getMaxScroll() {
+  return track.scrollWidth - window.innerWidth;
+}
+
+function setTrackWidth() {
+  // Let panels define their own widths naturally
+}
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function onTick() {
+  currentX = lerp(currentX, targetX, 0.075);
+  if (Math.abs(currentX - targetX) < 0.1) currentX = targetX;
+  track.style.transform = `translateX(${-currentX}px)`;
+
+  const max = getMaxScroll();
+  const pct = max > 0 ? (currentX / max) * 100 : 0;
+  progressFill.style.width = pct + '%';
+
+  // Active dot
+  const viewCenter = currentX + window.innerWidth * 0.3;
+  let active = 0;
+  panels.forEach((p, i) => {
+    const rect = p.getBoundingClientRect();
+    const pLeft = p.offsetLeft;
+    if (pLeft <= viewCenter) active = i;
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === active));
+
+  // Reveal elements in view
+  panels.forEach(p => {
+    const pLeft = p.offsetLeft;
+    const inView = pLeft < currentX + window.innerWidth * 1.1 && pLeft + p.offsetWidth > currentX - 100;
+    if (inView) {
+      p.classList.add('visible');
+    }
+  });
+
+  raf = requestAnimationFrame(onTick);
+}
+
+/* ---- WHEEL → HORIZONTAL ---- */
+function onWheel(e) {
+  e.preventDefault();
+  const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  targetX = Math.max(0, Math.min(getMaxScroll(), targetX + delta * 1.2));
+}
+
+/* ---- TOUCH → HORIZONTAL ---- */
+let touchStartX = 0, touchStartY = 0, touchStartScroll = 0;
+function onTouchStart(e) {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchStartScroll = targetX;
+}
+function onTouchMove(e) {
+  const dx = touchStartX - e.touches[0].clientX;
+  const dy = touchStartY - e.touches[0].clientY;
+  if (Math.abs(dx) > Math.abs(dy)) {
+    e.preventDefault();
+    targetX = Math.max(0, Math.min(getMaxScroll(), touchStartScroll + dx * 1.4));
+  }
+}
+
+/* ---- NAV PANEL JUMP ---- */
+document.querySelectorAll('[data-to]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const idx = parseInt(link.dataset.to);
+    const panel = panels.find(p => parseInt(p.dataset.idx) === idx);
+    if (!panel) return;
+    if (isMobile) {
+      panel.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      targetX = Math.max(0, Math.min(getMaxScroll(), panel.offsetLeft));
+    }
+  });
+});
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const idx = parseInt(dot.dataset.idx);
+    const panel = panels.find(p => parseInt(p.dataset.idx) === idx);
+    if (!panel) return;
+    if (isMobile) {
+      panel.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      targetX = Math.max(0, Math.min(getMaxScroll(), panel.offsetLeft));
+    }
+  });
+});
+
+/* ---- GOLDEN SPOTLIGHT (CSS-only, just track mouse) ---- */
+let spotX = window.innerWidth / 2;
+let spotY = window.innerHeight / 2;
+let spotTargetX = spotX;
+let spotTargetY = spotY;
+
+document.addEventListener('mousemove', e => {
+  spotTargetX = e.clientX;
+  spotTargetY = e.clientY;
+});
+
+function spotlightTick() {
+  spotX = lerp(spotX, spotTargetX, 0.08);
+  spotY = lerp(spotY, spotTargetY, 0.08);
+  document.body.style.setProperty('--mouse-x', spotX + 'px');
+  document.body.style.setProperty('--mouse-y', spotY + 'px');
+  requestAnimationFrame(spotlightTick);
+}
+
+/* ---- MAGNETIC EFFECT ---- */
+function magnetic(el, strength = 0.35) {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const dx = (e.clientX - cx) * strength;
+    const dy = (e.clientY - cy) * strength;
+    el.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = '';
+  });
+}
+
+/* ---- INIT ---- */
+function startApp() {
+  if (!isMobile) {
+    scroller.addEventListener('wheel', onWheel, { passive: false });
+    scroller.addEventListener('touchstart', onTouchStart, { passive: true });
+    scroller.addEventListener('touchmove', onTouchMove, { passive: false });
+    spotlightTick(); // lightweight CSS spotlight
+  }
+  raf = requestAnimationFrame(onTick);
+
+  // Magnetic on nav links
+  document.querySelectorAll('.site-nav a, .contact-socials a, .proj-link').forEach(el => {
+    magnetic(el, 0.3);
+  });
+
+  // Initial visible
+  panels[0].classList.add('visible');
+}
+
+window.addEventListener('resize', () => {
+  targetX = Math.max(0, Math.min(getMaxScroll(), targetX));
+});
+
+/* ---- ART THUMB KEYBOARD ---- */
+document.querySelectorAll('.art-thumb').forEach(t => {
+  t.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { t.click(); }
+  });
+});
+
+/* ---- LIGHTBOX ---- */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const lightboxClose = document.getElementById('lightbox-close');
+
+document.querySelectorAll('.art-thumb').forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    const img = thumb.querySelector('.real-art');
+    if (!img) return;
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || 'Zvětšený obrázek';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+lightboxClose.addEventListener('click', e => {
+  e.stopPropagation();
+  closeLightbox();
+});
+
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  if (isMobile) document.body.style.overflow = '';
+}
+
+</script>
+
+<script type="module">
+import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.27/build/backgrounds/liquid1.min.js';
+
+const canvas = document.getElementById('liquid-bg');
+// Detekce mobilu (využíváme existující proměnnou isMobile, pokud je dostupná, jinak fallback)
+const isMobileDevice = window.matchMedia('(max-width:768px)').matches;
+
+if (canvas && !isMobileDevice) {
+  const app = LiquidBackground(canvas);
+
+  // Tvá smaragdově-zlatá textura
+  app.loadImage('https://raw.githubusercontent.com/TerSva/Portfolio_web/main/bac_liq.jpg');
+
+  app.liquidPlane.material.metalness = 0.8;
+  app.liquidPlane.material.roughness = 0.15;
+  app.liquidPlane.uniforms.displacementScale.value = 4;
+  app.setRain(false);
+} else if (canvas) {
+  // Na mobilu canvas skryjeme pro úsporu výkonu
+  canvas.style.display = 'none';
+}
+</script>
+</body>
+</html>
