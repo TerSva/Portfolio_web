@@ -1052,8 +1052,18 @@ body::after{
   }
 
   /* 7. GALERIE */
-  .art-scroll-row { gap: 40px !important; }
-  .art-thumb { aspect-ratio: 4/5 !important; }
+  .art-scroll-row {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    gap: 24px !important;
+  }
+  .art-thumb {
+    aspect-ratio: unset !important;
+    height: 55vh !important;
+    width: 100% !important;
+    flex: none !important;
+  }
   .thumb-info { opacity: 1 !important; transform: none !important; }
 
   /* 8. KONTAKT & NAVIGACE */
@@ -1184,6 +1194,21 @@ body::after{
 #lightbox-close:hover {
   color: var(--gold);
   transform: rotate(90deg);
+}
+#lightbox-caption {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--ch2);
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease .2s;
+}
+#lightbox.open #lightbox-caption {
+  opacity: 1;
 }
 
 </style>
@@ -1421,6 +1446,7 @@ body::after{
 <div id="lightbox" role="dialog" aria-label="Zvětšený obrázek">
   <button id="lightbox-close" aria-label="Zavřít">&times;</button>
   <img src="" alt="Zvětšený obrázek">
+  <div id="lightbox-caption"></div>
 </div>
 
 <script>
@@ -1619,6 +1645,7 @@ document.querySelectorAll('.art-thumb').forEach(t => {
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 const lightboxClose = document.getElementById('lightbox-close');
+const lightboxCaption = document.getElementById('lightbox-caption');
 
 document.querySelectorAll('.art-thumb').forEach(thumb => {
   thumb.addEventListener('click', () => {
@@ -1626,6 +1653,14 @@ document.querySelectorAll('.art-thumb').forEach(thumb => {
     if (!img) return;
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt || 'Zvětšený obrázek';
+
+    const title = thumb.querySelector('.thumb-title')?.textContent || '';
+    const type  = thumb.querySelector('.thumb-type')?.textContent  || '';
+    lightboxCaption.innerHTML = `
+      <span style="display:block;font-family:var(--font-d);font-size:clamp(1.1rem,2vw,1.6rem);font-weight:400;font-style:italic;color:var(--ch);margin-bottom:.4rem;">${title}</span>
+      <span style="display:block;font-family:var(--font-m);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);">${type}</span>
+    `;
+
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   });
