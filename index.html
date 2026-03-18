@@ -1079,6 +1079,17 @@ body::after{
     border: 1px solid rgba(255,215,0,0.1) !important;
     margin: 0 !important;
   }
+  /* Zabití desktopového hover efektu (skákání karet) na mobilu */
+  .collage-wrap .col-img:hover,
+  .collage-wrap .img-back-2:hover,
+  .collage-wrap .img-back-1:hover,
+  .collage-wrap .img-front:hover {
+    transform: none !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(255,215,0,0.05) !important;
+    border: 1px solid rgba(255,215,0,0.1) !important;
+    filter: none !important;
+    z-index: 1 !important;
+  }
   /* 6. CITÁT — Posun autora/popisku níž */
   #p-quote { 
     display: flex !important;
@@ -1154,10 +1165,12 @@ body::after{
     z-index: 1000; /* Bude nad obsahem, ale pod navigací (ta má 9999) */
     background: linear-gradient(
       to bottom,
-      var(--bg) 0%,              /* Úplně nahoře 100% neprůhledná barva pozadí */
-      transparent 8%,            /* Rychlý přechod do ztracena */
-      transparent 90%,           /* Dlouhý čistý střed obrazovky */
-      var(--bg) 100%             /* Úplně dole zase zatavení do tmy */
+      var(--bg) 0%,
+      var(--bg) 2%,        /* Pojistka pro absolutně plnou barvu úplně nahoře */
+      transparent 18%,     /* Zvětšili jsme horní masku z 8 % na 18 % */
+      transparent 78%,     /* Spodní maska začne mnohem dřív (z 90 % jsme šli na 78 %) */
+      var(--bg) 98%,       /* Téměř plná barva dole pod menu */
+      var(--bg) 100%
     );
   }
 }
