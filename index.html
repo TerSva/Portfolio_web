@@ -1035,7 +1035,10 @@ body::after{
   .proj-title { font-size: 3.8rem !important; }
  
   .p-visual {
-    padding: 0 0 60px 0 !important; /* Odstraníme boční padding, ať můžeme scrollovat až do kraje */
+    min-height: auto !important; /* TOTO NÁM CHYBĚLO! Zruší těch 100svh a smrskne sekci jen na velikost karet */
+    height: auto !important;
+    padding: 40px 0 80px 0 !important; /* Vyvážená mezera nahoře i dole */
+    justify-content: center !important;
   }
 
   .vis-art {
