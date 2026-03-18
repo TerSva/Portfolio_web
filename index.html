@@ -1157,23 +1157,6 @@ body::after{
     justify-content: flex-start !important;
     width: 100%;
   }
-  /* 10. MOBILNÍ SCROLL MASK (Zatavení horního a spodního okraje) */
-  #scroller::after {
-    content: '';
-    position: fixed; /* Zůstane přibité na obrazovce */
-    inset: 0;
-    pointer-events: none; /* Důležité: propustí tvé dotyky a swajpování skrz sebe */
-    z-index: 1000; /* Bude nad obsahem, ale pod navigací (ta má 9999) */
-    background: linear-gradient(
-      to bottom,
-      var(--bg) 0%,
-      var(--bg) 2%,        /* Pojistka pro absolutně plnou barvu úplně nahoře */
-      transparent 18%,     /* Zvětšili jsme horní masku z 8 % na 18 % */
-      transparent 78%,     /* Spodní maska začne mnohem dřív (z 90 % jsme šli na 78 %) */
-      var(--bg) 98%,       /* Téměř plná barva dole pod menu */
-      var(--bg) 100%
-    );
-  }
 }
 /* Liquid canvas removed — replaced by CSS spotlight */
 
