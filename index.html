@@ -1038,6 +1038,41 @@ body::after{
     min-height: auto !important;
   }
   .collage-wrap { width: 85% !important; }
+  .collage-wrap:hover .img-back-2 {
+    transform: translateX(-15%) scale(0.85) rotate(-6deg) !important;
+  }
+  .collage-wrap:hover .img-back-1 {
+    transform: translateX(15%) scale(0.9) rotate(6deg) !important;
+  }
+  .proj-links-wrap {
+    flex-wrap: wrap !important; /* Jistota: kdyby byl displej hodně úzký, skočí tlačítka elegantně pod sebe */
+    gap: 0.8rem !important;     /* Menší mezera mezi nimi */
+  }
+
+  .btn-modern, .btn-ghost {
+    padding: 0.6rem 1.4rem !important; /* Osekáme vnitřní "hmotu" tlačítka */
+    font-size: 0.55rem !important;     /* Mírně zmenšíme text pro zachování proporcí */
+    letter-spacing: 0.12em !important; /* Lehce stáhneme mezery mezi písmeny, ať se text nerozpadá */
+  }
+
+  /* 2. Vycentrování konkrétní vybrané karty na střed */
+  .collage-wrap .img-back-2:hover,
+  .collage-wrap .img-back-2:active {
+    transform: translateX(0%) scale(1.05) rotate(0deg) translateY(-8%) !important;
+    z-index: 50 !important;
+  }
+  
+  .collage-wrap .img-back-1:hover,
+  .collage-wrap .img-back-1:active {
+    transform: translateX(0%) scale(1.05) rotate(0deg) translateY(-8%) !important;
+    z-index: 50 !important;
+  }
+  
+  .collage-wrap .img-front:hover,
+  .collage-wrap .img-front:active {
+    transform: translateX(0%) scale(1.05) rotate(0deg) translateY(-8%) !important;
+    z-index: 50 !important;
+  }
   /* 6. CITÁT — Posun autora/popisku níž */
   #p-quote { 
     display: flex !important;
