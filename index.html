@@ -219,6 +219,7 @@ body::after{
   transform:translateX(60px);
   transition: none;
 }
+html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
 .app-ready .hero-line-left{
   animation:slideMeetRight 1.1s cubic-bezier(0.16,1,0.3,1) both;
   animation-delay:.1s;
@@ -260,6 +261,40 @@ body::after{
   color:var(--ch2);transition:color .3s;
 }
 .site-nav a:hover{color:var(--gold);}
+
+/* Language switch — top center, matches .site-nav */
+.lang-switch{
+  position:fixed;top:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:1rem;list-style:none;
+  z-index:9999!important;
+  background: rgba(0, 31, 28, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.8rem 1.4rem;
+  border-radius: 100px;
+  border: 1px solid rgba(245, 245, 220, 0.08);
+  align-items:center;
+}
+.lang-switch button{
+  font-family:var(--font-s);
+  font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ch3);
+  transition:color .3s;
+  padding-bottom:2px;
+  position:relative;
+  cursor:pointer;
+}
+.lang-switch button:hover{color:var(--ch);}
+.lang-switch button.active{color:var(--gold);}
+.lang-switch button.active::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;
+  height:1px;background:var(--gold);
+}
+.lang-switch .lang-sep{
+  width:1px;height:10px;
+  background:rgba(245,245,220,0.18);
+  display:block;
+}
 
 /* Panel number */
 .panel-num {
@@ -317,8 +352,8 @@ body::after{
 }
 
 .proj-meta{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1.5rem;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1.5rem 2.5rem;
   margin-bottom:3rem;
 }
 .meta-item label{
@@ -1030,6 +1065,7 @@ body::after{
   .domain-item a { text-align: left !important; 
     padding: 1.2rem 0 !important; }
   .about-title { font-size: 2.8rem !important; margin-bottom: 20px; }
+  html[lang="en"] .about-title { font-size: 2.4rem !important; }
 
   /* 5. JOB TIMER & VISUÁL */
   .proj-title { font-size: 3.8rem !important; }
@@ -1141,6 +1177,14 @@ body::after{
     justify-content: center !important;
   }
   .site-nav a { font-size: 0.55rem !important; letter-spacing: 0.15em !important; }
+
+  /* Lang switch — keep top center on mobile, but smaller */
+  .lang-switch {
+    top: 22px !important;
+    padding: 8px 14px !important;
+    gap: 0.7rem !important;
+  }
+  .lang-switch button { font-size: 0.55rem !important; letter-spacing: 0.15em !important; }
   /* 9. KONTAKT — VYCENTROVANÝ BLOK, LEVÉ ZAROVNÁNÍ */
   #p-contact {
     display: flex !important;
@@ -1274,7 +1318,7 @@ body::after{
 <canvas id="liquid-bg" aria-hidden="true" style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block;"></canvas>
 
 <!-- LOADER -->
-<div id="loader" role="status" aria-label="Načítání">
+<div id="loader" role="status" data-i18n-aria="aria.loading" aria-label="Načítání">
   <span class="loader-count" id="lc">0</span>
   <div class="loader-line" id="ll"></div>
 </div>
@@ -1283,51 +1327,56 @@ body::after{
 <div id="progress" aria-hidden="true"><div id="progress-fill"></div></div>
 
 <!-- SECTION DOTS -->
-<nav id="section-counter" aria-label="Navigace sekcemi">
-  <div class="counter-dot active" data-idx="0" title="Intro"></div>
-  <div class="counter-dot" data-idx="1" title="O mně"></div>
-  <div class="counter-dot" data-idx="2" title="Job Timer"></div>
-  <div class="counter-dot" data-idx="3" title="Visuál"></div>
-  <div class="counter-dot" data-idx="4" title="Umění"></div>
-  <div class="counter-dot" data-idx="5" title="Kontakt"></div>
+<nav id="section-counter" data-i18n-aria="aria.dots" aria-label="Navigace sekcemi">
+  <div class="counter-dot active" data-idx="0" data-i18n-title="dot.intro" title="Intro"></div>
+  <div class="counter-dot" data-idx="1" data-i18n-title="dot.about" title="O mně"></div>
+  <div class="counter-dot" data-idx="2" data-i18n-title="dot.project" title="Job Timer"></div>
+  <div class="counter-dot" data-idx="3" data-i18n-title="dot.visual" title="Visuál"></div>
+  <div class="counter-dot" data-idx="4" data-i18n-title="dot.art" title="Umění"></div>
+  <div class="counter-dot" data-idx="5" data-i18n-title="dot.contact" title="Kontakt"></div>
 </nav>
 
 <!-- FIXED NAV — outside scroller so it never moves -->
-<span class="site-name" aria-label="Jméno">Tereza Britta Švanda</span>
+<span class="site-name" data-i18n-aria="aria.name" aria-label="Jméno">Tereza Britta Švanda</span>
 <ul class="site-nav" role="list">
-  <li><a href="#" data-to="2">Práce</a></li>
-  <li><a href="#" data-to="1">O mně</a></li>
-  <li><a href="#" data-to="5">Kontakt</a></li>
+  <li><a href="#" data-to="2" data-i18n="nav.work">Práce</a></li>
+  <li><a href="#" data-to="1" data-i18n="nav.about">O mně</a></li>
+  <li><a href="#" data-to="5" data-i18n="nav.contact">Kontakt</a></li>
 </ul>
+<div class="lang-switch" role="group" data-i18n-aria="aria.lang" aria-label="Přepínač jazyka">
+  <button type="button" class="lang-btn" data-lang="cs">CS</button>
+  <span class="lang-sep" aria-hidden="true"></span>
+  <button type="button" class="lang-btn" data-lang="en">EN</button>
+</div>
 
 <!-- MAIN SCROLLER -->
 <div id="scroller" role="main">
 <div id="track">
 
   <!-- ===================== PANEL 0 — HERO ===================== -->
-  <section class="panel" id="p-hero" data-idx="0" aria-label="Úvod">
+  <section class="panel" id="p-hero" data-idx="0" data-i18n-aria="aria.intro" aria-label="Úvod">
 
     <div class="hero-tagline">
       <h1 class="hero-big">
-        <span class="hero-line-left">Kde systém</span><br>
-        <em class="hero-line-right">potkává cit.</em>
+        <span class="hero-line-left" data-i18n="hero.left">Kde systém</span><br>
+        <em class="hero-line-right" data-i18n="hero.right">potkává cit.</em>
       </h1>
     </div>
 
     <div class="hero-sub-row">
-      <p class="hero-desc">
+      <p class="hero-desc" data-i18n-html="hero.desc">
         UI/UX designérka & ilustrátorka.<br>
         Technické myšlení,&nbsp;umělecká duše.<br>
         Karlovarský kraj&nbsp;— svět.
       </p>
-      <span class="hero-scroll-hint" aria-hidden="true">posuňte doprava</span>
+      <span class="hero-scroll-hint" data-i18n="hero.hint" aria-hidden="true">posuňte doprava</span>
     </div>
 
     <span class="panel-num" aria-hidden="true">01</span>
   </section>
 
   <!-- ===================== PANEL 1 — ABOUT ===================== -->
-  <section class="panel" id="p-about" data-idx="1" aria-label="O mně">
+  <section class="panel" id="p-about" data-idx="1" data-i18n-aria="aria.about" aria-label="O mně">
 
     <!-- Levý sloupec: foto placeholder -->
     <div class="about-photo" aria-hidden="true">
@@ -1336,25 +1385,25 @@ body::after{
 
   <div class="about-photo-inner"></div>
   <div class="about-photo-border"></div>
-  <span class="about-photo-label">Tereza — Karlovarský kraj</span>
+  <span class="about-photo-label" data-i18n="about.photoLabel">Tereza — Karlovarský kraj</span>
 </div>
-    
+
 
     <!-- Pravý sloupec: nadpis, text, seznam -->
     <div class="about-right">
-      <h2 class="about-title">
+      <h2 class="about-title" data-i18n-html="about.title">
         Jsem <strong>Tereza.</strong><br>
         <em>Navrhuju&nbsp;s duší.</em>
       </h2>
       <div class="about-body">
-        <p>Spojuji logiku design systémů s empatií kreativní tvůrkyně. Má cesta vedla od čisté kresby s tužkou v ruce až po vývoj komplexních digitálních produktů v Reactu. Přístup se ale nezměnil – ať už tvořím kód nebo grafiku, vždy kladu důraz na detail, emoci a bezchybnou funkčnost.</p>
+        <p data-i18n="about.body">Spojuji logiku design systémů s empatií kreativní tvůrkyně. Má cesta vedla od čisté kresby s tužkou v ruce až po vývoj komplexních digitálních produktů v Reactu. Přístup se ale nezměnil – ať už tvořím kód nebo grafiku, vždy kladu důraz na detail, emoci a bezchybnou funkčnost.</p>
       </div>
-      <ul class="domain-list" aria-label="Oblasti práce">
-        <li class="domain-item"><a href="#" tabindex="0">UI/UX Design</a></li>
-        <li class="domain-item"><a href="#" tabindex="0">Branding &amp; Vizuální identita</a></li>
-        <li class="domain-item"><a href="#" tabindex="0">Design Systémy &amp; React</a></li>
-        <li class="domain-item"><a href="#" tabindex="0">Digitální &amp; Tradiční ilustrace</a></li>
-        <li class="domain-item"><a href="#" tabindex="0">Sněhové výlohy &amp; Art instalace</a></li>
+      <ul class="domain-list" data-i18n-aria="aria.domains" aria-label="Oblasti práce">
+        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.uiux">UI/UX Design</a></li>
+        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.branding">Branding &amp; Vizuální identita</a></li>
+        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.system">Design Systémy &amp; React</a></li>
+        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.illustration">Digitální &amp; Tradiční ilustrace</a></li>
+        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.installation">Sněhové výlohy &amp; Art instalace</a></li>
       </ul>
     </div>
 
@@ -1362,8 +1411,8 @@ body::after{
   </section>
 
   <!-- ===================== PANEL 2 — PROJECT ===================== -->
-  <section class="panel p-project" id="p-proj1" data-idx="2" aria-label="Projekt Job Timer">
-    <span class="proj-index">01 / Případová studie</span>
+  <section class="panel p-project" id="p-proj1" data-idx="2" data-i18n-aria="aria.project" aria-label="Projekt Job Timer">
+    <span class="proj-index" data-i18n="proj.index">01 / Případová studie</span>
 
     <div class="proj-title-wrap">
       <h2 class="proj-title">
@@ -1378,29 +1427,29 @@ body::after{
 
     <div class="proj-meta">
       <div class="meta-item">
-        <label>Typ</label>
+        <label data-i18n="proj.metaType">Typ</label>
         <span>React App &amp; Design System</span>
       </div>
       <div class="meta-item">
-        <label>Rok</label>
+        <label data-i18n="proj.metaYear">Rok</label>
         <span>2026</span>
       </div>
       <div class="meta-item">
-        <label>Nástroje</label>
+        <label data-i18n="proj.metaTools">Nástroje</label>
         <span>Claude, Gemini, React</span>
       </div>
       <div class="meta-item">
-        <label>Role</label>
+        <label data-i18n="proj.metaRole">Role</label>
         <span>Art Director &amp; AI Prompting</span>
       </div>
     </div>
 
     <div class="proj-links-wrap">
-      <a href="https://tersva.github.io/Jobtimer/" class="btn-modern" target="_blank" aria-label="Otevřít živou aplikaci Job Timer">
-        Živá aplikace
+      <a href="https://tersva.github.io/Jobtimer/" class="btn-modern" target="_blank" data-i18n-aria="proj.liveAria" aria-label="Otevřít živou aplikaci Job Timer">
+        <span data-i18n="proj.live">Živá aplikace</span>
       </a>
-      <a href="https://tersva.github.io/Jobtimer/jobtimervisualbook.html" class="btn-ghost" target="_blank" aria-label="Otevřít design systém Job Timer">
-        Design Systém
+      <a href="https://tersva.github.io/Jobtimer/jobtimervisualbook.html" class="btn-ghost" target="_blank" data-i18n-aria="proj.systemAria" aria-label="Otevřít design systém Job Timer">
+        <span data-i18n="proj.system">Design Systém</span>
       </a>
     </div>
 
@@ -1412,59 +1461,59 @@ body::after{
     <div class="visual-placeholder">
       <div class="vis-art">
         <div class="collage-wrap">
-          <img src="jobtimer-3.jpg" alt="Náhled historie" class="col-img img-back-2">
-          <img src="jobtimer-2.jpg" alt="Náhled dashboardu" class="col-img img-back-1">
-          <img src="jobtimer-preview.jpg" alt="Náhled detailu" class="col-img img-front">
+          <img src="jobtimer-3.jpg" data-i18n-alt="vis.alt.history" alt="Náhled historie" class="col-img img-back-2">
+          <img src="jobtimer-2.jpg" data-i18n-alt="vis.alt.dashboard" alt="Náhled dashboardu" class="col-img img-back-1">
+          <img src="jobtimer-preview.jpg" data-i18n-alt="vis.alt.detail" alt="Náhled detailu" class="col-img img-front">
         </div>
       </div>
       <span class="vis-label">Job Timer — React App & Design System, 2026</span>
     </div>
   </div>
 
-  <section class="panel" id="p-quote" aria-label="Citát">
+  <section class="panel" id="p-quote" data-i18n-aria="aria.quote" aria-label="Citát">
     <div class="quote-wrapper">
-      <h2 class="quote-text">„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“</h2>
-      <span class="quote-author">Můj přístup k tvorbě</span>
+      <h2 class="quote-text" data-i18n-html="quote.text">„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“</h2>
+      <span class="quote-author" data-i18n="quote.author">Můj přístup k tvorbě</span>
     </div>
   </section>
 
   <!-- ===================== PANEL 4 — ART ===================== -->
-  <section class="panel" id="p-art" data-idx="4" aria-label="Galerie umění">
-    <h2 class="art-heading">
+  <section class="panel" id="p-art" data-idx="4" data-i18n-aria="aria.art" aria-label="Galerie umění">
+    <h2 class="art-heading" data-i18n-html="art.heading">
       Umění,<br><em>které dýchá.</em>
     </h2>
 
     <div class="art-scroll-row" role="list">
 
-      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Bradavice — sněhová malba na sklo">
-        <img src="IMG_5229.jpg" class="real-art" alt="Sněhová malba Bradavic na okně">
+      <article class="art-thumb" role="listitem" tabindex="0" data-i18n-aria="art.t1.aria" aria-label="Bradavice — sněhová malba na sklo">
+        <img src="IMG_5229.jpg" class="real-art" data-i18n-alt="art.t1.alt" alt="Sněhová malba Bradavic na okně">
         <div class="thumb-info">
-          <p class="thumb-title">Bradavice</p>
-          <span class="thumb-type">Sněhová malba na sklo</span>
+          <p class="thumb-title" data-i18n="art.t1.title">Bradavice</p>
+          <span class="thumb-type" data-i18n="art.t1.type">Sněhová malba na sklo</span>
         </div>
       </article>
 
-      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Podzimní chaloupka — tradiční malba">
-        <img src="IMG_3885.jpg" class="real-art" alt="Tradiční malba houbové chaloupky">
+      <article class="art-thumb" role="listitem" tabindex="0" data-i18n-aria="art.t2.aria" aria-label="Podzimní chaloupka — tradiční malba">
+        <img src="IMG_3885.jpg" class="real-art" data-i18n-alt="art.t2.alt" alt="Tradiční malba houbové chaloupky">
         <div class="thumb-info">
-          <p class="thumb-title">Podzimní chaloupka</p>
-          <span class="thumb-type">Tradiční malba</span>
+          <p class="thumb-title" data-i18n="art.t2.title">Podzimní chaloupka</p>
+          <span class="thumb-type" data-i18n="art.t2.type">Tradiční malba</span>
         </div>
       </article>
 
-      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Zimní vesnice — sněhová malba na sklo">
-        <img src="IMG_4723.jpg" class="real-art" alt="Sněhová malba zimní krajiny na okně">
+      <article class="art-thumb" role="listitem" tabindex="0" data-i18n-aria="art.t3.aria" aria-label="Zimní vesnice — sněhová malba na sklo">
+        <img src="IMG_4723.jpg" class="real-art" data-i18n-alt="art.t3.alt" alt="Sněhová malba zimní krajiny na okně">
         <div class="thumb-info">
-          <p class="thumb-title">Zimní vesnice</p>
-          <span class="thumb-type">Sněhová malba na sklo</span>
+          <p class="thumb-title" data-i18n="art.t3.title">Zimní vesnice</p>
+          <span class="thumb-type" data-i18n="art.t3.type">Sněhová malba na sklo</span>
         </div>
       </article>
 
-      <article class="art-thumb" role="listitem" tabindex="0" aria-label="Malá čarodějnice — lineart & markery">
-        <img src="IMG_4259.jpg" class="real-art" alt="Ilustrace markery - malá čarodějnice">
+      <article class="art-thumb" role="listitem" tabindex="0" data-i18n-aria="art.t4.aria" aria-label="Malá čarodějnice — lineart & markery">
+        <img src="IMG_4259.jpg" class="real-art" data-i18n-alt="art.t4.alt" alt="Ilustrace markery - malá čarodějnice">
         <div class="thumb-info">
-          <p class="thumb-title">Malá čarodějnice</p>
-          <span class="thumb-type">Lineart &amp; markery</span>
+          <p class="thumb-title" data-i18n="art.t4.title">Malá čarodějnice</p>
+          <span class="thumb-type" data-i18n="art.t4.type">Lineart &amp; markery</span>
         </div>
       </article>
 
@@ -1474,16 +1523,16 @@ body::after{
   </section>
 
   <!-- ===================== PANEL 5 — CONTACT ===================== -->
-  <section class="panel" id="p-contact" data-idx="5" aria-label="Kontakt">
-    
+  <section class="panel" id="p-contact" data-idx="5" data-i18n-aria="aria.contact" aria-label="Kontakt">
+
     <div class="contact-container">
-      <span class="contact-label">Pojďme tvořit</span>
+      <span class="contact-label" data-i18n="contact.label">Pojďme tvořit</span>
 
       <div class="contact-email-block">
-        <a href="#" class="contact-email" id="email-link" data-text="" aria-label="Napište mi e-mail"></a>
+        <a href="#" class="contact-email" id="email-link" data-text="" data-i18n-aria="contact.emailAria" aria-label="Napište mi e-mail"></a>
       </div>
 
-      <ul class="contact-socials" role="list" aria-label="Sociální sítě">
+      <ul class="contact-socials" role="list" data-i18n-aria="contact.socialsAria" aria-label="Sociální sítě">
         <li><a href="https://github.com/TerSva" target="_blank" rel="noopener noreferrer">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         <li><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener noreferrer">Behance</a></li>
@@ -1491,7 +1540,7 @@ body::after{
       </ul>
     </div>
 
-    <span class="footer-copy" aria-label="Copyright">© 2025 Tereza</span>
+    <span class="footer-copy" data-i18n-aria="contact.copyAria" aria-label="Copyright">© 2025 Tereza</span>
     <span class="panel-num" aria-hidden="true">06</span>
   </section>
 
@@ -1499,12 +1548,222 @@ body::after{
 </div><!-- end scroller -->
 
 <!-- LIGHTBOX -->
-<div id="lightbox" role="dialog" aria-label="Zvětšený obrázek">
-  <button id="lightbox-close" aria-label="Zavřít">&times;</button>
-  <img src="" alt="Zvětšený obrázek">
+<div id="lightbox" role="dialog" data-i18n-aria="aria.lightbox" aria-label="Zvětšený obrázek">
+  <button id="lightbox-close" data-i18n-aria="aria.close" aria-label="Zavřít">&times;</button>
+  <img src="" data-i18n-alt="aria.lightbox" alt="Zvětšený obrázek">
   <div id="lightbox-caption"></div>
 </div>
 
+<script>
+/* ================================================
+   I18N — CS / EN
+   Runs synchronously before app-ready so hero animation
+   slides in with the right language from the start.
+================================================ */
+(function(){
+  const translations = {
+    cs: {
+      'title.page': 'Tereza — UI/UX & Ilustrace',
+      'nav.work': 'Práce',
+      'nav.about': 'O mně',
+      'nav.contact': 'Kontakt',
+      'aria.name': 'Jméno',
+      'aria.lang': 'Přepínač jazyka',
+      'aria.loading': 'Načítání',
+      'aria.dots': 'Navigace sekcemi',
+      'dot.intro': 'Intro',
+      'dot.about': 'O mně',
+      'dot.project': 'Job Timer',
+      'dot.visual': 'Visuál',
+      'dot.art': 'Umění',
+      'dot.contact': 'Kontakt',
+      'aria.intro': 'Úvod',
+      'hero.left': 'Kde systém',
+      'hero.right': 'potkává cit.',
+      'hero.desc': 'UI/UX designérka & ilustrátorka.<br>Technické myšlení,&nbsp;umělecká duše.<br>Karlovarský kraj&nbsp;— svět.',
+      'hero.hint': 'posuňte doprava',
+      'aria.about': 'O mně',
+      'about.photoLabel': 'Tereza — Karlovarský kraj',
+      'about.title': 'Jsem <strong>Tereza.</strong><br><em>Navrhuju&nbsp;s duší.</em>',
+      'about.body': 'Spojuji logiku design systémů s empatií kreativní tvůrkyně. Má cesta vedla od čisté kresby s tužkou v ruce až po vývoj komplexních digitálních produktů v Reactu. Přístup se ale nezměnil – ať už tvořím kód nebo grafiku, vždy kladu důraz na detail, emoci a bezchybnou funkčnost.',
+      'aria.domains': 'Oblasti práce',
+      'about.domain.uiux': 'UI/UX Design',
+      'about.domain.branding': 'Branding & Vizuální identita',
+      'about.domain.system': 'Design Systémy & React',
+      'about.domain.illustration': 'Digitální & Tradiční ilustrace',
+      'about.domain.installation': 'Sněhové výlohy & Art instalace',
+      'aria.project': 'Projekt Job Timer',
+      'proj.index': '01 / Případová studie',
+      'proj.metaType': 'Typ',
+      'proj.metaYear': 'Rok',
+      'proj.metaTools': 'Nástroje',
+      'proj.metaRole': 'Role',
+      'proj.live': 'Živá aplikace',
+      'proj.system': 'Design Systém',
+      'proj.liveAria': 'Otevřít živou aplikaci Job Timer',
+      'proj.systemAria': 'Otevřít design systém Job Timer',
+      'vis.alt.history': 'Náhled historie',
+      'vis.alt.dashboard': 'Náhled dashboardu',
+      'vis.alt.detail': 'Náhled detailu',
+      'aria.quote': 'Citát',
+      'quote.text': '„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“',
+      'quote.author': 'Můj přístup k tvorbě',
+      'aria.art': 'Galerie umění',
+      'art.heading': 'Umění,<br><em>které dýchá.</em>',
+      'art.t1.title': 'Bradavice',
+      'art.t1.type': 'Sněhová malba na sklo',
+      'art.t1.aria': 'Bradavice — sněhová malba na sklo',
+      'art.t1.alt': 'Sněhová malba Bradavic na okně',
+      'art.t2.title': 'Podzimní chaloupka',
+      'art.t2.type': 'Tradiční malba',
+      'art.t2.aria': 'Podzimní chaloupka — tradiční malba',
+      'art.t2.alt': 'Tradiční malba houbové chaloupky',
+      'art.t3.title': 'Zimní vesnice',
+      'art.t3.type': 'Sněhová malba na sklo',
+      'art.t3.aria': 'Zimní vesnice — sněhová malba na sklo',
+      'art.t3.alt': 'Sněhová malba zimní krajiny na okně',
+      'art.t4.title': 'Malá čarodějnice',
+      'art.t4.type': 'Lineart & markery',
+      'art.t4.aria': 'Malá čarodějnice — lineart & markery',
+      'art.t4.alt': 'Ilustrace markery - malá čarodějnice',
+      'aria.contact': 'Kontakt',
+      'contact.label': 'Pojďme tvořit',
+      'contact.emailAria': 'Napište mi e-mail',
+      'contact.socialsAria': 'Sociální sítě',
+      'contact.copyAria': 'Copyright',
+      'aria.lightbox': 'Zvětšený obrázek',
+      'aria.close': 'Zavřít'
+    },
+    en: {
+      'title.page': 'Tereza — UI/UX & Illustration',
+      'nav.work': 'Work',
+      'nav.about': 'About',
+      'nav.contact': 'Contact',
+      'aria.name': 'Name',
+      'aria.lang': 'Language switcher',
+      'aria.loading': 'Loading',
+      'aria.dots': 'Section navigation',
+      'dot.intro': 'Intro',
+      'dot.about': 'About',
+      'dot.project': 'Job Timer',
+      'dot.visual': 'Visual',
+      'dot.art': 'Art',
+      'dot.contact': 'Contact',
+      'aria.intro': 'Intro',
+      'hero.left': 'Where system',
+      'hero.right': 'meets soul.',
+      'hero.desc': 'UI/UX designer & illustrator.<br>Technical mind,&nbsp;artistic soul.',
+      'hero.hint': 'scroll right',
+      'aria.about': 'About',
+      'about.photoLabel': 'Tereza — Designer & Illustrator',
+      'about.title': "I'm <strong>Tereza.</strong><br><em>I design with&nbsp;soul.</em>",
+      'about.body': "I bridge the logic of design systems with the empathy of a creative maker. My path led from pure pencil sketches to building complex digital products in React. The approach hasn't changed — whether I'm writing code or shaping graphics, I always emphasize detail, emotion, and flawless function.",
+      'aria.domains': 'Areas of work',
+      'about.domain.uiux': 'UI/UX Design',
+      'about.domain.branding': 'Branding & Visual Identity',
+      'about.domain.system': 'Design Systems & React',
+      'about.domain.illustration': 'Digital & Traditional Illustration',
+      'about.domain.installation': 'Snow Window Paintings & Art Installations',
+      'aria.project': 'Job Timer project',
+      'proj.index': '01 / Case Study',
+      'proj.metaType': 'Type',
+      'proj.metaYear': 'Year',
+      'proj.metaTools': 'Tools',
+      'proj.metaRole': 'Role',
+      'proj.live': 'View live',
+      'proj.system': 'Design System',
+      'proj.liveAria': 'Open the Job Timer live app',
+      'proj.systemAria': 'Open the Job Timer design system',
+      'vis.alt.history': 'History view',
+      'vis.alt.dashboard': 'Dashboard view',
+      'vis.alt.detail': 'Detail view',
+      'aria.quote': 'Quote',
+      'quote.text': '“We are beings made of stories.<br><em>Design is just another language to tell them in.</em>”',
+      'quote.author': 'My approach to craft',
+      'aria.art': 'Art gallery',
+      'art.heading': 'Art<br><em>that breathes.</em>',
+      'art.t1.title': 'Hogwarts',
+      'art.t1.type': 'Snow Window Painting',
+      'art.t1.aria': 'Hogwarts — snow window painting',
+      'art.t1.alt': 'Snow painting of Hogwarts on a window',
+      'art.t2.title': 'Autumn Cottage',
+      'art.t2.type': 'Traditional Painting',
+      'art.t2.aria': 'Autumn Cottage — traditional painting',
+      'art.t2.alt': 'Traditional painting of a mushroom cottage',
+      'art.t3.title': 'Winter Village',
+      'art.t3.type': 'Snow Window Painting',
+      'art.t3.aria': 'Winter Village — snow window painting',
+      'art.t3.alt': 'Snow painting of a winter landscape on a window',
+      'art.t4.title': 'Little Witch',
+      'art.t4.type': 'Lineart & Markers',
+      'art.t4.aria': 'Little Witch — lineart & markers',
+      'art.t4.alt': 'Marker illustration of a little witch',
+      'aria.contact': 'Contact',
+      'contact.label': "Let's create",
+      'contact.emailAria': 'Email me',
+      'contact.socialsAria': 'Social networks',
+      'contact.copyAria': 'Copyright',
+      'aria.lightbox': 'Enlarged image',
+      'aria.close': 'Close'
+    }
+  };
+
+  function detectInitialLang(){
+    try {
+      const stored = localStorage.getItem('lang');
+      if (stored === 'cs' || stored === 'en') return stored;
+    } catch(_) {}
+    const browser = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    return browser.startsWith('cs') ? 'cs' : 'en';
+  }
+
+  function applyLang(lang){
+    const dict = translations[lang] || translations.cs;
+    document.documentElement.lang = lang;
+    if (dict['title.page']) document.title = dict['title.page'];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n')];
+      if (v !== undefined) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-html')];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-aria')];
+      if (v !== undefined) el.setAttribute('aria-label', v);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-alt')];
+      if (v !== undefined) el.setAttribute('alt', v);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-title')];
+      if (v !== undefined) el.setAttribute('title', v);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    try { localStorage.setItem('lang', lang); } catch(_) {}
+    window.__lang = lang;
+  }
+
+  const initial = detectInitialLang();
+  applyLang(initial);
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = btn.dataset.lang;
+      if (next && next !== window.__lang) applyLang(next);
+    });
+  });
+
+  window.setLang = applyLang;
+})();
+</script>
 <script>
 /* Email anti-obfuscation: sestav email za runtime, Cloudflare ho nerozpozná */
 (function(){
