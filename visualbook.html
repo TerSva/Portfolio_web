@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!--
+  TEREZA BRITTA ŠVANDA — VISUAL BOOK
+  Branch: uxportfolio
+
+  Část A dokumentuje SKUTEČNÝ stav main branch (art hub) — audit, ne návrh.
+  Část B je odvozený Foundations systém pro uxportfolio (case studies).
+  Všechny barvy v části B jsou odvozené vzorcem z tokenů části A, ne vybrané od oka.
+  Všechny kontrastní poměry jsou reálně spočítané (WCAG relative luminance), ne odhadnuté.
+-->
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="Tereza Britta Švanda — Visual Book: audit main identity + odvozený Foundations systém pro uxportfolio">
+<title>Tereza — Visual Book &amp; Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   KNIHA — vlastní chrome dokumentu.
+   Používá SKUTEČNÉ main tokeny (žádná třetí vymyšlená paleta).
+═══════════════════════════════════════════════════════════ */
+:root{
+  --bg:#001F1C; --bg2:#012622; --em:#004D40; --gold:#FFD700; --copper:#E65C00;
+  --ch:#F5F5DC; --ch2:rgba(245,245,220,.85); --ch3:rgba(245,245,220,.60);
+  --border:rgba(245,245,220,.12);
+  --font-d:'DM Serif Display', Georgia, serif;
+  --font-s:'Space Grotesk', sans-serif;
+  --font-m:'IBM Plex Mono', monospace;
+
+  /* ── Část B — odvozené case-study tokeny ──
+     Vzorec je zdrojem pravdy, ne hex sám o sobě:
+     paper   = mix(ch 96%, em 4%)
+     surface = mix(white 80%, ch 20%)
+     border  = mix(ch 85%, em 15%)
+     ink     = em (beze změny — main tmavý token použitý jako světlý ink)
+     muted   = mix(paper 25%, em 75%)
+     copper-text = mix(copper 70%, black 30%)
+     gold-ui = mix(gold 60%, black 40%)  — gold NIKDY jako text, jen UI/hranice
+  */
+  --cs-paper:#EBEED6;
+  --cs-surface:#FDFDF8;
+  --cs-border:#D0DCC5;
+  --cs-ink:#004D40;
+  --cs-muted:#3B7565;
+  --cs-copper:#A14000;
+  --cs-gold-ui:#998100;
+  --sidebar-w:250px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-s);background:var(--bg);color:var(--ch);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+code{font-family:var(--font-m);font-size:.85em;background:var(--bg2);padding:2px 6px;border-radius:4px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:2px}
+.skip-link{position:fixed;top:8px;left:8px;z-index:100;transform:translateY(-200%);
+  background:var(--ch);color:var(--bg);padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
+.skip-link:focus{transform:none}
+
+.layout{display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:var(--bg2);
+  border-right:1px solid var(--border);padding:28px 0;overflow-y:auto;z-index:10}
+.sidebar-brand{padding:0 22px 20px;font-family:var(--font-d);font-style:italic;font-size:19px;
+  border-bottom:1px solid var(--border);margin-bottom:10px;color:var(--ch)}
+.sidebar-brand small{display:block;margin-top:6px;font-size:10.5px;font-weight:500;color:var(--ch3);
+  font-family:var(--font-m);font-style:normal;letter-spacing:.08em}
+.sidebar-group-label{padding:16px 22px 6px;font-family:var(--font-m);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold)}
+.sidebar a{display:block;padding:8px 22px;color:var(--ch3);text-decoration:none;font-size:13.5px;
+  border-left:3px solid transparent;transition:.15s}
+.sidebar a:hover,.sidebar a.active{color:var(--ch);border-left-color:var(--gold);background:rgba(255,215,0,.05)}
+main{margin-left:var(--sidebar-w);flex:1;padding:0 min(6vw,72px) 140px;max-width:1180px;position:relative}
+section{padding-top:80px}
+
+.section-label{font-family:var(--font-m);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.section-title{font-family:var(--font-d);font-style:italic;font-size:32px;font-weight:400;margin:8px 0 12px;line-height:1.2}
+.section-desc{color:var(--ch2);max-width:680px;margin-bottom:30px;font-size:15px}
+.subsection-title{font-family:var(--font-s);font-size:18px;font-weight:600;margin:34px 0 14px;color:var(--ch)}
+.text-sm{font-size:13px;color:var(--ch3)}
+.formula{font-family:var(--font-m);font-size:12.5px;color:var(--ch2);background:var(--bg2);
+  border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:10px 0 20px;white-space:pre-wrap}
+
+/* ── Cover ── */
+.cover{min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding-top:30px}
+.cover h1{font-family:var(--font-d);font-style:italic;font-size:clamp(38px,5.5vw,64px);font-weight:400;line-height:1.1;margin:14px 0}
+.cover p{font-size:17px;color:var(--ch2);max-width:600px}
+.palette-strip{display:flex;height:12px;border-radius:100px;overflow:hidden;margin-top:36px;max-width:560px}
+.palette-strip span{flex:1}
+.cover-meta{display:flex;gap:32px;margin-top:40px;flex-wrap:wrap}
+.cover-meta div{font-family:var(--font-m)}
+.cover-meta .val{font-size:22px;color:var(--gold);font-weight:600}
+.cover-meta .lbl{font-size:11px;color:var(--ch3);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+/* ── grid / swatch ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px}
+.card-full{grid-column:1/-1}
+.card h4{font-family:var(--font-s);font-size:15px;font-weight:600;margin-bottom:12px;color:var(--ch)}
+.swatch{border-radius:12px;overflow:hidden;border:1px solid var(--border);cursor:copy}
+.swatch-fill{height:76px}
+.swatch .info{padding:10px 13px;background:var(--bg2)}
+.swatch .name{display:block;font-weight:600;font-size:13px;color:var(--ch)}
+.swatch .hex{display:block;font-family:var(--font-m);font-size:11px;color:var(--ch3);margin-top:2px}
+.swatch .note{display:block;font-size:11.5px;color:var(--ch3);margin-top:4px}
+
+/* ── table ── */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:var(--font-m);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ch3)}
+tr:last-child td{border-bottom:0}
+.badge{display:inline-block;font-family:var(--font-m);font-size:10.5px;font-weight:600;border-radius:100px;padding:3px 10px}
+.badge-aaa{background:rgba(52,211,153,.15);color:#34d399}
+.badge-aa{background:rgba(96,165,250,.15);color:#60a5fa}
+.badge-uionly{background:rgba(251,191,36,.15);color:#fbbf24}
+.badge-fail{background:rgba(248,113,113,.15);color:#f87171}
+
+/* ── glass demo (skutečná main specifikace) ── */
+.glass-stage{position:relative;border-radius:16px;overflow:hidden;height:220px;
+  background:url('bac_liq.jpg') center/cover;display:flex;align-items:center;justify-content:center;gap:16px}
+.glass-pill{background:rgba(0,31,28,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(245,245,220,.08);border-radius:100px;padding:.8rem 1.8rem;
+  font-family:var(--font-s);font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ch2)}
+
+/* ── buttony (main specifikace) ── */
+.btn-modern{display:inline-flex;padding:.8rem 1.8rem;border-radius:100px;font-family:var(--font-m);
+  font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;
+  background:rgba(255,215,0,.1);border:1px solid var(--gold);color:var(--gold);transition:.3s}
+.btn-modern:hover{background:var(--gold);color:var(--bg)}
+.btn-ghost-demo{display:inline-flex;padding:.8rem 1.8rem;border-radius:100px;font-family:var(--font-m);
+  font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;
+  background:transparent;border:1px solid var(--em);color:var(--ch2);transition:.3s}
+.btn-ghost-demo:hover{background:var(--em);color:var(--ch)}
+
+/* ── karty/kompozice demo ── */
+.collage-demo{position:relative;height:230px;display:flex;align-items:center;justify-content:center}
+.collage-demo img{position:absolute;width:44%;border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.5);
+  border:1px solid rgba(255,215,0,.15);transition:all .5s cubic-bezier(.16,1,.3,1)}
+.collage-demo img:nth-child(1){transform:translateX(-16%) scale(.85) rotate(-6deg);opacity:.55;z-index:1}
+.collage-demo img:nth-child(2){transform:translateX(16%) scale(.9) rotate(4deg);opacity:.75;z-index:2}
+.collage-demo img:nth-child(3){transform:scale(1);opacity:1;z-index:3}
+.collage-demo:hover img:nth-child(1){transform:translateX(-34%) scale(.85) rotate(-9deg)}
+.collage-demo:hover img:nth-child(2){transform:translateX(34%) scale(.9) rotate(8deg)}
+
+.rule-bars{display:flex;height:44px;border-radius:10px;overflow:hidden;font-family:var(--font-m);font-size:11px;font-weight:700}
+.rule-bars div{display:flex;align-items:center;justify-content:center}
+
+/* ── foundations rule cards ── */
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.rule-card{padding:20px;border-radius:12px;border:1px solid var(--border);background:var(--bg2)}
+.rule-card h4{font-family:var(--font-m);font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.rule-card.keep h4{color:#34d399}
+.rule-card.adapt h4{color:#fbbf24}
+.rule-card.never h4{color:#f87171}
+.rule-card ul{margin-left:16px;font-size:13.5px;color:var(--ch2);line-height:1.7}
+
+/* ── PART B — live světlá ukázka vnořená do tmavé knihy ── */
+.cs-preview{background:var(--cs-paper);border-radius:16px;padding:34px;color:var(--cs-ink)}
+.cs-preview .cs-label{font-family:var(--font-m);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cs-muted);margin-bottom:14px;display:block}
+.cs-title{font-family:var(--font-d);font-style:normal;font-size:clamp(26px,3vw,38px);font-weight:400;
+  color:var(--cs-ink);border-bottom:2px solid var(--cs-gold-ui);padding-bottom:10px;display:inline-block;margin-bottom:16px}
+.cs-body{font-family:var(--font-s);font-size:14.5px;font-weight:400;color:var(--cs-ink);max-width:56ch;line-height:1.7}
+.cs-body a{color:var(--cs-copper);text-decoration:underline;text-underline-offset:3px}
+.cs-meta{font-family:var(--font-m);font-size:11.5px;color:var(--cs-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:16px}
+.cs-card{background:var(--cs-surface);border:1px solid var(--cs-border);border-radius:12px;padding:18px;margin-top:18px}
+.cs-tag{display:inline-block;background:#FFD700;color:var(--cs-ink);font-family:var(--font-m);font-size:10.5px;
+  font-weight:700;border-radius:100px;padding:4px 12px;margin-top:14px}
+
+/* ── anatomy list ── */
+.anatomy-item{border-left:2px solid var(--border);padding:4px 0 20px 20px;position:relative}
+.anatomy-item::before{content:attr(data-n);position:absolute;left:-13px;top:2px;width:24px;height:24px;
+  border-radius:50%;background:var(--bg2);border:1px solid var(--gold);color:var(--gold);
+  font-family:var(--font-m);font-size:11px;display:flex;align-items:center;justify-content:center}
+.anatomy-item h4{font-family:var(--font-s);font-size:15.5px;font-weight:600;color:var(--ch);margin-bottom:4px}
+.anatomy-item p{font-size:13.5px;color:var(--ch2)}
+
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.do-item,.dont-item{padding:12px 16px;border-radius:8px;font-size:13.5px;margin-bottom:8px}
+.do-item{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.35)}
+.dont-item{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.35)}
+
+@media(max-width:860px){
+  .sidebar{position:static;width:100%;height:auto;padding:14px 0;border-right:0;border-bottom:1px solid var(--border)}
+  .sidebar a{display:inline-block;border-left:0;border-bottom:2px solid transparent;padding:7px 12px}
+  .layout{display:block}
+  main{margin-left:0;padding:0 20px 100px}
+  .grid-2,.dodont{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#cover">Přeskočit na obsah</a>
+<div class="layout">
+
+<nav class="sidebar" aria-label="Obsah design systému">
+  <div class="sidebar-brand">Tereza<small>Visual Book · v0.1 draft</small></div>
+  <a href="#cover">Úvod</a>
+  <div class="sidebar-group-label">Část A — main (audit)</div>
+  <a href="#a-colors">Barvy main</a>
+  <a href="#a-type">Typografie main</a>
+  <a href="#a-glass">Glass efekt</a>
+  <a href="#a-buttons">Buttony</a>
+  <a href="#a-cards">Karty a kompozice</a>
+  <a href="#a-motion">Liquid a motion</a>
+  <div class="sidebar-group-label">Část B — uxportfolio</div>
+  <a href="#b-foundations">Foundations</a>
+  <a href="#b-colors">Barvy na světlém</a>
+  <a href="#b-neutrals">Neutrální škála</a>
+  <a href="#b-type">Typografie case study</a>
+  <a href="#b-anatomy">Anatomie case study</a>
+  <a href="#b-guidelines">Guidelines</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="cover" id="cover">
+  <span class="section-label">Visual Book · draft v0.1 · uxportfolio branch</span>
+  <h1>Tereza Britta Švanda<br>Visual Book</h1>
+  <p>Dva díly: audit skutečného main brandu a odvozený Foundations systém pro profesní UX/UI case studies. Žádný token v části B není vybraný od oka — každý má vzorec odvození z části A a spočítaný WCAG kontrast.</p>
+  <div class="palette-strip">
+    <span style="background:#001F1C"></span><span style="background:#004D40"></span>
+    <span style="background:#FFD700"></span><span style="background:#E65C00"></span>
+    <span style="background:#F5F5DC"></span><span style="background:#EBEED6"></span>
+  </div>
+  <div class="cover-meta">
+    <div><div class="val">2</div><div class="lbl">Části dokumentu</div></div>
+    <div><div class="val">6</div><div class="lbl">Zdrojové main tokeny</div></div>
+    <div><div class="val">7</div><div class="lbl">Odvozené cs- tokeny</div></div>
+    <div><div class="val">0</div><div class="lbl">Sémantické barvy (vědomě)</div></div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════
+     ČÁST A — ZDROJOVÁ IDENTITA (audit main)
+═════════════════════════════════════════════════════════ -->
+
+<section id="a-colors">
+  <span class="section-label">A1 · Audit</span>
+  <h2 class="section-title">Barvy main</h2>
+  <p class="section-desc">Přesné hodnoty z <code>index.html</code> na main branch. Klikni na plochu pro zkopírování hexu.</p>
+
+  <div class="grid">
+    <div class="swatch"><div class="swatch-fill" style="background:#001F1C" data-hex="#001F1C"></div>
+      <div class="info"><span class="name">--bg</span><span class="hex">#001F1C</span><span class="note">hlavní tmavé pozadí</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#012622" data-hex="#012622"></div>
+      <div class="info"><span class="name">--bg2</span><span class="hex">#012622</span><span class="note">sekundární plocha, hover panely</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#004D40" data-hex="#004D40"></div>
+      <div class="info"><span class="name">--em</span><span class="hex">#004D40</span><span class="note">emerald, bordery, ghost button</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#FFD700" data-hex="#FFD700"></div>
+      <div class="info"><span class="name">--gold</span><span class="hex">#FFD700</span><span class="note">primární akcent, CTA, glow</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#E65C00" data-hex="#E65C00"></div>
+      <div class="info"><span class="name">--copper</span><span class="hex">#E65C00</span><span class="note">definovaný, ale v main téměř nepoužitý</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#F5F5DC;color:#001F1C" data-hex="#F5F5DC"></div>
+      <div class="info" style="background:#F5F5DC"><span class="name" style="color:#001F1C">--ch</span><span class="hex" style="color:#333">#F5F5DC</span><span class="note" style="color:#555">champagne, primární text na tmavém</span></div></div>
+  </div>
+
+  <h3 class="subsection-title">Kontrast (spočítaný, ne odhadnutý)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kombinace</th><th>Poměr</th><th>Verdikt</th></tr></thead>
+      <tbody>
+        <tr><td>ch na bg</td><td>15.65:1</td><td><span class="badge badge-aaa">AAA</span></td></tr>
+        <tr><td>gold na bg</td><td>12.35:1</td><td><span class="badge badge-aaa">AAA</span></td></tr>
+        <tr><td>ch2 (85% opacity) na bg</td><td>≈11.07:1</td><td><span class="badge badge-aaa">AAA</span></td></tr>
+        <tr><td>ch3 (60% opacity, mutované labely) na bg</td><td>≈6.06:1</td><td><span class="badge badge-aa">AA</span></td></tr>
+        <tr><td>copper na bg</td><td>4.86:1</td><td><span class="badge badge-aa">AA (těsně)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-sm" style="margin-top:10px">⚠️ Poměry jsou vůči flat <code>--bg</code>. Reálně pod textem často leží liquid canvas + noise overlay + spotlight gradient — lokální kontrast tam může být nižší, hlavně u <code>ch3</code>. Pravidlo pro main: text nikdy přímo na živé ploše liquid bez tmavé vrstvy/scrimu pod sebou (to <code>#scroller::after</code> gradient v main už řeší pro postranní panely).</p>
+</section>
+
+<section id="a-type">
+  <span class="section-label">A2 · Audit</span>
+  <h2 class="section-title">Typografie main</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h4>DM Serif Display</h4>
+      <p style="font-family:var(--font-d);font-style:italic;font-size:28px;margin:10px 0">Kde systém potkává cit.</p>
+      <p class="text-sm">Hero nadpisy, project title, quote. Vždy kurzívou v emotivních místech main. Dominantní hlas webu.</p>
+    </div>
+    <div class="card">
+      <h4>Space Grotesk</h4>
+      <p style="font-family:var(--font-s);font-weight:300;font-size:16px;margin:10px 0">Spojuji logiku design systémů s empatií kreativní tvůrkyně.</p>
+      <p class="text-sm">Body text, weight 300. Lehký, vzdušný — funguje na tmavém s velkým řádkováním.</p>
+    </div>
+    <div class="card card-full">
+      <h4>IBM Plex Mono</h4>
+      <p style="font-family:var(--font-m);font-size:14px;letter-spacing:.15em;text-transform:uppercase;margin:10px 0">01 / Případová studie — Job Timer</p>
+      <p class="text-sm">Labely, metadata, mikro-navigace, buttony. Nese "technický" hlas systému.</p>
+    </div>
+  </div>
+</section>
+
+<section id="a-glass">
+  <span class="section-label">A3 · Audit</span>
+  <h2 class="section-title">Glass efekt</h2>
+  <p class="section-desc">Jediný skutečně systematický glassmorphism vzor v main, opakovaný konzistentně na <code>.site-name</code>, <code>.site-nav</code>, <code>.lang-switch</code>, <code>#lightbox</code>. Živá ukázka níže — pozadí je reálná main textura <code>bac_liq.jpg</code>.</p>
+  <div class="glass-stage">
+    <span class="glass-pill">Práce</span>
+    <span class="glass-pill">O mně</span>
+  </div>
+  <div class="formula">background: rgba(0,31,28,0.4);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(245,245,220,0.08);
+border-radius: 100px;</div>
+</section>
+
+<section id="a-buttons">
+  <span class="section-label">A4 · Audit</span>
+  <h2 class="section-title">Buttony</h2>
+  <p class="section-desc">Dvě varianty, obě pilulkovité, mono font, uppercase, letter-spacing .15em. Najeď myší pro hover stav.</p>
+  <div class="card" style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+    <button class="btn-modern">Živá aplikace</button>
+    <button class="btn-ghost-demo">Design systém</button>
+  </div>
+  <p class="text-sm" style="margin-top:12px"><code>.btn-modern</code> — primární CTA, gold outline → gold fill. <code>.btn-ghost-demo</code> (main: <code>.btn-ghost</code>) — sekundární, emerald outline → emerald fill.</p>
+</section>
+
+<section id="a-cards">
+  <span class="section-label">A5 · Audit</span>
+  <h2 class="section-title">Karty a kompozice</h2>
+  <p class="section-desc">Nejsou to klasické UI-kit karty — main používá scénické fotografické kompozice. Zjednodušená živá ukázka vějíře (skutečné obrázky z repozitáře), najeď myší.</p>
+  <div class="card">
+    <div class="collage-demo">
+      <img src="jobtimer-3.jpg" alt="">
+      <img src="jobtimer-2.jpg" alt="">
+      <img src="jobtimer-preview.jpg" alt="">
+    </div>
+  </div>
+  <p class="text-sm" style="margin-top:12px"><code>.collage-wrap</code> — 3 fotky, rotace ±4–6°, hover roztáhne vějíř. <code>.art-thumb</code> (galerie) — accordion, flex-grow on hover + grayscale→barva reveal. <code>.p-project</code> — celopanelová scénická "karta" s hover glow, ne ohraničený box.</p>
+</section>
+
+<section id="a-motion">
+  <span class="section-label">A6 · Audit</span>
+  <h2 class="section-title">Liquid a motion</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h4>WebGL liquid pozadí</h4>
+      <p class="text-sm"><code>#liquid-bg</code> canvas, knihovna <code>threejs-components</code> (<code>LiquidBackground</code>), texturuje <code>bac_liq.jpg</code>. Metalness 0.8, roughness 0.15, displacement 4. Desktop-only — na mobilu skrytý kvůli výkonu.</p>
+    </div>
+    <div class="card">
+      <h4>Golden spotlight reveal</h4>
+      <p class="text-sm">Radial-gradient sledující kurzor (<code>body::before</code>), mix-blend-mode screen, velmi jemná (opacity 0.06 max). Plus noise overlay <code>body::after</code> (SVG fractalNoise, opacity 0.032).</p>
+    </div>
+  </div>
+  <p class="text-sm" style="margin-top:14px">Live náhled těchto efektů (WebGL nelze čistě replikovat v tomto statickém dokumentu) — viz <code>index.html</code> na main branch.</p>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════
+     ČÁST B — ODVOZENÝ SYSTÉM PRO UXPORTFOLIO
+═════════════════════════════════════════════════════════ -->
+
+<section id="b-foundations" style="border-top:1px solid var(--border);margin-top:20px">
+  <span class="section-label">B1 · Foundations</span>
+  <h2 class="section-title">Pravidla před stylem</h2>
+  <p class="section-desc">Case study je primárně světlá. Foundations říká, co se z main přebírá beze změny, co se adaptuje pro světlé UI, a co se nepoužívá vůbec — kvůli skenovatelnosti a profesionálnímu tónu.</p>
+  <div class="rules-grid">
+    <div class="rule-card keep">
+      <h4>Must preserve</h4>
+      <ul>
+        <li>Gold jako jediný accent (CTA, underline, tag pozadí)</li>
+        <li>DM Serif Display — přísně jen jako H1 project title, vzpřímeně</li>
+        <li>IBM Plex Mono na metadata a labely</li>
+        <li>7bodová anatomie case study (obsahová struktura)</li>
+      </ul>
+    </div>
+    <div class="rule-card adapt">
+      <h4>May adapt</h4>
+      <ul>
+        <li>Podklad: teplý kámen odvozený z main tokenů (viz B2), ne main tmavá</li>
+        <li>Copper a gold: ztmavené UI varianty pro čitelnost na světlém</li>
+        <li>Space Grotesk: 400–500 váha místo 300, bez kurzívy</li>
+        <li>Hustota a počet sloupců podle breakpointu</li>
+      </ul>
+    </div>
+    <div class="rule-card never">
+      <h4>Never</h4>
+      <ul>
+        <li>Liquid canvas / glass efekt na case study obsahu</li>
+        <li>Scroll-hijacking, blokující intro animace</li>
+        <li>Gold nebo raw copper jako barva běžného textu</li>
+        <li>Sémantické barvy (success/warning/error) — vědomě vynechány</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="b-colors">
+  <span class="section-label">B2 · Odvozeno</span>
+  <h2 class="section-title">Barvy na světlém</h2>
+  <p class="section-desc">Žádný z těchto hexů není vybraný od oka — každý má vzorec z tokenů části A. Kontrast je spočítaný přes WCAG relative luminance.</p>
+
+  <div class="grid">
+    <div class="swatch"><div class="swatch-fill" style="background:#EBEED6" data-hex="#EBEED6"></div>
+      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-paper</span><span class="hex" style="color:#555">#EBEED6</span><span class="note" style="color:#666">mix(ch 96%, em 4%) — podklad stránky</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#FDFDF8;border-bottom:1px solid #ddd" data-hex="#FDFDF8"></div>
+      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-surface</span><span class="hex" style="color:#555">#FDFDF8</span><span class="note" style="color:#666">mix(white 80%, ch 20%) — karty, vystoupení</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#D0DCC5" data-hex="#D0DCC5"></div>
+      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-border</span><span class="hex" style="color:#555">#D0DCC5</span><span class="note" style="color:#666">mix(ch 85%, em 15%)</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#004D40" data-hex="#004D40"></div>
+      <div class="info"><span class="name">--cs-ink</span><span class="hex">#004D40</span><span class="note">= main --em, beze změny — primární text/nadpisy</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#3B7565" data-hex="#3B7565"></div>
+      <div class="info"><span class="name">--cs-muted</span><span class="hex">#3B7565</span><span class="note">mix(paper 25%, em 75%) — sekundární text</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#A14000" data-hex="#A14000"></div>
+      <div class="info"><span class="name">--cs-copper</span><span class="hex">#A14000</span><span class="note">mix(copper 70%, black 30%) — linky, drobný accent text</span></div></div>
+    <div class="swatch"><div class="swatch-fill" style="background:#998100" data-hex="#998100"></div>
+      <div class="info"><span class="name">--cs-gold-ui</span><span class="hex">#998100</span><span class="note">mix(gold 60%, black 40%) — jen hranice/ikony, nikdy text</span></div></div>
+  </div>
+
+  <h3 class="subsection-title">Kontrast — reálná čísla</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kombinace</th><th>Poměr</th><th>Verdikt</th></tr></thead>
+      <tbody>
+        <tr><td>cs-ink na cs-paper (nadpisy)</td><td>8.32:1</td><td><span class="badge badge-aaa">AAA</span></td></tr>
+        <tr><td>cs-ink na cs-surface (nadpisy v kartě)</td><td>9.64:1</td><td><span class="badge badge-aaa">AAA</span></td></tr>
+        <tr><td>cs-muted na cs-paper (sekundární text)</td><td>4.52:1</td><td><span class="badge badge-aa">AA</span></td></tr>
+        <tr><td>cs-copper na cs-paper (linky)</td><td>5.45:1</td><td><span class="badge badge-aa">AA</span></td></tr>
+        <tr><td>cs-copper na cs-surface</td><td>6.32:1</td><td><span class="badge badge-aaa">téměř AAA</span></td></tr>
+        <tr><td>cs-gold-ui na cs-paper (hranice/ikony, práh 3:1)</td><td>3.23:1</td><td><span class="badge badge-aa">splňuje 1.4.11</span></td></tr>
+        <tr><td>raw gold #FFD700 jako TEXT na cs-paper</td><td>1.19:1</td><td><span class="badge badge-fail">FAIL — nikdy jako text</span></td></tr>
+        <tr><td>cs-ink jako text NA raw gold pozadí (tag/badge)</td><td>7.01:1</td><td><span class="badge badge-aaa">AAA — takhle gold používat</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-sm" style="margin-top:10px">Raw <code>#FFD700</code> zůstává v systému — jen ne jako linka nebo text na světlém. Správné použití: plná plocha pozadí (tag/badge) s <code>--cs-ink</code> textem na ní (7.01:1). Na hranice/ikony/underline použij <code>--cs-gold-ui</code>.</p>
+  <p class="text-sm" style="margin-top:6px">⚠️ Kontrast ověřuje čitelnost, ne harmonii. <code>--cs-copper</code> je teplý akcent na chladně nazeleněném podkladu — před finálním zamčením paletového vztahu doporučuju vizuální swatch-check vedle sebe, ne jen čísla (feedback Sebastiana).</p>
+</section>
+
+<section id="b-neutrals">
+  <span class="section-label">B3 · Odvozeno</span>
+  <h2 class="section-title">Neutrální škála v kontextu</h2>
+  <p class="section-desc">Živá ukázka — světlá case-study kompozice vnořená do tmavé knihy, aby byl vidět skutečný vztah ploch.</p>
+  <div class="cs-preview">
+    <span class="cs-label">01 · Případová studie</span>
+    <h3 class="cs-title">Job Timer</h3>
+    <p class="cs-body">Aplikace pro sledování pracovní doby na více projektech současně. Přečti si <a href="#">celý proces</a> od problému po výsledek.</p>
+    <div class="cs-card">
+      <span class="text-sm" style="color:var(--cs-muted);font-family:var(--font-m);text-transform:uppercase;letter-spacing:.08em;font-size:11px">Role</span>
+      <p style="color:var(--cs-ink);font-family:var(--font-s);font-weight:500;margin-top:4px">Art Director &amp; AI Prompting</p>
+    </div>
+    <span class="cs-tag">React App</span>
+  </div>
+  <div class="rule-bars" style="margin-top:20px">
+    <div style="flex:6;background:var(--cs-paper);color:var(--cs-ink)">60 % paper</div>
+    <div style="flex:3;background:var(--cs-surface);color:var(--cs-ink);border-left:1px solid var(--cs-border)">30 % surface</div>
+    <div style="flex:1;background:#FFD700;color:var(--cs-ink)">10 % gold</div>
+  </div>
+</section>
+
+<section id="b-type">
+  <span class="section-label">B4 · Odvozeno</span>
+  <h2 class="section-title">Typografie case study</h2>
+  <div class="cs-preview">
+    <p style="font-family:var(--font-d);font-size:30px;color:var(--cs-ink);margin-bottom:14px">Job Timer — Design Systém</p>
+    <p class="cs-body" style="font-weight:500">Space Grotesk, 500 váha, bez kurzívy. Tohle je pracovní kůň case study — nadpisy sekcí i běžný text. Čte se čistě, profesionálně, žádný artový flourish.</p>
+    <p style="font-family:var(--font-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cs-muted);margin-top:14px">Typ · Rok · Nástroje — IBM Plex Mono, beze změny</p>
+  </div>
+  <p class="text-sm" style="margin-top:14px">Pravidlo: <strong>DM Serif Display se objevuje POUZE v project title (H1), vzpřímeně, nikdy jinde.</strong> Spojení s main je font + tenká gold linka pod titulkem (viz <code>.cs-title</code> border-bottom výše) — signatura jako dvojice rozhodnutí, ne osamocené písmo.</p>
+</section>
+
+<section id="b-anatomy">
+  <span class="section-label">B5 · Ze zdrojů bootcampu</span>
+  <h2 class="section-title">Anatomie case study</h2>
+  <p class="section-desc">Obsahová struktura už existuje hotová v <code>portfolio/portfolio-poznatky-bootcamp.md</code> — zde jen jako referenční přehled, ne nový návrh.</p>
+  <div>
+    <div class="anatomy-item" data-n="1"><h4>Overview</h4><p>Jednovětý elevator pitch — pro koho to je, jaký byl cíl a zamýšlený výsledek.</p></div>
+    <div class="anatomy-item" data-n="2"><h4>Problem Statement</h4><p>Proč projekt vznikl, jak se problém vyvíjel, kdo ho identifikoval.</p></div>
+    <div class="anatomy-item" data-n="3"><h4>Users &amp; Audience</h4><p>Konkrétní lidé, ne "uživatelé" — kdo přesně, jak jsi je poznala, existoval research/persony?</p></div>
+    <div class="anatomy-item" data-n="4"><h4>Roles &amp; Responsibilities</h4><p>Kdo na projektu pracoval, kolik lidí, tvoje konkrétní role, spolupráce s týmem.</p></div>
+    <div class="anatomy-item" data-n="5"><h4>Scope &amp; Constraints</h4><p>Časový rámec, rozpočet, omezení, co si vyžádalo adaptaci procesu.</p></div>
+    <div class="anatomy-item" data-n="6"><h4>Process &amp; What You Did</h4><p>Příběh realizace, použité metody a proč, zapojení stakeholderů.</p></div>
+    <div class="anatomy-item" data-n="7"><h4>Outcomes &amp; Lessons</h4><p>Launch nebo scrapped? Lekce, co bys udělala jinak, metriky, zpětná vazba.</p></div>
+  </div>
+  <p class="text-sm" style="margin-top:4px">Otevřená otázka z <code>00-strategie-a-kontext.md</code>: kolik case studies (Enow, Galerie Venek, případně Job Timer jako bonus) půjde do první verze — zatím nerozhodnuto.</p>
+</section>
+
+<section id="b-guidelines">
+  <span class="section-label">B6 · Guidelines</span>
+  <h2 class="section-title">Použití — do / don't</h2>
+  <div class="dodont">
+    <div>
+      <div class="do-item">✓ Gold jen jako plná plocha (tag) s cs-ink textem, nebo jako cs-gold-ui linka/hranice</div>
+      <div class="do-item">✓ Nadpisy vždy cs-ink (main --em) — je to AAA na obou světlých plochách</div>
+      <div class="do-item">✓ DM Serif Display výhradně na H1 project title</div>
+      <div class="do-item">✓ Odkazy v textu vždy cs-copper s podtržením</div>
+    </div>
+    <div>
+      <div class="dont-item">✕ Raw gold nebo raw copper jako barva běžného textu</div>
+      <div class="dont-item">✕ Liquid canvas, glass blur nebo main noise overlay na case study obsahu</div>
+      <div class="dont-item">✕ DM Serif Display kurzívou nebo mimo H1</div>
+      <div class="dont-item">✕ Nová sémantická paleta (success/warning/error) bez explicitního schválení</div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.sidebar a');
+  const sync = () => {
+    let current = '';
+    sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.id; });
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  };
+  addEventListener('scroll', sync, {passive:true}); sync();
+})();
+(function(){
+  document.querySelectorAll('[data-hex]').forEach(el => {
+    el.addEventListener('click', () => {
+      navigator.clipboard?.writeText(el.dataset.hex.trim());
+      const old = el.style.outline;
+      el.style.outline = '3px solid #FFD700';
+      setTimeout(() => el.style.outline = old, 400);
+    });
+  });
+})();
+</script>
+</body>
+</html>
