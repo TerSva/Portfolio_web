@@ -18,7 +18,74 @@
   --font-m: 'IBM Plex Mono', monospace;
 
   --measure: 40rem;
+
+  /* Named stops for the zone gradient transition strips — see .cs-zone-* below */
+  --cs-paper-z0: #EBEED6;
+  --cs-paper-z1: #C7D0B4;
+  --cs-paper-z2: #2E4B44;
+  --cs-paper-z3: #001F1C;
 }
+
+/* ============================================================
+   PROGRESSIVE DARK ZONES — the case-study background echoes
+   Enow's own product concept (adaptive brightness, darkest at
+   the SOS reveal, snapping back to calm after). Each wrapper
+   overrides the full cs- token set locally; every component
+   below already reads exclusively through var(--cs-*), so nothing
+   else needs to change. Values + contrast ratios verified via
+   WCAG relative luminance (see 00-strategie-a-kontext.md).
+============================================================ */
+.cs-zone-z0{
+  --cs-paper:   #EBEED6;
+  --cs-surface: #FDFDF8;
+  --cs-border:  #D0DCC5;
+  --cs-ink:     #004D40;
+  --cs-muted:   #3B7565;
+  --cs-copper:  #A14000;
+  --cs-gold-ui: #998100;
+  background:var(--cs-paper);
+}
+.cs-zone-z1{
+  --cs-paper:   #C7D0B4;
+  --cs-surface: #D8DFC7;
+  --cs-border:  #A9B896;
+  --cs-ink:     #053B30;
+  --cs-muted:   #2C5548;
+  --cs-copper:  #8A3800;
+  --cs-gold-ui: #7A6600;
+  background:var(--cs-paper);
+}
+.cs-zone-z2{
+  --cs-paper:   #2E4B44;
+  --cs-surface: #38584F;
+  --cs-border:  #4A695F;
+  --cs-ink:     #F5F5DC;
+  --cs-muted:   #CDE0D3;
+  --cs-copper:  #FFC080;
+  --cs-gold-ui: #FFD700;
+  background:var(--cs-paper);
+}
+.cs-zone-z3{
+  --cs-paper:   #001F1C;
+  --cs-surface: #0B2E29;
+  --cs-border:  #163F38;
+  --cs-ink:     #F5F5DC;
+  --cs-muted:   #B9C7BC;
+  --cs-copper:  #EA8347;
+  --cs-gold-ui: #FFD700;
+  background:var(--cs-paper);
+}
+
+/* Blend strips between zones — plain siblings, no section id, so the
+   scroll-spy's offsetTop scan just keeps the previous zone active
+   until the next real section is crossed. Heights are paced for
+   narrative weight, not just contrast delta. */
+.cs-zone-transition{ width:100%; }
+.cs-zone-transition--z0-z1{ background:linear-gradient(to bottom, var(--cs-paper-z0), var(--cs-paper-z1)); height:clamp(4rem,8vh,6rem); }
+.cs-zone-transition--z1-z2{ background:linear-gradient(to bottom, var(--cs-paper-z1), var(--cs-paper-z2)); height:clamp(6rem,12vh,10rem); }
+.cs-zone-transition--z2-z3{ background:linear-gradient(to bottom, var(--cs-paper-z2), var(--cs-paper-z3)); height:clamp(8rem,14vh,12rem); }
+.cs-zone-transition--z3-z1{ background:linear-gradient(to bottom, var(--cs-paper-z3), var(--cs-paper-z1)); height:clamp(3rem,5vh,4rem); }
+.cs-zone-transition--z1-z0{ background:linear-gradient(to bottom, var(--cs-paper-z1), var(--cs-paper-z0)); height:clamp(4rem,8vh,6rem); }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -103,8 +170,14 @@ img{max-width:100%;display:block;}
   transition:border-color .2s, color .2s;
 }
 .site-header .lang-current .chevron{
-  font-size:.8rem;transition:transform .25s ease;
+  display:inline-block;
+  width:0;height:0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:5px solid var(--nav-ch2);
+  transition:transform .25s ease, border-top-color .2s;
 }
+.site-header .lang-current:hover .chevron{border-top-color:var(--nav-ch);}
 .site-header .lang-current:hover{color:var(--nav-ch);border-color:var(--nav-ch2);}
 .site-header .lang-switch[data-open="true"] .lang-current .chevron{transform:rotate(180deg);}
 .site-header .lang-menu{
@@ -154,17 +227,36 @@ img{max-width:100%;display:block;}
   transition:background .3s, transform .3s;
 }
 .cs-dot.active{background:var(--cs-copper);transform:scale(1.6);}
+
+/* Tooltip is a floating overlay, deliberately hardcoded outside the
+   cs- token system (like .site-header) — it must read correctly at
+   every scroll position, including zones where --cs-ink itself has
+   flipped to a light color, so it can't inherit from the section
+   currently underneath it. */
 .cs-dot::after{
   content:attr(data-label);
   position:absolute;right:1.3rem;top:50%;transform:translateY(-50%);
   font-family:var(--font-m);font-size:.65rem;letter-spacing:.05em;
   white-space:nowrap;
-  background:var(--cs-ink);color:var(--cs-surface);
+  background:#001F1C;color:#F5F5DC;
   padding:.35rem .7rem;border-radius:4px;
   opacity:0;pointer-events:none;
   transition:opacity .25s;
 }
 .cs-dot:hover::after{opacity:1;}
+
+/* Dark-zone variant — #cs-dots sits at body level, outside every
+   .cs-zone-* wrapper, so it can't pick up scoped tokens via the
+   cascade. Toggled by the scroll-spy JS via body[data-zone]. */
+body[data-zone="z2"] .cs-dot,
+body[data-zone="z3"] .cs-dot{
+  background:#3A554C;
+}
+body[data-zone="z2"] .cs-dot.active,
+body[data-zone="z3"] .cs-dot.active{
+  background:#FFC080;
+}
+
 @media (max-width:900px){ #cs-dots{display:none;} }
 
 /* ============================================================
@@ -174,22 +266,34 @@ img{max-width:100%;display:block;}
   max-width:52rem;margin:0 auto;
   padding:calc(var(--nav-height) + 3.5rem) 6vw 3rem;
 }
+.cs-eyebrow{
+  display:block;
+  font-family:var(--font-m);font-size:.72rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--cs-copper);
+  margin-bottom:1rem;
+}
 .cs-title{
   font-family:var(--font-d);font-weight:400;
   font-size:clamp(2rem,4.2vw,3.4rem);
   line-height:1.15;letter-spacing:-0.01em;
   margin-bottom:1.75rem;
 }
-.cs-meta{
-  display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
-  font-family:var(--font-m);font-size:.72rem;letter-spacing:.04em;
-  color:var(--cs-muted);
-  padding:1rem 0;
+.cs-meta-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+  gap:1.5rem;
+  padding:1.5rem 0;
   border-top:1px solid var(--cs-border);
   border-bottom:1px solid var(--cs-border);
   margin-bottom:1.75rem;
 }
-.cs-meta strong{color:var(--cs-ink);font-weight:500;}
+.cs-meta-grid dt{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--cs-muted);
+  margin-bottom:.4rem;
+}
+.cs-meta-grid dd{
+  font-family:var(--font-s);font-size:.95rem;color:var(--cs-ink);
+}
 .cs-cta{display:flex;gap:1rem;flex-wrap:wrap;}
 .cs-btn{
   display:inline-block;

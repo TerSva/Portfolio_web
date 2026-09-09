@@ -2,27 +2,26 @@
 layout: base.njk
 title: "Enow — Acknowledge Now, Reset Later"
 dots:
-  - { id: "hook", label: "the problem" }
-  - { id: "intro", label: "the brief" }
-  - { id: "empathize", label: "the research" }
-  - { id: "define", label: "who it's for" }
-  - { id: "ideate", label: "the decision" }
-  - { id: "brand", label: "the visual language" }
-  - { id: "prototype", label: "the screens" }
-  - { id: "test", label: "what we learned" }
-  - { id: "reflection", label: "my part" }
+  - { id: "hook", label: "the problem", zone: "z0" }
+  - { id: "intro", label: "the brief", zone: "z0" }
+  - { id: "empathize", label: "the research", zone: "z1" }
+  - { id: "define", label: "who it's for", zone: "z1" }
+  - { id: "ideate", label: "the decision", zone: "z2" }
+  - { id: "brand", label: "the visual language", zone: "z2" }
+  - { id: "prototype", label: "the screens", zone: "z3" }
+  - { id: "test", label: "what we learned", zone: "z1" }
+  - { id: "reflection", label: "my part", zone: "z0" }
 ---
 
 <div class="cs-header">
+  <span class="cs-eyebrow">Enow</span>
   <h1 class="cs-title">Enow — Acknowledge Now, Reset Later: a stress app for parents with no time to sit down</h1>
-  <div class="cs-meta">
-    <span><strong>Type</strong> Stress-management app</span>
-    <span><strong>Platform</strong> Native iOS</span>
-    <span><strong>Team</strong> Team project</span>
-    <span><strong>Year</strong> 2026</span>
-    <span><strong>Tools</strong> Figma</span>
-    <span><strong>My role</strong> Brand identity, SOS flow &amp; onboarding</span>
-  </div>
+  <dl class="cs-meta-grid">
+    <div><dt>Scope</dt><dd>Stress-management app</dd></div>
+    <div><dt>Role</dt><dd>Brand identity, SOS flow &amp; onboarding</dd></div>
+    <div><dt>Platform</dt><dd>Native iOS</dd></div>
+    <div><dt>Year</dt><dd>2026</dd></div>
+  </dl>
   <div class="cs-cta">
     <a class="cs-btn cs-btn-primary" href="#" target="_blank" rel="noopener">View prototype →</a>
     <a class="cs-btn" href="#" target="_blank" rel="noopener">View presentation →</a>
@@ -33,6 +32,7 @@ dots:
   <p>Enow is a stress-management app for parents of young children, built during Ironhack's UX/UI bootcamp. My part covered the full visual identity, name, logo, and brand, plus the SOS flow and onboarding animations. Across three rounds of testing, the app moved from one confusing SOS screen to a system that triggers hands-free, through a lock-screen widget or by voice, and treats the moment of acute stress and the moment right after it as two separate conversations, each with its own tone.</p>
 </div>
 
+<div class="cs-zone-z0">
 <section class="cs-section" id="hook">
   <h2>Stress apps mostly assume you have time to sit down.</h2>
   <p class="cs-subtitle">Reality is the opposite. When the pressure of the day spills over, there is no time to scroll through a long menu, and often no free hands for a phone either.</p>
@@ -44,7 +44,11 @@ dots:
   <p class="cs-subtitle">The brief was open: build an app and a fresh visual identity around wellness.</p>
   <p>We ran into a problem almost immediately: stress has no clean edges, it touches nearly everything a person does in a day, and trying to solve all of it would have produced nothing usable. Instead of a large catalog of relaxation techniques, we narrowed the scope to a single moment: the tipping point, when the pressure that built up all day spills over and a person needs relief right away, with no extra steps in between.</p>
 </section>
+</div>
 
+<div class="cs-zone-transition cs-zone-transition--z0-z1"></div>
+
+<div class="cs-zone-z1">
 <section class="cs-section" id="empathize">
   <h2>European data and real conversations pointed at the same thing.</h2>
   <p class="cs-subtitle">Stress isn't the exception, it's the default state, and the apps on the market haven't caught up.</p>
@@ -80,7 +84,11 @@ dots:
 
   <p>That single sentence became the filter for every decision after it. Not "what relaxation technique works best," but "what does <em>not</em> ask more of her, at the one moment she has nothing left to give."</p>
 </section>
+</div>
 
+<div class="cs-zone-transition cs-zone-transition--z1-z2"></div>
+
+<div class="cs-zone-z2">
 <section class="cs-section" id="ideate">
   <h2>The journey map produced dozens of HMW questions, one for nearly every step of Maya's day.</h2>
   <p class="cs-subtitle">We couldn't build an app that answered all of them at once.</p>
@@ -118,7 +126,11 @@ dots:
     <div class="cs-media-visual cs-visual-placeholder">Mood board — warm, quiet, and never loud</div>
   </div>
 </section>
+</div>
 
+<div class="cs-zone-transition cs-zone-transition--z2-z3"></div>
+
+<div class="cs-zone-z3">
 <section class="cs-section" id="prototype">
   <h2>We show the core idea of the app through two key screens.</h2>
   <p class="cs-subtitle">One starts the SOS mode, the other closes it once Maya has calmed down. Both hold the same rule: ask nothing of her.</p>
@@ -141,7 +153,11 @@ dots:
 
   <p><a href="https://www.youtube.com/watch?v=cghzPP6UiHk" target="_blank" rel="noopener">Watch the SOS flow walkthrough →</a></p>
 </section>
+</div>
 
+<div class="cs-zone-transition cs-zone-transition--z3-z1"></div>
+
+<div class="cs-zone-z1">
 <section class="cs-section" id="test">
   <h2>The same finding kept resurfacing across all three rounds of testing.</h2>
   <p class="cs-subtitle">Numbers and charts made the app feel cold. We had to learn to let it feel, instead of measure.</p>
@@ -154,7 +170,11 @@ dots:
 
   <p>On the finished high-fidelity prototype, we ran desirability testing to see if that shift had landed. People described the app in a few words of their own choosing: Friendly, Secure, Easy to use, not "efficient" or "clear," the words apps usually chase, but words that describe someone you trust, not a tool that grades you.</p>
 </section>
+</div>
 
+<div class="cs-zone-transition cs-zone-transition--z1-z0"></div>
+
+<div class="cs-zone-z0">
 <section class="cs-section" id="reflection">
   <h2>My role: brand, developing the SOS flow, and the tone in the app's most sensitive moments.</h2>
   <p class="cs-subtitle">What I take away from this project most isn't really about the design itself. It's about how we worked as a team.</p>
@@ -167,3 +187,4 @@ dots:
 
   <p>You can find the full presentation and a click-through prototype linked at the top of this page.</p>
 </section>
+</div>

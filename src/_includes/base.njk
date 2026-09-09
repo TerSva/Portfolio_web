@@ -22,7 +22,7 @@
     </nav>
     <div class="lang-switch">
       <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false">
-        EN <span class="chevron" aria-hidden="true">⌄</span>
+        <span class="lang-current-label">EN</span><span class="chevron" aria-hidden="true"></span>
       </button>
       <div class="lang-menu" role="listbox" hidden>
         <button type="button" role="option" data-lang="en" aria-selected="true">EN</button>
@@ -35,7 +35,7 @@
 {% if dots %}
 <nav id="cs-dots" aria-label="Section navigation">
   {% for d in dots %}
-  <div class="cs-dot" data-target="{{ d.id }}" data-label="{{ d.label }}"></div>
+  <div class="cs-dot" data-target="{{ d.id }}" data-label="{{ d.label }}" data-zone="{{ d.zone }}"></div>
   {% endfor %}
 </nav>
 {% endif %}
@@ -45,6 +45,7 @@
   var wrap = document.querySelector('.lang-switch');
   if (!wrap) return;
   var current = wrap.querySelector('.lang-current');
+  var currentLabel = wrap.querySelector('.lang-current-label');
   var menu = wrap.querySelector('.lang-menu');
 
   function close(){ menu.hidden = true; wrap.removeAttribute('data-open'); current.setAttribute('aria-expanded','false'); }
@@ -56,7 +57,7 @@
   });
   menu.querySelectorAll('button').forEach(function(btn){
     btn.addEventListener('click', function(){
-      current.firstChild.textContent = btn.dataset.lang.toUpperCase() + ' ';
+      currentLabel.textContent = btn.dataset.lang.toUpperCase();
       menu.querySelectorAll('button').forEach(function(b){ b.removeAttribute('aria-selected'); });
       btn.setAttribute('aria-selected','true');
       close();
@@ -99,6 +100,7 @@
     dots.forEach(function(d, i){
       d.classList.toggle('active', i === activeIdx);
     });
+    document.body.dataset.zone = dots[activeIdx].dataset.zone;
   }
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
