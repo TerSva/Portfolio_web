@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{ title }} — Tereza Britta Švanda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="back-link" href="/">← Tereza Britta Švanda</a>
+  <div class="lang-switch" role="group" aria-label="Language switch">
+    <button type="button" class="active" data-lang="en">EN</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" data-lang="de">DE</button>
+  </div>
+</header>
+
+{% if dots %}
+<nav id="cs-dots" aria-label="Section navigation">
+  {% for d in dots %}
+  <div class="cs-dot" data-target="{{ d.id }}" data-label="{{ d.label }}"></div>
+  {% endfor %}
+</nav>
+{% endif %}
+
+<main>
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  Tereza Britta Švanda — UX/UI Design
+</footer>
+
+{% if dots %}
+<script>
+(function(){
+  var dots = document.querySelectorAll('.cs-dot');
+  var sections = Array.prototype.map.call(dots, function(d){
+    return document.getElementById(d.dataset.target);
+  });
+
+  dots.forEach(function(dot){
+    dot.addEventListener('click', function(){
+      var target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var activeIdx = 0;
+    sections.forEach(function(sec, i){
+      if (sec && sec.offsetTop <= pos) activeIdx = i;
+    });
+    dots.forEach(function(d, i){
+      d.classList.toggle('active', i === activeIdx);
+    });
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+{% endif %}
+
+</body>
+</html>

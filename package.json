@@ -1,0 +1,15 @@
+{
+  "name": "uxportfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tereza Britta Svanda — UX/UI portfolio (professional case studies)",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "playwright": "^1.63.0"
+  }
+}

@@ -1,0 +1,169 @@
+---
+layout: base.njk
+title: "Enow — Acknowledge Now, Reset Later"
+dots:
+  - { id: "hook", label: "the problem" }
+  - { id: "intro", label: "the brief" }
+  - { id: "empathize", label: "the research" }
+  - { id: "define", label: "who it's for" }
+  - { id: "ideate", label: "the decision" }
+  - { id: "brand", label: "the visual language" }
+  - { id: "prototype", label: "the screens" }
+  - { id: "test", label: "what we learned" }
+  - { id: "reflection", label: "my part" }
+---
+
+<div class="cs-header">
+  <h1 class="cs-title">Enow — Acknowledge Now, Reset Later: a stress app for parents with no time to sit down</h1>
+  <div class="cs-meta">
+    <span><strong>Type</strong> Stress-management app</span>
+    <span><strong>Platform</strong> Native iOS</span>
+    <span><strong>Team</strong> Team project</span>
+    <span><strong>Year</strong> 2026</span>
+    <span><strong>Tools</strong> Figma</span>
+    <span><strong>My role</strong> Brand identity, SOS flow &amp; onboarding</span>
+  </div>
+  <div class="cs-cta">
+    <a class="cs-btn cs-btn-primary" href="#" target="_blank" rel="noopener">View prototype →</a>
+    <a class="cs-btn" href="#" target="_blank" rel="noopener">View presentation →</a>
+  </div>
+</div>
+
+<div class="cs-outcome">
+  <p>Enow is a stress-management app for parents of young children, built during Ironhack's UX/UI bootcamp. My part covered the full visual identity, name, logo, and brand, plus the SOS flow and onboarding animations. Across three rounds of testing, the app moved from one confusing SOS screen to a system that triggers hands-free, through a lock-screen widget or by voice, and treats the moment of acute stress and the moment right after it as two separate conversations, each with its own tone.</p>
+</div>
+
+<section class="cs-section" id="hook">
+  <h2>Stress apps mostly assume you have time to sit down.</h2>
+  <p class="cs-subtitle">Reality is the opposite. When the pressure of the day spills over, there is no time to scroll through a long menu, and often no free hands for a phone either.</p>
+  <div class="cs-hero-visual cs-visual-placeholder">Hero visual — calm-return screen, full-bleed<br><small>"Time only for you. You are here. That's enough."</small></div>
+</section>
+
+<section class="cs-section" id="intro">
+  <h2>Enow is a mobile app we designed as a team for a fictional client, The Daily Health Conference.</h2>
+  <p class="cs-subtitle">The brief was open: build an app and a fresh visual identity around wellness.</p>
+  <p>We ran into a problem almost immediately: stress has no clean edges, it touches nearly everything a person does in a day, and trying to solve all of it would have produced nothing usable. Instead of a large catalog of relaxation techniques, we narrowed the scope to a single moment: the tipping point, when the pressure that built up all day spills over and a person needs relief right away, with no extra steps in between.</p>
+</section>
+
+<section class="cs-section" id="empathize">
+  <h2>European data and real conversations pointed at the same thing.</h2>
+  <p class="cs-subtitle">Stress isn't the exception, it's the default state, and the apps on the market haven't caught up.</p>
+  <p>We worked from EU-OSHA and Eurofound data: one in three EU workers reports work-related stress, 29 percent of mothers report high or extreme stress, and 46 percent of the EU population went through an emotional or psychosocial problem in the past year.</p>
+
+  <div class="cs-stat-grid">
+    <div class="cs-stat"><div class="num">1 in 3</div><div class="label">EU workers report stress</div></div>
+    <div class="cs-stat"><div class="num">29%</div><div class="label">mothers report high or extreme stress</div></div>
+    <div class="cs-stat"><div class="num">46%</div><div class="label">of EU population, emotional/psychosocial problem in past year</div></div>
+  </div>
+
+  <p>The numbers gave us the scale of the problem. Five interviews with parents and caregivers gave it shape — the same idea kept resurfacing, worded differently each time:</p>
+
+  <blockquote class="cs-quote">"That moment, from the moment we start the evening routine, until everyone is asleep, is the most stressful part of my day."</blockquote>
+  <blockquote class="cs-quote">"While I'm at work, my phone isn't at hand... And then when they come home, I'm just in a state of nervousness, all of a sudden, I get some notifications. It's just unpleasant."</blockquote>
+  <blockquote class="cs-quote">"Stop calling me. Don't let anyone send me any more messages."</blockquote>
+  <blockquote class="cs-quote">"It should not have [that], because you're in a state of mind when you're stressed and you should not feel pressured."</blockquote>
+
+  <p>It wasn't about speed. It was that the app couldn't become one more task on an already full list. Every coping mechanism people already used was physical and immediate: cold water on the face, counting to ten, a short walk. None of it involved opening an app.</p>
+</section>
+
+<section class="cs-section" id="define">
+  <h2>Maya doesn't need an app that explains anything to her.</h2>
+  <p class="cs-subtitle">She needs the certainty that when she's overloaded, there's a space where she doesn't have to prove anything to anyone.</p>
+
+  <div class="cs-media-row">
+    <div>
+      <p>Persona: Maya Linqvist, 39, office assistant, married, three kids of very different ages (12, 6, 3). She returned to work only a year ago, and the marriage is still recovering from a period of financial strain. Her day isn't about sudden swings — it's a predictable build-up of pressure. She already knows, by evening, that she'll hit a point where the tension becomes unbearable.</p>
+      <blockquote class="cs-quote">"Let it be more like a little escape, not another task I have to get done."</blockquote>
+    </div>
+    <div class="cs-media-visual cs-visual-placeholder">Persona card — Maya Linqvist</div>
+  </div>
+
+  <p>That single sentence became the filter for every decision after it. Not "what relaxation technique works best," but "what does <em>not</em> ask more of her, at the one moment she has nothing left to give."</p>
+</section>
+
+<section class="cs-section" id="ideate">
+  <h2>The journey map produced dozens of HMW questions, one for nearly every step of Maya's day.</h2>
+  <p class="cs-subtitle">We couldn't build an app that answered all of them at once.</p>
+
+  <p>Mapping Maya's day — from quiet morning pressure through work, the slow climb toward evening, to the tipping point at bedtime — produced dozens of "How might we" questions. Three directions competed for the main flow, and all three made sense on their own: a system built around the SOS moment, a dashboard tracking her state over time, or a library of exercises to choose from.</p>
+
+  <p><span class="cs-mini-head">What decided it:</span> We went back to Maya's tipping point. If that moment is the reason the app exists, the main flow had to be built around it, not around tracking, not around a menu. SOS became the primary path. Everything else — setup and goals, progress detail, browse and exercises — became separate modules built alongside it, connected later instead of competing for the center.</p>
+
+  <div class="cs-visual-placeholder" style="aspect-ratio:16/9;">4 Core Flows diagram — Main Flow, Setup &amp; Goals, Progress Detail, Browse &amp; Exercises, radiating from Enow</div>
+
+  <p><span class="cs-mini-head">MoSCoW cut the scope without debate:</span></p>
+  <div class="cs-card-grid">
+    <div class="cs-card"><div class="card-title">Must — Voice control + SOS button</div><div class="card-body">Hands-free activation via lock-screen widget or voice, non-negotiable for instant access during stress.</div></div>
+    <div class="cs-card"><div class="card-title">Must — Sensory exercise under 5 min</div><div class="card-body">Fast reset across touch, sight, sound, and breath — each under five minutes.</div></div>
+    <div class="cs-card"><div class="card-title">Should — Color check-in</div><div class="card-body">Quick mood-color logging at key moments — evening, mid-day, whenever the input comes.</div></div>
+    <div class="cs-card"><div class="card-title">Should — Guilt-free notifications</div><div class="card-body">"Not now" is available as "flat," declining triggers no guilt, stress-level, or nagging follow-up.</div></div>
+  </div>
+
+  <p>One sentence carried the whole decision, and stayed with the product from MVP on:</p>
+  <blockquote class="cs-quote">"Acknowledge now, reset later."</blockquote>
+  <p>The app has to see and register Maya first. The return to calm comes after, never as a condition.</p>
+</section>
+
+<section class="cs-section" id="brand">
+  <h2>Color and typography had to carry the same idea as the product itself.</h2>
+  <p class="cs-subtitle">The app has no separate light and dark mode. It runs on one continuous brightness scale that responds to the user's state.</p>
+
+  <p>A visual audit of Headspace and Calm showed two different approaches: Headspace leans on warm colors and playful illustration, Calm on muted blues and nature photography. Neither adapts visually to an acute moment of stress, which left room for our own direction.</p>
+
+  <div class="cs-media-row reverse">
+    <div>
+      <p>We chose terracotta and gold as a warm constant, paired with a deep navy for SOS and calming passages. Instead of switching between light and dark by time of day, we designed an adaptive brightness scale: the app darkens with the emotional intensity of the moment. Home stays lighter, the SOS interface moves into darker tones that strain the eyes and attention less.</p>
+      <p>For type, we picked Bricolage Grotesque in a light weight for headings, so the interface stays calm and never "shouts," paired with Instrument Sans for body text. The whole identity stayed inside five brand attributes: Calm, Confident, Empowering, Personal, Trustworthy.</p>
+    </div>
+    <div class="cs-media-visual cs-visual-placeholder">Mood board — warm, quiet, and never loud</div>
+  </div>
+</section>
+
+<section class="cs-section" id="prototype">
+  <h2>We show the core idea of the app through two key screens.</h2>
+  <p class="cs-subtitle">One starts the SOS mode, the other closes it once Maya has calmed down. Both hold the same rule: ask nothing of her.</p>
+
+  <p>We picked these two screens because they make the idea of the whole app clearest.</p>
+
+  <div class="cs-media-row">
+    <div>
+      <p>The first exists for the moment Maya triggers SOS, by voice or through the widget on her lock screen. The interface darkens immediately and offers just two direct choices: a quick presence exercise, or a countdown she set up beforehand. Once the countdown ends, the app checks in, without any urgency, on what should happen next. Maya can extend the time, move into an exercise, or close SOS mode entirely.</p>
+    </div>
+    <div class="cs-media-visual cs-visual-placeholder">"Ready when you are" / Help now · Not now — SOS trigger screen</div>
+  </div>
+
+  <div class="cs-media-row reverse">
+    <div>
+      <p>The second screen captures the moment right after the countdown: the return to calm. Here we worked from the same principle that runs through the whole app: the interface can't measure, score, or grade anything. All it needs to do is confirm that Maya is okay and give her a moment that's hers alone.</p>
+    </div>
+    <div class="cs-media-visual cs-visual-placeholder">"Time only for you. You are here. That's enough." — calm-return screen</div>
+  </div>
+
+  <p><a href="https://www.youtube.com/watch?v=cghzPP6UiHk" target="_blank" rel="noopener">Watch the SOS flow walkthrough →</a></p>
+</section>
+
+<section class="cs-section" id="test">
+  <h2>The same finding kept resurfacing across all three rounds of testing.</h2>
+  <p class="cs-subtitle">Numbers and charts made the app feel cold. We had to learn to let it feel, instead of measure.</p>
+
+  <p>It first showed up between low-fidelity and mid-fidelity: the first dashboard was full of charts and percentages, exactly what we were trying to keep the app away from. We simplified it into clear sections that move from the user's current state toward detail, not the other way around.</p>
+
+  <div class="cs-visual-placeholder" style="aspect-ratio:16/9;">Dashboard before/after — from charts and percentages to a calmer, clearer read</div>
+
+  <p>On the mid-fidelity prototype, tester Ambre surfaced the same finding from a different angle. Our stress-level slider ran on a 0 to 100 scale. Her reaction: people describe their state in colors, not numbers. "How many times did you feel red, how many times did you feel blue," as she put it, the same problem as the dashboard, in miniature: the app was measuring instead of listening. Mood colors used elsewhere in the app needed to hold everywhere, not just on some screens.</p>
+
+  <p>On the finished high-fidelity prototype, we ran desirability testing to see if that shift had landed. People described the app in a few words of their own choosing: Friendly, Secure, Easy to use, not "efficient" or "clear," the words apps usually chase, but words that describe someone you trust, not a tool that grades you.</p>
+</section>
+
+<section class="cs-section" id="reflection">
+  <h2>My role: brand, developing the SOS flow, and the tone in the app's most sensitive moments.</h2>
+  <p class="cs-subtitle">What I take away from this project most isn't really about the design itself. It's about how we worked as a team.</p>
+
+  <p>I owned the full visual identity on this project: the name Enow, the logo, and the whole brand style. The first idea for voice control and a bottom SOS button came from my teammate, and I took it from there, building it out into the SOS flow, onboarding, and the animations you see here.</p>
+
+  <p>The biggest lesson came from how we organized as a team. We each work at a somewhat different pace, which isn't a problem on its own, but it demands more ongoing sharing and clearer rules from the start, for example around building and maintaining components in Figma.</p>
+
+  <p>Given more time, I would have spent it tightening the timing on the animations and finishing the remaining exercise screens inside the SOS flow.</p>
+
+  <p>You can find the full presentation and a click-through prototype linked at the top of this page.</p>
+</section>

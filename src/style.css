@@ -1,0 +1,265 @@
+/* ============================================================
+   UX PORTFOLIO — cs- design tokens
+   Derived from main identity (visualbook.html), light palette,
+   WCAG AAA/AA verified. Never use raw gold (#FFD700) as text.
+============================================================ */
+:root{
+  --cs-paper:   #EBEED6;
+  --cs-surface: #FDFDF8;
+  --cs-border:  #D0DCC5;
+  --cs-ink:     #004D40;
+  --cs-muted:   #3B7565;
+  --cs-copper:  #A14000;
+  --cs-gold-ui: #998100;
+  --cs-gold-fill: #FFD700;
+
+  --font-d: 'DM Serif Display', Georgia, serif;
+  --font-s: 'Space Grotesk', sans-serif;
+  --font-m: 'IBM Plex Mono', monospace;
+
+  --measure: 40rem;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cs-paper);
+  color:var(--cs-ink);
+  font-family:var(--font-s);
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--cs-copper);text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{max-width:100%;display:block;}
+:focus-visible{outline:2px solid var(--cs-gold-ui);outline-offset:2px;}
+
+/* ============================================================
+   SITE HEADER (minimal — full nav lives on Work/About once built)
+============================================================ */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 4vw;
+  z-index:100;
+  background:rgba(235,238,214,0.82);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--cs-border);
+}
+.site-header .site-name{
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--cs-muted);
+}
+.site-header .back-link{
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--cs-ink);
+}
+.site-header .lang-switch{display:flex;gap:.6rem;align-items:center;}
+.site-header .lang-switch button{
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;
+  text-transform:uppercase;background:none;border:none;cursor:pointer;
+  color:var(--cs-muted);
+}
+.site-header .lang-switch button.active{color:var(--cs-copper);}
+
+/* ============================================================
+   SILENT DOT NAV — recycles #section-counter pattern, light palette
+============================================================ */
+#cs-dots{
+  position:fixed;right:2rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.7rem;z-index:150;
+}
+.cs-dot{
+  position:relative;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cs-border);
+  cursor:pointer;
+  transition:background .3s, transform .3s;
+}
+.cs-dot.active{background:var(--cs-copper);transform:scale(1.6);}
+.cs-dot::after{
+  content:attr(data-label);
+  position:absolute;right:1.3rem;top:50%;transform:translateY(-50%);
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.05em;
+  white-space:nowrap;
+  background:var(--cs-ink);color:var(--cs-surface);
+  padding:.35rem .7rem;border-radius:4px;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.cs-dot:hover::after{opacity:1;}
+@media (max-width:900px){ #cs-dots{display:none;} }
+
+/* ============================================================
+   CASE STUDY — header meta block
+============================================================ */
+.cs-header{
+  max-width:52rem;margin:0 auto;
+  padding:8.5rem 6vw 3rem;
+}
+.cs-title{
+  font-family:var(--font-d);font-weight:400;
+  font-size:clamp(2rem,4.2vw,3.4rem);
+  line-height:1.15;letter-spacing:-0.01em;
+  margin-bottom:1.75rem;
+}
+.cs-meta{
+  display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+  font-family:var(--font-m);font-size:.72rem;letter-spacing:.04em;
+  color:var(--cs-muted);
+  padding:1rem 0;
+  border-top:1px solid var(--cs-border);
+  border-bottom:1px solid var(--cs-border);
+  margin-bottom:1.75rem;
+}
+.cs-meta strong{color:var(--cs-ink);font-weight:500;}
+.cs-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+.cs-btn{
+  display:inline-block;
+  padding:.7rem 1.5rem;border-radius:100px;
+  font-family:var(--font-m);font-size:.68rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--cs-ink);color:var(--cs-ink);
+  transition:all .3s ease;
+}
+.cs-btn:hover{background:var(--cs-ink);color:var(--cs-surface);text-decoration:none;}
+.cs-btn.cs-btn-primary{background:var(--cs-ink);color:var(--cs-surface);}
+.cs-btn.cs-btn-primary:hover{background:var(--cs-copper);border-color:var(--cs-copper);}
+
+/* ============================================================
+   OUTCOME PREVIEW — no heading, sits right under header
+============================================================ */
+.cs-outcome{
+  max-width:var(--measure);margin:0 auto;
+  padding:0 6vw 3rem;
+  font-size:1.08rem;line-height:1.75;
+}
+
+/* ============================================================
+   SECTIONS
+============================================================ */
+.cs-section{
+  max-width:var(--measure);margin:0 auto;
+  padding:3.5rem 6vw;
+  scroll-margin-top:6rem;
+}
+.cs-section h2{
+  font-family:var(--font-d);font-weight:400;
+  font-size:clamp(1.5rem,2.6vw,2.1rem);
+  line-height:1.3;letter-spacing:-0.005em;
+  margin-bottom:.6rem;
+}
+.cs-section .cs-subtitle{
+  font-family:var(--font-d);font-style:italic;
+  font-size:1.05rem;color:var(--cs-muted);
+  margin-bottom:1.75rem;
+  line-height:1.5;
+}
+.cs-section p{margin-bottom:1.25rem;}
+.cs-section p:last-child{margin-bottom:0;}
+.cs-section strong{color:var(--cs-ink);font-weight:600;}
+
+/* Mini in-body headers (colon-led) */
+.cs-section .cs-mini-head{
+  font-family:var(--font-s);font-weight:600;
+  color:var(--cs-ink);display:block;margin-bottom:.5rem;
+}
+
+/* Pull-quotes / research quotes */
+.cs-quote{
+  border-left:2px solid var(--cs-gold-ui);
+  padding:.25rem 0 .25rem 1.5rem;
+  margin:1.75rem 0;
+  font-family:var(--font-d);font-style:italic;
+  font-size:1.15rem;line-height:1.55;
+  color:var(--cs-ink);
+}
+
+/* MoSCoW / mini lists */
+.cs-section ul{margin:0 0 1.25rem 1.25rem;}
+.cs-section li{margin-bottom:.4rem;}
+
+/* ============================================================
+   VISUALS — 3 media patterns
+============================================================ */
+/* Full-bleed (Hook hero only) */
+.cs-hero-visual{
+  width:100%;
+  aspect-ratio:16/9;
+  margin-bottom:0;
+}
+
+/* Placeholder block until real assets are swapped in */
+.cs-visual-placeholder{
+  display:flex;align-items:center;justify-content:center;
+  min-height:14rem;
+  background:var(--cs-surface);
+  border:1px dashed var(--cs-border);
+  border-radius:8px;
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.05em;
+  color:var(--cs-muted);text-align:center;padding:1.5rem;
+}
+
+/* Side-by-side, alternates L/R via .cs-media-row.reverse */
+.cs-media-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2.5rem;align-items:center;
+  margin:2rem 0;
+}
+.cs-media-row.reverse{direction:rtl;}
+.cs-media-row.reverse > *{direction:ltr;}
+@media (max-width:760px){
+  .cs-media-row{grid-template-columns:1fr;}
+  .cs-media-row .cs-media-visual{order:-1;} /* image first on mobile */
+}
+
+/* Inline/grid — stat blocks (Empathize), MoSCoW cards (Ideate) */
+.cs-stat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+  gap:1.5rem;margin:2rem 0;
+}
+.cs-stat{
+  text-align:center;padding:1.5rem 1rem;
+  background:var(--cs-surface);border:1px solid var(--cs-border);
+  border-radius:50%;aspect-ratio:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.cs-stat .num{font-family:var(--font-d);font-size:1.8rem;color:var(--cs-copper);}
+.cs-stat .label{font-family:var(--font-m);font-size:.62rem;letter-spacing:.03em;color:var(--cs-muted);margin-top:.4rem;}
+
+.cs-card-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));
+  gap:1rem;margin:2rem 0;
+}
+.cs-card{
+  padding:1.25rem;background:var(--cs-surface);
+  border:1px solid var(--cs-border);border-radius:8px;
+}
+.cs-card .card-title{font-family:var(--font-s);font-weight:600;font-size:.85rem;margin-bottom:.4rem;color:var(--cs-ink);}
+.cs-card .card-body{font-size:.8rem;color:var(--cs-muted);line-height:1.5;}
+
+figcaption{
+  font-family:var(--font-m);font-size:.68rem;color:var(--cs-muted);
+  margin-top:.6rem;text-align:center;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer{
+  max-width:var(--measure);margin:0 auto;
+  padding:2rem 6vw 5rem;
+  font-family:var(--font-m);font-size:.65rem;
+  color:var(--cs-muted);
+  border-top:1px solid var(--cs-border);
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+@media (max-width:760px){
+  .cs-header{padding-top:7rem;}
+  .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
+}
