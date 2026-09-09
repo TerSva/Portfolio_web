@@ -54,7 +54,6 @@ img{max-width:100%;display:block;}
   position:fixed;top:0;left:0;right:0;
   height:var(--nav-height);
   display:flex;align-items:center;justify-content:space-between;
-  gap:2rem;
   padding:0 4vw;
   z-index:200;
   background:rgba(0,31,28,0.92);
@@ -62,24 +61,25 @@ img{max-width:100%;display:block;}
   -webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid var(--nav-em);
 }
+
+/* Wordmark — this IS the logo, has to carry real presence */
 .site-header .site-brand{
-  display:flex;flex-direction:column;line-height:1.25;
+  font-family:var(--font-d);font-weight:400;
+  font-size:1.5rem;letter-spacing:-0.01em;
   color:var(--nav-ch);
+  white-space:nowrap;
 }
-.site-header .brand-name{
-  font-family:var(--font-d);font-size:1rem;font-weight:400;
-}
-.site-header .brand-role{
-  font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--nav-ch2);
+
+/* Nav links + lang switch grouped together, well clear of the brand */
+.site-header .nav-group{
+  display:flex;align-items:center;gap:2.5rem;
 }
 .site-header .site-nav{
   display:flex;gap:2rem;
-  margin-right:auto;
   flex-wrap:wrap;
 }
 .site-header .site-nav a{
-  font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;
   text-transform:uppercase;color:var(--nav-ch2);
   position:relative;padding-bottom:3px;
 }
@@ -90,27 +90,53 @@ img{max-width:100%;display:block;}
 }
 .site-header .site-nav a:hover{color:var(--nav-ch);}
 .site-header .site-nav a:hover::after{width:100%;}
-.site-header .lang-switch{display:flex;gap:.4rem;align-items:center;}
-.site-header .lang-switch button{
-  font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;
-  text-transform:uppercase;background:none;border:none;cursor:pointer;
-  color:var(--nav-ch2);
-  padding:.6rem;min-width:44px;min-height:44px;
+
+/* Collapsed lang switch — single pill, opens a small dropdown */
+.site-header .lang-switch{position:relative;}
+.site-header .lang-current{
+  display:flex;align-items:center;gap:.35rem;
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--nav-ch2);
+  background:none;border:1px solid var(--nav-em);border-radius:100px;
+  cursor:pointer;
+  padding:.5rem 1rem;min-height:44px;
+  transition:border-color .2s, color .2s;
 }
-.site-header .lang-switch button.active{color:var(--nav-gold);}
+.site-header .lang-current .chevron{
+  font-size:.8rem;transition:transform .25s ease;
+}
+.site-header .lang-current:hover{color:var(--nav-ch);border-color:var(--nav-ch2);}
+.site-header .lang-switch[data-open="true"] .lang-current .chevron{transform:rotate(180deg);}
+.site-header .lang-menu{
+  position:absolute;top:calc(100% + .5rem);right:0;
+  background:var(--nav-bg);border:1px solid var(--nav-em);
+  border-radius:10px;overflow:hidden;
+  min-width:100%;
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+}
+.site-header .lang-menu button{
+  display:block;width:100%;
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--nav-ch2);
+  background:none;border:none;cursor:pointer;text-align:left;
+  padding:.65rem 1rem;min-height:44px;
+}
+.site-header .lang-menu button:hover{background:var(--nav-em);color:var(--nav-ch);}
+.site-header .lang-menu button[aria-selected="true"]{color:var(--nav-gold);}
+
 @media (max-width:760px){
   .site-header{
     height:auto;flex-wrap:wrap;
     padding:1rem 5vw;gap:.75rem 1rem;
   }
-  .site-header .site-nav{
+  .site-header .site-brand{font-size:1.2rem;}
+  .site-header .nav-group{
     order:3;width:100%;
-    justify-content:center;gap:1.2rem;
+    justify-content:center;gap:1.5rem;
     padding-top:.75rem;
     border-top:1px solid var(--nav-em);
   }
-  .site-header .site-nav a{font-size:.6rem;}
-  .site-header .brand-role{display:none;}
+  .site-header .site-nav a{font-size:.62rem;}
 }
 
 /* ============================================================

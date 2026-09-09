@@ -12,20 +12,23 @@
 <body>
 
 <header class="site-header">
-  <a class="site-brand" href="/">
-    <span class="brand-name">Tereza Britta Švanda</span>
-    <span class="brand-role">UI/UX Designer</span>
-  </a>
-  <nav class="site-nav" aria-label="Main navigation">
-    <a href="/work/">Work</a>
-    <a href="/about/">About</a>
-    <a href="/cv/">CV</a>
-    <a href="/contact/">Contact</a>
-  </nav>
-  <div class="lang-switch" role="group" aria-label="Language switch">
-    <button type="button" class="active" data-lang="en">EN</button>
-    <span aria-hidden="true">·</span>
-    <button type="button" data-lang="de">DE</button>
+  <a class="site-brand" href="/">Tereza Britta Švanda</a>
+  <div class="nav-group">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/work/">Work</a>
+      <a href="/about/">About</a>
+      <a href="/cv/">CV</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false">
+        EN <span class="chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="lang-menu" role="listbox" hidden>
+        <button type="button" role="option" data-lang="en" aria-selected="true">EN</button>
+        <button type="button" role="option" data-lang="de">DE</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -36,6 +39,33 @@
   {% endfor %}
 </nav>
 {% endif %}
+
+<script>
+(function(){
+  var wrap = document.querySelector('.lang-switch');
+  if (!wrap) return;
+  var current = wrap.querySelector('.lang-current');
+  var menu = wrap.querySelector('.lang-menu');
+
+  function close(){ menu.hidden = true; wrap.removeAttribute('data-open'); current.setAttribute('aria-expanded','false'); }
+  function open(){ menu.hidden = false; wrap.setAttribute('data-open','true'); current.setAttribute('aria-expanded','true'); }
+
+  current.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (menu.hidden) open(); else close();
+  });
+  menu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      current.firstChild.textContent = btn.dataset.lang.toUpperCase() + ' ';
+      menu.querySelectorAll('button').forEach(function(b){ b.removeAttribute('aria-selected'); });
+      btn.setAttribute('aria-selected','true');
+      close();
+    });
+  });
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
 
 <main>
 {{ content | safe }}
