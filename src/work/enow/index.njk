@@ -36,7 +36,9 @@ dots:
 <section class="cs-section" id="hook">
   <h2>Stress apps mostly assume you have time to sit down.</h2>
   <p class="cs-subtitle">Reality is the opposite. When the pressure of the day spills over, there is no time to scroll through a long menu, and often no free hands for a phone either.</p>
-  <div class="cs-hero-visual cs-visual-placeholder">Hero visual — calm-return screen, full-bleed<br><small>"Time only for you. You are here. That's enough."</small></div>
+  <div class="cs-hero-visual">
+    <img src="/assets/enow/hero-calm-return.png" alt="Enow calm-return screen: &quot;Time only for you. You are here. That's enough.&quot; on a dark navy background." style="width:100%;height:100%;object-fit:cover;">
+  </div>
 </section>
 
 <section class="cs-section" id="intro">
@@ -74,12 +76,11 @@ dots:
   <h2>Maya doesn't need an app that explains anything to her.</h2>
   <p class="cs-subtitle">She needs the certainty that when she's overloaded, there's a space where she doesn't have to prove anything to anyone.</p>
 
-  <div class="cs-media-row">
-    <div>
-      <p>Persona: Maya Linqvist, 39, office assistant, married, three kids of very different ages (12, 6, 3). She returned to work only a year ago, and the marriage is still recovering from a period of financial strain. Her day isn't about sudden swings — it's a predictable build-up of pressure. She already knows, by evening, that she'll hit a point where the tension becomes unbearable.</p>
-      <blockquote class="cs-quote">"Let it be more like a little escape, not another task I have to get done."</blockquote>
-    </div>
-    <div class="cs-media-visual cs-visual-placeholder">Persona card — Maya Linqvist</div>
+  <p>Persona: Maya Linqvist, 39, office assistant, married, three kids of very different ages (12, 6, 3). She returned to work only a year ago, and the marriage is still recovering from a period of financial strain. Her day isn't about sudden swings — it's a predictable build-up of pressure. She already knows, by evening, that she'll hit a point where the tension becomes unbearable.</p>
+  <blockquote class="cs-quote">"Let it be more like a little escape, not another task I have to get done."</blockquote>
+
+  <div class="cs-visual-full">
+    <img src="/assets/enow/persona-maya.png" alt="Persona card for Maya Linqvist, 39, office assistant: her needs, frustrations, personality, and devices.">
   </div>
 
   <p>That single sentence became the filter for every decision after it. Not "what relaxation technique works best," but "what does <em>not</em> ask more of her, at the one moment she has nothing left to give."</p>
@@ -95,9 +96,15 @@ dots:
 
   <p>Mapping Maya's day — from quiet morning pressure through work, the slow climb toward evening, to the tipping point at bedtime — produced dozens of "How might we" questions. Three directions competed for the main flow, and all three made sense on their own: a system built around the SOS moment, a dashboard tracking her state over time, or a library of exercises to choose from.</p>
 
+  <div class="cs-visual-full">
+    <img src="/assets/enow/journey-map.png" alt="Maya Linqvist's journey map: seven stages from a stressful evening through the tipping point to a calm reset, each with actions and How-Might-We opportunities.">
+  </div>
+
   <p><span class="cs-mini-head">What decided it:</span> We went back to Maya's tipping point. If that moment is the reason the app exists, the main flow had to be built around it, not around tracking, not around a menu. SOS became the primary path. Everything else — setup and goals, progress detail, browse and exercises — became separate modules built alongside it, connected later instead of competing for the center.</p>
 
-  <div class="cs-visual-placeholder" style="aspect-ratio:16/9;">4 Core Flows diagram — Main Flow, Setup &amp; Goals, Progress Detail, Browse &amp; Exercises, radiating from Enow</div>
+  <div class="cs-visual-full">
+    <img src="/assets/enow/core-flows-diagram.png" alt="4 Core Flows diagram: Main Flow, Setup &amp; Goals, Progress Detail, and Browse &amp; Exercises, radiating from Enow.">
+  </div>
 
   <p><span class="cs-mini-head">MoSCoW cut the scope without debate:</span></p>
   <div class="cs-card-grid">
@@ -118,12 +125,11 @@ dots:
 
   <p>A visual audit of Headspace and Calm showed two different approaches: Headspace leans on warm colors and playful illustration, Calm on muted blues and nature photography. Neither adapts visually to an acute moment of stress, which left room for our own direction.</p>
 
-  <div class="cs-media-row reverse">
-    <div>
-      <p>We chose terracotta and gold as a warm constant, paired with a deep navy for SOS and calming passages. Instead of switching between light and dark by time of day, we designed an adaptive brightness scale: the app darkens with the emotional intensity of the moment. Home stays lighter, the SOS interface moves into darker tones that strain the eyes and attention less.</p>
-      <p>For type, we picked Bricolage Grotesque in a light weight for headings, so the interface stays calm and never "shouts," paired with Instrument Sans for body text. The whole identity stayed inside five brand attributes: Calm, Confident, Empowering, Personal, Trustworthy.</p>
-    </div>
-    <div class="cs-media-visual cs-visual-placeholder">Mood board — warm, quiet, and never loud</div>
+  <p>We chose terracotta and gold as a warm constant, paired with a deep navy for SOS and calming passages. Instead of switching between light and dark by time of day, we designed an adaptive brightness scale: the app darkens with the emotional intensity of the moment. Home stays lighter, the SOS interface moves into darker tones that strain the eyes and attention less.</p>
+  <p>For type, we picked Bricolage Grotesque in a light weight for headings, so the interface stays calm and never "shouts," paired with Instrument Sans for body text. The whole identity stayed inside five brand attributes: Calm, Confident, Empowering, Personal, Trustworthy.</p>
+
+  <div class="cs-visual-full">
+    <img src="/assets/enow/moodboard.png" alt="Enow mood board: warm, quiet imagery — soft light, hands, calm domestic moments, muted sunrise tones.">
   </div>
 </section>
 </div>
@@ -141,14 +147,18 @@ dots:
     <div>
       <p>The first exists for the moment Maya triggers SOS, by voice or through the widget on her lock screen. The interface darkens immediately and offers just two direct choices: a quick presence exercise, or a countdown she set up beforehand. Once the countdown ends, the app checks in, without any urgency, on what should happen next. Maya can extend the time, move into an exercise, or close SOS mode entirely.</p>
     </div>
-    <div class="cs-media-visual cs-visual-placeholder">"Ready when you are" / Help now · Not now — SOS trigger screen</div>
+    <div class="cs-media-visual">
+      <img src="/assets/enow/sos-trigger.png" alt="SOS trigger screen: &quot;Ready when you are.&quot; with Help now and Not now buttons.">
+    </div>
   </div>
 
   <div class="cs-media-row reverse">
     <div>
       <p>The second screen captures the moment right after the countdown: the return to calm. Here we worked from the same principle that runs through the whole app: the interface can't measure, score, or grade anything. All it needs to do is confirm that Maya is okay and give her a moment that's hers alone.</p>
     </div>
-    <div class="cs-media-visual cs-visual-placeholder">"Time only for you. You are here. That's enough." — calm-return screen</div>
+    <div class="cs-media-visual">
+      <img src="/assets/enow/sos-calm-return.png" alt="Calm-return screen after the countdown ends: &quot;When do you want to start?&quot; with Start now and Not now buttons.">
+    </div>
   </div>
 
   <p><a href="https://www.youtube.com/watch?v=cghzPP6UiHk" target="_blank" rel="noopener">Watch the SOS flow walkthrough →</a></p>

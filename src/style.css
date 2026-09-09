@@ -427,6 +427,19 @@ figcaption{
   margin-top:.6rem;text-align:center;
 }
 
+/* Full-width stacked image — for rich compositions (persona card,
+   moodboard, journey map) that need real estate a side-by-side
+   half-column can't give them. One step less dramatic than the
+   full-bleed hero: fills the content column, doesn't break out
+   of it. */
+.cs-visual-full{
+  width:100%;
+  margin:2rem 0;
+  border-radius:8px;
+  overflow:hidden;
+}
+.cs-visual-full img{ width:100%; height:auto; display:block; }
+
 /* ============================================================
    FOOTER
 ============================================================ */
