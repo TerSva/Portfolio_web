@@ -36,34 +36,82 @@ img{max-width:100%;display:block;}
 :focus-visible{outline:2px solid var(--cs-gold-ui);outline-offset:2px;}
 
 /* ============================================================
-   SITE HEADER (minimal — full nav lives on Work/About once built)
+   SITE HEADER — bridge element to the art-hub identity (main
+   branch). Deliberately dark/emerald, not cs- tokens: this bar
+   is the one place the two sites share a signature. Values are
+   the main site's own --bg/--em/--gold/--ch, hardcoded here
+   since this file otherwise carries only the light cs- system.
 ============================================================ */
+:root{
+  --nav-bg:   #001F1C;
+  --nav-em:   #004D40;
+  --nav-gold: #FFD700;
+  --nav-ch:   #F5F5DC;
+  --nav-ch2:  rgba(245,245,220,0.75);
+  --nav-height: 4.75rem;
+}
 .site-header{
   position:fixed;top:0;left:0;right:0;
+  height:var(--nav-height);
   display:flex;align-items:center;justify-content:space-between;
-  padding:1.5rem 4vw;
-  z-index:100;
-  background:rgba(235,238,214,0.82);
+  gap:2rem;
+  padding:0 4vw;
+  z-index:200;
+  background:rgba(0,31,28,0.92);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--cs-border);
+  border-bottom:1px solid var(--nav-em);
 }
-.site-header .site-name{
-  font-family:var(--font-m);font-size:.68rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--cs-muted);
+.site-header .site-brand{
+  display:flex;flex-direction:column;line-height:1.25;
+  color:var(--nav-ch);
 }
-.site-header .back-link{
+.site-header .brand-name{
+  font-family:var(--font-d);font-size:1rem;font-weight:400;
+}
+.site-header .brand-role{
+  font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--nav-ch2);
+}
+.site-header .site-nav{
+  display:flex;gap:2rem;
+  margin-right:auto;
+  flex-wrap:wrap;
+}
+.site-header .site-nav a{
   font-family:var(--font-m);font-size:.68rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--cs-ink);
+  text-transform:uppercase;color:var(--nav-ch2);
+  position:relative;padding-bottom:3px;
 }
-.site-header .lang-switch{display:flex;gap:.6rem;align-items:center;}
+.site-header .site-nav a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--nav-gold);
+  transition:width .3s cubic-bezier(0.16,1,0.3,1);
+}
+.site-header .site-nav a:hover{color:var(--nav-ch);}
+.site-header .site-nav a:hover::after{width:100%;}
+.site-header .lang-switch{display:flex;gap:.4rem;align-items:center;}
 .site-header .lang-switch button{
   font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;
   text-transform:uppercase;background:none;border:none;cursor:pointer;
-  color:var(--cs-muted);
+  color:var(--nav-ch2);
   padding:.6rem;min-width:44px;min-height:44px;
 }
-.site-header .lang-switch button.active{color:var(--cs-copper);}
+.site-header .lang-switch button.active{color:var(--nav-gold);}
+@media (max-width:760px){
+  .site-header{
+    height:auto;flex-wrap:wrap;
+    padding:1rem 5vw;gap:.75rem 1rem;
+  }
+  .site-header .site-nav{
+    order:3;width:100%;
+    justify-content:center;gap:1.2rem;
+    padding-top:.75rem;
+    border-top:1px solid var(--nav-em);
+  }
+  .site-header .site-nav a{font-size:.6rem;}
+  .site-header .brand-role{display:none;}
+}
 
 /* ============================================================
    SILENT DOT NAV — recycles #section-counter pattern, light palette
@@ -98,7 +146,7 @@ img{max-width:100%;display:block;}
 ============================================================ */
 .cs-header{
   max-width:52rem;margin:0 auto;
-  padding:8.5rem 6vw 3rem;
+  padding:calc(var(--nav-height) + 3.5rem) 6vw 3rem;
 }
 .cs-title{
   font-family:var(--font-d);font-weight:400;
@@ -264,6 +312,6 @@ figcaption{
    MOBILE
 ============================================================ */
 @media (max-width:760px){
-  .cs-header{padding-top:7rem;}
+  .cs-header{padding-top:9.5rem;} /* header wraps to 2 rows on mobile */
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
 }
