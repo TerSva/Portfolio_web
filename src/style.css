@@ -19,53 +19,18 @@
 
   --measure: 40rem;
   --canvas: min(88vw, 78rem);
-
-  /* Named stops for the zone gradient transition strips — see .cs-zone-* below */
-  --cs-paper-z0: #EBEED6;
-  --cs-paper-z1: #C7D0B4;
-  --cs-paper-z2: #2E4B44;
-  --cs-paper-z3: #001F1C;
 }
 
 /* ============================================================
-   PROGRESSIVE DARK ZONES — the case-study background echoes
-   Enow's own product concept (adaptive brightness, darkest at
-   the SOS reveal, snapping back to calm after). Each wrapper
-   overrides the full cs- token set locally; every component
-   below already reads exclusively through var(--cs-*), so nothing
-   else needs to change. Values + contrast ratios verified via
-   WCAG relative luminance (see 00-strategie-a-kontext.md).
+   PROTOTYPE DARK ZONE — one deliberate dark moment, not a
+   gradient system. Earlier attempts tried a 4-step light-to-dark
+   descent across several sections; it produced a muddy green-on-
+   green midtone that passed contrast math but read as a mistake.
+   Simplified per direction: rest of the page stays on the
+   standard light palette, only Prototype (where the SOS screens
+   appear) goes dark, reusing the site's own nav-bar navy — a hard
+   cut at the section boundary, no blend strip.
 ============================================================ */
-.cs-zone-z0{
-  --cs-paper:   #EBEED6;
-  --cs-surface: #FDFDF8;
-  --cs-border:  #D0DCC5;
-  --cs-ink:     #004D40;
-  --cs-muted:   #3B7565;
-  --cs-copper:  #A14000;
-  --cs-gold-ui: #998100;
-  background:var(--cs-paper);
-}
-.cs-zone-z1{
-  --cs-paper:   #C7D0B4;
-  --cs-surface: #D8DFC7;
-  --cs-border:  #A9B896;
-  --cs-ink:     #053B30;
-  --cs-muted:   #2C5548;
-  --cs-copper:  #8A3800;
-  --cs-gold-ui: #7A6600;
-  background:var(--cs-paper);
-}
-.cs-zone-z2{
-  --cs-paper:   #2E4B44;
-  --cs-surface: #38584F;
-  --cs-border:  #4A695F;
-  --cs-ink:     #F5F5DC;
-  --cs-muted:   #CDE0D3;
-  --cs-copper:  #FFC080;
-  --cs-gold-ui: #FFD700;
-  background:var(--cs-paper);
-}
 .cs-zone-z3{
   --cs-paper:   #001F1C;
   --cs-surface: #0B2E29;
@@ -77,16 +42,14 @@
   background:var(--cs-paper);
 }
 
-/* Blend strips between zones — plain siblings, no section id, so the
-   scroll-spy's offsetTop scan just keeps the previous zone active
-   until the next real section is crossed. Heights are paced for
-   narrative weight, not just contrast delta. */
-.cs-zone-transition{ width:100%; }
-.cs-zone-transition--z0-z1{ background:linear-gradient(to bottom, var(--cs-paper-z0), var(--cs-paper-z1)); height:clamp(4rem,8vh,6rem); }
-.cs-zone-transition--z1-z2{ background:linear-gradient(to bottom, var(--cs-paper-z1), var(--cs-paper-z2)); height:clamp(6rem,12vh,10rem); }
-.cs-zone-transition--z2-z3{ background:linear-gradient(to bottom, var(--cs-paper-z2), var(--cs-paper-z3)); height:clamp(8rem,14vh,12rem); }
-.cs-zone-transition--z3-z1{ background:linear-gradient(to bottom, var(--cs-paper-z3), var(--cs-paper-z1)); height:clamp(3rem,5vh,4rem); }
-.cs-zone-transition--z1-z0{ background:linear-gradient(to bottom, var(--cs-paper-z1), var(--cs-paper-z0)); height:clamp(4rem,8vh,6rem); }
+/* Lightening pass: alternate a near-white surface tone on the
+   research/data-heavy sections, so the page isn't one unbroken
+   stretch of the same green paper top to bottom. Same palette
+   family (cs-surface already exists for cards), just promoted to
+   the whole section instead of only small elements. */
+.cs-section-surface{
+  background:var(--cs-surface);
+}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -246,14 +209,12 @@ img{max-width:100%;display:block;}
 }
 .cs-dot:hover::after{opacity:1;}
 
-/* Dark-zone variant — #cs-dots sits at body level, outside every
-   .cs-zone-* wrapper, so it can't pick up scoped tokens via the
+/* Dark-zone variant — #cs-dots sits at body level, outside the
+   .cs-zone-z3 wrapper, so it can't pick up scoped tokens via the
    cascade. Toggled by the scroll-spy JS via body[data-zone]. */
-body[data-zone="z2"] .cs-dot,
 body[data-zone="z3"] .cs-dot{
   background:#3A554C;
 }
-body[data-zone="z2"] .cs-dot.active,
 body[data-zone="z3"] .cs-dot.active{
   background:#FFC080;
 }
@@ -328,11 +289,18 @@ body[data-zone="z3"] .cs-dot.active{
   padding:3.5rem 6vw;
   scroll-margin-top:6rem;
 }
-/* Running prose stays at a readable measure and centers itself
-   within the wider section canvas. Only targets DIRECT children —
-   text nested inside .cs-media-row/.cs-card/.cs-stat etc. follows
-   its own grid instead, and full-width visuals (.cs-visual-full,
-   .cs-stat-grid, .cs-card-grid, .cs-media-row) get the full canvas. */
+/* Running prose stays at a readable measure, LEFT-aligned — not
+   centered. Centering a narrow block inside a wide section made
+   the left edge drift section to section (wherever the measure
+   happened to land inside that section's own width), so text
+   never lined up down the page. Left-aligning holds one constant
+   edge for headings, paragraphs, quotes AND the header/outcome
+   text above (same padding, same starting point), while leaving
+   deliberate open space to the right — full-width visuals
+   (.cs-visual-full, .cs-stat-grid, .cs-card-grid) use that space
+   instead of it being an accidental leftover. Only targets DIRECT
+   children — text nested inside .cs-media-row/.cs-card/.cs-stat
+   etc. follows its own grid. */
 .cs-section > h2,
 .cs-section > .cs-subtitle,
 .cs-section > p,
@@ -340,7 +308,6 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-section > ul,
 .cs-section > .cs-media-row{
   max-width:var(--measure);
-  margin-left:auto;margin-right:auto;
 }
 .cs-section h2{
   font-family:var(--font-d);font-weight:400;
