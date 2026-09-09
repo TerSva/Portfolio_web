@@ -277,7 +277,6 @@ body[data-zone="z3"] .cs-dot.active{
   padding:0 6vw 3rem;
 }
 .cs-outcome p{
-  max-width:var(--measure);
   font-size:1.08rem;line-height:1.75;
 }
 
@@ -289,23 +288,8 @@ body[data-zone="z3"] .cs-dot.active{
   padding:3.5rem 6vw;
   scroll-margin-top:6rem;
 }
-/* Running prose stays at a readable measure, LEFT-aligned — not
-   centered. Centering a narrow block inside a wide section made
-   the left edge drift section to section (wherever the measure
-   happened to land inside that section's own width), so text
-   never lined up down the page. Left-aligning holds one constant
-   edge for headings, paragraphs, quotes AND the header/outcome
-   text above (same padding, same starting point), while leaving
-   deliberate open space to the right — full-width visuals
-   (.cs-visual-full, .cs-stat-grid, .cs-card-grid) use that space
-   instead of it being an accidental leftover. Only targets DIRECT
-   children — text nested inside .cs-media-row/.cs-card/.cs-stat
-   etc. follows its own grid. */
-.cs-section > h2,
-.cs-section > .cs-subtitle,
-.cs-section > p,
-.cs-section > blockquote,
-.cs-section > ul,
+/* Text fills the full section width — no separate reading-measure
+   cap. */
 .cs-section > .cs-media-row{
   max-width:var(--measure);
 }
