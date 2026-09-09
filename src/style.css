@@ -61,6 +61,7 @@ img{max-width:100%;display:block;}
   font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;
   text-transform:uppercase;background:none;border:none;cursor:pointer;
   color:var(--cs-muted);
+  padding:.6rem;min-width:44px;min-height:44px;
 }
 .site-header .lang-switch button.active{color:var(--cs-copper);}
 
@@ -184,10 +185,13 @@ img{max-width:100%;display:block;}
 /* ============================================================
    VISUALS — 3 media patterns
 ============================================================ */
-/* Full-bleed (Hook hero only) */
+/* Full-bleed (Hook hero only) — breaks out of the editorial column */
 .cs-hero-visual{
-  width:100%;
-  aspect-ratio:16/9;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  aspect-ratio:21/9;
+  margin-top:1rem;
   margin-bottom:0;
 }
 
