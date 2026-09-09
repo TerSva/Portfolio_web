@@ -18,6 +18,7 @@
   --font-m: 'IBM Plex Mono', monospace;
 
   --measure: 40rem;
+  --canvas: min(88vw, 78rem);
 
   /* Named stops for the zone gradient transition strips — see .cs-zone-* below */
   --cs-paper-z0: #EBEED6;
@@ -263,7 +264,7 @@ body[data-zone="z3"] .cs-dot.active{
    CASE STUDY — header meta block
 ============================================================ */
 .cs-header{
-  max-width:52rem;margin:0 auto;
+  max-width:var(--canvas);margin:0 auto;
   padding:calc(var(--nav-height) + 3.5rem) 6vw 3rem;
 }
 .cs-eyebrow{
@@ -311,8 +312,11 @@ body[data-zone="z3"] .cs-dot.active{
    OUTCOME PREVIEW — no heading, sits right under header
 ============================================================ */
 .cs-outcome{
-  max-width:var(--measure);margin:0 auto;
+  max-width:var(--canvas);margin:0 auto;
   padding:0 6vw 3rem;
+}
+.cs-outcome p{
+  max-width:var(--measure);
   font-size:1.08rem;line-height:1.75;
 }
 
@@ -320,9 +324,23 @@ body[data-zone="z3"] .cs-dot.active{
    SECTIONS
 ============================================================ */
 .cs-section{
-  max-width:var(--measure);margin:0 auto;
+  max-width:var(--canvas);margin:0 auto;
   padding:3.5rem 6vw;
   scroll-margin-top:6rem;
+}
+/* Running prose stays at a readable measure and centers itself
+   within the wider section canvas. Only targets DIRECT children —
+   text nested inside .cs-media-row/.cs-card/.cs-stat etc. follows
+   its own grid instead, and full-width visuals (.cs-visual-full,
+   .cs-stat-grid, .cs-card-grid, .cs-media-row) get the full canvas. */
+.cs-section > h2,
+.cs-section > .cs-subtitle,
+.cs-section > p,
+.cs-section > blockquote,
+.cs-section > ul,
+.cs-section > .cs-media-row{
+  max-width:var(--measure);
+  margin-left:auto;margin-right:auto;
 }
 .cs-section h2{
   font-family:var(--font-d);font-weight:400;
@@ -444,7 +462,7 @@ figcaption{
    FOOTER
 ============================================================ */
 .site-footer{
-  max-width:var(--measure);margin:0 auto;
+  max-width:var(--canvas);margin:0 auto;
   padding:2rem 6vw 5rem;
   font-family:var(--font-m);font-size:.65rem;
   color:var(--cs-muted);
