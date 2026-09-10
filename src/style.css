@@ -63,6 +63,7 @@
 .cs-spotlight[data-spotlight="active"]::before{opacity:1;}
 .cs-zone-z3 > .cs-section{position:relative;z-index:1;}
 .cs-cover.cs-spotlight > *{position:relative;z-index:1;}
+.cs-contact.cs-spotlight > *{position:relative;z-index:1;}
 .site-footer.cs-spotlight > *{position:relative;z-index:1;}
 @media (prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){
   .cs-spotlight::before{display:none;}
@@ -583,6 +584,56 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-visual-full img{ width:100%; height:auto; display:block; }
 
 /* ============================================================
+   CONTACT — a dark, direct invitation rather than a form shell
+============================================================ */
+.cs-contact{
+  min-height:calc(100svh - var(--nav-height));
+  padding:calc(var(--nav-height) + clamp(4rem,9vw,9rem)) 0 clamp(5rem,10vw,10rem);
+  background:var(--nav-bg);color:var(--nav-ch);
+}
+.cs-contact-grid{
+  width:min(100% - (var(--gutter) * 2), var(--media-measure));
+  margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:
+    "heading heading"
+    "story connect";
+  column-gap:clamp(3rem,8vw,8rem);row-gap:clamp(3rem,6vw,5.5rem);align-items:start;
+}
+.cs-contact-heading{grid-area:heading;}
+.cs-contact-heading h1{
+  max-width:none;
+  font-family:var(--font-d);font-size:clamp(3.25rem,5vw,5.5rem);
+  font-weight:400;line-height:1.04;letter-spacing:-.025em;
+}
+.cs-contact-story{grid-area:story;max-width:36rem;}
+.cs-contact-story p{font-size:clamp(1.05rem,1.4vw,1.25rem);line-height:1.65;margin-bottom:1.25rem;color:var(--nav-ch2);}
+.cs-contact-story .cs-contact-lead{color:var(--nav-ch);font-weight:500;}
+.cs-contact-connect{grid-area:connect;padding-top:.15rem;}
+.cs-contact-email-block{margin-top:0;}
+.cs-contact-email-block > span{
+  display:block;margin-bottom:.65rem;
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--nav-ch2);
+}
+.cs-contact-email-block a{
+  display:inline-block;
+  font-family:var(--font-d);font-size:clamp(1.65rem,3vw,2.75rem);line-height:1.2;
+  color:var(--nav-ch);text-decoration:none;
+  border-bottom:1px solid rgba(245,245,220,.35);
+  transition:color .2s ease,border-color .2s ease;
+}
+.cs-contact-email-block a:hover{color:var(--nav-gold);border-color:var(--nav-gold);}
+.cs-contact-links{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
+.cs-contact-links a{
+  display:inline-flex;align-items:center;min-height:44px;
+  font-family:var(--font-m);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--nav-ch2);text-decoration:none;border-bottom:1px solid transparent;padding:.25rem 0;
+  transition:color .2s ease,border-color .2s ease;
+}
+.cs-contact-links a span{color:var(--nav-gold);}
+.cs-contact-links a:hover{color:var(--nav-ch);border-color:var(--nav-ch);}
+
+/* ============================================================
    FOOTER
 ============================================================ */
 .site-footer{
@@ -595,10 +646,12 @@ body[data-zone="z3"] .cs-dot.active{
 }
 .site-footer.cs-footer-dark{
   width:100%;margin:0;
-  padding:clamp(3rem,6vw,5rem) max(var(--gutter),calc((100vw - var(--media-measure)) / 2));
+  padding:clamp(1.5rem,3vw,2.5rem) max(var(--gutter),calc((100vw - var(--media-measure)) / 2));
   background:var(--nav-bg);color:var(--nav-ch2);
   border-top:1px solid rgba(245,245,220,.16);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
 }
+@media(max-width:520px){.site-footer.cs-footer-dark{align-items:flex-start;flex-direction:column;gap:.65rem;}}
 
 /* ============================================================
    MOBILE
@@ -614,4 +667,7 @@ body[data-zone="z3"] .cs-dot.active{
   .cs-chapter-grid{grid-template-columns:1fr;gap:1.25rem;}
   .cs-intro-copy{text-align:left;}
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
+  .cs-contact{padding-top:calc(9.5rem + 3rem);}
+  .cs-contact-grid{grid-template-columns:1fr;grid-template-areas:"heading" "story" "connect";gap:2.5rem;}
+  .cs-contact-heading h1{max-width:13ch;}
 }
