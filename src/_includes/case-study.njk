@@ -1,0 +1,33 @@
+---
+layout: base.njk
+---
+{#
+  Reusable case-study frame. A project page supplies `caseStudy` in its
+  front matter, then writes only its narrative sections as page content.
+#}
+<section class="cs-cover cs-spotlight">
+  <div class="cs-header">
+    <h1 class="cs-title">
+      <span class="cs-title-project">{{ caseStudy.projectTitle }}</span>
+      <span class="cs-title-statement">{{ caseStudy.statement }}</span>
+    </h1>
+
+    <dl class="cs-meta-grid">
+      {% for item in caseStudy.meta %}
+      <div><dt>{{ item.label }}</dt><dd>{{ item.value }}</dd></div>
+      {% endfor %}
+    </dl>
+
+    <nav class="cs-project-links" aria-label="Project links">
+      {% for link in caseStudy.links %}
+      <a href="{{ link.href }}" target="_blank" rel="noopener">{{ link.label }} <span aria-hidden="true">↗</span></a>
+      {% endfor %}
+    </nav>
+  </div>
+
+  <div class="cs-outcome">
+    <p>{{ caseStudy.outcome }}</p>
+  </div>
+</section>
+
+{{ content | safe }}

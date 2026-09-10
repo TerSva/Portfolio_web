@@ -72,8 +72,8 @@
 {{ content | safe }}
 </main>
 
-<footer class="site-footer">
-  Tereza Britta Švanda — UX/UI Design
+<footer class="site-footer cs-footer-dark cs-spotlight">
+  <span>Tereza Britta Švanda — UX/UI Design</span>
 </footer>
 
 {% if dots %}
@@ -107,6 +107,45 @@
 })();
 </script>
 {% endif %}
+
+<script>
+/* A desktop-only, CSS-rendered spotlight borrowed from the art portfolio.
+   It is intentionally scoped to the dark prototype chapter and stops when
+   motion is reduced or a fine hover pointer is unavailable. */
+(function(){
+  var zones = document.querySelectorAll('.cs-spotlight');
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!zones.length || !canHover.matches || reducedMotion.matches) return;
+
+  zones.forEach(function(zone){
+    var current = {x: 50, y: 50};
+    var target = {x: 50, y: 50};
+    var frame = 0;
+
+    function paint(){
+      current.x += (target.x - current.x) * .18;
+      current.y += (target.y - current.y) * .18;
+      zone.style.setProperty('--spotlight-x', current.x + '%');
+      zone.style.setProperty('--spotlight-y', current.y + '%');
+      if (Math.abs(target.x - current.x) > .05 || Math.abs(target.y - current.y) > .05) {
+        frame = requestAnimationFrame(paint);
+      } else {
+        frame = 0;
+      }
+    }
+
+    zone.addEventListener('pointerenter', function(){ zone.dataset.spotlight = 'active'; });
+    zone.addEventListener('pointermove', function(event){
+      var rect = zone.getBoundingClientRect();
+      target.x = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+      target.y = Math.max(0, Math.min(100, ((event.clientY - rect.top) / rect.height) * 100));
+      if (!frame) frame = requestAnimationFrame(paint);
+    });
+    zone.addEventListener('pointerleave', function(){ delete zone.dataset.spotlight; });
+  });
+})();
+</script>
 
 </body>
 </html>

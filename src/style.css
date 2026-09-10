@@ -4,21 +4,29 @@
    WCAG AAA/AA verified. Never use raw gold (#FFD700) as text.
 ============================================================ */
 :root{
-  --cs-paper:   #EBEED6;
-  --cs-surface: #FDFDF8;
-  --cs-border:  #D0DCC5;
-  --cs-ink:     #004D40;
-  --cs-muted:   #3B7565;
-  --cs-copper:  #A14000;
-  --cs-gold-ui: #998100;
+  /* Mineral green-grey: quieter than the former yellow-olive paper,
+     while the deep Enow green remains the identity anchor. */
+  --cs-paper:   #E3E9E2;
+  --cs-surface: #F7F8F4;
+  --cs-border:  #C9D6CC;
+  --cs-ink:     #0A4B42;
+  --cs-muted:   #477269;
+  --cs-copper:  #A64F24;
+  --cs-gold-ui: #8C7800;
   --cs-gold-fill: #FFD700;
 
   --font-d: 'DM Serif Display', Georgia, serif;
   --font-s: 'Space Grotesk', sans-serif;
   --font-m: 'IBM Plex Mono', monospace;
 
-  --measure: 40rem;
+  /* The page has two deliberate rails.  Prose stays readable; visual
+     evidence can grow wider without turning the whole case study into a
+     centred card. */
+  --measure: 42rem;
+  --intro-measure: 58rem;
+  --media-measure: 72rem;
   --canvas: min(88vw, 78rem);
+  --gutter: clamp(1.25rem, 5vw, 4rem);
 }
 
 /* ============================================================
@@ -41,6 +49,31 @@
   --cs-gold-ui: #FFD700;
   background:var(--cs-paper);
 }
+.cs-spotlight{
+  --spotlight-x:50%;
+  --spotlight-y:50%;
+  position:relative;isolation:isolate;
+}
+.cs-spotlight::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(34rem 22rem ellipse at var(--spotlight-x) var(--spotlight-y),
+    rgba(234,131,71,.10) 0%,rgba(234,131,71,.035) 34%,transparent 70%);
+  mix-blend-mode:screen;opacity:0;transition:opacity .7s ease;
+}
+.cs-spotlight[data-spotlight="active"]::before{opacity:1;}
+.cs-zone-z3 > .cs-section{position:relative;z-index:1;}
+.cs-cover.cs-spotlight > *{position:relative;z-index:1;}
+.site-footer.cs-spotlight > *{position:relative;z-index:1;}
+@media (prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){
+  .cs-spotlight::before{display:none;}
+}
+.cs-zone-z3 .cs-chapter-heading,
+.cs-zone-z3 .cs-chapter-content{
+  color:var(--cs-ink);
+}
+.cs-zone-z3 .cs-chapter-content .cs-subtitle{color:var(--cs-muted);}
+.cs-zone-z3 .cs-chapter-content .cs-mini-head,
+.cs-zone-z3 .cs-quote{color:var(--cs-ink);}
 
 /* Lightening pass: alternate a near-white surface tone on the
    research/data-heavy sections, so the page isn't one unbroken
@@ -52,7 +85,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-height) + 1rem);}
 body{
   background:var(--cs-paper);
   color:var(--cs-ink);
@@ -112,14 +145,14 @@ img{max-width:100%;display:block;}
 .site-header .site-nav a{
   font-family:var(--font-m);font-size:.7rem;letter-spacing:.15em;
   text-transform:uppercase;color:var(--nav-ch2);
-  position:relative;padding-bottom:3px;
+  position:relative;padding-bottom:3px;text-decoration:none;
 }
 .site-header .site-nav a::after{
   content:'';position:absolute;bottom:0;left:0;
   width:0;height:1px;background:var(--nav-gold);
   transition:width .3s cubic-bezier(0.16,1,0.3,1);
 }
-.site-header .site-nav a:hover{color:var(--nav-ch);}
+.site-header .site-nav a:hover{color:var(--nav-ch);text-decoration:none;}
 .site-header .site-nav a:hover::after{width:100%;}
 
 /* Collapsed lang switch — single pill, opens a small dropdown */
@@ -225,9 +258,16 @@ body[data-zone="z3"] .cs-dot.active{
    CASE STUDY — header meta block
 ============================================================ */
 .cs-header{
-  max-width:var(--canvas);margin:0 auto;
-  padding:calc(var(--nav-height) + 3.5rem) 6vw 3rem;
+  width:min(100% - (var(--gutter) * 2), var(--media-measure));
+  margin:0 auto;
+  padding:calc(var(--nav-height) + 3.5rem) 0 3.5rem;
 }
+.cs-cover{
+  background:var(--nav-bg);
+  color:var(--nav-ch);
+  padding-bottom:clamp(3.5rem, 7vw, 7rem);
+}
+.cs-cover .cs-header{padding-bottom:3.5rem;}
 .cs-eyebrow{
   display:block;
   font-family:var(--font-m);font-size:.72rem;letter-spacing:.2em;
@@ -236,9 +276,20 @@ body[data-zone="z3"] .cs-dot.active{
 }
 .cs-title{
   font-family:var(--font-d);font-weight:400;
-  font-size:clamp(2rem,4.2vw,3.4rem);
-  line-height:1.15;letter-spacing:-0.01em;
-  margin-bottom:1.75rem;
+  line-height:1.1;letter-spacing:-0.015em;
+  margin-bottom:2.25rem;
+}
+.cs-title-project,
+.cs-title-statement{display:block;}
+.cs-title-project{
+  font-size:clamp(1.55rem,2.4vw,2.35rem);
+  line-height:1.2;color:var(--nav-ch2);
+  margin-bottom:.65rem;
+}
+.cs-title-statement{
+  max-width:24ch;
+  font-size:clamp(2.6rem,5vw,4.7rem);
+  color:var(--nav-ch);
 }
 .cs-meta-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
@@ -256,7 +307,18 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-meta-grid dd{
   font-family:var(--font-s);font-size:.95rem;color:var(--cs-ink);
 }
-.cs-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+/* External links stay in the cover, but read as project utilities rather
+   than competing calls-to-action. */
+.cs-project-links{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.cs-project-links a{
+  font-family:var(--font-m);font-size:.68rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--nav-ch2);text-decoration:none;
+  padding:.35rem 0;border-bottom:1px solid transparent;
+  transition:color .2s ease,border-color .2s ease;
+}
+.cs-project-links a:hover{color:var(--nav-ch);border-color:var(--nav-ch);}
+.cs-project-links a span{margin-left:.25rem;color:var(--nav-gold);}
 .cs-btn{
   display:inline-block;
   padding:.7rem 1.5rem;border-radius:100px;
@@ -269,50 +331,106 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-btn.cs-btn-primary{background:var(--cs-ink);color:var(--cs-surface);}
 .cs-btn.cs-btn-primary:hover{background:var(--cs-copper);border-color:var(--cs-copper);}
 
+/* Cover variants use the existing dark identity rather than a new palette. */
+.cs-cover .cs-meta-grid{border-color:rgba(245,245,220,.18);}
+.cs-cover .cs-meta-grid dt{color:var(--nav-ch2);}
+.cs-cover .cs-meta-grid dd{color:var(--nav-ch);}
+.cs-cover .cs-btn{border-color:var(--nav-ch2);color:var(--nav-ch);}
+.cs-cover .cs-btn:hover{background:var(--nav-ch);color:var(--nav-bg);}
+.cs-cover .cs-btn.cs-btn-primary{background:var(--nav-ch);border-color:var(--nav-ch);color:var(--nav-bg);}
+.cs-cover .cs-btn.cs-btn-primary:hover{background:var(--nav-gold);border-color:var(--nav-gold);color:var(--nav-bg);}
+
 /* ============================================================
    OUTCOME PREVIEW — no heading, sits right under header
 ============================================================ */
 .cs-outcome{
-  max-width:var(--canvas);margin:0 auto;
-  padding:0 6vw 3rem;
+  width:min(100% - (var(--gutter) * 2), var(--intro-measure));
+  margin:0 auto;
+  padding:0 0 clamp(2.25rem, 4vw, 3.5rem);
 }
 .cs-outcome p{
-  font-size:1.08rem;line-height:1.75;
+  font-size:clamp(1.08rem, 1.35vw, 1.3rem);line-height:1.7;
 }
+.cs-cover .cs-outcome p{color:var(--nav-ch2);}
 
 /* ============================================================
    SECTIONS
 ============================================================ */
 .cs-section{
-  max-width:var(--canvas);margin:0 auto;
-  padding:3.5rem 6vw;
+  width:100%;
+  margin:0;
+  padding:clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
   scroll-margin-top:6rem;
 }
-/* Text fills the full section width — no separate reading-measure
-   cap. */
-.cs-section > .cs-media-row{
-  max-width:var(--measure);
+
+/* A section is a full-width chapter, never a coloured box in the middle
+   of the viewport. The chapter grid creates the editorial left rail:
+   a heading anchors the section while the evidence is read on the right. */
+.cs-chapter-grid{
+  width:min(100%, var(--media-measure));
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(12rem, .75fr) minmax(0, 1.55fr);
+  gap:clamp(2rem, 6vw, 5rem);
+  align-items:start;
 }
-.cs-section h2{
+.cs-chapter-heading{min-width:0;}
+.cs-chapter-heading h2{
   font-family:var(--font-d);font-weight:400;
   font-size:clamp(1.5rem,2.6vw,2.1rem);
   line-height:1.3;letter-spacing:-0.005em;
-  margin-bottom:.6rem;
+  margin:0;
 }
-.cs-section .cs-subtitle{
-  font-family:var(--font-d);font-style:italic;
+.cs-chapter-content{min-width:0;}
+.cs-chapter-content > *{max-width:100%;}
+.cs-chapter-content > *:first-child{margin-top:0;}
+.cs-chapter-content > *:last-child{margin-bottom:0;}
+.cs-section .cs-chapter-content p{
+  width:100%;
+}
+.cs-chapter-content .cs-subtitle{
+  font-family:var(--font-s);font-style:normal;font-weight:500;
   font-size:1.05rem;color:var(--cs-muted);
   margin-bottom:1.75rem;
-  line-height:1.5;
+  line-height:1.55;
 }
-.cs-section p{margin-bottom:1.25rem;}
-.cs-section p:last-child{margin-bottom:0;}
-.cs-section strong{color:var(--cs-ink);font-weight:600;}
+.cs-chapter-content p{margin-bottom:1.25rem;}
+.cs-chapter-content strong{color:var(--cs-ink);font-weight:600;}
 
 /* Mini in-body headers (colon-led) */
-.cs-section .cs-mini-head{
+.cs-chapter-content .cs-mini-head{
   font-family:var(--font-s);font-weight:600;
   color:var(--cs-ink);display:block;margin-bottom:.5rem;
+}
+
+/* The cover is deliberately not a chapter grid. It gives the project
+   statement room to land before the editorial left rail begins. */
+#hook{
+  padding-top:clamp(2.5rem, 4vw, 4rem);
+  padding-bottom:0;
+}
+.cs-intro-copy{
+  width:min(100%, var(--intro-measure));
+  margin:0 auto;
+  text-align:center;
+}
+.cs-intro-copy h2{
+  font-family:var(--font-d);font-weight:400;
+  font-size:clamp(2rem,4vw,3.45rem);
+  line-height:1.16;letter-spacing:-0.015em;
+  margin:0 auto .9rem;
+}
+.cs-intro-copy .cs-subtitle{
+  width:min(100%, var(--measure));
+  margin:0 auto;
+  font-family:var(--font-s);font-style:normal;font-weight:500;
+  font-size:clamp(1.05rem,1.4vw,1.25rem);
+  line-height:1.5;color:var(--cs-muted);
+}
+.cs-intro-divider{
+  width:min(100%, var(--measure));
+  height:1px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  background:var(--cs-border);
 }
 
 /* Pull-quotes / research quotes */
@@ -320,8 +438,8 @@ body[data-zone="z3"] .cs-dot.active{
   border-left:2px solid var(--cs-gold-ui);
   padding:.25rem 0 .25rem 1.5rem;
   margin:1.75rem 0;
-  font-family:var(--font-d);font-style:italic;
-  font-size:1.15rem;line-height:1.55;
+  font-family:var(--font-d);font-style:normal;
+  font-size:1.2rem;line-height:1.5;
   color:var(--cs-ink);
 }
 
@@ -338,7 +456,7 @@ body[data-zone="z3"] .cs-dot.active{
   margin-left:calc(50% - 50vw);
   margin-right:calc(50% - 50vw);
   aspect-ratio:21/9;
-  margin-top:1rem;
+  margin-top:clamp(3rem, 6vw, 5rem);
   margin-bottom:0;
 }
 
@@ -353,23 +471,50 @@ body[data-zone="z3"] .cs-dot.active{
   color:var(--cs-muted);text-align:center;padding:1.5rem;
 }
 
+/* Native screen exports stay intentionally small: they are evidence for a
+   design decision, not a decorative full-width image. */
+.cs-dashboard-screens{
+  display:grid;
+  grid-template-columns:192px 172px;
+  justify-content:center;
+  align-items:start;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  margin:2.5rem auto;
+}
+.cs-dashboard-screens img{width:100%;height:auto;}
+
+/* The MoSCoW export carries pale category labels in its transparent area.
+   A dark evidence surface restores their contrast without altering the asset. */
+.cs-moscow-priorities{
+  background:var(--nav-bg);
+  padding:clamp(.9rem,2vw,1.5rem);
+  border-radius:8px;
+}
+.cs-artifact-group{margin:2.5rem 0;}
+.cs-artifact-group .cs-mini-head{margin:0 0 .75rem;}
+.cs-artifact-group .cs-visual-full{margin:0;}
+.cs-moscow-priorities img{width:100%;}
+
 /* Side-by-side, alternates L/R via .cs-media-row.reverse */
 .cs-media-row{
   display:grid;grid-template-columns:1fr 1fr;
   gap:2.5rem;align-items:center;
-  margin:2rem 0;
+  margin-top:2.5rem;
+  margin-bottom:2.5rem;
 }
 .cs-media-row.reverse{direction:rtl;}
 .cs-media-row.reverse > *{direction:ltr;}
+.cs-media-visual img{max-width:19.75rem;margin:0 auto;}
 @media (max-width:760px){
   .cs-media-row{grid-template-columns:1fr;}
   .cs-media-row .cs-media-visual{order:-1;} /* image first on mobile */
+  .cs-dashboard-screens{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
 }
 
 /* Inline/grid — stat blocks (Empathize), MoSCoW cards (Ideate) */
 .cs-stat-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
-  gap:1.5rem;margin:2rem 0;
+  gap:1.5rem;margin-top:2.5rem;margin-bottom:2.5rem;
 }
 .cs-stat{
   text-align:center;padding:1.5rem 1rem;
@@ -382,7 +527,7 @@ body[data-zone="z3"] .cs-dot.active{
 
 .cs-card-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));
-  gap:1rem;margin:2rem 0;
+  gap:1rem;margin-top:2.5rem;margin-bottom:2.5rem;
 }
 .cs-card{
   padding:1.25rem;background:var(--cs-surface);
@@ -391,10 +536,37 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-card .card-title{font-family:var(--font-s);font-weight:600;font-size:.85rem;margin-bottom:.4rem;color:var(--cs-ink);}
 .cs-card .card-body{font-size:.8rem;color:var(--cs-muted);line-height:1.5;}
 
-figcaption{
-  font-family:var(--font-m);font-size:.68rem;color:var(--cs-muted);
-  margin-top:.6rem;text-align:center;
+/* Most visual meaning lives in the surrounding copy. Only analytical
+   artefacts receive a compact, neutral label; quotes keep the accent line. */
+.cs-artifact{
+  position:relative;
+  overflow:visible;
+  transition:transform .24s cubic-bezier(.16,1,.3,1),box-shadow .24s ease;
 }
+.cs-artifact-captioned::after{
+  content:attr(data-artifact-label);
+  display:block;
+  margin-top:.75rem;
+  color:var(--cs-muted);
+  font-family:var(--font-m);font-size:.62rem;line-height:1.45;letter-spacing:.08em;
+  text-align:center;text-transform:uppercase;
+}
+.cs-artifact:hover{
+  transform:translateY(-6px);
+}
+.cs-visual-full.cs-artifact:hover,
+.cs-dashboard-screens.cs-artifact:hover,
+.cs-hero-visual.cs-artifact:hover{
+  box-shadow:0 14px 28px rgba(166,79,36,.22);
+}
+.cs-media-visual.cs-artifact img{transition:box-shadow .24s ease;}
+.cs-media-visual.cs-artifact:hover img{box-shadow:0 14px 28px rgba(166,79,36,.22);}
+
+/* .cs-visual-full normally clips media to its rounded frame. Artifacts need
+   the label to sit outside that frame, so the image itself keeps the radius. */
+.cs-visual-full.cs-artifact > img{border-radius:8px;}
+.cs-dashboard-screens.cs-artifact{overflow:visible;}
+.cs-dashboard-screens.cs-artifact-captioned::after{grid-column:1 / -1;}
 
 /* Full-width stacked image — for rich compositions (persona card,
    moodboard, journey map) that need real estate a side-by-side
@@ -403,7 +575,8 @@ figcaption{
    of it. */
 .cs-visual-full{
   width:100%;
-  margin:2rem 0;
+  margin-top:2.5rem;
+  margin-bottom:2.5rem;
   border-radius:8px;
   overflow:hidden;
 }
@@ -413,17 +586,32 @@ figcaption{
    FOOTER
 ============================================================ */
 .site-footer{
-  max-width:var(--canvas);margin:0 auto;
-  padding:2rem 6vw 5rem;
+  width:min(100% - (var(--gutter) * 2), var(--media-measure));
+  margin:0 auto;
+  padding:2rem 0 5rem;
   font-family:var(--font-m);font-size:.65rem;
   color:var(--cs-muted);
   border-top:1px solid var(--cs-border);
+}
+.site-footer.cs-footer-dark{
+  width:100%;margin:0;
+  padding:clamp(3rem,6vw,5rem) max(var(--gutter),calc((100vw - var(--media-measure)) / 2));
+  background:var(--nav-bg);color:var(--nav-ch2);
+  border-top:1px solid rgba(245,245,220,.16);
 }
 
 /* ============================================================
    MOBILE
 ============================================================ */
 @media (max-width:760px){
+  html{scroll-padding-top:9.5rem;}
   .cs-header{padding-top:9.5rem;} /* header wraps to 2 rows on mobile */
+  .cs-cover{padding-bottom:3.5rem;}
+  .cs-cover .cs-header{padding-bottom:2.5rem;}
+  .cs-title-project{font-size:1.35rem;}
+  .cs-title-statement{font-size:clamp(2.35rem,11vw,3.45rem);}
+  .cs-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem 1rem;}
+  .cs-chapter-grid{grid-template-columns:1fr;gap:1.25rem;}
+  .cs-intro-copy{text-align:left;}
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
 }
