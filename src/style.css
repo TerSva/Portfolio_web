@@ -634,6 +634,61 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-contact-links a:hover{color:var(--nav-ch);border-color:var(--nav-ch);}
 
 /* ============================================================
+   ABOUT — product story first; portrait supports the human
+   voice rather than turning the page into a personal profile.
+============================================================ */
+.about-shell{width:min(100% - (var(--gutter) * 2),var(--media-measure));margin:0 auto;}
+.about-hero{
+  padding:calc(var(--nav-height) + clamp(4rem,9vw,9rem)) 0 clamp(5rem,10vw,10rem);
+  background:var(--nav-bg);color:var(--nav-ch);
+}
+.about-hero > *,.about-collaboration > *{position:relative;z-index:1;}
+.about-eyebrow{
+  margin-bottom:1rem;font-family:var(--font-m);font-size:.67rem;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--cs-muted);
+}
+.about-hero .about-eyebrow{color:var(--nav-ch2);}
+.about-hero h1{
+  max-width:none;font-family:var(--font-d);font-size:clamp(3.5rem,5vw,5rem);
+  font-weight:400;line-height:.98;letter-spacing:-.035em;
+}
+.about-positioning{padding:clamp(5rem,10vw,10rem) 0;background:var(--cs-paper);}
+.about-positioning-grid{
+  display:grid;grid-template-columns:minmax(15rem,.72fr) minmax(0,1.28fr);
+  gap:clamp(3rem,9vw,10rem);align-items:start;
+}
+.about-portrait{margin:0;position:sticky;top:calc(var(--nav-height) + 2rem);}
+.about-portrait img{width:100%;aspect-ratio:3 / 4;object-fit:cover;object-position:center;border-radius:8px;}
+.about-positioning-copy{max-width:42rem;padding-top:clamp(.5rem,2vw,2rem);}
+.about-positioning-copy p{font-size:clamp(1.05rem,1.45vw,1.3rem);line-height:1.65;color:var(--cs-muted);}
+.about-positioning-copy p + p{margin-top:1.4rem;}
+.about-positioning-copy .about-lead{font-size:clamp(1.3rem,2vw,1.8rem);font-weight:500;line-height:1.45;color:var(--cs-ink);}
+.about-method{padding:clamp(5rem,10vw,10rem) 0 clamp(3.5rem,6vw,6rem);background:var(--cs-surface);}
+.about-section-heading{margin-bottom:clamp(3rem,6vw,5rem);}
+.about-section-heading .about-eyebrow{margin-bottom:1rem;}
+.about-section-heading h2,.about-collaboration h2{
+  max-width:none;font-family:var(--font-d);font-size:clamp(2.4rem,3.6vw,4rem);
+  font-weight:400;line-height:1.05;letter-spacing:-.025em;
+}
+.about-section-heading h2 span{display:block;}
+.about-steps{list-style:none;counter-reset:steps;}
+.about-steps li{
+  display:grid;grid-template-columns:3rem minmax(0,44rem);
+  gap:clamp(1rem,2vw,1.75rem);padding:clamp(1.75rem,3vw,2.75rem) 0;border-top:1px solid var(--cs-border);
+}
+.about-step-number{font-family:var(--font-m);font-size:.72rem;letter-spacing:.12em;color:var(--cs-gold-ui);}
+.about-steps h3{font-family:var(--font-d);font-size:clamp(1.9rem,3vw,2.8rem);font-weight:400;line-height:1.1;}
+.about-steps p{max-width:34rem;margin-top:.75rem;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.65;color:var(--cs-muted);}
+.about-collaboration{padding:clamp(5rem,10vw,10rem) 0;background:var(--nav-bg);color:var(--nav-ch);}
+.about-collaboration .about-eyebrow{color:var(--nav-ch2);}
+.about-collaboration-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(3rem,9vw,10rem);}
+.about-collaboration-copy{max-width:39rem;padding-top:.35rem;}
+.about-collaboration h2{max-width:none;font-size:clamp(2.4rem,2.8vw,3.25rem);line-height:1.08;}
+.about-collaboration-copy p{font-size:clamp(1.1rem,1.65vw,1.45rem);line-height:1.6;color:var(--nav-ch2);}
+.about-cta{display:inline-flex;align-items:center;gap:.75rem;min-height:44px;margin-top:2.25rem;font-family:var(--font-m);font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--nav-gold);text-decoration:none;border-bottom:1px solid rgba(255,215,0,.6);}
+.about-cta:hover{color:var(--nav-ch);border-color:var(--nav-ch);text-decoration:none;}
+
+/* ============================================================
    FOOTER
 ============================================================ */
 .site-footer{
@@ -670,4 +725,13 @@ body[data-zone="z3"] .cs-dot.active{
   .cs-contact{padding-top:calc(9.5rem + 3rem);}
   .cs-contact-grid{grid-template-columns:1fr;grid-template-areas:"heading" "story" "connect";gap:2.5rem;}
   .cs-contact-heading h1{max-width:13ch;}
+  .about-hero{padding-top:calc(9.5rem + 3rem);}
+  .about-hero h1{max-width:10ch;font-size:clamp(3.2rem,13vw,4.8rem);}
+  .about-positioning-grid,.about-steps li,.about-collaboration-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-portrait{position:static;max-width:25rem;}
+  .about-positioning-copy{padding-top:0;}
+  .about-section-heading{margin-bottom:2.5rem;}
+  .about-section-heading h2,.about-collaboration h2{max-width:13ch;}
+  .about-section-heading h2 span{display:inline;}
+  .about-steps li{gap:1rem;}
 }
