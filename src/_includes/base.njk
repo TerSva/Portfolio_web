@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang | default('en') }}">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,21 +12,21 @@
 <body>
 
 <header class="site-header">
-  <a class="site-brand" href="/">Tereza Britta Švanda</a>
+  <a class="site-brand" href="{{ homeUrl or '/work/' }}">Tereza Britta Švanda</a>
   <div class="nav-group">
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/work/">Work</a>
-      <a href="/about/">About</a>
-      <a href="/cv/">CV</a>
-      <a href="/contact/">Contact</a>
+      <a href="{{ workUrl or '/work/' }}">{{ navWork or 'Work' }}</a>
+      <a href="{{ aboutUrl or '/about/' }}">{{ navAbout or 'About' }}</a>
+      <a href="{{ cvUrl or '/cv/' }}">CV</a>
+      <a href="{{ contactUrl or '/contact/' }}">{{ navContact or 'Contact' }}</a>
     </nav>
     <div class="lang-switch">
       <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false">
-        <span class="lang-current-label">EN</span><span class="chevron" aria-hidden="true"></span>
+        <span class="lang-current-label">{{ lang | default('en') | upper }}</span><span class="chevron" aria-hidden="true"></span>
       </button>
       <div class="lang-menu" role="listbox" hidden>
-        <button type="button" role="option" data-lang="en" aria-selected="true">EN</button>
-        <button type="button" role="option" data-lang="de">DE</button>
+        <button type="button" role="option" data-url="{{ enUrl or '/work/' }}" aria-selected="{{ 'true' if (lang | default('en')) == 'en' else 'false' }}">EN</button>
+        <button type="button" role="option" data-url="{{ deUrl or '/de/work/' }}" aria-selected="{{ 'true' if lang == 'de' else 'false' }}">DE</button>
       </div>
     </div>
   </div>
@@ -57,14 +57,32 @@
   });
   menu.querySelectorAll('button').forEach(function(btn){
     btn.addEventListener('click', function(){
-      currentLabel.textContent = btn.dataset.lang.toUpperCase();
-      menu.querySelectorAll('button').forEach(function(b){ b.removeAttribute('aria-selected'); });
-      btn.setAttribute('aria-selected','true');
-      close();
+      window.location.href = btn.dataset.url;
     });
   });
   document.addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+
+<script>
+/* The project indicator exists only while a precise cursor explores a visual.
+   The full card remains the link; this is an affordance, not a second button. */
+(function(){
+  function init(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.work-project-visual').forEach(function(visual){
+      visual.addEventListener('pointerenter', function(){ visual.dataset.projectCursor = 'active'; });
+      visual.addEventListener('pointermove', function(event){
+        var rect = visual.getBoundingClientRect();
+        visual.style.setProperty('--project-cursor-x', (event.clientX - rect.left) + 'px');
+        visual.style.setProperty('--project-cursor-y', (event.clientY - rect.top) + 'px');
+      });
+      visual.addEventListener('pointerleave', function(){ delete visual.dataset.projectCursor; });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
