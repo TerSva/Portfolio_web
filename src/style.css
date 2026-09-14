@@ -743,6 +743,7 @@ body[data-zone="z3"] .cs-dot.active{
   border-top:1px solid rgba(245,245,220,.16);
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
 }
+.footer-art-link{color:var(--nav-ch2);text-decoration:none;border-bottom:1px solid rgba(245,245,220,.28);transition:color .2s ease,border-color .2s ease;}.footer-art-link:hover{color:var(--nav-gold);border-color:var(--nav-gold);text-decoration:none;}
 @media(max-width:520px){.site-footer.cs-footer-dark{align-items:flex-start;flex-direction:column;gap:.65rem;}}
 
 /* ============================================================

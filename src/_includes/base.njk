@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/style.css"/>
+<link rel="stylesheet" href="{{ '/style.css' | url }}"/>
 </head>
 <body>
 
@@ -16,18 +16,18 @@
   <span class="site-brand">Tereza Britta Švanda</span>
   <div class="nav-group">
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="{{ workUrl or '/work/' }}"{% if activeNav == 'work' %} class="is-active" aria-current="page"{% endif %}>{{ navWork or 'Work' }}</a>
-      <a href="{{ aboutUrl or '/about/' }}"{% if activeNav == 'about' %} class="is-active" aria-current="page"{% endif %}>{{ navAbout or 'About' }}</a>
-      <a href="{{ cvUrl or '/cv/' }}"{% if activeNav == 'cv' %} class="is-active" aria-current="page"{% endif %}>CV</a>
-      <a href="{{ contactUrl or '/contact/' }}"{% if activeNav == 'contact' %} class="is-active" aria-current="page"{% endif %}>{{ navContact or 'Contact' }}</a>
+      <a href="{{ (workUrl or '/work/') | url }}"{% if activeNav == 'work' %} class="is-active" aria-current="page"{% endif %}>{{ navWork or 'Work' }}</a>
+      <a href="{{ (aboutUrl or '/about/') | url }}"{% if activeNav == 'about' %} class="is-active" aria-current="page"{% endif %}>{{ navAbout or 'About' }}</a>
+      <a href="{{ (cvUrl or '/cv/') | url }}"{% if activeNav == 'cv' %} class="is-active" aria-current="page"{% endif %}>CV</a>
+      <a href="{{ (contactUrl or '/contact/') | url }}"{% if activeNav == 'contact' %} class="is-active" aria-current="page"{% endif %}>{{ navContact or 'Contact' }}</a>
     </nav>
     <div class="lang-switch">
       <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false">
         <span class="lang-current-label">{{ lang | default('en') | upper }}</span><span class="chevron" aria-hidden="true"></span>
       </button>
       <div class="lang-menu" role="listbox" hidden>
-        <button type="button" role="option" data-url="{{ enUrl or '/work/' }}" aria-selected="{{ 'true' if (lang | default('en')) == 'en' else 'false' }}">EN</button>
-        <button type="button" role="option" data-url="{{ deUrl or '/de/work/' }}" aria-selected="{{ 'true' if lang == 'de' else 'false' }}">DE</button>
+        <button type="button" role="option" data-url="{{ (enUrl or '/work/') | url }}" aria-selected="{{ 'true' if (lang | default('en')) == 'en' else 'false' }}">EN</button>
+        <button type="button" role="option" data-url="{{ (deUrl or '/de/work/') | url }}" aria-selected="{{ 'true' if lang == 'de' else 'false' }}">DE</button>
       </div>
     </div>
   </div>
@@ -94,6 +94,7 @@
 
 <footer class="site-footer cs-footer-dark cs-spotlight">
   <span>© 2026 Tereza Britta Švanda</span>
+  <a class="footer-art-link" href="{{ '/art/' | url }}">Art portfolio ↗</a>
   <span>Czech Republic / Germany / World</span>
 </footer>
 
