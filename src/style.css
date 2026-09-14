@@ -95,6 +95,12 @@ body{
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
+/* The light sits over the current page for one breath before a header route.
+   It uses screen blending rather than page opacity, so it cannot expose a
+   pale document background or turn the page into a flashing overlay. */
+body::after{content:'';position:fixed;inset:0;z-index:300;pointer-events:none;background:#CDE7D7;mix-blend-mode:screen;opacity:0;transition:opacity .2s ease;}
+html.header-navigation-leaving body::after{opacity:.055;}
+@media (prefers-reduced-motion:reduce){body::after{display:none;}}
 a{color:var(--cs-copper);text-decoration:none;}
 a:hover{text-decoration:underline;}
 img{max-width:100%;display:block;}
@@ -155,6 +161,8 @@ img{max-width:100%;display:block;}
 }
 .site-header .site-nav a:hover{color:var(--nav-ch);text-decoration:none;}
 .site-header .site-nav a:hover::after{width:100%;}
+.site-header .site-nav a.is-active{color:var(--nav-ch);}
+.site-header .site-nav a.is-active::after{width:100%;}
 
 /* Collapsed lang switch — single pill, opens a small dropdown */
 .site-header .lang-switch{position:relative;}

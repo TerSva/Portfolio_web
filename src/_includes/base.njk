@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>{{ title }} — Tereza Britta Švanda</title>
+<style>html,body{background:#001F1C;color:#F5F5DC}.site-header{position:fixed;top:0;right:0;left:0;z-index:200;display:flex;align-items:center;justify-content:space-between;height:4.75rem;padding:0 4vw;background:#001F1C;border-bottom:1px solid #004D40}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -12,13 +13,13 @@
 <body>
 
 <header class="site-header">
-  <a class="site-brand" href="{{ homeUrl or '/work/' }}">Tereza Britta Švanda</a>
+  <span class="site-brand">Tereza Britta Švanda</span>
   <div class="nav-group">
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="{{ workUrl or '/work/' }}">{{ navWork or 'Work' }}</a>
-      <a href="{{ aboutUrl or '/about/' }}">{{ navAbout or 'About' }}</a>
-      <a href="{{ cvUrl or '/cv/' }}">CV</a>
-      <a href="{{ contactUrl or '/contact/' }}">{{ navContact or 'Contact' }}</a>
+      <a href="{{ workUrl or '/work/' }}"{% if activeNav == 'work' %} class="is-active" aria-current="page"{% endif %}>{{ navWork or 'Work' }}</a>
+      <a href="{{ aboutUrl or '/about/' }}"{% if activeNav == 'about' %} class="is-active" aria-current="page"{% endif %}>{{ navAbout or 'About' }}</a>
+      <a href="{{ cvUrl or '/cv/' }}"{% if activeNav == 'cv' %} class="is-active" aria-current="page"{% endif %}>CV</a>
+      <a href="{{ contactUrl or '/contact/' }}"{% if activeNav == 'contact' %} class="is-active" aria-current="page"{% endif %}>{{ navContact or 'Contact' }}</a>
     </nav>
     <div class="lang-switch">
       <button type="button" class="lang-current" aria-haspopup="listbox" aria-expanded="false">
@@ -57,7 +58,8 @@
   });
   menu.querySelectorAll('button').forEach(function(btn){
     btn.addEventListener('click', function(){
-      window.location.href = btn.dataset.url;
+      if (window.portfolioNavigate) window.portfolioNavigate(btn.dataset.url);
+      else window.location.href = btn.dataset.url;
     });
   });
   document.addEventListener('click', close);
@@ -126,6 +128,41 @@
 })();
 </script>
 {% endif %}
+
+<script>
+/* A very small light wash belongs only to deliberate header navigation.
+   Content links and browser history keep their ordinary, immediate behaviour. */
+(function(){
+  var root = document.documentElement;
+  var duration = 200;
+  var navigating = false;
+
+  function reduceMotion(){
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function navigate(url){
+    if (navigating) return;
+    if (reduceMotion()) { window.location.href = url; return; }
+    navigating = true;
+    root.classList.add('header-navigation-leaving');
+    window.setTimeout(function(){ window.location.href = url; }, duration);
+  }
+
+  document.querySelectorAll('.site-header a[href]').forEach(function(link){
+    link.addEventListener('click', function(event){
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (link.target && link.target !== '_self') return;
+      var url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin || url.href === window.location.href) return;
+      event.preventDefault();
+      navigate(url.href);
+    });
+  });
+
+  window.portfolioNavigate = navigate;
+})();
+</script>
 
 <script>
 /* A desktop-only, CSS-rendered spotlight borrowed from the art portfolio.
