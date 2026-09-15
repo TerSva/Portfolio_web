@@ -427,6 +427,12 @@ body[data-zone="z3"] .cs-dot.active{
   margin:0 auto;
   text-align:center;
 }
+/* German compound words run longer than their English equivalents at the
+   same character budget, so the shared measure wraps this heading one
+   line deeper than intended. Give German pages a bit more room. */
+html[lang="de"] .cs-intro-copy{
+  width:min(100%, 66rem);
+}
 .cs-intro-copy h2{
   font-family:var(--font-d);font-weight:400;
   font-size:clamp(2rem,4vw,3.45rem);
@@ -484,14 +490,20 @@ body[data-zone="z3"] .cs-dot.active{
   color:var(--cs-muted);text-align:center;padding:1.5rem;
 }
 
+/* Three-up variant — same evidence-not-decoration sizing, for a
+   before/after/after-on-scroll trio instead of a pair. */
+.cs-dashboard-screens.cs-triple{grid-template-columns:repeat(3,9.5rem);}
+@media (max-width:760px){.cs-dashboard-screens.cs-triple{grid-template-columns:1fr;}}
+
 /* Native screen exports stay intentionally small: they are evidence for a
    design decision, not a decorative full-width image. */
 .cs-dashboard-screens{
   display:grid;
-  grid-template-columns:192px 172px;
+  grid-template-columns:172px 192px;
   justify-content:center;
-  align-items:start;
-  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;
+  column-gap:clamp(1.5rem,4vw,3.5rem);
+  row-gap:0;
   margin:2.5rem auto;
 }
 .cs-dashboard-screens img{width:100%;height:auto;}
@@ -594,6 +606,15 @@ body[data-zone="z3"] .cs-dot.active{
   overflow:hidden;
 }
 .cs-visual-full img{ width:100%; height:auto; display:block; }
+
+/* Two images sharing one figure (e.g. colors + attributes) need real
+   breathing room between them, not one shared clipped rectangle. */
+.cs-visual-full.cs-stack-gap{
+  display:flex;flex-direction:column;gap:1.5rem;
+  padding:1.5rem;background:var(--cs-surface);
+  overflow:visible;border-radius:12px;
+}
+.cs-visual-full.cs-stack-gap img{border-radius:8px;}
 
 /* ============================================================
    CONTACT — a dark, direct invitation rather than a form shell
@@ -784,3 +805,95 @@ body[data-zone="z3"] .cs-dot.active{
 }
 @media (hover:none),(pointer:coarse){.work-project-visit{display:none;}}
 @media (hover:hover) and (pointer:fine){.work-project-visual{cursor:none;}}
+
+/* ============================================================
+   HEURISTICS ACCORDION — same expand-on-hover mechanic as the
+   art portfolio's Aristide accordion, without its grayscale
+   treatment. These exports carry no baked-in title, so each
+   column gets a small live caption below the clipped thumb
+   instead (the caption sits outside the overflow:hidden box,
+   so it's never cropped by the hover expansion).
+============================================================ */
+.cs-heuristics-row{
+  display:flex;
+  gap:1vw;
+  margin-top:2.5rem;
+  margin-bottom:2.5rem;
+}
+.cs-heuristic-col{
+  flex:1;
+  transition:flex .8s cubic-bezier(.19,1,.22,1);
+}
+.cs-heuristic-col:hover{flex:2;}
+.cs-heuristic-thumb{
+  position:relative;
+  height:28rem;
+  overflow:hidden;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 14px 28px rgba(166,79,36,.14);
+}
+.cs-heuristic-thumb img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  transform:scale(1.06);
+  transition:transform .8s cubic-bezier(.19,1,.22,1);
+}
+.cs-heuristic-col:hover .cs-heuristic-thumb img{transform:scale(1);}
+/* Object-fit:cover crops toward the vertical center by default, which can
+   cut off the exact UI region a panel is meant to illustrate. Override
+   per image so the crop favors where that evidence actually sits. */
+.cs-heuristic-thumb img.cs-crop-bottom{object-position:center bottom;}
+.cs-heuristic-thumb img.cs-crop-low{object-position:center 80%;}
+.cs-heuristic-label{
+  margin-top:.75rem;
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--cs-muted);text-align:center;
+}
+@media (max-width:760px){
+  .cs-heuristics-row{flex-direction:column;gap:1.5rem;}
+  .cs-heuristic-col:hover{flex:1;}
+  .cs-heuristic-thumb{height:auto;aspect-ratio:3/4;}
+}
+@media (hover:none),(pointer:coarse){
+  .cs-heuristic-col:hover{flex:1;}
+  .cs-heuristic-col:hover .cs-heuristic-thumb img{transform:scale(1.06);}
+}
+
+/* ============================================================
+   LIGHTBOX — click-to-enlarge for dense evidence images.
+============================================================ */
+.cs-lightbox-figure{position:relative;cursor:zoom-in;}
+.cs-lightbox-figure::after{
+  content:'Click to enlarge';
+  position:absolute;bottom:1rem;right:1rem;
+  padding:.4rem .8rem;border-radius:100px;
+  background:rgba(0,31,28,.72);color:#F5F5DC;
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;
+  opacity:0;transition:opacity .2s ease;pointer-events:none;
+}
+.cs-lightbox-figure:hover::after,.cs-lightbox-figure:focus-visible::after{opacity:1;}
+.cs-lightbox-overlay{
+  position:fixed;inset:0;z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:6vh 4vw;
+  background:rgba(0,15,13,.92);
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease;
+}
+.cs-lightbox-overlay[data-open="true"]{opacity:1;pointer-events:auto;}
+.cs-lightbox-overlay img{
+  max-width:100%;max-height:100%;
+  border-radius:8px;cursor:zoom-out;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.cs-lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:2.75rem;height:2.75rem;border-radius:50%;
+  border:1px solid rgba(245,245,220,.3);background:rgba(0,31,28,.7);
+  color:#F5F5DC;font-size:1.4rem;line-height:1;cursor:pointer;
+  display:grid;place-items:center;
+}
+@media (prefers-reduced-motion:reduce){.cs-lightbox-overlay{transition:none;}}
+@media (hover:none),(pointer:coarse){.cs-lightbox-figure::after{content:'Tap to enlarge';opacity:1;}}

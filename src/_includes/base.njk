@@ -204,5 +204,56 @@
 })();
 </script>
 
+<script>
+/* Click-to-enlarge for dense evidence images (e.g. a competitive
+   analysis panel) that are too detailed to read at column width.
+   Opt in per image with .cs-lightbox-figure on its wrapping figure. */
+(function(){
+  var figures = document.querySelectorAll('.cs-lightbox-figure');
+  if (!figures.length) return;
+
+  var overlay = document.createElement('div');
+  overlay.className = 'cs-lightbox-overlay';
+  overlay.innerHTML = '<button type="button" class="cs-lightbox-close" aria-label="Close">&times;</button><img alt="">';
+  document.body.appendChild(overlay);
+  var overlayImg = overlay.querySelector('img');
+  var closeBtn = overlay.querySelector('.cs-lightbox-close');
+  var lastFocused = null;
+
+  function open(src, alt){
+    lastFocused = document.activeElement;
+    overlayImg.src = src;
+    overlayImg.alt = alt || '';
+    overlay.dataset.open = 'true';
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+  function close(){
+    overlay.dataset.open = 'false';
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  function onKeydown(e){ if (e.key === 'Escape') close(); }
+
+  figures.forEach(function(fig){
+    var img = fig.querySelector('img');
+    if (!img) return;
+    fig.setAttribute('tabindex', '0');
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('aria-label', 'Expand image');
+    fig.addEventListener('click', function(){ open(img.src, img.alt); });
+    fig.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img.src, img.alt); }
+    });
+  });
+  overlay.addEventListener('click', function(e){
+    if (e.target === overlay || e.target === overlayImg) close();
+  });
+  closeBtn.addEventListener('click', close);
+})();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,200 @@
+---
+layout: case-study.njk
+title: "Spotify — An app that knows what I listen to. Not who I am."
+deUrl: "/de/work/spotify/"
+activeNav: work
+dots:
+  - { id: "hook", label: "the assumption", zone: "z0" }
+  - { id: "intro", label: "the brief", zone: "z0" }
+  - { id: "empathize", label: "the research", zone: "z0" }
+  - { id: "define", label: "the pivot", zone: "z0" }
+  - { id: "ideate", label: "the decision", zone: "z0" }
+  - { id: "prototype", label: "the screens", zone: "z0" }
+  - { id: "test", label: "what we learned", zone: "z0" }
+  - { id: "ai", label: "the process", zone: "z0" }
+  - { id: "reflection", label: "my part", zone: "z0" }
+caseStudy:
+  projectTitle: "Spotify — A redesign that gave music its feeling back"
+  statement: "An app that knows what I listen to. Not who I am."
+  meta:
+    - { label: "Scope", value: "Product redesign" }
+    - { label: "Role", value: "Solo: research, UX, and visual identity" }
+    - { label: "Platform", value: "Mobile app" }
+    - { label: "Year", value: "2026" }
+  links:
+    - { label: "Prototype", href: "https://www.figma.com/proto/Qc3a2uuHGDEXlC7Kh7SznB/Tereza-%7C-Spotify?node-id=13449-604&viewport=-1439%2C-748%2C0.52&t=JGd6yK2pu2lDh8HI-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=13449%3A604&page-id=116%3A21" }
+  outcome: "This is a solo Spotify redesign built during Ironhack's UX/UI bootcamp, working from a personal starting point: chromesthesia, my own ability to see color in music. I ran the full heuristic and competitive analysis myself, then built the fix around that condition, a genre-and-mood color system that runs through the whole interface. Across a Nielsen evaluation and a design critique, the app moved from an unclosable mini-player, a chaotic library, and unreadable icons to a version validated by peers and delivered as a working Figma prototype."
+---
+
+<section class="cs-section" id="hook">
+  <div class="cs-intro-copy">
+    <h2>Spotify knows my&nbsp;playlists, my&nbsp;habits, my&nbsp;most&nbsp;played&nbsp;genres.</h2>
+    <p class="cs-subtitle">It&nbsp;knows nothing about how&nbsp;I&nbsp;actually perceive&nbsp;music.</p>
+    <div class="cs-intro-divider" aria-hidden="true"></div>
+  </div>
+  <div class="cs-hero-visual cs-artifact">
+    <img src="/assets/spotify/logo.png" alt="Spotify redesign wordmark: a soft gradient icon next to the Spotify name on a dark navy background." style="width:100%;height:100%;object-fit:cover;">
+  </div>
+</section>
+
+<section class="cs-section" id="intro">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Spotify wasn't my&nbsp;first choice. I'm&nbsp;genuinely grateful it&nbsp;became the&nbsp;project.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">The&nbsp;brief was&nbsp;open:&nbsp;redesign an&nbsp;app&nbsp;of&nbsp;my&nbsp;own&nbsp;choosing. I&nbsp;almost picked LinkedIn&nbsp;instead.</p>
+      <p>When I got the assignment to redesign an app of my own choosing, I was originally set on LinkedIn. A change in circumstances made me reconsider, and looking back, I'm glad it did. I had a lukewarm relationship with Spotify: I don't enjoy using it myself, it feels heavy, cluttered, and impersonal, while music itself is something I love and carry with me every day. The brief gave me complete freedom, and it opened the door to using something I'd never considered a design tool before: chromesthesia, my ability to see color in music.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="empathize">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Three things that&nbsp;don't work&nbsp;in&nbsp;Spotify.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">A&nbsp;gut&nbsp;feeling points at&nbsp;what&nbsp;might be&nbsp;wrong. It&nbsp;isn't proof of&nbsp;what&nbsp;actually needs&nbsp;fixing.</p>
+
+      <p>Before designing anything new, I needed to be clear on what was actually broken. So I ran the app through Nielsen's heuristics and picked the three most significant problems from the full analysis: <strong>the mini-player can't be closed</strong>, even when the user wants a clean, distraction-free screen; <strong>playlists, saved episodes, and albums are mixed into one feed</strong> with no clear distinction between them; and <strong>green checkmarks and raw play-count numbers force the user to guess</strong> what they mean instead of recognizing them instantly.</p>
+
+      <div class="cs-heuristics-row">
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img class="cs-crop-bottom" src="/assets/spotify/heuristic-user-control.png" alt="Spotify's home screen, showing the mini-player bar that can't be dismissed or minimized.">
+          </div>
+          <p class="cs-heuristic-label">User control and freedom</p>
+        </div>
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img src="/assets/spotify/heuristic-aesthetic.png" alt="Spotify's library screen mixing playlists, saved episodes, and albums with nothing to tell them apart.">
+          </div>
+          <p class="cs-heuristic-label">Aesthetic and minimalist design</p>
+        </div>
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img class="cs-crop-low" src="/assets/spotify/heuristic-recognition.png" alt="A Spotify artist page with green checkmarks and raw play-count numbers next to each track.">
+          </div>
+          <p class="cs-heuristic-label">Recognition rather than recall</p>
+        </div>
+      </div>
+
+      <p>I wanted to know whether this was a Spotify problem or an industry-wide one, so I ran the same comparison across Apple Music, Tidal, and YouTube Music. Apple Music handles the mini-player best of the three: on scroll it collapses neatly instead of just sitting there, and its floating pill-shaped nav bar feels lighter than Spotify's full-width one. Tidal and YouTube Music share almost the same palette, black, white, and two shades of gray, but only one of them uses it on purpose. Tidal builds a clear typographic hierarchy and even has its own loading animation, a morphing logo between tracks, while YouTube Music's grayscale reads as a default dark-mode skin nobody designed on purpose, and its nav bar mixes real navigation with a commercial "Upgrade" button. None of the four apps, Spotify included, let color carry any emotional information.</p>
+
+      <figure class="cs-visual-full cs-artifact cs-lightbox-figure">
+        <img src="/assets/spotify/competitive-apple-music.png" alt="Competitive analysis of Apple Music: home screen, library, and mini-player, with notes on its light theme, collapsing mini-player, and pill-shaped navigation bar.">
+      </figure>
+      <figure class="cs-visual-full cs-artifact cs-lightbox-figure">
+        <img src="/assets/spotify/competitive-tidal.png" alt="Competitive analysis of Tidal: home screen, library, and artist profile, with notes on its black-white-gray palette, typographic hierarchy, and morphing-logo loading animation.">
+      </figure>
+      <figure class="cs-visual-full cs-artifact cs-lightbox-figure">
+        <img src="/assets/spotify/competitive-youtube-music.png" alt="Competitive analysis of YouTube Music: home screen, library, and artist profile, with notes on its five-item navigation bar and generic dark-mode palette.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="define">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>What&nbsp;if&nbsp;color wasn't just&nbsp;decoration?</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">The&nbsp;heuristic analysis showed what&nbsp;was&nbsp;broken. It&nbsp;said&nbsp;nothing about how&nbsp;to&nbsp;fix&nbsp;it.</p>
+
+      <p>The answer turned out to be something entirely natural to me: chromesthesia, a form of synesthesia where hearing music automatically triggers a perception of color. For me, music and color have never been two separate things. It sounded like an interesting creative concept, but a real obstacle stood in the way: how do you turn something so deeply subjective into a system that works for people who perceive the world completely differently?</p>
+
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/moodboard.png" alt="Spotify moodboard: warm and teal-toned reference images, concert crowds, candlelight, water ripples, and abstract color washes, used to shape the genre-to-color system.">
+      </figure>
+
+      <p>The solution wasn't to transplant my own perceptions into the interface word for word. I only borrowed the underlying principle: every major genre got one fixed color, rock, electronic, pop, hip-hop, jazz/soul, and classical, each with its own visual tone. The interface shows how a given kind of music feels, in a way that's legible to everyone. This same foundation later gave rise to filtering music by mood. I ultimately framed the whole system around four core attributes. Whatever the user is listening to, the app had to feel clear, calm, expressive, and above all, like their own personal, safe place.</p>
+
+      <figure class="cs-visual-full cs-stack-gap cs-artifact cs-artifact-captioned" data-artifact-label="Genre colors and the four core attributes">
+        <img src="/assets/spotify/colors.png" alt="Five solid brand colors: dark navy, teal, orange, mint, and dark green, representing the genre color system.">
+        <img src="/assets/spotify/brand-attributes.png" alt="Four soft gradient swatches representing the app's core attributes: clear, calm, expressive, and personal.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="ideate">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>A&nbsp;personal concept that&nbsp;has&nbsp;to&nbsp;work&nbsp;for&nbsp;everyone.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">My&nbsp;first instinct was&nbsp;to&nbsp;let&nbsp;users turn&nbsp;the&nbsp;mini-player off&nbsp;completely. Comparing Apple Music and&nbsp;Tidal proved that&nbsp;instinct&nbsp;wrong.</p>
+
+      <p>It turned out users actually rely on the mini-player while listening and don't want to lose it entirely. I kept the option to dismiss it, but the main solution was different: shrinking it and letting it merge into the bottom tab bar.</p>
+
+      <p>This same habit of questioning my own assumptions carried through into the structure of the home screen. To stay on course, I used the four pillars, clear, calm, expressive, personal, as a filter for every further UX decision. The goal was an arrangement and set of filters that felt more personal than a plain music catalog. The result is a space where the user's current mood is reflected directly in the interface's colors, gently accompanying them as they listen and browse.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="prototype">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>A&nbsp;home&nbsp;screen that&nbsp;asks&nbsp;how&nbsp;you&nbsp;feel,&nbsp;not&nbsp;what&nbsp;you&nbsp;own.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Instead of&nbsp;splitting by&nbsp;content type,&nbsp;I&nbsp;filtered by&nbsp;the&nbsp;user's relationship to&nbsp;it:&nbsp;Previous, All,&nbsp;Favourite,&nbsp;Discover.</p>
+
+      <p>The Discover section makes direct use of the color system: the "Choose your mood" tiles offer specific moods, Feel Good Mix, Main Character, Night Drive, each in the color that matches its genre. The user picks a playlist based on how they want to feel, not on an artist's name.</p>
+
+      <figure class="cs-dashboard-screens cs-triple cs-artifact cs-artifact-captioned" aria-label="Home screen before and after the redesign" data-artifact-label="Before, after, and after on scroll">
+        <img src="/assets/spotify/home-before.png" alt="Original Spotify home screen with a mixed grid of playlists and artists, an artist spotlight card, and a Jump back in row.">
+        <img src="/assets/spotify/home-after.png" alt="Redesigned Spotify home screen at rest, with the mini-player as a full-width bar above a complete Home, Library, Add, Search navigation bar.">
+        <img src="/assets/spotify/home-after-scroll.png" alt="Redesigned Spotify home screen while scrolling, with the navigation bar collapsed to Home and Search icons and the mini-player merged into the middle of it.">
+      </figure>
+
+      <p><span class="cs-mini-head">A&nbsp;library that&nbsp;stopped being one&nbsp;endless&nbsp;list.</span> The library mixed playlists, saved episodes, and albums into one feed with nothing to tell them apart. I split the content into three clear sections: Your Playlists, Your Emotions, Your Artists. Your Emotions is a direct result of the color system, moods like Rebel, Flow, Feel-good, Motivation, Relax, Focus are color-coded using the same logic as the genres on the home screen. The result is a library you can scan in a few seconds, instead of scrolling through an undifferentiated list.</p>
+
+      <figure class="cs-dashboard-screens cs-artifact cs-artifact-captioned" aria-label="Library before and after the redesign" data-artifact-label="Library, before and after">
+        <img src="/assets/spotify/library-before.png" alt="Original Spotify library list mixing playlists, saved episodes, and albums with no visual distinction between them.">
+        <img src="/assets/spotify/library-after.png" alt="Redesigned Spotify library split into three sections: Your Playlists, Your Emotions with color-coded mood tags, and Your Artists.">
+      </figure>
+
+      <figure class="cs-dashboard-screens cs-artifact cs-artifact-captioned" aria-label="An artist page before and after the redesign" data-artifact-label="Same artist page, redesigned">
+        <img src="/assets/spotify/artist-page-before.png" alt="Original Spotify artist page with green checkmarks and raw play-count numbers next to each track.">
+        <img src="/assets/spotify/artist-page-after.png" alt="Redesigned Spotify artist page with heart icons replacing checkmarks and play counts removed.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="test">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>One&nbsp;button, one&nbsp;arrow, one&nbsp;clearer&nbsp;signal.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">I&nbsp;presented the&nbsp;redesign in&nbsp;a&nbsp;design critique with&nbsp;classmates and&nbsp;a&nbsp;mentor. The&nbsp;feedback confirmed the&nbsp;direction I'd&nbsp;chosen.</p>
+
+      <p>The one concrete change concerned a single detail on the first screen: moving the play button to the top and adding an arrow to open the full playlist, so it's immediately clear that playing it starts the whole playlist, not a single track.</p>
+
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/test-play-fix.png" alt="Redesigned Spotify Favourite screen with the play button moved to the top and an arrow added to open the full playlist.">
+      </figure>
+
+      <p>The rest of the feedback confirmed that the solutions were working. One comment noted that the redesign removed the app's crowded feeling. Another highlighted how tying the interface's look to the mood and vibe of the music made the experience feel more accurate and relevant.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="ai">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Where AI&nbsp;helped, and&nbsp;where I&nbsp;didn't let&nbsp;it&nbsp;decide.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">AI&nbsp;only&nbsp;knows what&nbsp;I&nbsp;feed&nbsp;it,&nbsp;so&nbsp;its&nbsp;output inherently carries my&nbsp;own&nbsp;biases and&nbsp;assumptions.</p>
+      <p>I used AI tools for the moodboard, after first building a version by hand. I ran several iterations and fed my own hand-built moodboard back in as reference material to sharpen the results. I selected from those iterations myself, I didn't accept the output as-is. I checked every result against my own judgment before including anything in the final version.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="reflection">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>I&nbsp;knew&nbsp;when&nbsp;to&nbsp;stop.&nbsp;Next&nbsp;time,&nbsp;I'd&nbsp;let&nbsp;the&nbsp;app&nbsp;breathe a&nbsp;little&nbsp;more.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Two&nbsp;things this&nbsp;project taught me&nbsp;the&nbsp;most:&nbsp;how&nbsp;long&nbsp;to&nbsp;trust a&nbsp;quick judgment, and&nbsp;when&nbsp;to&nbsp;stop&nbsp;adding to&nbsp;a&nbsp;design that&nbsp;already&nbsp;works.</p>
+
+      <p>This was a solo project, so every decision from the heuristic analysis to the final screens was mine to make and mine to defend. The first lesson was about the mini-player: my initial instinct was quick, and comparing it against Apple Music and Tidal showed that even a fast judgment is worth putting through longer scrutiny. Without that competitive analysis, the app would have lost a feature users actually rely on.</p>
+
+      <p>The second was about scope. Right from the start, I had to be clear on what belonged in this redesign and what didn't. I knew the next logical steps would be a gentle pulse and glow in the mini-player synced to the playing music, and an accessibility layer for visually impaired users, so the app wouldn't rely on color as its only carrier of information. I chose to stay within the current scope instead, rather than risk finishing at a lower quality.</p>
+
+      <p>Usability testing wasn't part of the brief. In a more developed version, this project should go three steps further: real testing, micro-animations that would make the app feel more alive, and an accessibility layer independent of color.</p>
+
+      <p>You can explore the interactive prototype on <a href="https://www.figma.com/proto/Qc3a2uuHGDEXlC7Kh7SznB/Tereza-%7C-Spotify?node-id=13449-604&viewport=-1439%2C-748%2C0.52&t=JGd6yK2pu2lDh8HI-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=13449%3A604&page-id=116%3A21" target="_blank" rel="noopener">Figma</a>.</p>
+    </div>
+  </div>
+</section>

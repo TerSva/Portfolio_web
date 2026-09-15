@@ -1,0 +1,209 @@
+---
+layout: case-study.njk
+title: "Spotify — Ein Redesign, das der Musik ihr Gefühl zurückgab"
+lang: de
+activeNav: work
+enUrl: "/work/spotify/"
+homeUrl: "/de/work/"
+workUrl: "/de/work/"
+aboutUrl: "/de/about/"
+cvUrl: "/de/cv/"
+contactUrl: "/de/contact/"
+navWork: "Arbeit"
+navAbout: "Über mich"
+navContact: "Kontakt"
+dots:
+  - { id: "hook", label: "die Annahme", zone: "z0" }
+  - { id: "intro", label: "das Briefing", zone: "z0" }
+  - { id: "empathize", label: "die Recherche", zone: "z0" }
+  - { id: "define", label: "der Wendepunkt", zone: "z0" }
+  - { id: "ideate", label: "die Entscheidung", zone: "z0" }
+  - { id: "prototype", label: "die Screens", zone: "z0" }
+  - { id: "test", label: "was ich lernte", zone: "z0" }
+  - { id: "ai", label: "der Prozess", zone: "z0" }
+  - { id: "reflection", label: "mein Anteil", zone: "z0" }
+caseStudy:
+  projectTitle: "Spotify — Ein Redesign, das der Musik ihr Gefühl zurückgab"
+  statement: "Eine App, die weiß, was ich höre. Nicht, wer ich bin."
+  meta:
+    - { label: "Umfang", value: "Produkt-Redesign" }
+    - { label: "Rolle", value: "Allein: Recherche, UX und visuelle Identität" }
+    - { label: "Plattform", value: "Mobile App" }
+    - { label: "Jahr", value: "2026" }
+  links:
+    - { label: "Prototyp", href: "https://www.figma.com/proto/Qc3a2uuHGDEXlC7Kh7SznB/Tereza-%7C-Spotify?node-id=13449-604&viewport=-1439%2C-748%2C0.52&t=JGd6yK2pu2lDh8HI-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=13449%3A604&page-id=116%3A21" }
+  outcome: "Dies ist ein Solo-Redesign von Spotify, entstanden während Ironhacks UX/UI-Bootcamp, ausgehend von einem sehr persönlichen Startpunkt: Chromästhesie, meiner eigenen Fähigkeit, Musik als Farbe wahrzunehmen. Die komplette heuristische und Wettbewerbsanalyse habe ich allein durchgeführt, die Lösung dann genau um diese Fähigkeit herum gebaut: ein Genre- und Stimmungs-Farbsystem, das sich durch die gesamte Oberfläche zieht. Über eine Nielsen-Evaluation und eine Design-Critique hinweg wurde aus einem unschließbaren Mini-Player, einer chaotischen Bibliothek und unlesbaren Icons eine Version, die bestätigt und als funktionierender Figma-Prototyp abgeliefert wurde."
+---
+
+<section class="cs-section" id="hook">
+  <div class="cs-intro-copy">
+    <h2>Spotify kennt meine Playlists, meine Gewohnheiten, meine meistgehörten&nbsp;Genres.</h2>
+    <p class="cs-subtitle">Wie&nbsp;ich&nbsp;Musik tatsächlich wahrnehme, weiß&nbsp;die&nbsp;App&nbsp;nicht.</p>
+    <div class="cs-intro-divider" aria-hidden="true"></div>
+  </div>
+  <div class="cs-hero-visual cs-artifact">
+    <img src="/assets/spotify/logo.png" alt="Spotify-Redesign-Wortmarke: ein weiches Verlaufsicon neben dem Spotify-Namen auf dunkelblauem Grund." style="width:100%;height:100%;object-fit:cover;">
+  </div>
+</section>
+
+<section class="cs-section" id="intro">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Spotify war&nbsp;nicht meine erste Wahl.&nbsp;Ich&nbsp;bin&nbsp;wirklich dankbar, dass&nbsp;es&nbsp;das&nbsp;Projekt&nbsp;wurde.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Die&nbsp;Aufgabe war&nbsp;offen: eine&nbsp;App&nbsp;meiner Wahl&nbsp;neu&nbsp;gestalten. Fast&nbsp;wäre&nbsp;es&nbsp;LinkedIn&nbsp;geworden.</p>
+      <p>Als ich die Aufgabe bekam, eine App meiner Wahl neu zu gestalten, stand für mich zunächst LinkedIn fest. Eine Änderung der Umstände brachte mich zum Umdenken, und im Rückblick bin ich froh darüber. Zu Spotify hatte ich ein eher distanziertes Verhältnis: Ich nutze die App selbst nicht gern, sie wirkt auf mich schwer, überladen und unpersönlich, während Musik für mich etwas ist, das ich liebe und jeden Tag bei mir trage. Die Aufgabe gab mir völlige Freiheit, und sie öffnete die Tür zu etwas, das ich vorher nie als Gestaltungswerkzeug in Betracht gezogen hatte: Chromästhesie, meine Fähigkeit, Musik als Farbe zu sehen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="empathize">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Drei&nbsp;Dinge, die&nbsp;bei&nbsp;Spotify nicht&nbsp;funktionieren.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Ein&nbsp;Bauchgefühl zeigt, wo&nbsp;etwas nicht stimmen könnte. Ein&nbsp;Beweis dafür, was&nbsp;wirklich behoben werden muss,&nbsp;ist&nbsp;es&nbsp;nicht.</p>
+
+      <p>Bevor ich etwas Neues gestalten konnte, musste ich genau wissen, was tatsächlich nicht funktionierte. Also habe ich die App anhand von Nielsens Heuristiken geprüft und aus der vollständigen Analyse die drei gravierendsten Probleme ausgewählt: Der Mini-Player lässt sich nicht schließen, selbst wenn man einen aufgeräumten, ablenkungsfreien Bildschirm möchte; Playlists, gespeicherte Episoden und Alben landen ohne erkennbare Trennung in einem einzigen Feed; und grüne Häkchen sowie rohe Play-Zahlen zwingen einen zum Raten, statt auf einen Blick erkennbar zu sein.</p>
+
+      <div class="cs-heuristics-row">
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img src="/assets/spotify/heuristic-user-control.png" alt="Spotifys Startbildschirm mit dem Mini-Player, der sich nicht schließen lässt.">
+          </div>
+          <p class="cs-heuristic-label">Benutzerkontrolle und -freiheit</p>
+        </div>
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img src="/assets/spotify/heuristic-aesthetic.png" alt="Spotifys Bibliothek, die Playlists, Episoden und Alben ohne Trennung vermischt.">
+          </div>
+          <p class="cs-heuristic-label">Ästhetisches und minimalistisches Design</p>
+        </div>
+        <div class="cs-heuristic-col">
+          <div class="cs-heuristic-thumb">
+            <img src="/assets/spotify/heuristic-recognition.png" alt="Eine Spotify-Künstlerseite mit grünen Häkchen und rohen Play-Zahlen neben jedem Titel.">
+          </div>
+          <p class="cs-heuristic-label">Wiedererkennung statt Erinnerung</p>
+        </div>
+      </div>
+
+      <p>Ich wollte wissen, ob das ein Spotify-spezifisches Problem war oder eines der ganzen Branche, also habe ich denselben Vergleich bei Apple Music, Tidal und YouTube Music durchgeführt. Apple Music löst den Mini-Player am elegantesten: Beim Scrollen zieht er sich sauber zusammen, statt einfach stehen zu bleiben, und die schwebende, pillenförmige Navigationsleiste wirkt leichter als Spotifys durchgehender Balken. Tidal und YouTube Music teilen sich fast dieselbe Palette, Schwarz, Weiß und zwei Grautöne, aber nur eine der beiden Apps setzt das bewusst ein. Tidal baut eine klare typografische Hierarchie auf und hat sogar eine eigene Ladeanimation, ein morphendes Logo beim Titelwechsel, während YouTube Musics Graustufen wie ein x-beliebiger Dark-Mode-Skin wirken, den niemand bewusst gestaltet hat, und dessen Navigationsleiste echte Navigation mit einem kommerziellen "Upgrade"-Button vermischt. Keine der vier Apps, Spotify eingeschlossen, lässt Farbe irgendeine emotionale Information tragen.</p>
+
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/competitive-apple-music.png" alt="Wettbewerbsanalyse von Apple Music.">
+      </figure>
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/competitive-tidal.png" alt="Wettbewerbsanalyse von Tidal.">
+      </figure>
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/competitive-youtube-music.png" alt="Wettbewerbsanalyse von YouTube Music.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="define">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Was,&nbsp;wenn&nbsp;Farbe nicht nur&nbsp;Dekoration&nbsp;wäre?</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Die&nbsp;heuristische Analyse zeigte, was&nbsp;kaputt war.&nbsp;Wie&nbsp;es&nbsp;repariert werden sollte, sagte sie&nbsp;nicht.</p>
+
+      <p>Die Antwort war etwas, das mir völlig natürlich vorkam: Chromästhesie, eine Form der Synästhesie, bei der das Hören von Musik automatisch eine Farbwahrnehmung auslöst. Für mich waren Musik und Farbe nie zwei getrennte Dinge. Das klang nach einem interessanten gestalterischen Ansatz, aber ein echtes Hindernis stand im Weg: Wie macht man aus etwas so zutiefst Subjektivem ein System, das für Menschen funktioniert, die die Welt völlig anders wahrnehmen?</p>
+
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/moodboard.png" alt="Moodboard für das Spotify-Redesign.">
+      </figure>
+
+      <p>Die Lösung bestand nicht darin, meine eigene Wahrnehmung eins zu eins in die Oberfläche zu übertragen. Ich habe nur das zugrunde liegende Prinzip übernommen: Jedes große Genre bekam eine feste Farbe, Rock, Electronic, Pop, Hip-Hop, Jazz/Soul und Klassik, jedes mit seinem eigenen visuellen Ton. Die Oberfläche zeigt, wie sich eine bestimmte Art von Musik anfühlt, auf eine Weise, die für alle nachvollziehbar ist. Aus dieser Grundlage entstand später auch das Filtern nach Stimmung. Am Ende habe ich das gesamte System um vier zentrale Eigenschaften herum aufgebaut. Egal was gerade läuft, die App musste sich klar, ruhig, ausdrucksstark und vor allem wie der eigene, sichere Ort anfühlen.</p>
+
+      <figure class="cs-visual-full cs-stack-gap cs-artifact cs-artifact-captioned" data-artifact-label="Genre-Farben und die vier Attribute">
+        <img src="/assets/spotify/colors.png" alt="Fünf Genre-Farben des Farbsystems.">
+        <img src="/assets/spotify/brand-attributes.png" alt="Vier Verläufe für die App-Attribute klar, ruhig, ausdrucksstark, persönlich.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="ideate">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Ein&nbsp;persönliches Konzept, das&nbsp;für&nbsp;alle&nbsp;funktionieren&nbsp;muss.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Mein&nbsp;erster Instinkt war,&nbsp;den&nbsp;Mini-Player komplett abschaltbar zu&nbsp;machen. Der&nbsp;Vergleich mit&nbsp;Apple Music und&nbsp;Tidal zeigte, dass&nbsp;dieser Instinkt falsch&nbsp;war.</p>
+
+      <p>Es stellte sich heraus, dass man sich beim Hören tatsächlich auf den Mini-Player verlässt und ihn nicht komplett verlieren möchte. Ich habe die Möglichkeit, ihn auszublenden, beibehalten, aber die eigentliche Lösung war eine andere: ihn zu verkleinern und in die untere Tab-Leiste einwandern zu lassen.</p>
+
+      <p>Diese Gewohnheit, meine eigenen Annahmen zu hinterfragen, zog sich weiter durch den Aufbau des Startbildschirms. Um auf Kurs zu bleiben, nutzte ich die vier Säulen, klar, ruhig, ausdrucksstark, persönlich, als Filter für jede weitere UX-Entscheidung. Das Ziel war eine Anordnung und ein Filtersystem, das sich persönlicher anfühlt als ein reiner Musikkatalog. Das Ergebnis ist ein Raum, in dem sich die eigene Stimmung direkt in den Farben der Oberfläche spiegelt und einen beim Hören und Stöbern sanft begleitet.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="prototype">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Ein&nbsp;Startbildschirm, der&nbsp;fragt, wie&nbsp;man&nbsp;sich&nbsp;fühlt, nicht was&nbsp;man&nbsp;besitzt.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Statt nach&nbsp;Inhaltstyp zu&nbsp;trennen, habe&nbsp;ich&nbsp;danach gefiltert, in&nbsp;welcher Beziehung man&nbsp;zum&nbsp;Inhalt steht: Previous, All,&nbsp;Favourite,&nbsp;Discover.</p>
+
+      <p>Der Discover-Bereich nutzt das Farbsystem direkt: Die "Choose your mood"-Kacheln bieten konkrete Stimmungen an, Feel Good Mix, Main Character, Night Drive, jede in der Farbe, die zu ihrem Genre passt. Man wählt eine Playlist danach, wie man sich fühlen möchte, nicht nach einem Künstlernamen.</p>
+
+      <figure class="cs-dashboard-screens cs-triple cs-artifact cs-artifact-captioned" aria-label="Startbildschirm vorher und nachher" data-artifact-label="Vorher, nachher, und beim Scrollen">
+        <img src="/assets/spotify/home-before.png" alt="Ursprünglicher Spotify-Startbildschirm.">
+        <img src="/assets/spotify/home-after.png" alt="Neu gestalteter Startbildschirm im Ruhezustand.">
+        <img src="/assets/spotify/home-after-scroll.png" alt="Neu gestalteter Startbildschirm beim Scrollen, mit zusammengeführtem Mini-Player.">
+      </figure>
+
+      <p><span class="cs-mini-head">Eine&nbsp;Bibliothek, die&nbsp;aufgehört hat,&nbsp;eine&nbsp;endlose Liste zu&nbsp;sein.</span> Die Bibliothek vermischte Playlists, gespeicherte Episoden und Alben in einem Feed, ohne dass irgendetwas sie unterschied. Ich habe den Inhalt in drei klare Bereiche aufgeteilt: Your Playlists, Your Emotions, Your Artists. Your Emotions ist ein direktes Ergebnis des Farbsystems, Stimmungen wie Rebel, Flow, Feel-good, Motivation, Relax, Focus sind nach derselben Logik farbcodiert wie die Genres auf dem Startbildschirm. Das Ergebnis ist eine Bibliothek, die sich in wenigen Sekunden überblicken lässt, statt durch eine unstrukturierte Liste scrollen zu müssen.</p>
+
+      <figure class="cs-dashboard-screens cs-artifact cs-artifact-captioned" aria-label="Bibliothek vorher und nachher" data-artifact-label="Bibliothek, vorher und nachher">
+        <img src="/assets/spotify/library-before.png" alt="Ursprüngliche Spotify-Bibliothek ohne Struktur.">
+        <img src="/assets/spotify/library-after.png" alt="Neu gestaltete Bibliothek mit drei klaren Bereichen.">
+      </figure>
+
+      <figure class="cs-dashboard-screens cs-artifact cs-artifact-captioned" aria-label="Künstlerseite vorher und nachher" data-artifact-label="Dieselbe Künstlerseite, neu gestaltet">
+        <img src="/assets/spotify/artist-page-before.png" alt="Ursprüngliche Künstlerseite mit Häkchen und Play-Zahlen.">
+        <img src="/assets/spotify/artist-page-after.png" alt="Neu gestaltete Künstlerseite mit Herz-Icons.">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="test">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Ein&nbsp;Button, ein&nbsp;Pfeil, ein&nbsp;klareres&nbsp;Signal.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Ich&nbsp;habe&nbsp;das&nbsp;Redesign in&nbsp;einer Design-Critique vor&nbsp;der&nbsp;Klasse und&nbsp;einer Mentorin präsentiert. Das&nbsp;Feedback bestätigte die&nbsp;Richtung, für&nbsp;die&nbsp;ich&nbsp;mich&nbsp;entschieden&nbsp;hatte.</p>
+
+      <p>Die eine konkrete Änderung betraf ein einzelnes Detail auf dem ersten Bildschirm: den Play-Button nach oben zu verschieben und einen Pfeil zum Öffnen der ganzen Playlist hinzuzufügen, damit sofort klar ist, dass das Abspielen die ganze Playlist startet und nicht nur einen einzelnen Titel.</p>
+
+      <figure class="cs-visual-full cs-artifact">
+        <img src="/assets/spotify/test-play-fix.png" alt="Favourite-Screen mit korrigiertem Play-Button und Pfeil.">
+      </figure>
+
+      <p>Der Rest des Feedbacks bestätigte, dass die Lösungen funktionierten. Ein Kommentar hob hervor, dass das Redesign das überladene Gefühl der App genommen hat. Ein anderer betonte, dass die Verbindung von Oberfläche und Stimmung der Musik die Erfahrung stimmiger und relevanter wirken lässt.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section" id="ai">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Wo&nbsp;KI&nbsp;geholfen hat,&nbsp;und&nbsp;wo&nbsp;ich&nbsp;sie&nbsp;nicht entscheiden&nbsp;ließ.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">KI&nbsp;kennt nur&nbsp;das,&nbsp;was&nbsp;ich&nbsp;ihr&nbsp;gebe,&nbsp;ihre&nbsp;Ergebnisse tragen also&nbsp;zwangsläufig meine eigenen Vorannahmen und&nbsp;blinden Flecken in&nbsp;sich.</p>
+      <p>Für das Moodboard habe ich KI-Tools genutzt, allerdings erst, nachdem ich eine Version von Hand gebaut hatte. Ich habe mehrere Durchläufe gemacht und mein eigenes, handgebautes Moodboard als Referenz zurück eingespeist, um die Ergebnisse zu schärfen. Aus diesen Durchläufen habe ich selbst ausgewählt, ich habe die Ausgabe nicht einfach übernommen. Jedes Ergebnis habe ich gegen mein eigenes Urteil geprüft, bevor es in die finale Version kam.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cs-section cs-section-surface" id="reflection">
+  <div class="cs-chapter-grid">
+    <div class="cs-chapter-heading"><h2>Ich&nbsp;habe&nbsp;gewusst, wann&nbsp;Schluss ist.&nbsp;Beim&nbsp;nächsten Mal&nbsp;würde ich&nbsp;der&nbsp;App&nbsp;mehr&nbsp;Raum&nbsp;zum&nbsp;Atmen&nbsp;lassen.</h2></div>
+    <div class="cs-chapter-content">
+      <p class="cs-subtitle">Zwei&nbsp;Dinge hat&nbsp;mich&nbsp;dieses Projekt vor&nbsp;allem gelehrt: wie&nbsp;lange man&nbsp;einem schnellen Urteil trauen sollte, und&nbsp;wann&nbsp;man&nbsp;aufhört, an&nbsp;einem Design weiterzuarbeiten, das&nbsp;schon&nbsp;funktioniert.</p>
+
+      <p>Das war ein Solo-Projekt, jede Entscheidung von der heuristischen Analyse bis zu den finalen Screens musste ich selbst treffen und selbst vertreten. Die erste Lektion betraf den Mini-Player: Mein erster Instinkt war schnell gefällt, und der Vergleich mit Apple Music und Tidal zeigte, dass sich selbst ein schnelles Urteil eine längere Prüfung verdient. Ohne diese Wettbewerbsanalyse hätte die App ein Feature verloren, auf das man sich tatsächlich verlässt.</p>
+
+      <p>Die zweite Lektion betraf den Scope. Von Anfang an musste ich klar entscheiden, was zu diesem Redesign gehört und was nicht. Ich wusste, die nächsten logischen Schritte wären ein sanftes Pulsieren und Leuchten des Mini-Players im Takt der Musik sowie eine Accessibility-Ebene für sehbehinderte Menschen, damit die App Farbe nicht als einzigen Informationsträger nutzt. Ich habe mich stattdessen entschieden, im aktuellen Scope zu bleiben, statt das Risiko einzugehen, das Projekt in geringerer Qualität abzuschließen.</p>
+
+      <p>Usability-Tests waren nicht Teil der Aufgabenstellung. In einer weiterentwickelten Version sollte dieses Projekt trotzdem drei Schritte weitergehen: echte Tests, Mikroanimationen, die die App lebendiger wirken lassen würden, und eine Accessibility-Ebene, die unabhängig von Farbe funktioniert.</p>
+
+      <p>Den interaktiven Prototyp kannst du dir auf <a href="https://www.figma.com/proto/Qc3a2uuHGDEXlC7Kh7SznB/Tereza-%7C-Spotify?node-id=13449-604&viewport=-1439%2C-748%2C0.52&t=JGd6yK2pu2lDh8HI-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=13449%3A604&page-id=116%3A21" target="_blank" rel="noopener">Figma</a> ansehen.</p>
+    </div>
+  </div>
+</section>
