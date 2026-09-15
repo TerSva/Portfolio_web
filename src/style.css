@@ -304,6 +304,10 @@ body[data-zone="z3"] .cs-dot.active{
   font-size:clamp(2.6rem,5vw,4.7rem);
   color:var(--nav-ch);
 }
+/* Forces a specific phrase to stay on one line at normal widths (used to
+   pin an exact editorial line break in a heading). Falls back to normal
+   wrapping on narrow phones so it can't run off-screen there. */
+.cs-hard-line{white-space:nowrap;}
 .cs-meta-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
   gap:1.5rem;
@@ -393,6 +397,16 @@ body[data-zone="z3"] .cs-dot.active{
   font-size:clamp(1.5rem,2.6vw,2.1rem);
   line-height:1.3;letter-spacing:-0.005em;
   margin:0;
+}
+/* These two headings pin a specific mid-sentence line break (via a
+   .cs-hard-line span) that doesn't fit the narrow left-rail column at the
+   base heading size, so they're scaled down just enough to clear it with
+   margin across the whole desktop width range — verified 800-1920px. */
+#ideate .cs-chapter-heading h2{
+  font-size:clamp(1.125rem,1.95vw,1.575rem);
+}
+#reflection .cs-chapter-heading h2{
+  font-size:clamp(1.275rem,2.21vw,1.785rem);
 }
 .cs-chapter-content{min-width:0;}
 .cs-chapter-content > *{max-width:100%;}
@@ -781,6 +795,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-cover .cs-header{padding-bottom:2.5rem;}
   .cs-title-project{font-size:1.35rem;}
   .cs-title-statement{font-size:clamp(2.35rem,11vw,3.45rem);}
+  .cs-hard-line{white-space:normal;}
   .cs-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem 1rem;}
   .cs-chapter-grid{grid-template-columns:1fr;gap:1.25rem;}
   .cs-intro-copy{text-align:left;}

@@ -200,7 +200,15 @@ background) — used for the colors + brand-attributes composite.
 - **Nunjucks autoescape**: `&nbsp;` entity in a YAML front-matter string
   rendered via `{{ }}` shows up as literal visible text. Use the real
   U+00A0 character in front matter; the entity is fine in literal template
-  body text.
+  body text. **Exception**: `caseStudy.statement` is rendered via
+  `{{ caseStudy.statement | safe }}` in `case-study.njk` specifically so it
+  can contain a literal `<br>` (needed to force the hero statement to break
+  between two sentences rather than let them run together — see the
+  widow/orphan note below for why). Because of `| safe`, `&nbsp;` entities
+  work directly in `caseStudy.statement` too, unlike other front-matter
+  fields. Don't extend `| safe` to `projectTitle` or any other field
+  without a documented reason — it disables autoescaping for whatever gets
+  put there.
 - **CSS Grid single `gap` shorthand** sets both row-gap and column-gap —
   if a grid has an implicit extra row (e.g. a full-width `::after` caption),
   a large column-gap value silently leaks into that row's spacing too.
@@ -214,10 +222,34 @@ background) — used for the colors + brand-attributes composite.
 - Czech/German widow-orphan rule applied throughout: **no single short
   word alone at the end of a line**, and more strongly, **no heading's
   final rendered line should ever be a single bare word**, regardless of
-  its length. The working rule used by the final script: bind any word
-  (stripped of trailing punctuation) ≤4 characters forward to the next
-  word with U+00A0/`&nbsp;`, AND always bind the literal last two words of
-  the string, regardless of length.
+  its length.
+  **The static "bind any word ≤4 chars forward + always bind the last two
+  words" heuristic from an earlier session is retired — it caused a real
+  bug.** Applied blindly, it chains: a short word bound forward to its
+  neighbor is *still* ≤4 chars itself, so the next short word in a run
+  binds to *that* pair, and so on. German and English headings built mostly
+  of short function words (der, die, ich, mehr, zum, a, to, has, not…)
+  turned into single 5-8-word unbreakable `&nbsp;` blocks that overflowed
+  their column and visually collided with the next one (worst case: the
+  Spotify reflection heading's whole back half glued into one run). Found
+  and fixed in the Spotify EN+DE pages via a Playwright audit (render at
+  1600px and 390px, group text by rendered line, flag any line whose text
+  extends past its own element's box, and any final line that's a single
+  bare word).
+  **Current approach: measure, don't guess statically.** Reset the heading
+  to plain text, render it, and only add an `&nbsp;` binding where the
+  render actually shows a violation (a short word alone at a line's end →
+  bind it forward; the final line is one bare word → bind it backward to
+  the previous word). Re-render and repeat until stable, checked at both
+  breakpoints. This never chains further than a real violation requires,
+  so it can't produce the overflow bug above. For a hero statement made of
+  two short sentences where even the *first* sentence doesn't fit one line
+  at typical widths (`.cs-title-statement` has `max-width:24ch`), don't
+  force it onto one line by gluing the whole sentence together — that
+  breaks on mobile where the glued run runs off the viewport with no way
+  to wrap. Use a literal `<br>` between the sentences instead (via the
+  `| safe` exception above) so they never merge onto the same line, and let
+  each sentence wrap internally as needed.
 
 ## 7. Current state (as of this hand-off)
 

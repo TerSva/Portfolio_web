@@ -9,7 +9,7 @@ layout: base.njk
   <div class="cs-header">
     <h1 class="cs-title">
       <span class="cs-title-project">{{ caseStudy.projectTitle }}</span>
-      <span class="cs-title-statement">{{ caseStudy.statement }}</span>
+      <span class="cs-title-statement">{{ caseStudy.statement | safe }}</span>
     </h1>
 
     <dl class="cs-meta-grid">
