@@ -217,6 +217,10 @@ img{max-width:100%;display:block;}
   }
   .site-header .site-nav a{font-size:.62rem;}
 }
+@media (max-width:380px){
+  .site-header .nav-group{gap:1rem;}
+  .site-header .site-nav{gap:1.1rem;}
+}
 
 /* ============================================================
    SILENT DOT NAV — recycles #section-counter pattern, light palette
@@ -517,7 +521,7 @@ body[data-zone="z3"] .cs-dot.active{
 @media (max-width:760px){
   .cs-media-row{grid-template-columns:1fr;}
   .cs-media-row .cs-media-visual{order:-1;} /* image first on mobile */
-  .cs-dashboard-screens{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;}
+  .cs-dashboard-screens{grid-template-columns:1fr;gap:1.25rem;}
 }
 
 /* Inline/grid — stat blocks (Empathize), MoSCoW cards (Ideate) */
