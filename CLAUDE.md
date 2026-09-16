@@ -36,7 +36,7 @@ src/
   work/
     index.njk           Work index (project cards)
     enow/index.njk       Enow case study (EN) — shipped, live
-    spotify/index.njk    Spotify case study (EN) — built, NOT yet pushed
+    spotify/index.njk    Spotify case study (EN) — shipped, live
   de/                    German mirror of everything under /, incl. work/
     work/enow/index.njk
     work/spotify/index.njk
@@ -258,11 +258,8 @@ background) — used for the colors + brand-attributes composite.
 - **Spotify** case study: fully built, EN + DE, content signed off
   section-by-section, all known visual bugs fixed and verified
   (widow/orphans fixed via script + Playwright-verified at 1600px/390px ×
-  EN/DE; German Hook heading now wraps to 2 lines not 3). **Still
-  uncommitted and unpushed** — needs her explicit final go-ahead first (see
-  `git status` — new files `src/work/spotify/`, `src/de/work/spotify/`,
-  modified `src/style.css` + `src/_includes/base.njk`, renamed/moved assets
-  from root `Spotify/` into `src/assets/spotify/`).
+  EN/DE; German Hook heading now wraps to 2 lines not 3). **Shipped and
+  pushed to `uxportfolio`** (commit `ce751b8`).
 - Work index → Enow card hover glow: cooler green
   (`rgba(77,191,163,.16)`), resolved.
 - Homepage redirects straight to `/work/` — discussed, she's fine with it
@@ -272,16 +269,84 @@ background) — used for the colors + brand-attributes composite.
 - GitHub Pages URL/repo-naming question was informational only — no
   changes made.
 
-## 8. Deferred / not started
+## 8. Work index grid redesign — decisions from brainstorm (2026-09-16, not built)
+
+Brainstormed with the design-mentor-sebastian skill, triggered by Tereza
+wanting to add more case studies without an ever-growing vertical scroll.
+**Nothing built yet — decisions only.** Build this as its own step, following
+her usual "brainstorm → sign-off → build" ordering (§5.3); don't treat this
+section as a green light to start coding the grid.
+
+**Grid mechanics:**
+- CSS Grid `auto-fill`/`minmax()` sizing, not a fixed 2-up or 3-up column
+  count — cards should re-flow on their own as more case studies are added,
+  instead of the grid needing a rewrite every time.
+- New cards wrap into additional rows. Horizontal scroll was explicitly ruled
+  out as a desktop UX antipattern.
+
+**Card content / taxonomy:**
+- Every card always shows title + one visible category tag — never hide the
+  only differentiator behind hover. With several cards side by side, a bare
+  title alone doesn't give someone scanning without hovering enough to go on.
+- Category is a **multi-tag field, not single-select**: `UX`, `UI`,
+  `Branding`, `Motion & Interaction` — a project can carry more than one
+  (e.g. Enow/Spotify would be `UX` + `UI`).
+- **No filter UI (pills/tabs) until there are 4-5+ case studies spanning at
+  least two genuinely different categories.** A filter with only one usable
+  value is worse than no filter at all — explicitly decided against building
+  one now just because a reference site has one. Do add the tag data now so
+  filtering can switch on later without retroactively re-tagging everything.
+- Reference inspiration (external sites, structural pattern only, not to
+  copy visually): Kristian Ulrych's portfolio (2-up grid, title + tag + year
+  always visible under each image, a small "Soon" label for an unfinished
+  project) and a Veevoy-style laptop-mockup card. Tereza was explicit: don't
+  chase their visual/mockup production quality right now ("pořád jsou to
+  školní projekty") — only the title/tag/year placement pattern is being
+  borrowed.
+- Accessibility note for whenever hover-revealed content gets added: it must
+  also reveal on `:focus-visible`, not just `:hover`, or keyboard/
+  screen-reader users never see it. Flagged during brainstorm, not yet
+  implemented anywhere.
+
+**PULS as the 4th card:**
+- PULS (Praut's B2B AI learning platform, `puls.praut.cz`) — a real
+  shipped product, not a bootcamp project — goes into the grid now as a 4th
+  entry, tagged `UI` + `Motion & Interaction`.
+- Unlike Enow/Spotify/Venek, its card links **externally to
+  `puls.praut.cz`**, not to an internal `/work/` case-study page — reuse the
+  existing "↗" external-link affordance already used for Figma prototype
+  links inside case studies, so the card itself signals "this leaves the
+  portfolio" before it's clicked.
+- Card is labeled **"Coming soon"** (or equivalent) since there's no written
+  case study behind it yet — same pattern as Kristian Ulrych's "Soon" tag.
+- Card visual needs to be a short **video/GIF loop**, not a static
+  screenshot — PULS's signature motif is a glowing thread from the flame
+  logo that grows, golds, or recedes depending on section (the visual
+  metaphor: "PULS is just the spark, the participant is the driving force").
+  A still image would undersell the entire point of this entry. Tereza can
+  capture the loop from either the live landing page or her component lab.
+  This means the card template needs to support video/GIF media, which the
+  other three cards currently don't.
+- **A full written `/work/puls/` case study is intentionally deferred to
+  last** — built only after the rest of the portfolio (Venek included)
+  ships. When it happens, it's explicitly **not** meant to reuse the
+  existing light/dark case-study palette — it gets its own darker, more
+  technical-feeling visual treatment (typeface TBD), because PULS is a live
+  product/"playground", not a bootcamp case study, and shouldn't be forced
+  into the same template just for the sake of consistency.
+
+## 9. Deferred / not started
 
 - **Venek** case study — not started.
 - **Czech version of Enow** — deferred.
+- **Work index grid rebuild** — brainstorm/decisions complete (§8),
+  implementation not started.
 - **Hover/motion animation polish** on the Work-index Enow card — parked
   "until another case study exists"; two now exist (Enow, Spotify) so this
   could resurface, but she hasn't reopened it.
 - A stronger homepage hero moment — deferred until more case studies ship.
 
-## 9. Useful commands
+## 10. Useful commands
 
 ```
 npm run serve      # eleventy --serve, local dev server
