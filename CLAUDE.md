@@ -262,6 +262,10 @@ background) — used for the colors + brand-attributes composite.
   pushed to `uxportfolio`** (commit `ce751b8`).
 - Work index → Enow card hover glow: cooler green
   (`rgba(77,191,163,.16)`), resolved.
+- **Work index grid rebuilt and shipped** (EN + DE, commit `b556d09`,
+  deployed successfully via the GitHub Pages Actions workflow) — see §8 for
+  the full as-built account, including where it deviated from the original
+  brainstorm.
 - Homepage redirects straight to `/work/` — discussed, she's fine with it
   for now; a stronger hero moment was explicitly deferred until more case
   studies exist ("ten silnejsi hero moment asi dame, ale az po dalsich case
@@ -269,15 +273,18 @@ background) — used for the colors + brand-attributes composite.
 - GitHub Pages URL/repo-naming question was informational only — no
   changes made.
 
-## 8. Work index grid redesign — decisions from brainstorm (2026-09-16, not built)
+## 8. Work index grid redesign — brainstormed 2026-09-16, built + shipped
 
 Brainstormed with the design-mentor-sebastian skill, triggered by Tereza
 wanting to add more case studies without an ever-growing vertical scroll.
-**Nothing built yet — decisions only.** Build this as its own step, following
-her usual "brainstorm → sign-off → build" ordering (§5.3); don't treat this
-section as a green light to start coding the grid.
+**Built and shipped** (`src/work/index.njk` + `src/de/work/index.njk`,
+commit `b556d09`, deployed via GitHub Pages Actions). The sections below are
+the taxonomy/PULS decisions as originally brainstormed; where the actual
+build ended up differently, that's called out explicitly rather than left
+implied — read the "As built" note at the end of this section before
+assuming any given bullet is exactly what shipped.
 
-**Grid mechanics:**
+**Grid mechanics (superseded — see "As built"):**
 - CSS Grid `auto-fill`/`minmax()` sizing, not a fixed 2-up or 3-up column
   count — cards should re-flow on their own as more case studies are added,
   instead of the grid needing a rewrite every time.
@@ -335,12 +342,56 @@ section as a green light to start coding the grid.
   product/"playground", not a bootcamp case study, and shouldn't be forced
   into the same template just for the sake of consistency.
 
+**As built — where the shipped grid differs from the brainstorm above:**
+- **Grid mechanics**: not `auto-fill`/`minmax()`. After seeing reference
+  screenshots (Kristian Ulrych's portfolio) Tereza asked directly for a
+  **fixed asymmetric 2-column grid** (`grid-template-columns:1.35fr 1fr`)
+  instead — wide/narrow card pairing, matching the reference look more
+  closely than a uniform auto-fill grid would. A CSS-only rule,
+  `.work-project:last-child:nth-child(odd){grid-column:1/-1;}`, makes an
+  odd-count trailing card (PULS, today) span the full row automatically —
+  no card-count-specific markup needed. This stops applying cleanly once
+  the count goes even (e.g. once Venek ships as a 4th case study).
+- **Card content**: shipped even leaner than planned — title + a small
+  eyebrow tagline (reusing each case study's own `projectTitle`, the part
+  after the em dash) + the tag/year line. No descriptive sentence at all.
+  No filter UI yet, per the original decision (still waiting on 4-5+ cards
+  spanning 2+ categories).
+- **Card images**: Enow and Spotify's case-study hero images (wide/cinematic,
+  ~21:9) cropped badly into the new `4/5` portrait card box — no
+  `object-position` fixed it, the source images were the wrong shape. Both
+  were replaced with dedicated, higher-resolution portrait screenshots
+  Tereza exported specifically for this: Enow uses
+  `src/assets/enow/sos-lockscreen.jpg` (the SOS-flow widget on a phone lock
+  screen, cropped `object-position:center bottom` via a new
+  `.work-project-crop-bottom` utility, so the widget itself is never cut
+  off), Spotify uses `src/assets/spotify/library-emotions.jpg` (the Library
+  screen, cropped to the colorful "Your Emotions" tag row via a new
+  `.work-project-crop-emotions{object-position:center 38%;}` utility — that
+  row is this screen's most visually distinctive element). Both exports were
+  large (300-400+KB PNG) and were re-saved as compressed JPEGs (39KB/78KB)
+  before committing.
+- **PULS card**: shipped with a **static placeholder image**
+  (`src/assets/puls/landing-placeholder.jpg`, resized/compressed from
+  Tereza's full-resolution `puls_landing.png` upload) rather than the
+  video/GIF loop described above — the video swap is still a follow-up, not
+  done yet. Everything else (external link, "Coming soon" badge, tags,
+  full-width layout via the odd-card rule) shipped as planned.
+- Verified via Playwright at 1440/1024/760/375px × EN/DE that the existing
+  ambient card glow (`rgba(77,191,163,.16)`), the pointer-tracking cursor
+  affordance, and the header page-transition wash all still work unchanged
+  after the CSS restructuring — none of them needed code changes.
+
 ## 9. Deferred / not started
 
 - **Venek** case study — not started.
 - **Czech version of Enow** — deferred.
-- **Work index grid rebuild** — brainstorm/decisions complete (§8),
-  implementation not started.
+- **PULS card video/GIF loop** — card shipped with a static placeholder
+  image (§8 "As built"); swapping in the glowing-thread animation loop is
+  still open.
+- **Work index filter UI** (pills/tabs by tag) — intentionally deferred
+  until there are 4-5+ case studies spanning 2+ genuinely different
+  categories (§8). Tag data itself is already in each card's meta line.
 - **Hover/motion animation polish** on the Work-index Enow card — parked
   "until another case study exists"; two now exist (Enow, Spotify) so this
   could resurface, but she hasn't reopened it.
