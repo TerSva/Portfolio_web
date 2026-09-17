@@ -7,6 +7,7 @@ layout: base.njk
 #}
 <section class="cs-cover cs-spotlight">
   <div class="cs-header">
+    <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ navWork or 'Work' }}</a>
     <h1 class="cs-title">
       <span class="cs-title-project">{{ caseStudy.projectTitle }}</span>
       <span class="cs-title-statement">{{ caseStudy.statement | safe }}</span>
