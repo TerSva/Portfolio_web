@@ -88,6 +88,22 @@
 })();
 </script>
 
+<script>
+/* A card's autoplaying background loop is decorative motion, not content —
+   never force it on someone who has asked for less. */
+(function(){
+  function init(){
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.work-project-visual video').forEach(function(video){
+      video.removeAttribute('autoplay');
+      video.pause();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
 <main>
 {{ content | safe }}
 </main>
