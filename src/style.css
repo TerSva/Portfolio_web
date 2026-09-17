@@ -824,7 +824,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-contact-grid{grid-template-columns:1fr;grid-template-areas:"heading" "story" "connect";gap:2.5rem;}
   .cs-contact-heading h1{max-width:13ch;}
   .about-hero{padding-top:calc(9.5rem + 3rem);}
-  .about-hero h1{max-width:10ch;font-size:clamp(3.2rem,13vw,4.8rem);}
+  .about-hero h1{font-size:clamp(3.2rem,13vw,4.8rem);}
   .about-positioning-grid,.about-steps li,.about-collaboration-grid{grid-template-columns:1fr;gap:2rem;}
   .about-portrait{position:static;max-width:25rem;}
   .about-positioning-copy{padding-top:0;}
