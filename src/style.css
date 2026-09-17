@@ -750,17 +750,17 @@ html[lang="de"] .cs-intro-copy{
 .work-list{padding:clamp(2.5rem,5vw,4.5rem) 0 clamp(5rem,9vw,9rem);background:#001512;color:var(--nav-ch)}.work-list>.work-shell{position:relative;z-index:1}
 .work-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(2rem,3.5vw,3rem);}
 .work-project{display:flex;flex-direction:column;gap:clamp(1.25rem,2vw,1.5rem);color:var(--nav-ch);text-decoration:none}.work-project:hover{text-decoration:none}
-/* An odd total card count (true today: Enow, Spotify, PULS) leaves the last
-   card alone in its row — let it claim the full row instead of sitting
-   narrow and off-center. Stops applying cleanly once the count is even. */
-.work-project:last-child:nth-child(odd){grid-column:1 / -1;}
+/* Explicit opt-in for a card that always spans the full row (an external
+   product link, or a case study whose source image doesn't suit the
+   narrow portrait slot) — independent of how many other cards exist. */
+.work-project-featured{grid-column:1 / -1;}
 .work-project-visual{position:relative;border-radius:6px;box-shadow:0 0 28px 6px rgba(77,191,163,.16);cursor:pointer}
 .work-project img{width:100%;aspect-ratio:4 / 5;object-fit:cover;border-radius:6px;transition:transform .55s cubic-bezier(.16,1,.3,1),filter .55s ease}
 .work-project-crop-left{object-position:left center;}
 .work-project-crop-top{object-position:top center;}
 .work-project-crop-bottom{object-position:center bottom;}
 .work-project-crop-emotions{object-position:center 38%;}
-.work-project:last-child:nth-child(odd) img{aspect-ratio:21 / 9;}
+.work-project-featured img{aspect-ratio:21 / 9;}
 .work-project-visit{position:absolute;top:var(--project-cursor-y,50%);left:var(--project-cursor-x,50%);display:grid;place-items:center;width:3rem;height:3rem;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.72);border:1px solid rgba(255,215,0,.64);border-radius:50%;background:rgba(255,215,0,.10);box-shadow:0 0 0 5px rgba(0,21,18,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--font-s);font-size:1.35rem;line-height:1;color:var(--nav-gold);transition:opacity .18s ease,transform .22s cubic-bezier(.16,1,.3,1),background-color .22s ease,color .22s ease,box-shadow .22s ease}.work-project-visual[data-project-cursor="active"] .work-project-visit{opacity:1;transform:translate(-50%,-50%) scale(1);background:rgba(255,215,0,.18);box-shadow:0 0 20px rgba(255,215,0,.32),0 0 0 5px rgba(0,21,18,.16);color:var(--nav-gold)}.work-project:focus-visible .work-project-visit{top:50%;left:50%;opacity:1;transform:translate(-50%,-50%) scale(1);background:rgba(255,215,0,.18);box-shadow:0 0 20px rgba(255,215,0,.32),0 0 0 5px rgba(0,21,18,.16);color:var(--nav-gold)}.work-project:hover img{transform:scale(1.018);filter:brightness(1.04)}
 .work-project-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:.6rem;}
 .work-project h2{margin:0;font-family:var(--font-d);font-size:clamp(1.8rem,2.6vw,2.4rem);font-weight:400;line-height:.95;letter-spacing:-.03em}
