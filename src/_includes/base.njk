@@ -4,6 +4,25 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>{{ title }} — Tereza Britta Švanda</title>
+{% if description %}<meta name="description" content="{{ description }}"/>{% endif %}
+<link rel="canonical" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
+{% if deUrl %}<link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
+<link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ deUrl | url }}"/>
+<link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ page.url | url }}"/>{% endif %}
+{% if enUrl %}<link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
+<link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ enUrl | url }}"/>
+<link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ enUrl | url }}"/>{% endif %}
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Tereza Britta Švanda"/>
+<meta property="og:title" content="{{ title }} — Tereza Britta Švanda"/>
+{% if description %}<meta property="og:description" content="{{ description }}"/>{% endif %}
+<meta property="og:url" content="{{ siteBaseUrl }}{{ page.url | url }}"/>
+<meta property="og:image" content="{{ siteBaseUrl }}{{ (ogImage or '/assets/enow/hero-calm-return.png') | url }}"/>
+<meta property="og:locale" content="{{ 'de_DE' if lang == 'de' else 'en_US' }}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{{ title }} — Tereza Britta Švanda"/>
+{% if description %}<meta name="twitter:description" content="{{ description }}"/>{% endif %}
+<meta name="twitter:image" content="{{ siteBaseUrl }}{{ (ogImage or '/assets/enow/hero-calm-return.png') | url }}"/>
 <style>html,body{background:#001F1C;color:#F5F5DC}.site-header{position:fixed;top:0;right:0;left:0;z-index:200;display:flex;align-items:center;justify-content:space-between;height:4.75rem;padding:0 4vw;background:#001F1C;border-bottom:1px solid #004D40}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>

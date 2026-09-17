@@ -1,5 +1,6 @@
 module.exports = function (eleventyConfig) {
   const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "/";
+  eleventyConfig.addGlobalData("siteBaseUrl", "https://tersva.github.io");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/style.css": "style.css" });
   eleventyConfig.addPassthroughCopy({ "index.html": "art/index.html" });

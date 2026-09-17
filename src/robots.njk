@@ -1,0 +1,10 @@
+---
+permalink: /robots.txt
+layout: false
+eleventyExcludeFromCollections: true
+---
+User-agent: *
+Allow: {{ '/' | url }}
+Disallow: {{ '/cv/print/' | url }}
+
+Sitemap: {{ siteBaseUrl }}{{ '/sitemap.xml' | url }}
