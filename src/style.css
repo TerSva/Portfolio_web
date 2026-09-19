@@ -85,6 +85,195 @@
   background:var(--cs-surface);
 }
 
+/* ============================================================
+   PULS — dedicated dark/technical theme, opted into via the
+   bodyClass front-matter key ("puls-theme", see base.njk).
+   Reuses every existing cs-* component (chapter grid, dots,
+   spotlight, cover) with new token values only — never the
+   light --cs-* defaults, never the z3 dark-navy zone tokens,
+   never PULS's own live purple/navy brand (this is a case study
+   ABOUT that work, not a mirror of it). Uniformly dark: no
+   light/dark zone switching within the page.
+============================================================ */
+body.puls-theme{
+  --cs-paper:     #04241E;
+  --cs-surface:   #04241E;
+  --cs-border:    #1B4C3F;
+  --cs-ink:       #E7ECE9;
+  --cs-muted:     #8FB0A2;
+  --cs-copper:    #D9A441;
+  --cs-gold-ui:   #D9A441;
+  --cs-gold-fill: #D9A441;
+  /* Space Grotesk read too mechanical/blocky for headings; the site's
+     real display serif (DM Serif Display) then read too editorial/
+     newspaper for a technical case study. IBM Plex Sans shares its
+     family with the Plex Mono already used for labels/eyebrows
+     everywhere on this page, so headings and labels now read as one
+     cohesive "Plex" technical voice instead of two unrelated fonts. */
+  --font-d: 'IBM Plex Sans', sans-serif;
+}
+/* One base color everywhere on this page, no alternating light/dark
+   surface panels and no separate cover-section tone — cs-cover
+   normally uses the sitewide --nav-bg, but here it's pinned to the
+   same --cs-paper as the rest of the page. */
+body.puls-theme .cs-cover{
+  background:var(--cs-paper);
+}
+body.puls-theme .cs-title,
+body.puls-theme .cs-chapter-heading h2{
+  font-weight:600;
+}
+/* The shared .cs-title-statement max-width (24ch) is a knife-edge fit
+   for this page's first line, "A landing page where you are" (29
+   characters): it wrapped cleanly in one browser's font metrics but
+   dropped the last word ("are") alone onto its own line in another
+   (confirmed cross-browser, not a single-environment fluke). Widened
+   with real margin instead of chasing per-browser hinting — scoped to
+   this page only, other case studies' headings are already tuned to
+   the shared 24ch and untouched. */
+body.puls-theme .cs-title-statement{
+  max-width:30ch;
+}
+body.puls-theme .cs-spotlight::before{
+  background:radial-gradient(34rem 22rem ellipse at var(--spotlight-x) var(--spotlight-y),
+    rgba(217,164,65,.12) 0%,rgba(217,164,65,.04) 34%,transparent 70%);
+}
+
+/* Ambient glow under every visual, reused verbatim from the Work
+   index card affordance (.work-project-visual) so the same "cooler
+   green light" identity carries from the index into the case study —
+   always on, not a hover reveal, and visible starting at the Hook. */
+body.puls-theme #hook .cs-hero-visual,
+body.puls-theme .cs-artifact{
+  box-shadow:0 0 42px 8px rgba(77,191,163,.18);
+}
+/* No hover-lift here (the shared .cs-artifact:hover translateY) — these
+   visuals are already permanently backlit, so a lift-on-hover on top
+   of an always-on glow reads as redundant motion, not a new affordance. */
+body.puls-theme .cs-artifact:hover{
+  transform:none;
+}
+body.puls-theme .cs-artifact:hover,
+body.puls-theme .cs-visual-full.cs-artifact:hover,
+body.puls-theme .cs-dashboard-screens.cs-artifact:hover,
+body.puls-theme .cs-hero-visual.cs-artifact:hover{
+  box-shadow:0 0 52px 10px rgba(77,191,163,.26);
+}
+
+/* Hook visual, PULS only: a small contained logo mark, not the
+   editorial full-bleed hero image other case studies use. The
+   whole point of this page's hero is restraint, typography does
+   the work, the logo is a quiet accent, not a dominant graphic. */
+body.puls-theme #hook .cs-hero-visual{
+  width:100%;max-width:21rem;
+  margin:0 auto;
+  aspect-ratio:1/1;
+  background:var(--cs-surface);
+  border:1px solid var(--cs-border);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  padding:2.5rem;
+}
+body.puls-theme #hook .cs-hero-visual img{
+  width:100%;height:100%;object-fit:contain;
+}
+
+/* Text left, logo right, instead of the shared centered vertical
+   stack: the visual anchor is visible from the first screen instead
+   of after three stacked text blocks. Asymmetric ratio (not 50/50)
+   echoes the Work index's own 1.35fr/1fr card grid, so the logo
+   stays secondary to the text rather than gaining equal weight. */
+body.puls-theme #hook{
+  display:grid;
+  grid-template-columns:1.9fr 1fr;
+  gap:clamp(2rem,5vw,4rem);
+  align-items:center;
+  /* Matches .cs-header's own width formula exactly (100% - gutter*2,
+     capped at media-measure) instead of relying on .cs-section's own
+     gutter padding — that left this column's text inset one extra
+     --gutter further right than the title block above it. */
+  width:min(100% - (var(--gutter) * 2), var(--media-measure));
+  margin:0 auto;
+  padding-left:0;
+  padding-right:0;
+}
+body.puls-theme #hook .cs-intro-copy{
+  width:100%;
+  margin:0;
+  text-align:left;
+}
+/* The shared .cs-subtitle/.cs-intro-divider width cap (var(--measure),
+   42rem) was tuned for the old full-width centered intro column. In
+   this two-column layout the text column is wider than that, so both
+   ended noticeably short of the plain paragraph's own right edge —
+   looked like a stray, misplaced line rather than a deliberate rule.
+   Match the column's full width instead of the shared measure. */
+body.puls-theme #hook .cs-intro-copy .cs-subtitle,
+body.puls-theme #hook .cs-intro-divider{
+  width:100%;
+  margin-left:0;
+}
+@media (max-width:760px){
+  body.puls-theme #hook{
+    grid-template-columns:1fr;
+  }
+  body.puls-theme #hook .cs-hero-visual{
+    margin-top:clamp(2rem,5vw,3rem);
+  }
+}
+
+/* Lab-animation videos in Prototype: shown at (close to) their native
+   capture resolution instead of stretched to the full cs-visual-full
+   measure, which upscaled a small source into visible blur. */
+body.puls-theme .cs-visual-native{
+  width:100%;
+  margin-left:auto;margin-right:auto;
+}
+body.puls-theme .cs-visual-native video,
+body.puls-theme .cs-visual-native img{width:100%;height:auto;display:block;}
+body.puls-theme .cs-visual-native-640{max-width:420px;}
+body.puls-theme .cs-visual-native-480{max-width:320px;}
+body.puls-theme .cs-visual-native-800{max-width:480px;}
+
+/* Landscape before/after pair (desktop screenshots), replacing
+   cs-dashboard-screens, which is sized for narrow portrait phone
+   exports and rendered these two far too small. */
+.cs-landscape-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:clamp(1rem,2.5vw,1.75rem);
+  row-gap:.75rem;
+  margin:2.5rem auto;
+  width:100%;
+}
+.cs-landscape-pair img{width:100%;height:auto;border-radius:8px;display:block;}
+.cs-landscape-pair.cs-artifact-captioned::after{grid-column:1 / -1;}
+/* Per-image caption (used instead of the single shared
+   cs-artifact-captioned label when each side of the pair needs its
+   own short explanation — e.g. the screenshots are in Czech and the
+   case study text is in English). */
+.cs-landscape-pair-item{display:flex;flex-direction:column;}
+.cs-landscape-pair-caption{
+  margin-top:.6rem;
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.03em;
+  line-height:1.45;color:var(--cs-muted);text-align:center;
+}
+@media (max-width:700px){
+  .cs-landscape-pair{grid-template-columns:1fr;}
+}
+/* Break out of the narrow chapter-content column — a before/after
+   pair read as too small confined to editorial measure. Full-bleed
+   the same way .cs-hero-visual does, then pad back in from the true
+   viewport edge so it reads as "most of the viewport", not the
+   entire width edge-to-edge. */
+body.puls-theme .cs-landscape-pair{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:0 4vw;
+  box-sizing:border-box;
+}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-height) + 1rem);}
 body{
@@ -469,7 +658,7 @@ html[lang="de"] .cs-intro-copy{
 }
 .cs-intro-divider{
   width:min(100%, var(--measure));
-  height:1px;margin:clamp(2rem,4vw,3.5rem) auto 0;
+  height:1px;margin:clamp(2rem,4vw,3.5rem) auto clamp(1.5rem,3vw,2.5rem);
   background:var(--cs-border);
 }
 

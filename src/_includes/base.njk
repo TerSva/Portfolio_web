@@ -26,10 +26,10 @@
 <style>html,body{background:#001F1C;color:#F5F5DC}.site-header{position:fixed;top:0;right:0;left:0;z-index:200;display:flex;align-items:center;justify-content:space-between;height:4.75rem;padding:0 4vw;background:#001F1C;border-bottom:1px solid #004D40}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="{{ '/style.css' | url }}"/>
 </head>
-<body>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
 
 <header class="site-header">
   <span class="site-brand">Tereza Britta Švanda</span>
@@ -113,7 +113,7 @@
 (function(){
   function init(){
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('.work-project-visual video').forEach(function(video){
+    document.querySelectorAll('.work-project-visual video, .cs-artifact video').forEach(function(video){
       video.removeAttribute('autoplay');
       video.pause();
     });
@@ -277,14 +277,16 @@
   function onKeydown(e){ if (e.key === 'Escape') close(); }
 
   figures.forEach(function(fig){
-    var img = fig.querySelector('img');
-    if (!img) return;
-    fig.setAttribute('tabindex', '0');
-    fig.setAttribute('role', 'button');
-    fig.setAttribute('aria-label', 'Expand image');
-    fig.addEventListener('click', function(){ open(img.src, img.alt); });
-    fig.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img.src, img.alt); }
+    var imgs = fig.querySelectorAll('img');
+    if (!imgs.length) return;
+    imgs.forEach(function(img){
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      if (!img.hasAttribute('aria-label')) img.setAttribute('aria-label', 'Expand image');
+      img.addEventListener('click', function(e){ e.stopPropagation(); open(img.src, img.alt); });
+      img.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img.src, img.alt); }
+      });
     });
   });
   overlay.addEventListener('click', function(e){
