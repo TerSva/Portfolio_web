@@ -222,18 +222,66 @@ body.puls-theme #hook .cs-intro-divider{
   }
 }
 
-/* Lab-animation videos in Prototype: shown at (close to) their native
-   capture resolution instead of stretched to the full cs-visual-full
-   measure, which upscaled a small source into visible blur. */
-body.puls-theme .cs-visual-native{
-  width:100%;
+/* Text-next-to-video pairing for the Prototype lab animations. Contained
+   to var(--media-measure) and centered exactly like .cs-chapter-grid —
+   NOT full-bleed. It was full-bleed originally so the video could sit at
+   a generous size, but once the video got capped down to a modest
+   max-width (see the -420/-320/-480 variants below), the only thing the
+   full-bleed breakout was still doing was putting the text column on a
+   different coordinate system than every plain flowing paragraph in the
+   same section (those live in .cs-chapter-grid, centered to
+   var(--media-measure)) — so the pair's own mini-head text landed at a
+   different left edge than the section's true left margin, and the
+   flowing paragraphs between pairs looked like they were floating
+   center-ish by comparison. Sharing .cs-chapter-grid's own width/centering
+   makes every text block in the section — heading, flowing paragraphs,
+   and pair text alike — share one left edge. */
+.cs-media-pair{
+  width:min(100%, var(--media-measure));
   margin-left:auto;margin-right:auto;
+  display:grid;
+  grid-template-columns:minmax(16rem,1fr) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(2rem,5vw,4rem);
+  row-gap:1.5rem;
+  /* Was a flat 3rem — too close to a plain paragraph's own margin-bottom
+     to read as "a new moment," not just the next line of the same one.
+     Scales with viewport like the section's own vertical padding. */
+  margin-top:clamp(4rem,8vw,6rem);
+  margin-bottom:clamp(4rem,8vw,6rem);
 }
-body.puls-theme .cs-visual-native video,
-body.puls-theme .cs-visual-native img{width:100%;height:auto;display:block;}
-body.puls-theme .cs-visual-native-640{max-width:420px;}
-body.puls-theme .cs-visual-native-480{max-width:320px;}
-body.puls-theme .cs-visual-native-800{max-width:480px;}
+/* No max-width/justify-self: the column itself is already sized for
+   reading (minmax(16rem,1fr) above), and letting the text fill it from
+   the column's own start edge is what gives it the same left position as
+   .cs-chapter-heading and every plain paragraph in .cs-chapter-content. */
+.cs-media-pair-visual{
+  width:fit-content;
+  max-width:100%;
+}
+.cs-media-pair-visual video{
+  width:auto;height:auto;
+  max-width:100%;
+  max-height:min(60vh,32rem);
+  display:block;border-radius:8px;
+}
+/* min(Xrem,100%), not a bare Xrem: a fixed length doesn't shrink with its
+   own grid column, so at narrower desktop widths — where the column is
+   narrower than the cap but the layout is still 2-up — the video
+   overflowed into the text column. */
+body.puls-theme .cs-media-pair-visual-420{max-width:min(26.25rem,100%);}
+body.puls-theme .cs-media-pair-visual-320{max-width:min(20rem,100%);}
+body.puls-theme .cs-media-pair-visual-480{max-width:min(30rem,100%);}
+@media (max-width:760px){
+  .cs-media-pair{grid-template-columns:minmax(0,1fr);}
+  /* Same specificity as the .cs-media-pair-visual-420/-320/-480 rules
+     above (two classes) — a plain .cs-media-pair-visual rule here is a
+     lower-specificity no-op against them regardless of source order,
+     which is what let the desktop caps keep forcing a mobile grid
+     blowout before this was caught. */
+  body.puls-theme .cs-media-pair-visual-420,
+  body.puls-theme .cs-media-pair-visual-320,
+  body.puls-theme .cs-media-pair-visual-480{width:100%;max-width:100%;}
+}
 
 /* Landscape before/after pair (desktop screenshots), replacing
    cs-dashboard-screens, which is sized for narrow portrait phone
@@ -272,6 +320,11 @@ body.puls-theme .cs-landscape-pair{
   margin-right:calc(50% - 50vw);
   padding:0 4vw;
   box-sizing:border-box;
+  /* Match the .cs-media-pair rhythm — the Foundation pair is one of the
+     same "moments" in this section, and the shared 2.5rem default would
+     otherwise read as a smaller gap than the ones now around it. */
+  margin-top:clamp(4rem,8vw,6rem);
+  margin-bottom:clamp(4rem,8vw,6rem);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -586,6 +639,20 @@ body[data-zone="z3"] .cs-dot.active{
   grid-template-columns:minmax(12rem, .75fr) minmax(0, 1.55fr);
   gap:clamp(2rem, 6vw, 5rem);
   align-items:start;
+}
+/* Stacked variant: heading full-width on its own row, content below it,
+   both left-aligned — for a section-opening block where the side-by-side
+   heading|content split reads ambiguous about where to start reading
+   (the heading doesn't obviously come "first" when it's just sitting
+   next to the text rather than above it). Reuses .cs-chapter-grid's own
+   width/centering, just overrides the column split to a single column. */
+.cs-chapter-grid-stacked{
+  grid-template-columns:1fr;
+  gap:1.5rem;
+}
+.cs-chapter-grid-stacked .cs-chapter-heading h2{
+  max-width:none;
+  font-size:clamp(1.75rem,3.4vw,2.75rem);
 }
 .cs-chapter-heading{min-width:0;}
 .cs-chapter-heading h2{

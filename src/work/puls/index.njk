@@ -95,38 +95,55 @@ caseStudy:
 </section>
 
 <section class="cs-section" id="prototype">
-  <div class="cs-chapter-grid">
+  <div class="cs-chapter-grid cs-chapter-grid-stacked">
     <div class="cs-chapter-heading"><h2>Two moments carried most of the weight: the first few seconds on the page, and the level picker a bit further&nbsp;down.</h2></div>
     <div class="cs-chapter-content">
       <p class="cs-subtitle">The&nbsp;animation lets you&nbsp;look for&nbsp;a&nbsp;moment. The&nbsp;level picker then&nbsp;answers what&nbsp;the&nbsp;previous section&nbsp;found.</p>
 
       <p>I deliberately added the animation as the last layer of the process, after the philosophy, the copy, and the layout were already in place, so it would accompany the visitor through the page and support the content instead of overwhelming it. Design-wise, the page leans on two moments above all, and they come in exactly this order as you scroll: the opening moment in the hero section, and the level picker further down, which answers what you just realized.</p>
+    </div>
+  </div>
 
+  <div class="cs-media-pair">
+    <div class="cs-media-pair-text cs-chapter-content">
       <p><span class="cs-mini-head">A&nbsp;quiet spark, a&nbsp;sense of&nbsp;hope.</span> The logo wakes up from a dimmed rest. A thread of gold ignites from its lower edge, a quiet but clear impulse meant to spark a sense of hope, calm, and gentle motion in the person watching. It's a small ignition at the start of the journey, and at the same time a visual metaphor for the quiet awareness a participant gains inside the academy. PULS only lights the spark and then stays as quiet support in the background, because the real work happens in the person.</p>
 
-      <figure class="cs-visual-native cs-visual-native-640 cs-artifact">
+      <p>I designed this animation myself. I also hand-built the depth of the background, the soft purple haze behind the thread, in a graphics program, because the effect I needed couldn't be achieved through code alone. The logo itself stays fixed in the background of the hero section as a quiet constant, so the space never feels empty on a scroll back up (an earlier version, where the logo flew up into the nav, we had to drop).</p>
+
+      <p>Getting the animation's behavior consistent across browsers took far more work than we expected. Chrome and Safari interpreted it differently, and Safari physically couldn't keep up. On mobile, we ended up dropping the thread's staged phases entirely. My main goal at that point wasn't to dumb the animation down, it was to preserve the overall atmosphere even under that technical constraint. We also considered accessibility: anyone with reduced motion enabled sees the page directly in its resting state.</p>
+    </div>
+    <div class="cs-media-pair-visual cs-media-pair-visual-420">
+      <figure class="cs-artifact cs-artifact-captioned" data-artifact-label="Klid, Probuzení, Puls, Přechod do niti — the logo waking up, state by state">
         <video autoplay muted loop playsinline poster="/assets/puls/labs/logo-poster.jpg" aria-label="The PULS logo waking up and igniting a thread of light, looped">
           <source src="/assets/puls/labs/logo-lab.webm" type="video/webm">
           <source src="/assets/puls/labs/logo-lab.mp4" type="video/mp4">
         </video>
       </figure>
+    </div>
+  </div>
 
-      <p>I designed this animation myself. I also hand-built the depth of the background, the soft purple haze behind the thread, in a graphics program, because the effect I needed couldn't be achieved through code alone. The logo itself stays fixed in the background of the hero section as a quiet constant, so the space never feels empty on a scroll back up (an earlier version, where the logo flew up into the nav, we had to drop).</p>
+  <div class="cs-media-pair">
+    <div class="cs-media-pair-text cs-chapter-content">
+      <p><span class="cs-mini-head">The&nbsp;same thread, many&nbsp;moods.</span> It moves through seven distinct states, calm, igniting, dense, flaring, settling, each one tuned to a different moment on the&nbsp;page.</p>
 
-      <p>Getting the animation's behavior consistent across browsers took far more work than we expected. Chrome and Safari interpreted it differently, and Safari physically couldn't keep up. On mobile, we ended up dropping the thread's staged phases entirely. My main goal at that point wasn't to dumb the animation down, it was to preserve the overall atmosphere even under that technical constraint. We also considered accessibility: anyone with reduced motion enabled sees the page directly in its resting state.</p>
-
-      <figure class="cs-visual-native cs-visual-native-480 cs-artifact cs-artifact-captioned" data-artifact-label="The thread across its full range of states">
+      <p>The guerrilla test from the previous section showed exactly this: atmosphere alone isn't enough. The fix wasn't to bury the animation under an explanatory paragraph. Instead, I tied the two layers together closely: the short words that fade in and out during the animation (Claude, Workflow, Proces, Systém, Výstup) now sit directly above the main copy, which spells out what they mean. I also added a clear "PULS · AKADEMIE" label to the navigation, so context is obvious before anything on screen even starts moving.</p>
+    </div>
+    <div class="cs-media-pair-visual cs-media-pair-visual-320">
+      <figure class="cs-artifact cs-artifact-captioned" data-artifact-label="The thread across its full range of states">
         <video autoplay muted loop playsinline poster="/assets/puls/labs/thread-poster.jpg" aria-label="The violet and cyan thread weaving through its different states, looped">
           <source src="/assets/puls/labs/thread-lab.webm" type="video/webm">
           <source src="/assets/puls/labs/thread-lab.mp4" type="video/mp4">
         </video>
       </figure>
+    </div>
+  </div>
 
-      <p>The guerrilla test from the previous section showed exactly this: atmosphere alone isn't enough. The fix wasn't to bury the animation under an explanatory paragraph. Instead, I tied the two layers together closely: the short words that fade in and out during the animation (Claude, Workflow, Proces, Systém, Výstup) now sit directly above the main copy, which spells out what they mean. I also added a clear "PULS · AKADEMIE" label to the navigation, so context is obvious before anything on screen even starts moving.</p>
-
+  <div class="cs-chapter-grid cs-chapter-grid-stacked">
+    <div class="cs-chapter-content">
       <p><span class="cs-mini-head">An&nbsp;answer instead of&nbsp;a&nbsp;question.</span> Further down sits the level picker itself, Foundation, Power, Advanced, and Expert, collapsed visually into four simple rows. Clicking one expands it into its own card with concrete content, a price, and two buttons.</p>
     </div>
   </div>
+
   <figure class="cs-landscape-pair cs-artifact cs-lightbox-figure" aria-label="The level picker collapsed and the Foundation tier expanded">
     <div class="cs-landscape-pair-item">
       <img src="/assets/puls/tier-foundation-collapsed.jpg" alt="The level picker collapsed into four rows, Foundation, Power, Advanced, and Expert, with Foundation highlighted.">
@@ -137,14 +154,19 @@ caseStudy:
       <p class="cs-landscape-pair-caption">The Foundation tier, expanded into its own card</p>
     </div>
   </figure>
-  <div class="cs-chapter-grid">
-    <div class="cs-chapter-heading"></div>
+
+  <div class="cs-chapter-grid cs-chapter-grid-stacked">
     <div class="cs-chapter-content">
       <p>It's not a filter, and it's not a quiz. It's a direct answer to the problem from the previous section: instead of an abstract question like "how much do you know about AI," people get four concrete descriptions and pick the one they recognize themselves in. Because these cards sit on top of the same animated thread as the rest of the page, legibility was at risk. I solved it with a frosted-glass effect on the cards that separates the text from the motion behind it without hiding the animation completely.</p>
+    </div>
+  </div>
 
+  <div class="cs-media-pair">
+    <div class="cs-media-pair-text cs-chapter-content">
       <p><span class="cs-mini-head">A&nbsp;human perspective.</span> The same thread principle returns one more time, right at the bottom, next to my own quote. There, the gold thread thickens for a moment into a soft, pulsing smoke effect that wraps around the card, on mobile too. It's exactly the spot where someone is meant to pause for a second, take in the human side of the whole project, and actually feel it.</p>
-
-      <figure class="cs-visual-native cs-visual-native-800 cs-artifact">
+    </div>
+    <div class="cs-media-pair-visual cs-media-pair-visual-480">
+      <figure class="cs-artifact cs-artifact-captioned" data-artifact-label="The smoke lab, activated and settling around the quote card">
         <video autoplay muted loop playsinline poster="/assets/puls/labs/utulek-poster.jpg" aria-label="A soft, colorful smoke effect swirling around a personal quote card, looped">
           <source src="/assets/puls/labs/utulek-lab.webm" type="video/webm">
           <source src="/assets/puls/labs/utulek-lab.mp4" type="video/mp4">
