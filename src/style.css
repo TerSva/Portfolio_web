@@ -679,7 +679,7 @@ body[data-zone="z3"] .cs-dot.active{
   width:100%;
 }
 .cs-chapter-content .cs-subtitle{
-  font-family:var(--font-s);font-style:normal;font-weight:500;
+  font-family:var(--font-s);font-style:italic;font-weight:500;
   font-size:1.05rem;color:var(--cs-muted);
   margin-bottom:1.75rem;
   line-height:1.55;
