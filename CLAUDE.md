@@ -34,21 +34,28 @@ src/
                        `caseStudy` object in front matter + its narrative
                        sections as page content.
   work/
-    index.njk           Work index (project cards)
+    index.njk           Work index (project cards — Enow, Spotify, Venek, PULS)
     enow/index.njk       Enow case study (EN) — shipped, live
     spotify/index.njk    Spotify case study (EN) — shipped, live
+    venek/index.njk      Galerie Venek case study (EN) — shipped, live
+    puls/index.njk       PULS case study (EN), `bodyClass: puls-theme` — shipped, live
   de/                    German mirror of everything under /, incl. work/
-    work/enow/index.njk
-    work/spotify/index.njk
+    work/enow/index.njk, work/spotify/index.njk, work/venek/index.njk, work/puls/index.njk
   about/, cv/, cv/print/, contact/   plus their /de/ counterparts
   assets/
-    enow/, spotify/, about/, cv/     per-project image assets
+    enow/, spotify/, venek/, puls/, about/, cv/     per-project image assets
   style.css              single global stylesheet, all pages share it
 
 .eleventy.js              input=src, output=_site, includes=_includes,
                            njk for html+markdown, GH Pages path-prefix
                            transform via ELEVENTY_PATH_PREFIX env var
 package.json               scripts: build / serve / debug (eleventy --serve)
+
+index.html                 SEPARATE, framework-free single-page "art portfolio"
+                            (illustration/personal work) — NOT an Eleventy
+                            template, just a static file passthrough-copied to
+                            `/art/`. See §11 — it has its own structure, CSS
+                            and JS entirely independent of src/style.css.
 ```
 
 No CSS/JS bundler. `style.css` and everything in `src/assets/` are copied
@@ -250,26 +257,117 @@ background) — used for the colors + brand-attributes composite.
   to wrap. Use a literal `<br>` between the sentences instead (via the
   `| safe` exception above) so they never merge onto the same line, and let
   each sentence wrap internally as needed.
+- **Print CV PDFs are pre-rendered exports, not build output.** The web CV's
+  download buttons point at static files
+  (`src/assets/cv/Tereza-Britta-Svanda-CV-{EN,DE}-September-2026.pdf`) — the
+  Eleventy build does NOT regenerate these from `src/cv/print/{en,de}.njk`
+  automatically. Editing the print-CV template and forgetting to
+  re-export/replace the static PDF leaves the live download silently out of
+  sync with the page (this happened once: a header-link underline fix
+  landed in the template but the already-downloaded PDF still had the old,
+  un-underlined links). After any change to `src/cv/print/*.njk`,
+  regenerate both PDFs from the live-rendered page — e.g. via a headless
+  browser's print-to-PDF against the local dev server
+  (`page.pdf({ preferCSSPageSize: true, printBackground: true })` in
+  Playwright reproduces the `@page{size:A4;margin:0}` layout exactly) — and
+  overwrite the two files in `src/assets/cv/`, not just the `.njk` source.
+- **The print CV's fixed-height A4 page (`.sheet{height:297mm}`) can silently
+  overflow.** `.content{min-height:0}` lets the flex layout shrink the grid
+  content area below what it actually needs once total content exceeds one
+  page, which visually collides the footer into whatever section was still
+  rendering (looks like a misplaced border/overlapping text, not an obvious
+  "overflow" cutoff). Adding even one extra bullet/line to the Experience or
+  Projects section can tip this over, and German text runs long enough that
+  it can overflow when the English version of the same edit still has
+  slack. Check with
+  `page.evaluate(() => { const s=document.querySelector('.sheet'); s.style.height='auto'; return s.scrollHeight; })`
+  against the fixed 297mm pixel height (1122.5px at 96dpi) after any content
+  addition to either print CV — don't just eyeball it, the overlap is easy
+  to miss in a quick glance. If it overflows, trim spacing (padding/margin
+  values already tuned in mm) rather than shrinking fonts, and only in the
+  file that actually overflows — don't touch the other language's spacing
+  if it still has slack.
 
-## 7. Current state (as of this hand-off)
+## 7. Current state
 
-- **Enow** case study: shipped, live on `uxportfolio`, EN only (Czech
-  version explicitly deferred — "pak dodam").
-- **Spotify** case study: fully built, EN + DE, content signed off
-  section-by-section, all known visual bugs fixed and verified
-  (widow/orphans fixed via script + Playwright-verified at 1600px/390px ×
-  EN/DE; German Hook heading now wraps to 2 lines not 3). **Shipped and
-  pushed to `uxportfolio`** (commit `ce751b8`).
-- Work index → Enow card hover glow: cooler green
+**Read this section fresh from the repo before trusting it** — this file has
+gone stale relative to actual shipped work at least once already (it kept
+saying Venek "not started" and PULS "deferred to last" for a full session
+after both had already been built and shipped). When in doubt, check
+`src/work/` and `src/de/work/` directly rather than this hand-off note.
+
+- **Enow** case study: shipped, live, EN + DE (`src/work/enow/`,
+  `src/de/work/enow/`, both full 9-section builds). A Czech-language
+  version is separately deferred — "pak dodam" — and this generalizes: a
+  full Czech-language version of the whole site, not just Enow, is a
+  genuine future plan, not a one-off exception for this one project. Don't
+  confuse this with German — all 4 case studies (Enow, Spotify, Venek,
+  PULS) already ship in both EN and DE.
+- **Spotify** case study: shipped, EN + DE, all known visual bugs fixed and
+  verified (widow/orphans fixed via script + Playwright-verified at
+  1600px/390px × EN/DE).
+- **Galerie Venek** case study: shipped, EN + DE (`src/work/venek/`,
+  `src/de/work/venek/`). A 3-person Ironhack team project with a real
+  founder/client (Markéta) rather than a fictional brief — Tereza's own part
+  covered the local-market/context onboarding, the persona + journey map
+  (persona "Robin"), and owned the workshop-booking flow + "What's on" page
+  end-to-end through two rounds of usability testing. Follows the same
+  10-part skeleton and `case-study.njk` frame as Enow/Spotify. Uses its own
+  asset folder `src/assets/venek/`.
+- **PULS** case study: shipped, EN + DE (`src/work/puls/`,
+  `src/de/work/puls/`), `bodyClass: puls-theme` on the front matter — its own
+  darker, more technical visual treatment as originally planned in §8,
+  distinct from the light/dark case-study palette the bootcamp projects use.
+  Covers the PULS landing page only (a real live Praut B2B AI-fluency
+  academy product, `puls.praut.cz`) — not the academy's internal
+  dashboard/course logic, which is explicitly out of scope. Documents her
+  full ownership of content philosophy, visual/interaction design, the HTML
+  prototype, and converting it into production Angular herself
+  (AI-assisted; an engineering partner handled the backend). Includes 3
+  looping lab videos (logo ignition, the 7-state thread, and a "smoke"
+  effect around the closing quote card) under `src/assets/puls/labs/`, with
+  `prefers-reduced-motion` handled (resting-state fallback) and a guerrilla
+  5-person comprehensibility test that drove a real hero-section fix
+  (added a "PULS · AKADEMIE" nav label + fading keywords, documented as a
+  before/after image pair in the case study's own Test section). The
+  business/B2B-lead section is deliberately left as a short paragraph for
+  now — a dedicated inquiry form is future work, per the case study's own
+  Reflection section, not a gap to "fix" unprompted.
+- **Work index**: rebuilt as a 4-card grid (Enow, Spotify, Venek, PULS),
+  EN + DE — see §8 for the full as-built account. **PULS's card is no
+  longer a "coming soon" placeholder** — it now links internally to
+  `/work/puls/` (not externally to `puls.praut.cz`), the "Coming soon"
+  badge markup was removed once the case study shipped, and its video loop
+  (`src/assets/puls/landing-loop.webm`/`.mp4`) replaced the static
+  placeholder image. `.work-project-badge` still exists in `style.css` but
+  is currently unused by any card — leave it, it's a small reusable style,
+  not dead code worth deleting.
+- Work index → Enow/Venek/PULS card hover glow: cooler green
   (`rgba(77,191,163,.16)`), resolved.
-- **Work index grid rebuilt and shipped** (EN + DE, commit `b556d09`,
-  deployed successfully via the GitHub Pages Actions workflow) — see §8 for
-  the full as-built account, including where it deviated from the original
-  brainstorm.
 - Homepage redirects straight to `/work/` — discussed, she's fine with it
   for now; a stronger hero moment was explicitly deferred until more case
-  studies exist ("ten silnejsi hero moment asi dame, ale az po dalsich case
-  study").
+  studies exist.
+- **Art portfolio (`index.html` → `/art/`)**: the old "Job Timer" work
+  sample (outdated once the professional case studies existed) was replaced
+  with a hand-built horizontal-scroll carousel showcasing all 4 professional
+  case studies + a link to the full portfolio. See §11 for the full
+  breakdown — this is a separate codebase from the Eleventy site.
+- **Site-wide external-link convention**: no diagonal ↗ arrow glyph
+  anywhere, on either site. See §12.
+- **Print CV** (`src/cv/print/{en,de}.njk`): has a PULS bullet under
+  "Selected design work for Praut" / "Ausgewählte Designarbeit für Praut"
+  in the Experience section (not the Projects section — Projects is
+  explicitly scoped to Ironhack Bootcamp work, PULS is real paid Praut
+  work). The downloadable static PDFs at
+  `src/assets/cv/Tereza-Britta-Svanda-CV-{EN,DE}-September-2026.pdf` are
+  **pre-rendered exports of these templates, not generated at build time**
+  — see the gotcha in §6 about keeping them in sync.
+- **Web CV** (`src/cv/index.njk`, `src/de/cv/index.njk`): intentionally
+  stays high-level and names no individual project for any entry (neither
+  Praut/PULS nor the Ironhack bootcamp) — it explicitly defers all
+  project-level detail to the downloadable PDF. Confirmed this needs no
+  parallel PULS addition; don't add one without a specific reason to
+  revisit that design choice.
 - GitHub Pages URL/repo-naming question was informational only — no
   changes made.
 
@@ -377,6 +475,12 @@ assuming any given bullet is exactly what shipped.
   video/GIF loop described above — the video swap is still a follow-up, not
   done yet. Everything else (external link, "Coming soon" badge, tags,
   full-width layout via the odd-card rule) shipped as planned.
+  **Superseded — see §7:** the video loop has since shipped
+  (`landing-loop.webm`/`.mp4`), the full `/work/puls/` case study has since
+  been written and shipped, and the card now links internally instead of to
+  `puls.praut.cz` — the "coming soon"/external-link framing in this section
+  is historical (why the card was originally built this way), not current
+  behavior.
 - Verified via Playwright at 1440/1024/760/375px × EN/DE that the existing
   ambient card glow (`rgba(77,191,163,.16)`), the pointer-tracking cursor
   affordance, and the header page-transition wash all still work unchanged
@@ -384,17 +488,21 @@ assuming any given bullet is exactly what shipped.
 
 ## 9. Deferred / not started
 
-- **Venek** case study — not started.
-- **Czech version of Enow** — deferred.
-- **PULS card video/GIF loop** — card shipped with a static placeholder
-  image (§8 "As built"); swapping in the glowing-thread animation loop is
-  still open.
+- **A full Czech-language version of the site** — deferred generally, not
+  just for Enow. Enow's Czech version is the one instance discussed
+  concretely so far ("pak dodam"), but treat it as one case of a broader
+  future plan, not an isolated exception.
 - **Work index filter UI** (pills/tabs by tag) — intentionally deferred
   until there are 4-5+ case studies spanning 2+ genuinely different
-  categories (§8). Tag data itself is already in each card's meta line.
-- **Hover/motion animation polish** on the Work-index Enow card — parked
-  "until another case study exists"; two now exist (Enow, Spotify) so this
-  could resurface, but she hasn't reopened it.
+  categories (§8). Tag data itself is already in each card's meta line. All
+  4 current cards (Enow, Spotify, Venek, PULS) are shipped, so this is
+  getting closer but hasn't been revisited yet.
+- **Hover/motion animation polish** on the Work-index cards — parked
+  "until another case study exists"; several now exist, so this could
+  resurface, but she hasn't reopened it.
+- **PULS business/B2B-lead section** — deliberately left as a short
+  paragraph for now; a dedicated inquiry form/CTA is planned future work
+  per the case study's own Reflection section (not a bug to silently fix).
 - A stronger homepage hero moment — deferred until more case studies ship.
 
 ## 10. Useful commands
@@ -404,3 +512,94 @@ npm run serve      # eleventy --serve, local dev server
 npm run build      # eleventy, outputs to _site/
 npm run debug       # DEBUG=Eleventy* eleventy
 ```
+
+## 11. The art portfolio (`index.html` → `/art/`)
+
+A completely separate, framework-free single-page site (illustration and
+personal work) living at the repo root as `index.html` — NOT an Eleventy
+template. `.eleventy.js` passthrough-copies it (plus its own images/JS/CSS,
+all inline in the one file) straight into the build output at `/art/`. It
+shares no CSS/JS with `src/style.css` or `base.njk` — its own `<style>`/
+`<script>` blocks are self-contained.
+
+**Mechanics**: horizontal-scroll engine (`#scroller`/`#track`/
+`.panel[data-idx]`) with `targetX`/`currentX` lerp-smoothed
+(`lerp(a,b,0.075)`) in a `requestAnimationFrame` loop; wheel/touch
+hijacking attached to `#scroller` only when not on mobile
+(`matchMedia('(max-width:768px)')`); dot-nav tracks active state by ARRAY
+POSITION between `panels` and `dots` NodeLists, while `[data-to]` nav-jump
+links match by the `data-idx` VALUE. i18n is a small inline dictionary
+(`cs`/`en`) swapped via `data-i18n`/`data-i18n-html`/`data-i18n-alt`/
+`data-i18n-aria` attributes — `data-i18n-html` is required (not plain
+`data-i18n`) whenever the translated string contains literal HTML like
+`<br>`/`<em>`.
+
+**Work panel** (`#p-work`, replaced an outdated "Job Timer" sample once the
+professional case studies existed): a hand-built drag/scroll carousel
+(`.work-carousel`) showing all 4 professional case studies (Enow, Spotify,
+Venek, PULS) as cards, plus a "Full portfolio" link out to `/work/`. Card
+images are dedicated JPGs at the repo root (`enow-card.jpg`,
+`spotify-card.jpg`, `venek-card.jpg`, `puls-card.jpg`, passthrough-copied
+into `art/` via a per-file list in `.eleventy.js` — add new filenames there
+if more cards are added). Cards compose two independent transform sources
+(scroll-driven "base" tilt + cursor-driven "hover" tilt) via separate
+`baseState`/`hoverState` `Map`s merged in one `renderCard()` function,
+avoiding the two interactions clobbering each other's inline `transform`.
+
+**"Phantom container" CSS bug pattern** (recognized twice on this project,
+once here): a flex/grid wrapper defaults to filling its parent's full
+width even when its fixed-width children don't need that space, leaving
+dead visual space and mis-sized `box-shadow`/backgrounds. Fixed here via
+`width:fit-content;max-width:100%` on `.work-carousel` and on a shared
+`.work-content` wrapper around the heading + carousel together (so any
+leftover canvas centers symmetrically instead of dumping on one side).
+
+**Scroll-chaining**: `.work-carousel` must only intercept wheel/touch
+events while it still has scrollable room in the requested direction
+(`scrollLeft` vs `0`/`maxScroll` boundary checks before
+`preventDefault()`/`stopPropagation()`) — otherwise it permanently
+captures input and blocks the page's own horizontal scroll once its own
+content is exhausted.
+
+**Nav**: the external "UX/UI [portfolio]" link is visually distinguished
+from the 3 in-page anchors (O mně / Práce / Kontakt) via a small IBM Plex
+Mono "Portfolio" tag + a thin 1px vertical divider — not an arrow (§12). Nav
+order matches actual panel order (O mně before Práce, since About is panel
+index 1 and Work is panel index 2). Dot-nav was reduced from 6 to 5 dots
+after the old Job Timer/visual panels were removed — if panels are ever
+added/removed again, remember to update both the dot-nav `data-idx` values
+AND every panel's own `data-idx`, including the trailing `panel-num` display
+text (e.g. "05"/"06"), which don't auto-derive from anything.
+
+**Relationship to the professional site**: linked from the professional
+`/about/` page (one sentence + link inside the existing "creative practice"
+paragraph, EN + DE) — deliberately NOT added to the main professional nav,
+to avoid diluting the focused "Product & UX/UI Designer" positioning. Only
+linked one-way for now; the art portfolio links back out to `/work/` from
+its own Work panel.
+
+## 12. Site-wide external-link convention: no ↗ arrow
+
+Firm, explicit house rule, applies to BOTH the professional site and the
+art portfolio: **no diagonal arrow glyph (↗, U+2197) anywhere as an
+external-link affordance.** It reads as an "AI-generated" visual tell to
+her and was deliberately removed everywhere it had crept in: the art
+portfolio's nav (replaced with the mono "Portfolio" tag + divider, §11),
+the About-page link to the art portfolio, `case-study.njk`'s
+Prototype/Presentation links (shared by all 4 case studies × 2 languages),
+the Contact page's LinkedIn/Behance links (EN + DE), and the print CV's
+"Case study" links (EN + DE). In every case the fix was simply removing the
+glyph with no replacement — plain link-color + underline/border-bottom on
+hover (or, for the print CV, an always-visible `border-bottom` since it's a
+static document with no hover state) is enough affordance on its own.
+
+**Explicitly NOT covered by this rule** — don't remove these:
+- The "↓" download arrow on CV PDF download links (a different glyph/
+  convention, for downloads not external navigation).
+- The plain "→" (non-diagonal) arrow used site-wide as the established
+  primary-CTA affordance (e.g. "Start a conversation →", "tažením posuňte
+  →"). Only the diagonal ↗ is banned.
+
+When adding any new external link anywhere on either site, don't reach for
+↗ by habit — use the existing plain-underline/border-bottom pattern, or ask
+if a specific new context seems to need something else.
