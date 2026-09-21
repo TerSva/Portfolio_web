@@ -261,6 +261,16 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   color:var(--ch2);transition:color .3s;
 }
 .site-nav a:hover{color:var(--gold);}
+.nav-ext{display:flex;align-items:baseline;gap:.5rem;}
+.nav-ext-tag{
+  font-family:var(--font-m);
+  font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ch3);
+}
+.nav-divider{
+  width:1px;align-self:stretch;
+  background:rgba(245,245,220,0.15);
+}
 
 /* Language switch — top center, matches .site-nav */
 .lang-switch{
@@ -302,195 +312,116 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
 }
 
 /* ================================
-   PANEL — WORK PANEL (horizontal items)
+   WORK PANEL — selected case studies
 ================================ */
-.work-panels{
-  display:flex;flex-direction:row;height:100%;
-}
-
-/* ================================
-   PROJECT PANEL
-================================ */
-.p-project{
-  width:55vw;
+.p-work{
+  width:100vw;
   background:var(--bg2);
   border-left:1px solid var(--em);
-  padding:18vh 5vw 3rem;
-  justify-content:flex-start;
-  transition:background .6s;
+  padding:12vh 5vw 4rem;
+  justify-content:center;
+  align-items:center;
 }
-.p-project:hover{background:#01302c;}
 
-.proj-index{
-  position:absolute;top:3rem;left:5vw;
+.work-content{
+  display:flex;flex-direction:column;gap:2.5rem;
+  width:fit-content;
+  max-width:100%;
+}
+
+.work-head{
+  display:flex;flex-direction:column;gap:.7rem;
+  max-width:42rem;
+}
+.work-index{
   font-family:var(--font-m);
   font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
   color:var(--gold);
 }
-
-.proj-title-wrap{
-  margin-bottom:3rem;
-}
-.proj-title{
+.work-heading{
   font-family:var(--font-d);
-  font-size:clamp(3rem,6vw,7.5rem);
-  font-weight:400;line-height:1.1;
+  font-size:clamp(2.1rem,3.6vw,3.4rem);
+  font-weight:400;line-height:1.18;
   letter-spacing:-0.02em;
-  overflow:hidden;
-}
-.proj-title-inner{
-  display:block;
-  transform:translateY(110%);
-  transition:transform .9s cubic-bezier(0.16,1,0.3,1);
-}
-.p-project.visible .proj-title-inner{transform:translateY(0);}
-
-.proj-title em{
-  font-style:italic;font-weight:400;
-  display:block;color:var(--ch2);
-  font-size:82%;letter-spacing:-0.01em;
-}
-
-.proj-meta{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:1.5rem 2.5rem;
-  margin-bottom:3rem;
-}
-.meta-item label{
-  display:block;font-family:var(--font-m);font-size:.65rem;
-  letter-spacing:.3em;text-transform:uppercase;
-  color:var(--ch2);margin-bottom:.4rem;
-}
-.meta-item span{
-  font-family:var(--font-m);font-size:.95rem;color:var(--ch);letter-spacing:.05em;
-}
-
-.proj-links-wrap{
-  display:flex;flex-direction:row;gap:1.2rem;align-items:center;
-}
-.btn-modern{
-  padding:.8rem 1.8rem;
-  border-radius:100px;
-  font-family:var(--font-m);font-size:.65rem;font-weight:700;
-  letter-spacing:.15em;text-transform:uppercase;
-  transition:all .4s ease;
-  cursor:pointer;
-  background:rgba(255,215,0,0.1);
-  border:1px solid var(--gold);
-  color:var(--gold);
-}
-.btn-modern:hover{
-  background:var(--gold);
-  color:var(--bg);
-}
-.btn-ghost{
-  padding:.8rem 1.8rem;
-  border-radius:100px;
-  font-family:var(--font-m);font-size:.65rem;font-weight:700;
-  letter-spacing:.15em;text-transform:uppercase;
-  transition:all .4s ease;
-  cursor:pointer;
-  background:transparent;
-  border:1px solid var(--em);
-  color:var(--ch2);
-}
-.btn-ghost:hover{
-  background:var(--em);
   color:var(--ch);
 }
+.work-heading em{
+  font-style:italic;font-weight:400;color:var(--ch2);
+}
+.work-hint{
+  font-family:var(--font-m);
+  font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--ch3);
+}
 
-/* ================================
-   VISUAL PANEL (beside each project)
-================================ */
-.p-visual{
-  width:45vw;
-  border-left:1px solid var(--em);
-  padding:0;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  background:var(--bg);
+.work-carousel{
+  display:flex;flex-direction:row;
+  gap:1.75rem;
+  overflow-x:auto;
+  width:fit-content;
+  max-width:100%;
+  padding:.5rem .25rem 2rem;
+  cursor:grab;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  perspective:1600px;
+  user-select:none;
+}
+.work-carousel::-webkit-scrollbar{display:none;}
+.work-carousel.dragging{cursor:grabbing;}
+
+.work-card{
+  flex:0 0 auto;
+  width:250px;
+  aspect-ratio:9/16;
   position:relative;
-}
-
-.visual-placeholder{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-
-/* SVG abstract art per panel */
-.vis-art{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.collage-wrap{
-  position:relative;
-  width:65%;
-  aspect-ratio:3/4;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:scale(.92);
-  transition:opacity .9s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1);
-}
-.p-visual.visible .collage-wrap{opacity:1;transform:scale(1);}
-.col-img{
-  position:absolute;
-  width:75%;
-  height:auto;
+  display:block;
   border-radius:12px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  overflow:hidden;
   border:1px solid rgba(255,215,0,0.15);
-  transition:all .8s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  text-decoration:none;
+  transition:box-shadow .4s ease, border-color .4s ease, transform .12s ease;
+  will-change:transform;
 }
-.img-back-2{
-  transform:translateX(-15%) scale(0.85) rotate(-6deg);
-  opacity:0.4;z-index:1;
+.work-card img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  pointer-events:none;
+  -webkit-user-drag:none;
 }
-.img-back-1{
-  transform:translateX(15%) scale(0.9) rotate(4deg);
-  opacity:0.6;z-index:2;
+.work-card-info{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:3rem 1rem 1rem;
+  background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.82) 45%, transparent 100%);
+  display:flex;flex-direction:column;gap:.25rem;
+  pointer-events:none;
 }
-.img-front{
-  transform:scale(1) rotate(0deg);
-  opacity:1;z-index:3;
+.work-card-title{
+  font-family:var(--font-d);font-size:1.2rem;color:var(--ch);
 }
-/* Ztmavnutí všech při hover na kontejner + Roztažení vějíře pro snazší kliknutí */
-.collage-wrap:hover .col-img {
-  filter: brightness(0.4);
-  opacity: 0.6;
+.work-card-tagline{
+  font-family:var(--font-s);font-size:.72rem;line-height:1.35;color:var(--ch2);
 }
-.collage-wrap:hover .img-back-2 {
-  transform: translateX(-38%) scale(0.85) rotate(-10deg);
-}
-.collage-wrap:hover .img-back-1 {
-  transform: translateX(38%) scale(0.9) rotate(10deg);
+.work-card:hover{
+  border-color:rgba(255,215,0,0.5);
+  box-shadow:0 25px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255,215,0,0.15);
 }
 
-/* Konkrétní karta pod kurzorem (každá má teď zafixovanou svou X pozici) */
-.collage-wrap .img-back-2:hover {
-  z-index: 50 !important;
-  filter: brightness(1) !important;
-  opacity: 1 !important;
-  transform: translateX(-38%) scale(1.05) rotate(-2deg) translateY(-8%) !important;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
-  border: 1px solid rgba(255,215,0,0.5) !important;
+.work-more{
+  align-self:flex-end;
+  display:flex;align-items:baseline;gap:.5rem;
+  font-family:var(--font-s);font-size:.85rem;color:var(--ch2);
+  text-decoration:none;
+  transition:color .3s ease;
 }
-.collage-wrap .img-back-1:hover {
-  z-index: 50 !important;
-  filter: brightness(1) !important;
-  opacity: 1 !important;
-  transform: translateX(38%) scale(1.05) rotate(2deg) translateY(-8%) !important;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
-  border: 1px solid rgba(255,215,0,0.5) !important;
+.work-more:hover{color:var(--gold);}
+.work-more-tag{
+  font-family:var(--font-m);
+  font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ch3);
 }
-.collage-wrap .img-front:hover {
-  z-index: 50 !important;
-  filter: brightness(1) !important;
-  opacity: 1 !important;
-  transform: translateX(0%) scale(1.05) rotate(0deg) translateY(-8%) !important;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,0.2) !important;
-  border: 1px solid rgba(255,215,0,0.5) !important;
-}
+.work-more:hover .work-more-tag{color:var(--gold);}
 
 /* ================================
    PANEL 3.5 — QUOTE SEPARATOR
@@ -670,9 +601,6 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   border-top:1px solid rgba(255,215,0,0.15);
 }
 .domain-item{
-  border-bottom:1px solid rgba(255,215,0,0.15);
-}
-.domain-item a{
   display:block;
   padding:1rem 0;
   font-family:var(--font-s);
@@ -680,16 +608,7 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   font-weight:400;
   color:var(--ch2);
   letter-spacing:-0.01em;
-  transform:translateX(0);
-  transition:transform .4s ease, color .4s ease;
-  cursor:pointer;
-}
-.domain-item a:hover{
-  transform:translateX(15px);
-  color:var(--gold);
-}
-.domain-item:hover{
-  border-bottom-color:var(--gold);
+  border-bottom:1px solid rgba(255,215,0,0.15);
 }
 
 /* ================================
@@ -959,12 +878,12 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
     overflow-x: hidden !important;
     will-change: auto !important;
   }
-  #section-counter, .hero-scroll-hint, .site-name, .panel-num, .vis-label {
+  #section-counter, .hero-scroll-hint, .site-name, .panel-num {
     display: none !important;
   }
 
   /* 2. UNIVERZÁLNÍ PANEL */
-  .panel, .p-project, .p-about, .p-art, .p-contact {
+  .panel, .p-about, .p-art, .p-contact {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
@@ -1062,74 +981,30 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
     margin-right: 0 !important;
     text-align: left !important; }
   .domain-list { width: 100%; }
-  .domain-item a { text-align: left !important; 
+  .domain-item { text-align: left !important;
     padding: 1.2rem 0 !important; }
   .about-title { font-size: 2.8rem !important; margin-bottom: 20px; }
   html[lang="en"] .about-title { font-size: 2.4rem !important; }
 
-  /* 5. JOB TIMER & VISUÁL */
-  .proj-title { font-size: 3.8rem !important; }
- 
-  .p-visual {
-    min-height: auto !important; /* TOTO NÁM CHYBĚLO! Zruší těch 100svh a smrskne sekci jen na velikost karet */
-    height: auto !important;
-    padding: 40px 0 80px 0 !important; /* Vyvážená mezera nahoře i dole */
-    justify-content: center !important;
-  }
-
-  .vis-art {
-    position: relative !important;
-    display: block !important;
-  }
-
- .collage-wrap {
+  /* 5. WORK PANEL */
+  .p-work {
     width: 100% !important;
-    aspect-ratio: auto !important;
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-padding: 0 10vw !important; /* NOVÉ: Definuje střední zónu pro magnetické zarovnání */
-    gap: 1.5rem !important;
-    padding: 20px 10vw 40px !important; /* ZVĚTŠENO: Aby první a poslední karta měly místo z krajů */
+    padding: 20px 0 60px !important;
+    align-items: flex-start !important;
+  }
+  .work-content { width: 100%; }
+  .work-more { margin-right: 6vw; }
+  .work-head { padding: 0 6vw; }
+  .work-carousel {
+    padding: 1rem 6vw 1.5rem !important;
+    scroll-snap-type: x mandatory;
+  }
+  .work-card {
+    width: min(55vw, 220px) !important;
+    scroll-snap-align: center;
     transform: none !important;
-    opacity: 1 !important;
-    -webkit-overflow-scrolling: touch;
   }
 
-  /* Skrytí ošklivého systémového scrollbaru pro čistý vzhled */
-  .collage-wrap::-webkit-scrollbar { 
-    display: none; 
-  }
-
-  /* Všechny karty srovnáme vedle sebe a zrušíme jim desktopové rotace */
-  .col-img,
-  .collage-wrap .img-back-2,
-  .collage-wrap .img-back-1,
-  .collage-wrap .img-front {
-    position: relative !important;
-    width: 75% !important; /* Zabere většinu, ale kousek další vykukuje */
-    flex-shrink: 0 !important;
-    scroll-snap-align: center !important; /* Karta vždycky magneticky doskočí na střed */
-    transform: none !important; 
-    opacity: 1 !important;
-    filter: none !important;
-    z-index: 1 !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(255,215,0,0.05) !important;
-    border: 1px solid rgba(255,215,0,0.1) !important;
-    margin: 0 !important;
-  }
-  /* Zabití desktopového hover efektu (skákání karet) na mobilu */
-  .collage-wrap .col-img:hover,
-  .collage-wrap .img-back-2:hover,
-  .collage-wrap .img-back-1:hover,
-  .collage-wrap .img-front:hover {
-    transform: none !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(255,215,0,0.05) !important;
-    border: 1px solid rgba(255,215,0,0.1) !important;
-    filter: none !important;
-    z-index: 1 !important;
-  }
   /* 6. CITÁT — Posun autora/popisku níž */
   #p-quote { 
     display: flex !important;
@@ -1218,14 +1093,6 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   transition:width .4s cubic-bezier(0.16,1,0.3,1);
 }
 .site-nav a:hover::after{width:100%;}
-
-/* Project panel subtle bottom glow on hover */
-.p-project::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 40% at 50% 100%,rgba(255,215,0,0.05) 0%,transparent 70%);
-  opacity:0;transition:opacity .8s ease;pointer-events:none;
-}
-.p-project:hover::before{opacity:1;}
 
 /* Hero text depth */
 .hero-big{text-shadow: 0 0 120px rgba(245,245,220,0.15), 0 0 40px rgba(245,245,220,0.05);}
@@ -1330,19 +1197,19 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
 <nav id="section-counter" data-i18n-aria="aria.dots" aria-label="Navigace sekcemi">
   <div class="counter-dot active" data-idx="0" data-i18n-title="dot.intro" title="Intro"></div>
   <div class="counter-dot" data-idx="1" data-i18n-title="dot.about" title="O mně"></div>
-  <div class="counter-dot" data-idx="2" data-i18n-title="dot.project" title="Job Timer"></div>
-  <div class="counter-dot" data-idx="3" data-i18n-title="dot.visual" title="Visuál"></div>
-  <div class="counter-dot" data-idx="4" data-i18n-title="dot.art" title="Umění"></div>
-  <div class="counter-dot" data-idx="5" data-i18n-title="dot.contact" title="Kontakt"></div>
+  <div class="counter-dot" data-idx="2" data-i18n-title="dot.work" title="Práce"></div>
+  <div class="counter-dot" data-idx="3" data-i18n-title="dot.art" title="Umění"></div>
+  <div class="counter-dot" data-idx="4" data-i18n-title="dot.contact" title="Kontakt"></div>
 </nav>
 
 <!-- FIXED NAV — outside scroller so it never moves -->
 <span class="site-name" data-i18n-aria="aria.name" aria-label="Jméno">Tereza Britta Švanda</span>
 <ul class="site-nav" role="list">
-  <li><a href="../work/" aria-label="Open Product and UX/UI portfolio">UX/UI</a></li>
-  <li><a href="#" data-to="2" data-i18n="nav.work">Práce</a></li>
+  <li><a href="../work/" class="nav-ext" aria-label="Open Product and UX/UI portfolio">UX/UI <span class="nav-ext-tag" aria-hidden="true">Portfolio</span></a></li>
+  <li class="nav-divider" aria-hidden="true"></li>
   <li><a href="#" data-to="1" data-i18n="nav.about">O mně</a></li>
-  <li><a href="#" data-to="5" data-i18n="nav.contact">Kontakt</a></li>
+  <li><a href="#" data-to="2" data-i18n="nav.work">Práce</a></li>
+  <li><a href="#" data-to="4" data-i18n="nav.contact">Kontakt</a></li>
 </ul>
 <div class="lang-switch" role="group" data-i18n-aria="aria.lang" aria-label="Přepínač jazyka">
   <button type="button" class="lang-btn" data-lang="cs">CS</button>
@@ -1400,76 +1267,62 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
         <p data-i18n="about.body">Spojuji logiku design systémů s empatií kreativní tvůrkyně. Má cesta vedla od čisté kresby s tužkou v ruce až po vývoj komplexních digitálních produktů v Reactu. Přístup se ale nezměnil – ať už tvořím kód nebo grafiku, vždy kladu důraz na detail, emoci a bezchybnou funkčnost.</p>
       </div>
       <ul class="domain-list" data-i18n-aria="aria.domains" aria-label="Oblasti práce">
-        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.uiux">UI/UX Design</a></li>
-        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.branding">Branding &amp; Vizuální identita</a></li>
-        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.system">Design Systémy &amp; React</a></li>
-        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.illustration">Digitální &amp; Tradiční ilustrace</a></li>
-        <li class="domain-item"><a href="#" tabindex="0" data-i18n="about.domain.installation">Sněhové výlohy &amp; Art instalace</a></li>
+        <li class="domain-item" data-i18n="about.domain.uiux">UI/UX Design</li>
+        <li class="domain-item" data-i18n="about.domain.branding">Branding &amp; Vizuální identita</li>
+        <li class="domain-item" data-i18n="about.domain.system">Design Systémy &amp; React</li>
+        <li class="domain-item" data-i18n="about.domain.illustration">Digitální &amp; Tradiční ilustrace</li>
+        <li class="domain-item" data-i18n="about.domain.installation">Sněhové výlohy &amp; Art instalace</li>
       </ul>
     </div>
 
     <span class="panel-num" aria-hidden="true">02</span>
   </section>
 
-  <!-- ===================== PANEL 2 — PROJECT ===================== -->
-  <section class="panel p-project" id="p-proj1" data-idx="2" data-i18n-aria="aria.project" aria-label="Projekt Job Timer">
-    <span class="proj-index" data-i18n="proj.index">01 / Případová studie</span>
+  <!-- ===================== PANEL 2 — WORK ===================== -->
+  <section class="panel p-work" id="p-work" data-idx="2" data-i18n-aria="aria.work" aria-label="Vybraná práce">
+   <div class="work-content">
+    <div class="work-head">
+      <span class="work-index" data-i18n="work.index">02 / Vybraná práce</span>
+      <h2 class="work-heading" data-i18n-html="work.heading">Něco z kódu,<br><em>něco z designu.</em></h2>
+      <span class="work-hint" data-i18n="work.hint" aria-hidden="true">tažením posuňte →</span>
+    </div>
 
-    <div class="proj-title-wrap">
-      <h2 class="proj-title">
-        <span class="proj-title-inner">Job</span>
-      </h2>
-      <h2 class="proj-title">
-        <span class="proj-title-inner" style="transition-delay:.08s">
-          <em>Timer</em>
+    <div class="work-carousel" role="list">
+      <a class="work-card" role="listitem" href="../work/enow/" data-i18n-aria="work.enow.aria" aria-label="Otevřít case study Enow">
+        <img src="enow-card.jpg" data-i18n-alt="work.enow.alt" alt="Enow — SOS widget na zamykací obrazovce">
+        <span class="work-card-info">
+          <span class="work-card-title">Enow</span>
+          <span class="work-card-tagline" data-i18n="work.enow.tagline">Zaznamenej teď, resetuj později</span>
         </span>
-      </h2>
-    </div>
-
-    <div class="proj-meta">
-      <div class="meta-item">
-        <label data-i18n="proj.metaType">Typ</label>
-        <span>React App &amp; Design System</span>
-      </div>
-      <div class="meta-item">
-        <label data-i18n="proj.metaYear">Rok</label>
-        <span>2026</span>
-      </div>
-      <div class="meta-item">
-        <label data-i18n="proj.metaTools">Nástroje</label>
-        <span>Claude, Gemini, React</span>
-      </div>
-      <div class="meta-item">
-        <label data-i18n="proj.metaRole">Role</label>
-        <span>Art Director &amp; AI Prompting</span>
-      </div>
-    </div>
-
-    <div class="proj-links-wrap">
-      <a href="https://tersva.github.io/Jobtimer/" class="btn-modern" target="_blank" data-i18n-aria="proj.liveAria" aria-label="Otevřít živou aplikaci Job Timer">
-        <span data-i18n="proj.live">Živá aplikace</span>
       </a>
-      <a href="https://tersva.github.io/Jobtimer/jobtimervisualbook.html" class="btn-ghost" target="_blank" data-i18n-aria="proj.systemAria" aria-label="Otevřít design systém Job Timer">
-        <span data-i18n="proj.system">Design Systém</span>
+      <a class="work-card" role="listitem" href="../work/spotify/" data-i18n-aria="work.spotify.aria" aria-label="Otevřít case study Spotify">
+        <img src="spotify-card.jpg" data-i18n-alt="work.spotify.alt" alt="Spotify — knihovna s barevnými emočními tagy">
+        <span class="work-card-info">
+          <span class="work-card-title">Spotify</span>
+          <span class="work-card-tagline" data-i18n="work.spotify.tagline">Redesign, který hudbě vrátil pocit</span>
+        </span>
+      </a>
+      <a class="work-card" role="listitem" href="../work/venek/" data-i18n-aria="work.venek.aria" aria-label="Otevřít case study Galerie Venek">
+        <img src="venek-card.jpg" data-i18n-alt="work.venek.alt" alt="Galerie Venek — domovská stránka na mobilu">
+        <span class="work-card-info">
+          <span class="work-card-title">Galerie Venek</span>
+          <span class="work-card-tagline" data-i18n="work.venek.tagline">Web, kterému na první pohled uvěříte</span>
+        </span>
+      </a>
+      <a class="work-card" role="listitem" href="../work/puls/" data-i18n-aria="work.puls.aria" aria-label="Otevřít case study PULS">
+        <img src="puls-card.jpg" data-i18n-alt="work.puls.alt" alt="PULS — landing page s planoucím logem">
+        <span class="work-card-info">
+          <span class="work-card-title">PULS</span>
+          <span class="work-card-tagline" data-i18n="work.puls.tagline">Landing page, na které jsi ty ve středu</span>
+        </span>
       </a>
     </div>
 
-    <span class="panel-num" aria-hidden="true">03</span>
+    <a class="work-more" href="../work/" aria-label="Open the full Product and UX/UI portfolio">
+      UX/UI <span class="work-more-tag" aria-hidden="true" data-i18n="work.more">Celé portfolio</span>
+    </a>
+   </div>
   </section>
-
-  <!-- ===================== PANEL 3 — VISUAL ===================== -->
-  <div class="panel p-visual" id="p-vis1" data-idx="3" aria-hidden="true">
-    <div class="visual-placeholder">
-      <div class="vis-art">
-        <div class="collage-wrap">
-          <img src="jobtimer-3.jpg" data-i18n-alt="vis.alt.history" alt="Náhled historie" class="col-img img-back-2">
-          <img src="jobtimer-2.jpg" data-i18n-alt="vis.alt.dashboard" alt="Náhled dashboardu" class="col-img img-back-1">
-          <img src="jobtimer-preview.jpg" data-i18n-alt="vis.alt.detail" alt="Náhled detailu" class="col-img img-front">
-        </div>
-      </div>
-      <span class="vis-label">Job Timer — React App & Design System, 2026</span>
-    </div>
-  </div>
 
   <section class="panel" id="p-quote" data-i18n-aria="aria.quote" aria-label="Citát">
     <div class="quote-wrapper">
@@ -1479,7 +1332,7 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   </section>
 
   <!-- ===================== PANEL 4 — ART ===================== -->
-  <section class="panel" id="p-art" data-idx="4" data-i18n-aria="aria.art" aria-label="Galerie umění">
+  <section class="panel" id="p-art" data-idx="3" data-i18n-aria="aria.art" aria-label="Galerie umění">
     <h2 class="art-heading" data-i18n-html="art.heading">
       Umění,<br><em>které dýchá.</em>
     </h2>
@@ -1520,11 +1373,11 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
 
     </div>
 
-    <span class="panel-num" aria-hidden="true">05</span>
+    <span class="panel-num" aria-hidden="true">04</span>
   </section>
 
-  <!-- ===================== PANEL 5 — CONTACT ===================== -->
-  <section class="panel" id="p-contact" data-idx="5" data-i18n-aria="aria.contact" aria-label="Kontakt">
+  <!-- ===================== PANEL 4 — CONTACT ===================== -->
+  <section class="panel" id="p-contact" data-idx="4" data-i18n-aria="aria.contact" aria-label="Kontakt">
 
     <div class="contact-container">
       <span class="contact-label" data-i18n="contact.label">Pojďme tvořit</span>
@@ -1542,7 +1395,7 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
     </div>
 
     <span class="footer-copy" data-i18n-aria="contact.copyAria" aria-label="Copyright">© 2025 Tereza</span>
-    <span class="panel-num" aria-hidden="true">06</span>
+    <span class="panel-num" aria-hidden="true">05</span>
   </section>
 
 </div><!-- end track -->
@@ -1574,8 +1427,7 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'aria.dots': 'Navigace sekcemi',
       'dot.intro': 'Intro',
       'dot.about': 'O mně',
-      'dot.project': 'Job Timer',
-      'dot.visual': 'Visuál',
+      'dot.work': 'Práce',
       'dot.art': 'Umění',
       'dot.contact': 'Kontakt',
       'aria.intro': 'Úvod',
@@ -1593,19 +1445,23 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'about.domain.system': 'Design Systémy & React',
       'about.domain.illustration': 'Digitální & Tradiční ilustrace',
       'about.domain.installation': 'Sněhové výlohy & Art instalace',
-      'aria.project': 'Projekt Job Timer',
-      'proj.index': '01 / Případová studie',
-      'proj.metaType': 'Typ',
-      'proj.metaYear': 'Rok',
-      'proj.metaTools': 'Nástroje',
-      'proj.metaRole': 'Role',
-      'proj.live': 'Živá aplikace',
-      'proj.system': 'Design Systém',
-      'proj.liveAria': 'Otevřít živou aplikaci Job Timer',
-      'proj.systemAria': 'Otevřít design systém Job Timer',
-      'vis.alt.history': 'Náhled historie',
-      'vis.alt.dashboard': 'Náhled dashboardu',
-      'vis.alt.detail': 'Náhled detailu',
+      'aria.work': 'Vybraná práce',
+      'work.index': '02 / Vybraná práce',
+      'work.heading': 'Něco z kódu,<br><em>něco z designu.</em>',
+      'work.hint': 'tažením posuňte →',
+      'work.enow.tagline': 'Zaznamenej teď, resetuj později',
+      'work.enow.aria': 'Otevřít case study Enow',
+      'work.enow.alt': 'Enow — SOS widget na zamykací obrazovce',
+      'work.spotify.tagline': 'Redesign, který hudbě vrátil pocit',
+      'work.spotify.aria': 'Otevřít case study Spotify',
+      'work.spotify.alt': 'Spotify — knihovna s barevnými emočními tagy',
+      'work.venek.tagline': 'Web, kterému na první pohled uvěříte',
+      'work.venek.aria': 'Otevřít case study Galerie Venek',
+      'work.venek.alt': 'Galerie Venek — domovská stránka na mobilu',
+      'work.puls.tagline': 'Landing page, na které jsi ty ve středu',
+      'work.puls.aria': 'Otevřít case study PULS',
+      'work.puls.alt': 'PULS — landing page s planoucím logem',
+      'work.more': 'Celé portfolio',
       'aria.quote': 'Citát',
       'quote.text': '„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“',
       'quote.author': 'Můj přístup k tvorbě',
@@ -1646,8 +1502,7 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'aria.dots': 'Section navigation',
       'dot.intro': 'Intro',
       'dot.about': 'About',
-      'dot.project': 'Job Timer',
-      'dot.visual': 'Visual',
+      'dot.work': 'Work',
       'dot.art': 'Art',
       'dot.contact': 'Contact',
       'aria.intro': 'Intro',
@@ -1665,19 +1520,23 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'about.domain.system': 'Design Systems & React',
       'about.domain.illustration': 'Digital & Traditional Illustration',
       'about.domain.installation': 'Snow Window Paintings & Art Installations',
-      'aria.project': 'Job Timer project',
-      'proj.index': '01 / Case Study',
-      'proj.metaType': 'Type',
-      'proj.metaYear': 'Year',
-      'proj.metaTools': 'Tools',
-      'proj.metaRole': 'Role',
-      'proj.live': 'View live',
-      'proj.system': 'Design System',
-      'proj.liveAria': 'Open the Job Timer live app',
-      'proj.systemAria': 'Open the Job Timer design system',
-      'vis.alt.history': 'History view',
-      'vis.alt.dashboard': 'Dashboard view',
-      'vis.alt.detail': 'Detail view',
+      'aria.work': 'Selected work',
+      'work.index': '02 / Selected Work',
+      'work.heading': 'Some code,<br><em>some design.</em>',
+      'work.hint': 'drag to explore →',
+      'work.enow.tagline': 'Acknowledge Now, Reset Later',
+      'work.enow.aria': 'Open the Enow case study',
+      'work.enow.alt': 'Enow — SOS widget on a phone lock screen',
+      'work.spotify.tagline': 'A redesign that gave music its feeling back',
+      'work.spotify.aria': 'Open the Spotify case study',
+      'work.spotify.alt': 'Spotify — library screen with colored emotion tags',
+      'work.venek.tagline': 'A website that earns trust on sight',
+      'work.venek.aria': 'Open the Galerie Venek case study',
+      'work.venek.alt': 'Galerie Venek — homepage on mobile',
+      'work.puls.tagline': 'A landing page that puts you at the center',
+      'work.puls.aria': 'Open the PULS case study',
+      'work.puls.alt': 'PULS — landing page with a glowing flame logo',
+      'work.more': 'Full portfolio',
       'aria.quote': 'Quote',
       'quote.text': '“We are beings made of stories.<br><em>Design is just another language to tell them in.</em>”',
       'quote.author': 'My approach to craft',
@@ -1942,6 +1801,120 @@ function magnetic(el, strength = 0.35) {
   });
 }
 
+/* ---- WORK CAROUSEL — drag/scroll with a tilt-on-scroll feel ----
+   Self-contained: stopPropagation on wheel/touch so the page's own
+   horizontal-scroll-hijack (attached to #scroller, desktop only)
+   never sees these events and this row scrolls independently. */
+function initWorkCarousel() {
+  const carousel = document.querySelector('.work-carousel');
+  if (!carousel) return;
+  const cards = [...carousel.querySelectorAll('.work-card')];
+  const hint = document.querySelector('.work-hint');
+
+  function updateHint() {
+    if (!hint) return;
+    hint.style.display = carousel.scrollWidth > carousel.clientWidth + 2 ? '' : 'none';
+  }
+
+  // Base tilt (from scroll position) and hover tilt (from cursor position
+  // within the card) are tracked separately per card and composed together
+  // in renderCard — so a mouse hover never fights the scroll-driven lean.
+  const baseState = new Map();
+  const hoverState = new Map();
+
+  function renderCard(card) {
+    const base = baseState.get(card) || { rotate: 0, scale: 1 };
+    const hover = hoverState.get(card) || { rx: 0, ry: 0, lift: 0, boost: 0 };
+    card.style.transform =
+      `translateY(${hover.lift}px) rotateX(${hover.rx}deg) rotateY(${base.rotate + hover.ry}deg) scale(${base.scale + hover.boost})`;
+  }
+
+  function updateTilt() {
+    const rect = carousel.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    cards.forEach(card => {
+      const cr = card.getBoundingClientRect();
+      const cardCenter = cr.left + cr.width / 2;
+      const dist = (cardCenter - center) / (rect.width / 2);
+      const clamped = Math.max(-1, Math.min(1, dist));
+      baseState.set(card, { rotate: clamped * -14, scale: 1 - Math.abs(clamped) * 0.12 });
+      renderCard(card);
+    });
+  }
+
+  // Hover: card leans gently toward the cursor and lifts, independent of
+  // the scroll-driven lean (which keeps working while hovered).
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const offsetX = (e.clientX - r.left) / r.width - 0.5;
+      const offsetY = (e.clientY - r.top) / r.height - 0.5;
+      hoverState.set(card, { rx: offsetY * -10, ry: offsetX * 12, lift: -8, boost: 0.04 });
+      renderCard(card);
+    });
+    card.addEventListener('mouseleave', () => {
+      hoverState.delete(card);
+      renderCard(card);
+    });
+  });
+
+  let tickScheduled = false;
+  function requestTilt() {
+    if (tickScheduled) return;
+    tickScheduled = true;
+    requestAnimationFrame(() => { updateTilt(); tickScheduled = false; });
+  }
+
+  carousel.addEventListener('scroll', requestTilt, { passive: true });
+  window.addEventListener('resize', requestTilt);
+  window.addEventListener('resize', updateHint);
+  requestTilt();
+  updateHint();
+
+  // Wheel: convert vertical wheel/trackpad motion into horizontal scroll.
+  // Only claim the event while the carousel actually has room left to move;
+  // once it's scrolled to either end, let it bubble to the page's own
+  // horizontal-scroll engine so scrolling still advances the whole site.
+  carousel.addEventListener('wheel', e => {
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const atStart = carousel.scrollLeft <= 0;
+    const atEnd = carousel.scrollLeft >= maxScroll - 1;
+    if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    carousel.scrollLeft += delta;
+  }, { passive: false });
+
+  // Pointer drag-to-scroll (mouse); touch keeps native scrolling.
+  let isDragging = false, dragStartX = 0, dragStartScroll = 0, moved = false;
+  carousel.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'touch') return;
+    isDragging = true;
+    moved = false;
+    dragStartX = e.clientX;
+    dragStartScroll = carousel.scrollLeft;
+    carousel.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartX;
+    if (Math.abs(dx) > 4) moved = true;
+    carousel.scrollLeft = dragStartScroll - dx;
+  });
+  window.addEventListener('pointerup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.classList.remove('dragging');
+  });
+  // Suppress the click-through to a card's link if the pointer actually dragged.
+  cards.forEach(card => {
+    card.addEventListener('click', e => { if (moved) e.preventDefault(); });
+  });
+  carousel.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
+  carousel.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
+}
+
 /* ---- INIT ---- */
 function startApp() {
   if (!isMobile) {
@@ -1964,6 +1937,8 @@ function startApp() {
   if (isMobile) {
     panels.forEach(p => p.classList.add('visible'));
   }
+
+  initWorkCarousel();
 }
 
 window.addEventListener('resize', () => {
