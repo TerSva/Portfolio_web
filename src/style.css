@@ -250,6 +250,15 @@ body.puls-theme #hook .cs-intro-divider{
   margin-top:clamp(4rem,8vw,6rem);
   margin-bottom:clamp(4rem,8vw,6rem);
 }
+/* This margin is for rhythm BETWEEN moments inside a section. At a
+   section's own edge it doesn't collapse with .cs-section's padding
+   (padding blocks margin collapsing), so the two stacked — measured
+   304px at a section boundary vs. the intended 96px between moments.
+   Same fix .cs-chapter-content already has for its own first/last
+   child: zero the edge that would double up against the section's own
+   padding. */
+.cs-section > .cs-media-pair:first-child{margin-top:0;}
+.cs-section > .cs-media-pair:last-child{margin-bottom:0;}
 /* No max-width/justify-self: the column itself is already sized for
    reading (minmax(16rem,1fr) above), and letting the text fill it from
    the column's own start edge is what gives it the same left position as
@@ -294,6 +303,12 @@ body.puls-theme .cs-media-pair-visual-480{max-width:min(30rem,100%);}
   margin:2.5rem auto;
   width:100%;
 }
+/* Same fix as .cs-chapter-content's own first/last-child rule: this
+   margin doesn't collapse with .cs-section's own padding when the
+   figure sits at a section's edge, so the two stacked instead of one
+   taking over — same bug .cs-media-pair had. */
+.cs-section > .cs-landscape-pair:first-child{margin-top:0;}
+.cs-section > .cs-landscape-pair:last-child{margin-bottom:0;}
 .cs-landscape-pair img{width:100%;height:auto;border-radius:8px;display:block;}
 .cs-landscape-pair.cs-artifact-captioned::after{grid-column:1 / -1;}
 /* Per-image caption (used instead of the single shared
