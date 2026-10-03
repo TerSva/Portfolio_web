@@ -123,29 +123,6 @@
 })();
 </script>
 
-<script>
-/* The CV toolkit is a short capability field, so its three lines may arrive
-   once as the reader reaches them—not as a ticker or repeating decoration. */
-(function(){
-  function init(){
-    var section = document.querySelector('.cv-methods');
-    var content = section && section.querySelector('.cv-methods-grid > div');
-    if (!content || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-    section.setAttribute('data-toolkit-reveal', 'pending');
-    var observer = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (!entry.isIntersecting) return;
-        section.setAttribute('data-toolkit-reveal', 'revealed');
-        observer.unobserve(content);
-      });
-    }, {threshold:.1, rootMargin:'0px 0px -35% 0px'});
-    observer.observe(content);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
-</script>
-
 <main>
 {{ content | safe }}
 </main>
