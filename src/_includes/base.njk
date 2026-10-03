@@ -129,16 +129,17 @@
 (function(){
   function init(){
     var section = document.querySelector('.cv-methods');
-    if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    var content = section && section.querySelector('.cv-methods-grid > div');
+    if (!content || window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
     section.setAttribute('data-toolkit-reveal', 'pending');
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if (!entry.isIntersecting) return;
         section.setAttribute('data-toolkit-reveal', 'revealed');
-        observer.unobserve(section);
+        observer.unobserve(content);
       });
-    }, {threshold:.15, rootMargin:'0px 0px -12% 0px'});
-    observer.observe(section);
+    }, {threshold:.1, rootMargin:'0px 0px -35% 0px'});
+    observer.observe(content);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
