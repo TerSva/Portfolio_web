@@ -17,8 +17,8 @@ navContact: "Kontakt"
 ---
 <section class="work-hero cs-spotlight">
   <div class="work-shell">
-    <p class="work-eyebrow">Ausgewählte Arbeiten</p>
-    <h1>Product- &amp; UX/UI-Arbeiten.</h1>
+    <p class="work-eyebrow">Portfolio · Ausgewählte Arbeiten</p>
+    <h1>Product- &amp; UX/UI-Arbeiten.<span class="work-hero-title-shimmer" aria-hidden="true">Product- &amp; UX/UI-Arbeiten.</span></h1>
     <p>Verschiedene Produkte, ein gemeinsamer Ausgangspunkt. Wie sich Menschen fühlen, wenn sie den Bildschirm öffnen.</p>
   </div>
 </section>
@@ -27,8 +27,11 @@ navContact: "Kontakt"
   <div class="work-shell">
     <div class="work-grid">
       <a class="work-project" href="{{ '/de/work/enow/' | url }}">
-        <div class="work-project-visual">
-          <img class="work-project-crop-bottom" src="{{ '/assets/enow/sos-lockscreen.jpg' | url }}" alt="Enow-SOS-Widget auf dem Sperrbildschirm, mit einem Start-now-Button">
+        <div class="work-project-visual work-project-enow-cover">
+          <img class="work-project-atmosphere" src="{{ '/assets/enow/work-cover-atmosphere-preview.png' | url }}" alt="">
+          <div class="work-project-device">
+            <img src="{{ '/assets/enow/sos-lockscreen.jpg' | url }}" alt="Enow-SOS-Widget auf dem Sperrbildschirm für unmittelbare Unterstützung in einem Stressmoment">
+          </div>
           <span class="work-project-visit" aria-hidden="true"></span>
         </div>
         <div class="work-project-copy">
@@ -40,8 +43,11 @@ navContact: "Kontakt"
         </div>
       </a>
       <a class="work-project" href="{{ '/de/work/spotify/' | url }}">
-        <div class="work-project-visual">
-          <img class="work-project-crop-emotions" src="{{ '/assets/spotify/library-emotions.jpg' | url }}" alt="Neu gestalteter Spotify-Bibliotheksbildschirm mit einer Reihe farbiger Gefühls-Tags">
+        <div class="work-project-visual work-project-spotify-cover">
+          <img class="work-project-atmosphere" src="{{ '/assets/spotify/work-cover-atmosphere-v3-preview.png' | url }}" alt="">
+          <div class="work-project-spotify-device">
+            <img src="{{ '/assets/spotify/library-emotions.jpg' | url }}" alt="Neu gestalteter Spotify-Bibliotheksbildschirm mit einer Reihe farbiger Gefühls-Tags">
+          </div>
           <span class="work-project-visit" aria-hidden="true"></span>
         </div>
         <div class="work-project-copy">
@@ -53,8 +59,11 @@ navContact: "Kontakt"
         </div>
       </a>
       <a class="work-project work-project-featured" href="{{ '/de/work/venek/' | url }}">
-        <div class="work-project-visual">
-          <img class="work-project-reveal" src="{{ '/assets/venek/hero-homepage.jpg' | url }}" alt="Startseite von Galerie Venek: „Welcome to Galerie Venek“ und ein What's-on-Bereich mit kommenden Events">
+        <div class="work-project-visual work-project-venek-cover">
+          <img class="work-project-atmosphere" src="{{ '/assets/venek/work-cover-atmosphere-v3-preview.png' | url }}" alt="">
+          <div class="work-project-browser">
+            <img src="{{ '/assets/venek/hero-homepage.jpg' | url }}" alt="Startseite von Galerie Venek: „Welcome to Galerie Venek“ und ein What's-on-Bereich mit kommenden Events">
+          </div>
           <span class="work-project-visit" aria-hidden="true"></span>
         </div>
         <div class="work-project-copy">
@@ -66,11 +75,13 @@ navContact: "Kontakt"
         </div>
       </a>
       <a class="work-project work-project-featured" href="{{ '/de/work/puls/' | url }}">
-        <div class="work-project-visual">
-          <video autoplay muted loop playsinline aria-hidden="true" poster="{{ '/assets/puls/landing-placeholder.jpg' | url }}">
+        <div class="work-project-visual work-project-puls-cover">
+          <div class="work-project-puls-browser">
+            <video autoplay muted loop playsinline aria-hidden="true" poster="{{ '/assets/puls/landing-placeholder.jpg' | url }}">
             <source src="{{ '/assets/puls/landing-loop.webm' | url }}" type="video/webm">
             <source src="{{ '/assets/puls/landing-loop.mp4' | url }}" type="video/mp4">
-          </video>
+            </video>
+          </div>
           <span class="work-project-visit" aria-hidden="true"></span>
         </div>
         <div class="work-project-copy">

@@ -32,7 +32,7 @@
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
 
 <header class="site-header">
-  <span class="site-brand">Tereza Britta Švanda</span>
+  <a class="site-brand" href="{{ (homeUrl or workUrl or '/work/') | url }}" aria-label="{{ 'Zur Startseite' if lang == 'de' else 'Go to homepage' }}">Tereza Britta Švanda</a>
   <div class="nav-group">
     <nav class="site-nav" aria-label="Main navigation">
       <a href="{{ (workUrl or '/work/') | url }}"{% if activeNav == 'work' %} class="is-active" aria-current="page"{% endif %}>{{ navWork or 'Work' }}</a>
