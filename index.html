@@ -261,11 +261,29 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   color:var(--ch2);transition:color .3s;
 }
 .site-nav a:hover{color:var(--gold);}
-.nav-ext{display:flex;align-items:baseline;gap:.5rem;}
+.nav-ext{
+  display:inline-flex;align-items:center;gap:.5rem;
+  box-sizing:border-box;
+  height:31px;
+  margin:-.36rem -.64rem;
+  padding:0 .85rem;
+  border:1px solid rgba(245,245,220,.18);
+  border-radius:999px;
+  background:rgba(0,31,28,.18);
+  line-height:1;
+  text-decoration:none;
+  transition:color .3s,border-color .3s,background .3s;
+}
+.nav-ext:hover{
+  color:var(--ch);
+  border-color:rgba(245,245,220,.38);
+  background:rgba(245,245,220,.045);
+  text-decoration:none;
+}
 .nav-ext-tag{
   font-family:var(--font-m);
   font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ch3);
+  color:var(--ch3);line-height:1;
 }
 .nav-divider{
   width:1px;align-self:stretch;
@@ -408,18 +426,29 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   box-shadow:0 25px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255,215,0,0.15);
 }
 
+.work-portfolio-cta{
+  align-self:stretch;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding-top:1.2rem;
+  border-top:1px solid rgba(245,245,220,.14);
+}
+.work-more-label{
+  font-family:var(--font-m);font-size:.56rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ch3);
+}
 .work-more{
-  align-self:flex-end;
-  display:flex;align-items:baseline;gap:.5rem;
-  font-family:var(--font-s);font-size:.85rem;color:var(--ch2);
+  display:inline-flex;align-items:baseline;gap:.5rem;
+  font-family:var(--font-s);font-size:.88rem;color:var(--ch2);
   text-decoration:none;
   transition:color .3s ease;
 }
+.work-more::after{content:'→';font-family:var(--font-m);font-size:.8em;transition:transform .3s ease;}
 .work-more:hover{color:var(--gold);}
+.work-more:hover::after{transform:translateX(.28rem);}
 .work-more-tag{
   font-family:var(--font-m);
-  font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ch3);
+  font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ch3);transition:color .3s ease;
 }
 .work-more:hover .work-more-tag{color:var(--gold);}
 
@@ -993,7 +1022,12 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
     align-items: flex-start !important;
   }
   .work-content { width: 100%; }
-  .work-more { margin-right: 6vw; }
+  .work-portfolio-cta {
+    margin: 0 6vw;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .7rem;
+  }
   .work-head { padding: 0 6vw; }
   .work-carousel {
     padding: 1rem 6vw 1.5rem !important;
@@ -1093,6 +1127,9 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   transition:width .4s cubic-bezier(0.16,1,0.3,1);
 }
 .site-nav a:hover::after{width:100%;}
+/* The portfolio switch is an outlined control, not a section link. */
+.site-nav a.nav-ext{padding:0 .85rem;}
+.site-nav a.nav-ext::after{display:none;}
 
 /* Hero text depth */
 .hero-big{text-shadow: 0 0 120px rgba(245,245,220,0.15), 0 0 40px rgba(245,245,220,0.05);}
@@ -1318,9 +1355,13 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       </a>
     </div>
 
-    <a class="work-more" href="../work/" aria-label="Open the full Product and UX/UI portfolio">
-      UX/UI <span class="work-more-tag" aria-hidden="true" data-i18n="work.more">Celé portfolio</span>
-    </a>
+    <div class="work-portfolio-cta">
+      <span class="work-more-label" data-i18n="work.moreLabel">Další produktová práce</span>
+      <a class="work-more" href="../work/" data-i18n-aria="aria.workMore" aria-label="Otevřít celé Product & UX/UI portfolio">
+        <span data-i18n="work.moreAction">Zobrazit</span>
+        <span class="work-more-tag" data-i18n="work.more">celé Product & UX/UI portfolio</span>
+      </a>
+    </div>
    </div>
   </section>
 
@@ -1461,7 +1502,10 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'work.puls.tagline': 'Landing page, na které jsi ty ve středu',
       'work.puls.aria': 'Otevřít case study PULS',
       'work.puls.alt': 'PULS — landing page s planoucím logem',
-      'work.more': 'Celé portfolio',
+      'work.moreLabel': 'Další produktová práce',
+      'work.moreAction': 'Zobrazit',
+      'work.more': 'celé Product & UX/UI portfolio',
+      'aria.workMore': 'Otevřít celé Product & UX/UI portfolio',
       'aria.quote': 'Citát',
       'quote.text': '„Jsme bytosti tvořené z příběhů.<br><em>Design je jen další jazyk, jak je vyprávět.</em>“',
       'quote.author': 'Můj přístup k tvorbě',
@@ -1536,7 +1580,10 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
       'work.puls.tagline': 'A landing page that puts you at the center',
       'work.puls.aria': 'Open the PULS case study',
       'work.puls.alt': 'PULS — landing page with a glowing flame logo',
-      'work.more': 'Full portfolio',
+      'work.moreLabel': 'More product work',
+      'work.moreAction': 'View the',
+      'work.more': 'full Product & UX/UI portfolio',
+      'aria.workMore': 'Open the full Product & UX/UI portfolio',
       'aria.quote': 'Quote',
       'quote.text': '“We are beings made of stories.<br><em>Design is just another language to tell them in.</em>”',
       'quote.author': 'My approach to craft',
@@ -1569,6 +1616,8 @@ html[lang="en"] .hero-line-right{ letter-spacing:-0.005em; }
   };
 
   function detectInitialLang(){
+    const requested = new URLSearchParams(window.location.search).get('lang');
+    if (requested === 'cs' || requested === 'en') return requested;
     try {
       const stored = localStorage.getItem('lang');
       if (stored === 'cs' || stored === 'en') return stored;

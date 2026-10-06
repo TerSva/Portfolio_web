@@ -7,7 +7,7 @@ layout: base.njk
 #}
 <section class="cs-cover cs-spotlight">
   <div class="cs-header">
-    <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Alle Arbeiten{% else %}All work{% endif %}</a>
+    <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Zurück zu ausgewählten Arbeiten{% else %}Back to selected work{% endif %}</a>
     <h1 class="cs-title">
       <span class="cs-title-project">{{ caseStudy.projectTitle }}</span>
       <span class="cs-title-statement">{{ caseStudy.statement | safe }}</span>
@@ -32,3 +32,54 @@ layout: base.njk
 </section>
 
 {{ content | safe }}
+
+{% if caseStudy.nextProject %}
+<nav class="cs-next" id="case-next" aria-label="{% if lang == 'de' %}Projekt-Navigation{% else %}Project navigation{% endif %}">
+  <div class="cs-next-inner">
+    <a class="cs-next-card" href="{{ caseStudy.nextProject.href | url }}">
+      <div class="cs-next-copy">
+        <span class="cs-next-label">{% if lang == 'de' %}Weiter mit{% else %}Continue with{% endif %}</span>
+        <h2>{{ caseStudy.nextProject.title }}</h2>
+        <p>{{ caseStudy.nextProject.statement }}</p>
+        <span class="cs-next-cta">{% if lang == 'de' %}{{ caseStudy.nextProject.title }} Case Study öffnen{% else %}Open {{ caseStudy.nextProject.title }} case study{% endif %} <span aria-hidden="true">→</span></span>
+      </div>
+      {% if caseStudy.nextProject.cover == 'enow' %}
+      <div class="cs-next-visual cs-next-enow-cover">
+        <img class="cs-next-atmosphere" src="{{ '/assets/enow/work-cover-atmosphere-preview.png' | url }}" alt="">
+        <div class="cs-next-enow-device">
+          <img src="{{ caseStudy.nextProject.image | url }}" alt="{{ caseStudy.nextProject.imageAlt }}">
+        </div>
+      </div>
+      {% elif caseStudy.nextProject.cover == 'spotify' %}
+      <div class="cs-next-visual cs-next-spotify-cover">
+        <img class="cs-next-atmosphere" src="{{ '/assets/spotify/work-cover-atmosphere-v3-preview.png' | url }}" alt="">
+        <div class="cs-next-spotify-device">
+          <img src="{{ caseStudy.nextProject.image | url }}" alt="{{ caseStudy.nextProject.imageAlt }}">
+        </div>
+      </div>
+      {% elif caseStudy.nextProject.cover == 'venek' %}
+      <div class="cs-next-visual cs-next-venek-cover">
+        <img class="cs-next-atmosphere" src="{{ '/assets/venek/work-cover-atmosphere-v3-preview.png' | url }}" alt="">
+        <div class="cs-next-venek-browser">
+          <img src="{{ caseStudy.nextProject.image | url }}" alt="{{ caseStudy.nextProject.imageAlt }}">
+        </div>
+      </div>
+      {% elif caseStudy.nextProject.cover == 'puls' %}
+      <div class="cs-next-visual cs-next-puls-cover">
+        <div class="cs-next-puls-browser">
+          <video autoplay muted loop playsinline aria-hidden="true" poster="{{ '/assets/puls/landing-placeholder.jpg' | url }}">
+            <source src="{{ '/assets/puls/landing-loop.webm' | url }}" type="video/webm">
+            <source src="{{ '/assets/puls/landing-loop.mp4' | url }}" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      {% else %}
+      <div class="cs-next-visual">
+        <img src="{{ caseStudy.nextProject.image | url }}" alt="{{ caseStudy.nextProject.imageAlt }}">
+      </div>
+      {% endif %}
+    </a>
+    <a class="cs-next-back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Zurück zu allen Arbeiten{% else %}Back to all work{% endif %}</a>
+  </div>
+</nav>
+{% endif %}
