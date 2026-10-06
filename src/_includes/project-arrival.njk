@@ -1,0 +1,30 @@
+{# Optional, project-specific opening scene. Expects caseStudy.arrival. #}
+{% if caseStudy.arrival %}
+<section class="enow-arrival" aria-labelledby="enow-arrival-title">
+  <div class="enow-arrival__copy">
+    <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> All work</a>
+    <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
+    <h2 id="enow-arrival-title">{{ caseStudy.arrival.title }}</h2>
+    <p class="enow-arrival__statement">{{ caseStudy.arrival.statement }}</p>
+    {% if caseStudy.arrival.meta %}
+    <dl class="enow-arrival__meta">
+      {% for item in caseStudy.arrival.meta %}
+      <div><dt>{{ item.label }}</dt><dd>{{ item.value }}</dd></div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+    <div class="enow-arrival__links">
+      <a class="enow-arrival__link" href="{{ caseStudy.arrival.prototypeHref }}" target="_blank" rel="noopener">{{ caseStudy.arrival.prototypeLabel }} <span aria-hidden="true">→</span></a>
+      {% if caseStudy.arrival.walkthroughHref %}
+      <a class="enow-arrival__link enow-arrival__link--secondary" href="{{ caseStudy.arrival.walkthroughHref }}" target="_blank" rel="noopener">{{ caseStudy.arrival.walkthroughLabel }} <span aria-hidden="true">→</span></a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="enow-arrival__scene" aria-label="{{ caseStudy.arrival.sceneLabel }}">
+    <img class="enow-arrival__atmosphere" src="{{ caseStudy.arrival.atmosphere | url }}" alt="" aria-hidden="true">
+    <div class="enow-arrival__device">
+      <img src="{{ caseStudy.arrival.screen | url }}" alt="{{ caseStudy.arrival.screenAlt }}">
+    </div>
+  </div>
+</section>
+{% endif %}

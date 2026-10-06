@@ -5,6 +5,9 @@ layout: base.njk
   Reusable case-study frame. A project page supplies `caseStudy` in its
   front matter, then writes only its narrative sections as page content.
 #}
+{% if caseStudy.arrival %}
+{% include "project-arrival.njk" %}
+{% else %}
 <section class="cs-cover cs-spotlight">
   <div class="cs-header">
     <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Zurück zu ausgewählten Arbeiten{% else %}Back to selected work{% endif %}</a>
@@ -30,6 +33,7 @@ layout: base.njk
     <p>{{ caseStudy.outcome }}</p>
   </div>
 </section>
+{% endif %}
 
 {{ content | safe }}
 
