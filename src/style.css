@@ -462,25 +462,40 @@ img{max-width:100%;display:block;}
 .site-header .lang-menu button[aria-selected="true"]{color:var(--nav-gold);}
 
 @media (max-width:760px){
-  /* The fixed navigation becomes two rows on phones. Keep the shared
-     offset truthful so case-study openings never disappear behind it. */
-  :root{--nav-height:9.25rem;}
+  /* The phone header is a deliberate two-level layout, not a flex row that
+     happens to wrap differently for longer German labels. */
+  :root{--nav-height:10.75rem;}
   .site-header{
-    height:auto;flex-wrap:wrap;
-    padding:1rem 5vw;gap:.75rem 1rem;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"brand language" "nav nav";
+    align-items:center;
+    height:auto;
+    min-height:var(--nav-height);
+    padding:1rem 5vw .9rem;
+    gap:.85rem 1rem;
   }
-  .site-header .site-brand{font-size:1.2rem;}
+  .site-header .site-brand{grid-area:brand;font-size:1.2rem;}
   .site-header .nav-group{
-    order:3;width:100%;
-    justify-content:center;gap:1.5rem;
-    padding-top:.75rem;
+    display:contents;
+  }
+  .site-header .site-nav{
+    grid-area:nav;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.2rem 1rem;
+    width:100%;
+    padding-top:.65rem;
     border-top:1px solid var(--nav-em);
   }
-  .site-header .site-nav a{font-size:.62rem;}
+  .site-header .site-nav a{font-size:.62rem;min-height:38px;padding:0 .1rem 2px;}
+  .site-header .lang-switch{grid-area:language;justify-self:end;}
+  .site-header .lang-current{min-height:42px;padding:.45rem .85rem;}
 }
 @media (max-width:380px){
-  .site-header .nav-group{gap:1rem;}
-  .site-header .site-nav{gap:1.1rem;}
+  .site-header .site-brand{font-size:1.08rem;}
+  .site-header .site-nav{gap:.15rem .6rem;}
+  .site-header .site-nav a{font-size:.58rem;letter-spacing:.12em;}
 }
 
 /* ============================================================
@@ -772,6 +787,17 @@ body[data-zone="z3"] .cs-dot.active{
   object-fit:cover;
   object-position:top;
 }
+/* Spotify uses the same story-first structure as Enow, but its world is
+   chromesthesia: an actual redesign screen sits against its own colour field. */
+.enow-arrival--spotify{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);background:#071723;}
+.enow-arrival--spotify .enow-arrival__copy{background:linear-gradient(105deg,#071723 72%,rgba(7,23,35,.94));}
+.enow-arrival--spotify .enow-arrival__scene{background:#081923;}
+.enow-arrival--spotify .enow-arrival__scene::after{background:linear-gradient(90deg,rgba(7,23,35,.44),transparent 44%),linear-gradient(0deg,rgba(3,12,19,.3),transparent 48%);}
+.enow-arrival--spotify .enow-arrival__atmosphere{object-position:center 51%;filter:brightness(.82) saturate(.94);}
+.enow-arrival--spotify .enow-arrival__device{left:47%;bottom:5%;width:clamp(11rem,23vw,18rem);border-color:#090d13;background:#090d13;box-shadow:0 0 0 1px rgba(200,239,226,.34),0 1.6rem 3.25rem rgba(0,0,0,.6),0 0 3.5rem rgba(69,189,213,.17);}
+.enow-arrival--spotify .enow-arrival__device::before{background:#090d13;}
+.enow-arrival--spotify .enow-arrival__link span{color:#e7c36c;}
+.enow-arrival--spotify .enow-arrival__link:hover{border-color:#e7c36c;color:#e7c36c;}
 @media(max-width:760px){
   .enow-arrival{
     grid-template-columns:1fr;
@@ -786,6 +812,7 @@ body[data-zone="z3"] .cs-dot.active{
   .enow-arrival__scene{min-height:clamp(25rem,112vw,34rem);}
   .enow-arrival__atmosphere{object-position:center 48%;}
   .enow-arrival__device{left:50%;bottom:4%;width:clamp(10rem,47vw,15rem);}
+  .enow-arrival--spotify .enow-arrival__device{left:50%;bottom:4%;width:clamp(10rem,47vw,15rem);}
 }
 
 /* ============================================================
@@ -1040,6 +1067,46 @@ html[lang="de"] .cs-intro-copy{
   margin:2.5rem auto;
 }
 .cs-dashboard-screens img{width:100%;height:auto;}
+
+/* Spotify's product evidence is the case-study payoff, not an appendix to
+   a narrow reading column. The explanatory copy keeps its editorial measure;
+   the actual before/after screens open into their own shared visual field. */
+#prototype .cs-prototype-evidence{
+  width:min(100% - (var(--gutter) * 2),72rem);
+  margin:clamp(2.75rem,6vw,5rem) auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:end;
+  gap:clamp(1.25rem,3vw,3rem);
+}
+#prototype .cs-prototype-evidence.cs-triple{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+#prototype .cs-prototype-screen{
+  display:grid;
+  gap:.55rem;
+  justify-items:center;
+}
+#prototype .cs-prototype-screen > span{
+  color:var(--cs-muted);
+  font-family:var(--font-m);font-size:.62rem;line-height:1.45;letter-spacing:.08em;
+  text-align:center;text-transform:uppercase;
+}
+#prototype .cs-prototype-evidence .cs-prototype-screen > img{
+  width:100%;
+  max-width:20rem;
+  justify-self:center;
+}
+#prototype .cs-prototype-evidence--home .cs-prototype-screen > img{max-width:18rem;}
+#prototype .cs-prototype-follow-up{margin-top:clamp(4rem,8vw,6.5rem);}
+#prototype .cs-prototype-follow-up .cs-chapter-content p{margin:0;}
+@media (max-width:760px){
+  #prototype .cs-prototype-evidence,
+  #prototype .cs-prototype-evidence.cs-triple{grid-template-columns:1fr;gap:1.5rem;}
+  #prototype .cs-prototype-evidence .cs-prototype-screen > img,
+  #prototype .cs-prototype-evidence--home .cs-prototype-screen > img{max-width:min(20rem,100%);}
+  #prototype .cs-prototype-follow-up{margin-top:3.5rem;}
+}
 
 /* The MoSCoW export carries pale category labels in its transparent area.
    A dark evidence surface restores their contrast without altering the asset. */
@@ -1404,8 +1471,8 @@ html[lang="de"] .cs-intro-copy{
    MOBILE
 ============================================================ */
 @media (max-width:760px){
-  html{scroll-padding-top:9.5rem;}
-  .cs-header{padding-top:9.5rem;} /* header wraps to 2 rows on mobile */
+  html{scroll-padding-top:calc(var(--nav-height) + .25rem);}
+  .cs-header{padding-top:calc(var(--nav-height) + .25rem);}
   .cs-cover{padding-bottom:3.5rem;}
   .cs-cover .cs-header{padding-bottom:2.5rem;}
   .cs-title-project{font-size:1.35rem;}
@@ -1416,7 +1483,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-chapter-grid{grid-template-columns:1fr;gap:1.25rem;}
   .cs-intro-copy{text-align:left;}
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
-  .cs-contact{padding-top:calc(9.5rem + 3rem);}
+  .cs-contact{padding-top:calc(var(--nav-height) + 3rem);}
   .cs-contact-grid{grid-template-columns:1fr;grid-template-areas:"heading" "story" "connect";gap:2.5rem;}
   .cs-contact-heading h1{max-width:13ch;}
   .about-hero{padding-top:calc(9.5rem + 3rem);}
@@ -1428,9 +1495,9 @@ html[lang="de"] .cs-intro-copy{
   .about-section-heading h2,.about-collaboration h2{max-width:13ch;}
   .about-section-heading h2 span{display:inline;}
   .about-steps li{gap:1rem;}
-  .work-hero{min-height:auto;padding-top:calc(9.5rem + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}
+  .work-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}
   .work-art-bridge{padding:3rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{font-size:clamp(3.25rem,14vw,4.75rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{object-position:center 62%;}
-  .cv-hero{padding-top:calc(9.5rem + 3rem);}
+  .cv-hero{padding-top:calc(var(--nav-height) + 3rem);}
   .cv-hero h1{font-size:clamp(3.1rem,12.5vw,4.7rem);}
   .cv-overview-grid,.cv-timeline-list li,.cv-methods-grid,.cv-contact-grid{grid-template-columns:1fr;gap:2rem;}
   .cv-timeline-list{margin-left:0;}

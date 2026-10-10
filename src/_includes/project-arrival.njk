@@ -1,10 +1,10 @@
 {# Optional, project-specific opening scene. Expects caseStudy.arrival. #}
 {% if caseStudy.arrival %}
-<section class="enow-arrival" aria-labelledby="enow-arrival-title">
+<section class="enow-arrival{% if caseStudy.arrival.variant %} enow-arrival--{{ caseStudy.arrival.variant }}{% endif %}" aria-labelledby="project-arrival-title">
   <div class="enow-arrival__copy">
-    <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> All work</a>
+    <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ 'Alle Arbeiten' if lang == 'de' else 'All work' }}</a>
     <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
-    <h2 id="enow-arrival-title">{{ caseStudy.arrival.title }}</h2>
+    <h2 id="project-arrival-title">{{ caseStudy.arrival.title }}</h2>
     <p class="enow-arrival__statement">{{ caseStudy.arrival.statement }}</p>
     {% if caseStudy.arrival.meta %}
     <dl class="enow-arrival__meta">
