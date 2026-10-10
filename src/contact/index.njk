@@ -10,7 +10,8 @@ ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
 <section class="cs-contact cs-spotlight">
   <div class="cs-contact-grid">
     <div class="cs-contact-heading">
-      <h1>What story is your product trying to tell?</h1>
+      <p class="contact-kicker">Start a conversation</p>
+      <h1>A good first message doesn’t need to be perfect.</h1>
     </div>
 
     <div class="cs-contact-story">
@@ -19,11 +20,37 @@ ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
     </div>
 
     <div class="cs-contact-connect">
+      <form class="contact-conversation" data-contact-chat action="https://formspree.io/f/mljgnpye" method="POST" novalidate data-required-message="Please add your name, email and a short message." data-email-message="Please enter a valid email address." data-sending-message="Sending your message…" data-success-message="Thank you — your message is on its way. I’ll reply as soon as I can." data-error-message="Something went wrong. Please try again or email me directly.">
+        <div class="contact-conversation__heading">
+          <span>One question to start</span>
+          <h2>What brings you here?</h2>
+          <p>Choose a starting point, then tell me only what feels useful.</p>
+        </div>
+        <fieldset class="contact-conversation__choices">
+          <legend>Choose a starting point.</legend>
+          <label><input type="radio" name="topic" value="A product or UX challenge" checked><span>A product or UX challenge</span></label>
+          <label><input type="radio" name="topic" value="A role or collaboration"><span>A role or collaboration</span></label>
+          <label><input type="radio" name="topic" value="Something else"><span>Something else</span></label>
+        </fieldset>
+        <label class="contact-conversation__field">
+          <span>What would you like me to know?</span>
+          <textarea name="message" rows="5" placeholder="What are you building, or where are you stuck?"></textarea>
+        </label>
+        <div class="contact-conversation__details">
+          <label class="contact-conversation__field"><span>Your name</span><input name="name" type="text" autocomplete="name"></label>
+          <label class="contact-conversation__field"><span>Email</span><input name="email" type="email" autocomplete="email"></label>
+        </div>
+        <input type="hidden" name="_subject" value="Portfolio enquiry">
+        <button class="contact-conversation__send" type="submit">Send message <span aria-hidden="true">→</span></button>
+        <p class="contact-conversation__note" data-contact-status aria-live="polite">I’ll receive your message directly — no email app needs to open. By sending, you acknowledge the processing described in the <a href="{{ '/privacy/' | url }}">Privacy details</a>.</p>
+      </form>
+    </div>
+
+    <div class="cs-contact-ways">
       <div class="cs-contact-email-block">
-        <span>Start a conversation</span>
+        <span>Prefer your own email?</span>
         <a href="mailto:brittasvanda@gmail.com">brittasvanda@gmail.com</a>
       </div>
-
       <nav class="cs-contact-links" aria-label="Professional profiles">
         <a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener">Behance</a>
@@ -31,3 +58,32 @@ ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var form = document.querySelector('[data-contact-chat]');
+  if (!form) return;
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    var data = new FormData(form);
+    var status = form.querySelector('[data-contact-status]');
+    var name = String(data.get('name') || '').trim();
+    var email = String(data.get('email') || '').trim();
+    var message = String(data.get('message') || '').trim();
+    if (!name || !email || !message) { status.textContent = form.dataset.requiredMessage; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = form.dataset.emailMessage; return; }
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    status.textContent = form.dataset.sendingMessage;
+    fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+      .then(function(response){ if (!response.ok) throw new Error('Form submission failed'); return response.json(); })
+      .then(function(){
+        form.reset();
+        form.querySelector('input[name="topic"]:checked').checked = true;
+        status.textContent = form.dataset.successMessage;
+      })
+      .catch(function(){ status.textContent = form.dataset.errorMessage; })
+      .finally(function(){ button.disabled = false; });
+  });
+})();
+</script>

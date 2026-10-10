@@ -129,7 +129,10 @@
 
 <footer class="site-footer cs-footer-dark cs-spotlight">
   <span>© 2026 Tereza Britta Švanda</span>
-  <a class="footer-art-link" href="{{ '/art/?lang=en' | url }}">Art portfolio</a>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a class="footer-art-link" href="{{ '/art/?lang=en' | url }}">Art portfolio</a>
+    <a class="footer-art-link" href="{{ ('/de/privacy/' if lang == 'de' else '/privacy/') | url }}">{{ 'Datenschutz' if lang == 'de' else 'Privacy' }}</a>
+  </nav>
   <span>Czech Republic / Germany / World</span>
 </footer>
 

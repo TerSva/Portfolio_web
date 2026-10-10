@@ -15,4 +15,58 @@ navWork: "Arbeit"
 navAbout: "Über mich"
 navContact: "Kontakt"
 ---
-<section class="cs-contact cs-spotlight"><div class="cs-contact-grid"><div class="cs-contact-heading"><h1>Welche Geschichte soll dein Produkt erzählen?</h1></div><div class="cs-contact-story"><p class="cs-contact-lead">Ich verbinde die Logik von Designsystemen mit der Empathie einer kreativen Gestalterin — und mache Komplexität zu klaren, menschlichen Produkterlebnissen.</p><p>Ob Produkt im Aufbau, schwieriger Flow oder erste Idee: Schreib mir.</p></div><div class="cs-contact-connect"><div class="cs-contact-email-block"><span>Gespräch beginnen</span><a href="mailto:brittasvanda@gmail.com">brittasvanda@gmail.com</a></div><nav class="cs-contact-links" aria-label="Berufliche Profile"><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener">Behance</a></nav></div></div></section>
+<section class="cs-contact cs-spotlight">
+  <div class="cs-contact-grid">
+    <div class="cs-contact-heading"><p class="contact-kicker">Gespräch beginnen</p><h1>Eine gute erste Nachricht muss nicht perfekt sein.</h1></div>
+    <div class="cs-contact-story"><p class="cs-contact-lead">Ich verbinde die Logik von Designsystemen mit der Empathie einer kreativen Gestalterin — und mache Komplexität zu klaren, menschlichen Produkterlebnissen.</p><p>Ob Produkt im Aufbau, schwieriger Flow oder erste Idee: Schreib mir.</p></div>
+    <div class="cs-contact-connect">
+      <form class="contact-conversation" data-contact-chat action="https://formspree.io/f/mljgnpye" method="POST" novalidate data-required-message="Bitte ergänze deinen Namen, deine E-Mail-Adresse und eine kurze Nachricht." data-email-message="Bitte gib eine gültige E-Mail-Adresse ein." data-sending-message="Deine Nachricht wird gesendet…" data-success-message="Danke — deine Nachricht ist unterwegs. Ich melde mich so bald wie möglich." data-error-message="Etwas ist schiefgelaufen. Bitte versuche es noch einmal oder schreibe mir direkt.">
+        <div class="contact-conversation__heading"><span>Eine Frage zum Anfang</span><h2>Was führt dich hierher?</h2><p>Wähle einen Ausgangspunkt und erzähl nur, was gerade hilfreich ist.</p></div>
+        <fieldset class="contact-conversation__choices">
+          <legend>Wähle einen Ausgangspunkt.</legend>
+          <label><input type="radio" name="topic" value="Ein Produkt oder eine UX-Herausforderung" checked><span>Ein Produkt oder eine UX-Herausforderung</span></label>
+          <label><input type="radio" name="topic" value="Eine Rolle oder Zusammenarbeit"><span>Eine Rolle oder Zusammenarbeit</span></label>
+          <label><input type="radio" name="topic" value="Etwas anderes"><span>Etwas anderes</span></label>
+        </fieldset>
+        <label class="contact-conversation__field"><span>Was sollte ich wissen?</span><textarea name="message" rows="5" placeholder="Woran arbeitest du gerade oder wo hakt es?"></textarea></label>
+        <div class="contact-conversation__details"><label class="contact-conversation__field"><span>Dein Name</span><input name="name" type="text" autocomplete="name"></label><label class="contact-conversation__field"><span>E-Mail</span><input name="email" type="email" autocomplete="email"></label></div>
+        <input type="hidden" name="_subject" value="Portfolio-Anfrage">
+        <button class="contact-conversation__send" type="submit">Nachricht senden <span aria-hidden="true">→</span></button>
+        <p class="contact-conversation__note" data-contact-status aria-live="polite">Ich erhalte deine Nachricht direkt — kein E-Mail-Programm muss sich öffnen. Mit dem Absenden nimmst du die Verarbeitung gemäß den <a href="{{ '/de/privacy/' | url }}">Datenschutzhinweisen</a> zur Kenntnis.</p>
+      </form>
+    </div>
+    <div class="cs-contact-ways">
+      <div class="cs-contact-email-block"><span>Lieber direkt schreiben?</span><a href="mailto:brittasvanda@gmail.com">brittasvanda@gmail.com</a></div>
+      <nav class="cs-contact-links" aria-label="Berufliche Profile"><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener">Behance</a></nav>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var form = document.querySelector('[data-contact-chat]');
+  if (!form) return;
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    var data = new FormData(form);
+    var status = form.querySelector('[data-contact-status]');
+    var name = String(data.get('name') || '').trim();
+    var email = String(data.get('email') || '').trim();
+    var message = String(data.get('message') || '').trim();
+    if (!name || !email || !message) { status.textContent = form.dataset.requiredMessage; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = form.dataset.emailMessage; return; }
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    status.textContent = form.dataset.sendingMessage;
+    fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+      .then(function(response){ if (!response.ok) throw new Error('Form submission failed'); return response.json(); })
+      .then(function(){
+        form.reset();
+        form.querySelector('input[name="topic"]:checked').checked = true;
+        status.textContent = form.dataset.successMessage;
+      })
+      .catch(function(){ status.textContent = form.dataset.errorMessage; })
+      .finally(function(){ button.disabled = false; });
+  });
+})();
+</script>
