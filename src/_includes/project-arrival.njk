@@ -2,7 +2,12 @@
 {% if caseStudy.arrival %}
 <section class="enow-arrival{% if caseStudy.arrival.variant %} enow-arrival--{{ caseStudy.arrival.variant }}{% endif %}" aria-labelledby="project-arrival-title">
   <div class="enow-arrival__copy">
-    <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ 'Alle Arbeiten' if lang == 'de' else 'All work' }}</a>
+    <nav class="enow-arrival__navigation" aria-label="{{ 'Projekt-Navigation' if lang == 'de' else 'Project navigation' }}">
+      <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ 'Alle Arbeiten' if lang == 'de' else 'All work' }}</a>
+      {% if caseStudy.arrival.previousProject %}
+      <a class="enow-arrival__previous" href="{{ caseStudy.arrival.previousProject.href | url }}"><span aria-hidden="true">←</span> {{ 'Zurück zu' if lang == 'de' else 'Back to' }} {{ caseStudy.arrival.previousProject.title }}</a>
+      {% endif %}
+    </nav>
     <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
     <h2 id="project-arrival-title">{{ caseStudy.arrival.title }}</h2>
     <p class="enow-arrival__statement">{{ caseStudy.arrival.statement }}</p>
@@ -21,9 +26,16 @@
     </div>
   </div>
   <div class="enow-arrival__scene" aria-label="{{ caseStudy.arrival.sceneLabel }}">
-    <img class="enow-arrival__atmosphere" src="{{ caseStudy.arrival.atmosphere | url }}" alt="" aria-hidden="true">
+    {% if caseStudy.arrival.atmosphere %}<img class="enow-arrival__atmosphere" src="{{ caseStudy.arrival.atmosphere | url }}" alt="" aria-hidden="true">{% endif %}
     <div class="enow-arrival__device">
+      {% if caseStudy.arrival.videoWebm %}
+      <video autoplay muted loop playsinline poster="{{ caseStudy.arrival.poster | url }}" aria-label="{{ caseStudy.arrival.screenAlt }}">
+        <source src="{{ caseStudy.arrival.videoWebm | url }}" type="video/webm">
+        {% if caseStudy.arrival.videoMp4 %}<source src="{{ caseStudy.arrival.videoMp4 | url }}" type="video/mp4">{% endif %}
+      </video>
+      {% else %}
       <img src="{{ caseStudy.arrival.screen | url }}" alt="{{ caseStudy.arrival.screenAlt }}">
+      {% endif %}
     </div>
   </div>
 </section>

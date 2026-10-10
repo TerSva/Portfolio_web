@@ -143,7 +143,6 @@ body.puls-theme .cs-spotlight::before{
    index card affordance (.work-project-visual) so the same "cooler
    green light" identity carries from the index into the case study —
    always on, not a hover reveal, and visible starting at the Hook. */
-body.puls-theme #hook .cs-hero-visual,
 body.puls-theme .cs-artifact{
   box-shadow:0 0 42px 8px rgba(77,191,163,.18);
 }
@@ -158,68 +157,6 @@ body.puls-theme .cs-visual-full.cs-artifact:hover,
 body.puls-theme .cs-dashboard-screens.cs-artifact:hover,
 body.puls-theme .cs-hero-visual.cs-artifact:hover{
   box-shadow:0 0 52px 10px rgba(77,191,163,.26);
-}
-
-/* Hook visual, PULS only: a small contained logo mark, not the
-   editorial full-bleed hero image other case studies use. The
-   whole point of this page's hero is restraint, typography does
-   the work, the logo is a quiet accent, not a dominant graphic. */
-body.puls-theme #hook .cs-hero-visual{
-  width:100%;max-width:21rem;
-  margin:0 auto;
-  aspect-ratio:1/1;
-  background:var(--cs-surface);
-  border:1px solid var(--cs-border);
-  border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  padding:2.5rem;
-}
-body.puls-theme #hook .cs-hero-visual img{
-  width:100%;height:100%;object-fit:contain;
-}
-
-/* Text left, logo right, instead of the shared centered vertical
-   stack: the visual anchor is visible from the first screen instead
-   of after three stacked text blocks. Asymmetric ratio (not 50/50)
-   echoes the Work index's own 1.35fr/1fr card grid, so the logo
-   stays secondary to the text rather than gaining equal weight. */
-body.puls-theme #hook{
-  display:grid;
-  grid-template-columns:1.9fr 1fr;
-  gap:clamp(2rem,5vw,4rem);
-  align-items:center;
-  /* Matches .cs-header's own width formula exactly (100% - gutter*2,
-     capped at media-measure) instead of relying on .cs-section's own
-     gutter padding — that left this column's text inset one extra
-     --gutter further right than the title block above it. */
-  width:min(100% - (var(--gutter) * 2), var(--media-measure));
-  margin:0 auto;
-  padding-left:0;
-  padding-right:0;
-}
-body.puls-theme #hook .cs-intro-copy{
-  width:100%;
-  margin:0;
-  text-align:left;
-}
-/* The shared .cs-subtitle/.cs-intro-divider width cap (var(--measure),
-   42rem) was tuned for the old full-width centered intro column. In
-   this two-column layout the text column is wider than that, so both
-   ended noticeably short of the plain paragraph's own right edge —
-   looked like a stray, misplaced line rather than a deliberate rule.
-   Match the column's full width instead of the shared measure. */
-body.puls-theme #hook .cs-intro-copy .cs-subtitle,
-body.puls-theme #hook .cs-intro-divider{
-  width:100%;
-  margin-left:0;
-}
-@media (max-width:760px){
-  body.puls-theme #hook{
-    grid-template-columns:1fr;
-  }
-  body.puls-theme #hook .cs-hero-visual{
-    margin-top:clamp(2rem,5vw,3rem);
-  }
 }
 
 /* Text-next-to-video pairing for the Prototype lab animations. Contained
@@ -680,14 +617,17 @@ body[data-zone="z3"] .cs-dot.active{
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-.enow-arrival__back{
+.enow-arrival__navigation{
   position:absolute;top:clamp(2rem,4vw,4rem);left:var(--enow-copy-inline);
+  display:flex;align-items:center;gap:clamp(.8rem,1.6vw,1.5rem);
+}
+.enow-arrival__back,.enow-arrival__previous{
   display:inline-flex;align-items:center;gap:.45rem;min-height:44px;
   margin:0;
   color:var(--nav-ch2);font-family:var(--font-m);font-size:.68rem;
   font-weight:600;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;
 }
-.enow-arrival__back:hover{color:var(--nav-ch);text-decoration:none;}
+.enow-arrival__back:hover,.enow-arrival__previous:hover{color:var(--nav-ch);text-decoration:none;}
 .enow-arrival__copy h2{
   margin:0;
   color:var(--nav-ch);
@@ -820,6 +760,19 @@ body[data-zone="z3"] .cs-dot.active{
 .enow-arrival--venek .enow-arrival__device img{border-radius:calc(.55rem - 1px);object-fit:cover;}
 .enow-arrival--venek .enow-arrival__link span{color:#ead36e;}
 .enow-arrival--venek .enow-arrival__link:hover{border-color:#ead36e;color:#ead36e;}
+/* PULS leads with the actual moving landing page. The dark violet field and
+   restrained gold light belong to the project, while the browser surface
+   makes its frontend and interaction work visible before the case-study copy. */
+.enow-arrival--puls{grid-template-columns:minmax(0,.79fr) minmax(0,1.21fr);background:#0c0a1f;}
+.enow-arrival--puls .enow-arrival__copy{background:linear-gradient(105deg,#0c0a1f 70%,rgba(12,10,31,.94));}
+.enow-arrival--puls .enow-arrival__statement{max-width:33ch;}
+.enow-arrival--puls .enow-arrival__scene{background:radial-gradient(ellipse 42% 62% at 76% 42%,rgba(124,85,229,.34),transparent 72%),radial-gradient(ellipse 31% 38% at 30% 83%,rgba(226,178,79,.13),transparent 72%),linear-gradient(130deg,#090919 0%,#171438 55%,#0d0b24 100%);}
+.enow-arrival--puls .enow-arrival__scene::after{background:linear-gradient(90deg,rgba(12,10,31,.47),transparent 42%),linear-gradient(0deg,rgba(6,5,16,.28),transparent 52%);}
+.enow-arrival--puls .enow-arrival__device{left:50%;top:50%;bottom:auto;width:min(83%,54rem);aspect-ratio:1800 / 1013;padding:.45rem;border:1px solid rgba(231,219,255,.42);border-radius:.55rem;background:rgba(9,8,25,.88);box-shadow:0 1.8rem 4.5rem rgba(0,0,0,.6),0 0 4rem rgba(120,81,230,.22);transform:translate(-50%,-50%);}
+.enow-arrival--puls .enow-arrival__device::before{display:none;}
+.enow-arrival--puls .enow-arrival__device video{display:block;width:100%;height:100%;border-radius:calc(.55rem - 2px);object-fit:cover;}
+.enow-arrival--puls .enow-arrival__link span{color:#e7c36c;}
+.enow-arrival--puls .enow-arrival__link:hover{border-color:#e7c36c;color:#e7c36c;}
 @media(max-width:760px){
   .enow-arrival{
     grid-template-columns:1fr;
@@ -827,7 +780,8 @@ body[data-zone="z3"] .cs-dot.active{
     padding-top:var(--nav-height);
   }
   .enow-arrival__copy{--enow-copy-inline:1.5rem;padding:2rem var(--enow-copy-inline);}
-  .enow-arrival__back{position:static;margin-bottom:2rem;}
+  .enow-arrival__navigation{position:static;flex-wrap:wrap;gap:.25rem 1rem;margin-bottom:2rem;}
+  .enow-arrival__back,.enow-arrival__previous{min-height:2rem;}
   .enow-arrival__copy h2{font-size:clamp(3.4rem,15vw,5rem);}
   .enow-arrival__statement{margin:1rem 0 1.25rem;}
   .enow-arrival__meta div{grid-template-columns:4.75rem minmax(0,1fr);}
@@ -837,6 +791,8 @@ body[data-zone="z3"] .cs-dot.active{
   .enow-arrival--spotify .enow-arrival__device{left:50%;bottom:4%;width:clamp(10rem,47vw,15rem);}
   .enow-arrival--venek .enow-arrival__scene{min-height:clamp(20rem,86vw,28rem);}
   .enow-arrival--venek .enow-arrival__device{left:50%;top:auto;bottom:6%;width:min(86%,32rem);transform:translateX(-50%);}
+  .enow-arrival--puls .enow-arrival__scene{min-height:clamp(18rem,82vw,25rem);}
+  .enow-arrival--puls .enow-arrival__device{left:50%;top:50%;bottom:auto;width:min(88%,34rem);transform:translate(-50%,-50%);}
 }
 
 /* ============================================================
