@@ -462,9 +462,10 @@ img{max-width:100%;display:block;}
 .site-header .lang-menu button[aria-selected="true"]{color:var(--nav-gold);}
 
 @media (max-width:760px){
-  /* The phone header is a deliberate two-level layout, not a flex row that
-     happens to wrap differently for longer German labels. */
-  :root{--nav-height:10.75rem;}
+  /* One compact, predictable mobile header: brand controls first, then a
+     single complete navigation row. German labels still fit without turning
+     the header into an accidental two-by-two menu. */
+  :root{--nav-height:7.5rem;}
   .site-header{
     display:grid;
     grid-template-columns:minmax(0,1fr) auto;
@@ -472,8 +473,8 @@ img{max-width:100%;display:block;}
     align-items:center;
     height:auto;
     min-height:var(--nav-height);
-    padding:1rem 5vw .9rem;
-    gap:.85rem 1rem;
+    padding:.8rem 5vw .7rem;
+    gap:.5rem 1rem;
   }
   .site-header .site-brand{grid-area:brand;font-size:1.2rem;}
   .site-header .nav-group{
@@ -481,21 +482,26 @@ img{max-width:100%;display:block;}
   }
   .site-header .site-nav{
     grid-area:nav;
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:.2rem 1rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:0;
     width:100%;
-    padding-top:.65rem;
+    padding-inline:1.75rem;
+    padding-top:.5rem;
     border-top:1px solid var(--nav-em);
   }
-  .site-header .site-nav a{font-size:.62rem;min-height:38px;padding:0 .1rem 2px;}
+  .site-header .site-nav a{font-size:.56rem;letter-spacing:.12em;min-height:36px;padding:0 0 2px;white-space:nowrap;}
+  /* Keep the active state visually attached to its label, not to the bottom
+     edge of the larger touch target. */
+  .site-header .site-nav a::after{bottom:7px;}
   .site-header .lang-switch{grid-area:language;justify-self:end;}
-  .site-header .lang-current{min-height:42px;padding:.45rem .85rem;}
+  .site-header .lang-current{min-height:38px;padding:.4rem .8rem;}
 }
 @media (max-width:380px){
   .site-header .site-brand{font-size:1.08rem;}
-  .site-header .site-nav{gap:.15rem .6rem;}
-  .site-header .site-nav a{font-size:.58rem;letter-spacing:.12em;}
+  .site-header .site-nav{padding-inline:1.1rem;}
+  .site-header .site-nav a{font-size:.52rem;letter-spacing:.1em;}
 }
 
 /* ============================================================
