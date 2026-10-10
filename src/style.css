@@ -798,6 +798,22 @@ body[data-zone="z3"] .cs-dot.active{
 .enow-arrival--spotify .enow-arrival__device::before{background:#090d13;}
 .enow-arrival--spotify .enow-arrival__link span{color:#e7c36c;}
 .enow-arrival--spotify .enow-arrival__link:hover{border-color:#e7c36c;color:#e7c36c;}
+/* Venek begins with the physical gallery, then places the website in that
+   real context. It is a browser surface, not a phone mockup. */
+.enow-arrival--venek{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);background:#16352c;}
+.enow-arrival--venek .enow-arrival__copy{background:linear-gradient(105deg,#16352c 70%,rgba(22,53,44,.91));}
+.enow-arrival--venek .enow-arrival__scene{background:#263829;}
+.enow-arrival--venek .enow-arrival__scene::after{background:linear-gradient(90deg,rgba(22,53,44,.5),transparent 42%),linear-gradient(0deg,rgba(10,24,20,.32),transparent 45%);}
+.enow-arrival--venek .enow-arrival__atmosphere{object-position:59% center;filter:brightness(.76) saturate(.8);}
+.enow-arrival--venek .enow-arrival__device{
+  left:50%;top:50%;bottom:auto;width:clamp(24rem,52vw,51rem);aspect-ratio:1300 / 850;
+  padding:0;border:1px solid rgba(255,247,218,.55);border-radius:.55rem;background:#f7edce;
+  box-shadow:0 1.75rem 4rem rgba(11,25,18,.5);transform:translate(-50%,-50%);
+}
+.enow-arrival--venek .enow-arrival__device::before{display:none;}
+.enow-arrival--venek .enow-arrival__device img{border-radius:calc(.55rem - 1px);object-fit:cover;}
+.enow-arrival--venek .enow-arrival__link span{color:#ead36e;}
+.enow-arrival--venek .enow-arrival__link:hover{border-color:#ead36e;color:#ead36e;}
 @media(max-width:760px){
   .enow-arrival{
     grid-template-columns:1fr;
@@ -813,6 +829,8 @@ body[data-zone="z3"] .cs-dot.active{
   .enow-arrival__atmosphere{object-position:center 48%;}
   .enow-arrival__device{left:50%;bottom:4%;width:clamp(10rem,47vw,15rem);}
   .enow-arrival--spotify .enow-arrival__device{left:50%;bottom:4%;width:clamp(10rem,47vw,15rem);}
+  .enow-arrival--venek .enow-arrival__scene{min-height:clamp(20rem,86vw,28rem);}
+  .enow-arrival--venek .enow-arrival__device{left:50%;top:auto;bottom:6%;width:min(86%,32rem);transform:translateX(-50%);}
 }
 
 /* ============================================================
@@ -1130,10 +1148,41 @@ html[lang="de"] .cs-intro-copy{
 .cs-media-row.reverse{direction:rtl;}
 .cs-media-row.reverse > *{direction:ltr;}
 .cs-media-visual img{max-width:19.75rem;margin:0 auto;}
+
+/* Venek's decisive evidence is a short, real booking journey. It breaks out
+   of the reading column so the two screens can be inspected together rather
+   than feeling like decorative attachments to two paragraphs. */
+.cs-venek-flow{
+  width:min(100% - (var(--gutter) * 2),72rem);
+  margin:clamp(3.5rem,8vw,6.5rem) auto 0;
+  display:grid;
+  grid-template-columns:minmax(13rem,.72fr) minmax(0,1.28fr);
+  gap:clamp(2rem,6vw,5.5rem);
+  align-items:center;
+}
+.cs-venek-flow-copy h3{
+  margin:.35rem 0 1rem;
+  color:var(--cs-ink);font-family:var(--font-d);font-size:clamp(1.7rem,2.6vw,2.35rem);font-weight:400;
+  letter-spacing:-.02em;line-height:1.12;
+}
+.cs-venek-flow-copy p:last-child{margin:0;color:var(--cs-muted);}
+.cs-venek-flow-kicker{
+  margin:0;color:var(--cs-gold-ui);font-family:var(--font-m);font-size:.64rem;
+  font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+}
+.cs-venek-flow-screens{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,2.5vw,2rem);align-items:start;}
+.cs-venek-flow-screens figure{margin:0;}
+.cs-venek-flow-screens figcaption{
+  margin:0 0 .65rem;color:var(--cs-muted);font-family:var(--font-m);font-size:.62rem;
+  letter-spacing:.08em;text-align:center;text-transform:uppercase;
+}
+.cs-venek-flow-screens img{width:100%;border-radius:.55rem;}
 @media (max-width:760px){
   .cs-media-row{grid-template-columns:1fr;}
   .cs-media-row .cs-media-visual{order:-1;} /* image first on mobile */
   .cs-dashboard-screens{grid-template-columns:1fr;gap:1.25rem;}
+  .cs-venek-flow{grid-template-columns:1fr;gap:2.5rem;}
+  .cs-venek-flow-screens{grid-template-columns:1fr;gap:1.5rem;}
 }
 
 /* Inline/grid — stat blocks (Empathize), MoSCoW cards (Ideate) */
