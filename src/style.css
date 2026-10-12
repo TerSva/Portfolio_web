@@ -75,6 +75,8 @@
 .cs-zone-z3 .cs-chapter-content .cs-subtitle{color:var(--cs-muted);}
 .cs-zone-z3 .cs-chapter-content .cs-mini-head,
 .cs-zone-z3 .cs-quote{color:var(--cs-ink);}
+.cs-zone-z3 .cs-inline-link{color:var(--cs-ink);text-decoration-color:rgba(245,245,220,.55);}
+.cs-zone-z3 .cs-inline-link:hover{color:var(--cs-gold-ui);text-decoration-color:var(--cs-gold-ui);}
 
 /* Lightening pass: alternate a near-white surface tone on the
    research/data-heavy sections, so the page isn't one unbroken
@@ -795,7 +797,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
   .enow-arrival__back,.enow-arrival__previous{min-height:2rem;}
   .enow-arrival__copy h2{font-size:clamp(3.4rem,15vw,5rem);}
   .enow-arrival__statement{margin:1rem 0 1.25rem;}
-  .enow-arrival__statement span{display:inline;}
+  .enow-arrival__statement span{display:inline;white-space:nowrap;}
   .enow-arrival__statement span + span::before{content:" ";}
   .enow-arrival__meta div{grid-template-columns:4.75rem minmax(0,1fr);}
   .enow-arrival__scene{min-height:clamp(25rem,112vw,34rem);}
