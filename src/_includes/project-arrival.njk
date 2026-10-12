@@ -2,14 +2,16 @@
 {% if caseStudy.arrival %}
 <section class="enow-arrival{% if caseStudy.arrival.variant %} enow-arrival--{{ caseStudy.arrival.variant }}{% endif %}" aria-labelledby="project-arrival-title">
   <div class="enow-arrival__copy">
-    <nav class="enow-arrival__navigation" aria-label="{{ 'Projekt-Navigation' if lang == 'de' else 'Project navigation' }}">
-      <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ 'Alle Arbeiten' if lang == 'de' else 'All work' }}</a>
+    <nav class="enow-arrival__navigation" aria-label="{{ 'Navigace mezi projekty' if lang == 'cs' else ('Projekt-Navigation' if lang == 'de' else 'Project navigation') }}">
+      <a class="enow-arrival__back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {{ 'Všechny projekty' if lang == 'cs' else ('Alle Arbeiten' if lang == 'de' else 'All work') }}</a>
       {% if caseStudy.arrival.previousProject %}
-      <a class="enow-arrival__previous" href="{{ caseStudy.arrival.previousProject.href | url }}"><span aria-hidden="true">←</span> {{ 'Zurück zu' if lang == 'de' else 'Back to' }} {{ caseStudy.arrival.previousProject.title }}</a>
+      <a class="enow-arrival__previous" href="{{ caseStudy.arrival.previousProject.href | url }}"><span aria-hidden="true">←</span> {{ 'Zpět na' if lang == 'cs' else ('Zurück zu' if lang == 'de' else 'Back to') }} {{ caseStudy.arrival.previousProject.title }}</a>
       {% endif %}
     </nav>
-    <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
-    <h2 id="project-arrival-title">{{ caseStudy.arrival.title }}</h2>
+    <div class="enow-arrival__title-group">
+      <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
+      <h2 id="project-arrival-title">{{ caseStudy.arrival.title }}</h2>
+    </div>
     <p class="enow-arrival__statement">{{ caseStudy.arrival.statement }}</p>
     {% if caseStudy.arrival.meta %}
     <dl class="enow-arrival__meta">

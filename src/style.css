@@ -609,8 +609,9 @@ body[data-zone="z3"] .cs-dot.active{
   padding:clamp(2rem,4vw,4rem) var(--enow-copy-inline);
   background:linear-gradient(105deg,var(--nav-bg) 72%,rgba(0,31,28,.94));
 }
+.enow-arrival__title-group{display:flex;flex-direction:column;align-items:flex-start;}
 .enow-arrival__eyebrow{
-  margin:0 0 1.25rem;
+  margin:0 0 .65rem;
   color:var(--nav-ch2);
   font-family:var(--font-m);
   font-size:.67rem;
@@ -644,6 +645,7 @@ body[data-zone="z3"] .cs-dot.active{
   font-size:clamp(1.05rem,1.5vw,1.25rem);
   line-height:1.5;
 }
+html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
 .enow-arrival__meta{
   display:grid;grid-template-columns:1fr;
   width:100%;max-width:30rem;

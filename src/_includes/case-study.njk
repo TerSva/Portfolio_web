@@ -10,7 +10,7 @@ layout: base.njk
 {% else %}
 <section class="cs-cover cs-spotlight">
   <div class="cs-header">
-    <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Zurück zu ausgewählten Arbeiten{% else %}Back to selected work{% endif %}</a>
+    <a class="cs-back-link" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'cs' %}Zpět na vybrané projekty{% elif lang == 'de' %}Zurück zu ausgewählten Arbeiten{% else %}Back to selected work{% endif %}</a>
     <h1 class="cs-title">
       <span class="cs-title-project">{{ caseStudy.projectTitle }}</span>
       <span class="cs-title-statement">{{ caseStudy.statement | safe }}</span>
@@ -38,14 +38,14 @@ layout: base.njk
 {{ content | safe }}
 
 {% if caseStudy.nextProject %}
-<nav class="cs-next" id="case-next" aria-label="{% if lang == 'de' %}Projekt-Navigation{% else %}Project navigation{% endif %}">
+<nav class="cs-next" id="case-next" aria-label="{% if lang == 'cs' %}Navigace mezi projekty{% elif lang == 'de' %}Projekt-Navigation{% else %}Project navigation{% endif %}">
   <div class="cs-next-inner">
     <a class="cs-next-card" href="{{ caseStudy.nextProject.href | url }}">
       <div class="cs-next-copy">
-        <span class="cs-next-label">{% if lang == 'de' %}Weiter mit{% else %}Continue with{% endif %}</span>
+        <span class="cs-next-label">{% if lang == 'cs' %}Pokračovat projektem{% elif lang == 'de' %}Weiter mit{% else %}Continue with{% endif %}</span>
         <h2>{{ caseStudy.nextProject.title }}</h2>
         <p>{{ caseStudy.nextProject.statement }}</p>
-        <span class="cs-next-cta">{% if lang == 'de' %}{{ caseStudy.nextProject.title }} Case Study öffnen{% else %}Open {{ caseStudy.nextProject.title }} case study{% endif %} <span aria-hidden="true">→</span></span>
+        <span class="cs-next-cta">{% if lang == 'cs' %}Otevřít případovou studii {{ caseStudy.nextProject.title }}{% elif lang == 'de' %}{{ caseStudy.nextProject.title }} Case Study öffnen{% else %}Open {{ caseStudy.nextProject.title }} case study{% endif %} <span aria-hidden="true">→</span></span>
       </div>
       {% if caseStudy.nextProject.cover == 'enow' %}
       <div class="cs-next-visual cs-next-enow-cover">
@@ -83,7 +83,7 @@ layout: base.njk
       </div>
       {% endif %}
     </a>
-    <a class="cs-next-back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'de' %}Zurück zu allen Arbeiten{% else %}Back to all work{% endif %}</a>
+    <a class="cs-next-back" href="{{ (workUrl or '/work/') | url }}"><span aria-hidden="true">←</span> {% if lang == 'cs' %}Zpět na všechny projekty{% elif lang == 'de' %}Zurück zu allen Arbeiten{% else %}Back to all work{% endif %}</a>
   </div>
 </nav>
 {% endif %}
