@@ -123,6 +123,14 @@ body.puls-theme .cs-title,
 body.puls-theme .cs-chapter-heading h2{
   font-weight:600;
 }
+/* Czech chapter titles carry more connective words than their English
+   counterparts. The standard editorial rail makes them break into narrow,
+   staircase-like blocks, so this case study gives the title a deliberate
+   wider measure while keeping the explanatory column comfortably readable. */
+body.puls-theme .cs-chapter-grid:not(.cs-chapter-grid-stacked){
+  grid-template-columns:minmax(16rem,1fr) minmax(0,1.35fr);
+  gap:clamp(2rem,5vw,4rem);
+}
 /* The shared .cs-title-statement max-width (24ch) is a knife-edge fit
    for this page's first line, "A landing page where you are" (29
    characters): it wrapped cleanly in one browser's font metrics but
@@ -768,6 +776,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
 .enow-arrival--puls{grid-template-columns:minmax(0,.79fr) minmax(0,1.21fr);background:#0c0a1f;}
 .enow-arrival--puls .enow-arrival__copy{background:linear-gradient(105deg,#0c0a1f 70%,rgba(12,10,31,.94));}
 .enow-arrival--puls .enow-arrival__statement{max-width:33ch;}
+.enow-arrival__statement span{display:block;}
 .enow-arrival--puls .enow-arrival__scene{background:radial-gradient(ellipse 42% 62% at 76% 42%,rgba(124,85,229,.34),transparent 72%),radial-gradient(ellipse 31% 38% at 30% 83%,rgba(226,178,79,.13),transparent 72%),linear-gradient(130deg,#090919 0%,#171438 55%,#0d0b24 100%);}
 .enow-arrival--puls .enow-arrival__scene::after{background:linear-gradient(90deg,rgba(12,10,31,.47),transparent 42%),linear-gradient(0deg,rgba(6,5,16,.28),transparent 52%);}
 .enow-arrival--puls .enow-arrival__device{left:50%;top:50%;bottom:auto;width:min(83%,54rem);aspect-ratio:1800 / 1013;padding:.45rem;border:1px solid rgba(231,219,255,.42);border-radius:.55rem;background:rgba(9,8,25,.88);box-shadow:0 1.8rem 4.5rem rgba(0,0,0,.6),0 0 4rem rgba(120,81,230,.22);transform:translate(-50%,-50%);}
@@ -786,6 +795,8 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
   .enow-arrival__back,.enow-arrival__previous{min-height:2rem;}
   .enow-arrival__copy h2{font-size:clamp(3.4rem,15vw,5rem);}
   .enow-arrival__statement{margin:1rem 0 1.25rem;}
+  .enow-arrival__statement span{display:inline;}
+  .enow-arrival__statement span + span::before{content:" ";}
   .enow-arrival__meta div{grid-template-columns:4.75rem minmax(0,1fr);}
   .enow-arrival__scene{min-height:clamp(25rem,112vw,34rem);}
   .enow-arrival__atmosphere{object-position:center 48%;}
@@ -1521,6 +1532,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem 1rem;}
   .cs-next-card{grid-template-columns:1fr;min-height:0;}.cs-next-copy{padding:2rem;}.cs-next-visual{min-height:17rem;}.cs-next-visual img{object-position:50% 20%;}.cs-next-spotify-cover .cs-next-atmosphere,.cs-next-enow-cover .cs-next-atmosphere,.cs-next-venek-cover .cs-next-atmosphere{object-position:center;}.cs-next-spotify-device{width:45%;}.cs-next-enow-device{width:40%;}.cs-next-venek-browser{width:56%;left:9%;}.cs-next-puls-browser{right:7%;width:76%;}
   .cs-chapter-grid{grid-template-columns:1fr;gap:1.25rem;}
+  body.puls-theme .cs-chapter-grid:not(.cs-chapter-grid-stacked){grid-template-columns:1fr;}
   .cs-intro-copy{text-align:left;}
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
   .cs-contact{padding-top:calc(var(--nav-height) + 3rem);}

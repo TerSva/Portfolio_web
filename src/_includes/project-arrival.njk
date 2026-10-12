@@ -12,7 +12,7 @@
       <p class="enow-arrival__eyebrow">{{ caseStudy.arrival.eyebrow }}</p>
       <h2 id="project-arrival-title">{{ caseStudy.arrival.title }}</h2>
     </div>
-    <p class="enow-arrival__statement">{{ caseStudy.arrival.statement }}</p>
+    <p class="enow-arrival__statement">{% if caseStudy.arrival.statementLines %}{% for line in caseStudy.arrival.statementLines %}<span>{{ line }}</span>{% endfor %}{% else %}{{ caseStudy.arrival.statement }}{% endif %}</p>
     {% if caseStudy.arrival.meta %}
     <dl class="enow-arrival__meta">
       {% for item in caseStudy.arrival.meta %}
