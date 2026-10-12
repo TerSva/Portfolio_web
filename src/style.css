@@ -1554,7 +1554,7 @@ html[lang="de"] .cs-intro-copy{
   .work-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}
   .work-art-bridge{padding:3rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{font-size:clamp(3.25rem,14vw,4.75rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{object-position:center 62%;}
   .cv-hero{padding-top:calc(var(--nav-height) + 3rem);}
-  .cv-hero h1{font-size:clamp(3.1rem,12.5vw,4.7rem);}
+  .cv-hero h1{font-size:clamp(2.75rem,11vw,4.7rem);}
   .cv-overview-grid,.cv-timeline-list li,.cv-methods-grid,.cv-contact-grid{grid-template-columns:1fr;gap:2rem;}
   .cv-timeline-list{margin-left:0;}
 }
