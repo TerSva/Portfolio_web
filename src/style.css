@@ -797,7 +797,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
   .enow-arrival__back,.enow-arrival__previous{min-height:2rem;}
   .enow-arrival__copy h2{font-size:clamp(3.4rem,15vw,5rem);}
   .enow-arrival__statement{margin:1rem 0 1.25rem;}
-  .enow-arrival__statement span{display:inline;white-space:nowrap;}
+  .enow-arrival__statement span{display:inline;white-space:normal;}
   .enow-arrival__statement span + span::before{content:" ";}
   .enow-arrival__meta div{grid-template-columns:4.75rem minmax(0,1fr);}
   .enow-arrival__scene{min-height:clamp(25rem,112vw,34rem);}
@@ -1543,18 +1543,23 @@ html[lang="de"] .cs-intro-copy{
   .cs-contact-heading h1{max-width:13ch;}
   .contact-conversation__choices,.contact-conversation__details{grid-template-columns:1fr;}
   .about-hero{padding-top:calc(9.5rem + 3rem);}
-  .about-hero h1{font-size:clamp(3.2rem,13vw,4.8rem);}
+  .about-hero h1{font-size:clamp(1.9rem,8vw,2.45rem);}
   .about-positioning-grid,.about-steps li,.about-collaboration-grid{grid-template-columns:1fr;gap:2rem;}
   .about-portrait{position:static;max-width:25rem;}
   .about-positioning-copy{padding-top:0;}
   .about-section-heading{margin-bottom:2.5rem;}
-  .about-section-heading h2,.about-collaboration h2{max-width:13ch;}
+  .about-section-heading h2{max-width:none;font-size:clamp(1.7rem,7.5vw,2rem);}
+  .about-collaboration h2{max-width:none;font-size:clamp(1.9rem,8.2vw,2.25rem);}
   .about-section-heading h2 span{display:inline;}
   .about-steps li{gap:1rem;}
   .work-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}
   .work-art-bridge{padding:3rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{font-size:clamp(3.25rem,14vw,4.75rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{object-position:center 62%;}
   .cv-hero{padding-top:calc(var(--nav-height) + 3rem);}
   .cv-hero h1{font-size:clamp(2.75rem,11vw,4.7rem);}
+  .cv-hero h1 .cv-role{display:block;margin-top:.3rem;font-size:clamp(1.35rem,6.2vw,1.5rem);line-height:1.08;letter-spacing:-.02em;white-space:nowrap;}
+  .cv-timeline-list h3{font-size:clamp(1.65rem,7vw,2.1rem);}
+  .cv-contact-details > a:first-child{overflow-wrap:anywhere;}
+  .cv-contact h2{max-width:14ch;font-size:clamp(2.25rem,10vw,3rem);}
   .cv-overview-grid,.cv-timeline-list li,.cv-methods-grid,.cv-contact-grid{grid-template-columns:1fr;gap:2rem;}
   .cv-timeline-list{margin-left:0;}
 }
