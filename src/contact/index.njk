@@ -9,40 +9,34 @@ ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
 
 <section class="cs-contact cs-spotlight">
   <div class="cs-contact-grid">
-    <div class="cs-contact-heading">
-      <p class="contact-kicker">Start a conversation</p>
-      <h1>A good first message doesn’t need to be perfect.</h1>
-    </div>
-
-    <div class="cs-contact-story">
-      <p class="cs-contact-lead">I bridge the logic of design systems with the empathy of a creative maker - turning complexity into clear, human product experiences.</p>
-      <p>Whether you have a product in progress, a difficult flow, or the beginning of an idea, send a note.</p>
-    </div>
-
     <div class="cs-contact-connect">
       <form class="contact-conversation" data-contact-chat action="https://formspree.io/f/mljgnpye" method="POST" novalidate data-required-message="Please add your name, email and a short message." data-email-message="Please enter a valid email address." data-sending-message="Sending your message…" data-success-message="Thank you - your message is on its way. I’ll reply as soon as I can." data-error-message="Something went wrong. Please try again or email me directly.">
         <div class="contact-conversation__heading">
-          <span>One question to start</span>
-          <h2>What brings you here?</h2>
-          <p>Choose a starting point, then tell me only what feels useful.</p>
+          <h1>What brings you here?</h1>
+          <p>Choose a topic and write a few lines. We can work out the details later.</p>
         </div>
         <fieldset class="contact-conversation__choices">
           <legend>Choose a starting point.</legend>
-          <label><input type="radio" name="topic" value="A product or UX challenge" checked><span>A product or UX challenge</span></label>
+          <label><input type="radio" name="topic" value="UX or product design" checked><span>UX or product design</span></label>
           <label><input type="radio" name="topic" value="A role or collaboration"><span>A role or collaboration</span></label>
-          <label><input type="radio" name="topic" value="Something else"><span>Something else</span></label>
+          <label><input type="radio" name="topic" value="Another question"><span>Another question</span></label>
         </fieldset>
         <label class="contact-conversation__field">
           <span>What would you like me to know?</span>
-          <textarea name="message" rows="5" placeholder="What are you building, or where are you stuck?"></textarea>
+          <textarea name="message" rows="4" placeholder="What are you building, or where are you stuck?"></textarea>
         </label>
         <div class="contact-conversation__details">
           <label class="contact-conversation__field"><span>Your name</span><input name="name" type="text" autocomplete="name"></label>
           <label class="contact-conversation__field"><span>Email</span><input name="email" type="email" autocomplete="email"></label>
         </div>
         <input type="hidden" name="_subject" value="Portfolio enquiry">
-        <button class="contact-conversation__send" type="submit">Send message <span aria-hidden="true">→</span></button>
-        <p class="contact-conversation__note" data-contact-status aria-live="polite">I’ll receive your message directly - no email app needs to open. By sending, you acknowledge the processing described in the <a href="{{ '/privacy/' | url }}">Privacy details</a>.</p>
+        <div class="contact-conversation__completion">
+          <p class="contact-conversation__note">Your message will go straight to my inbox. You can read how I handle your data in the <a href="{{ '/privacy/' | url }}">Privacy details</a>.</p>
+          <div class="contact-conversation__actions">
+            <button class="contact-conversation__send" type="submit">Send message</button>
+            <p class="contact-conversation__status" data-contact-status aria-live="polite"></p>
+          </div>
+        </div>
       </form>
     </div>
 
