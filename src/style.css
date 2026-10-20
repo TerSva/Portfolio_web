@@ -1,18 +1,18 @@
 /* ============================================================
-   UX PORTFOLIO — cs- design tokens
+   UX PORTFOLIO - cs- design tokens
    Derived from main identity (visualbook.html), light palette,
    WCAG AAA/AA verified. Never use raw gold (#FFD700) as text.
 ============================================================ */
 :root{
   /* Mineral green-grey: quieter than the former yellow-olive paper,
      while the deep Enow green remains the identity anchor. */
-  --cs-paper:   #E3E9E2;
-  --cs-surface: #F7F8F4;
-  --cs-border:  #C9D6CC;
-  --cs-ink:     #0A4B42;
-  --cs-muted:   #477269;
-  --cs-copper:  #A64F24;
-  --cs-gold-ui: #8C7800;
+  --cs-paper:   #EBEED6;
+  --cs-surface: #FDFDF8;
+  --cs-border:  #D0DCC5;
+  --cs-ink:     #004D40;
+  --cs-muted:   #3B7565;
+  --cs-copper:  #A14000;
+  --cs-gold-ui: #998100;
   --cs-gold-fill: #FFD700;
 
   --font-d: 'DM Serif Display', Georgia, serif;
@@ -30,13 +30,13 @@
 }
 
 /* ============================================================
-   PROTOTYPE DARK ZONE — one deliberate dark moment, not a
+   PROTOTYPE DARK ZONE - one deliberate dark moment, not a
    gradient system. Earlier attempts tried a 4-step light-to-dark
    descent across several sections; it produced a muddy green-on-
    green midtone that passed contrast math but read as a mistake.
    Simplified per direction: rest of the page stays on the
    standard light palette, only Prototype (where the SOS screens
-   appear) goes dark, reusing the site's own nav-bar navy — a hard
+   appear) goes dark, reusing the site's own nav-bar navy - a hard
    cut at the section boundary, no blend strip.
 ============================================================ */
 .cs-zone-z3{
@@ -88,10 +88,10 @@
 }
 
 /* ============================================================
-   PULS — dedicated dark/technical theme, opted into via the
+   PULS - dedicated dark/technical theme, opted into via the
    bodyClass front-matter key ("puls-theme", see base.njk).
    Reuses every existing cs-* component (chapter grid, dots,
-   spotlight, cover) with new token values only — never the
+   spotlight, cover) with new token values only - never the
    light --cs-* defaults, never the z3 dark-navy zone tokens,
    never PULS's own live purple/navy brand (this is a case study
    ABOUT that work, not a mirror of it). Uniformly dark: no
@@ -115,7 +115,7 @@ body.puls-theme{
   --font-d: 'IBM Plex Sans', sans-serif;
 }
 /* One base color everywhere on this page, no alternating light/dark
-   surface panels and no separate cover-section tone — cs-cover
+   surface panels and no separate cover-section tone - cs-cover
    normally uses the sitewide --nav-bg, but here it's pinned to the
    same --cs-paper as the rest of the page. */
 body.puls-theme .cs-cover{
@@ -138,7 +138,7 @@ body.puls-theme .cs-chapter-grid:not(.cs-chapter-grid-stacked){
    characters): it wrapped cleanly in one browser's font metrics but
    dropped the last word ("are") alone onto its own line in another
    (confirmed cross-browser, not a single-environment fluke). Widened
-   with real margin instead of chasing per-browser hinting — scoped to
+   with real margin instead of chasing per-browser hinting - scoped to
    this page only, other case studies' headings are already tuned to
    the shared 24ch and untouched. */
 body.puls-theme .cs-title-statement{
@@ -151,12 +151,12 @@ body.puls-theme .cs-spotlight::before{
 
 /* Ambient glow under every visual, reused verbatim from the Work
    index card affordance (.work-project-visual) so the same "cooler
-   green light" identity carries from the index into the case study —
+   green light" identity carries from the index into the case study -
    always on, not a hover reveal, and visible starting at the Hook. */
 body.puls-theme .cs-artifact{
   box-shadow:0 0 42px 8px rgba(77,191,163,.18);
 }
-/* No hover-lift here (the shared .cs-artifact:hover translateY) — these
+/* No hover-lift here (the shared .cs-artifact:hover translateY) - these
    visuals are already permanently backlit, so a lift-on-hover on top
    of an always-on glow reads as redundant motion, not a new affordance. */
 body.puls-theme .cs-artifact:hover{
@@ -170,19 +170,19 @@ body.puls-theme .cs-hero-visual.cs-artifact:hover{
 }
 
 /* Text-next-to-video pairing for the Prototype lab animations. Contained
-   to var(--media-measure) and centered exactly like .cs-chapter-grid —
+   to var(--media-measure) and centered exactly like .cs-chapter-grid -
    NOT full-bleed. It was full-bleed originally so the video could sit at
    a generous size, but once the video got capped down to a modest
    max-width (see the -420/-320/-480 variants below), the only thing the
    full-bleed breakout was still doing was putting the text column on a
    different coordinate system than every plain flowing paragraph in the
    same section (those live in .cs-chapter-grid, centered to
-   var(--media-measure)) — so the pair's own mini-head text landed at a
+   var(--media-measure)) - so the pair's own mini-head text landed at a
    different left edge than the section's true left margin, and the
    flowing paragraphs between pairs looked like they were floating
    center-ish by comparison. Sharing .cs-chapter-grid's own width/centering
-   makes every text block in the section — heading, flowing paragraphs,
-   and pair text alike — share one left edge. */
+   makes every text block in the section - heading, flowing paragraphs,
+   and pair text alike - share one left edge. */
 .cs-media-pair{
   width:min(100%, var(--media-measure));
   margin-left:auto;margin-right:auto;
@@ -191,7 +191,7 @@ body.puls-theme .cs-hero-visual.cs-artifact:hover{
   align-items:center;
   column-gap:clamp(2rem,5vw,4rem);
   row-gap:1.5rem;
-  /* Was a flat 3rem — too close to a plain paragraph's own margin-bottom
+  /* Was a flat 3rem - too close to a plain paragraph's own margin-bottom
      to read as "a new moment," not just the next line of the same one.
      Scales with viewport like the section's own vertical padding. */
   margin-top:clamp(4rem,8vw,6rem);
@@ -199,7 +199,7 @@ body.puls-theme .cs-hero-visual.cs-artifact:hover{
 }
 /* This margin is for rhythm BETWEEN moments inside a section. At a
    section's own edge it doesn't collapse with .cs-section's padding
-   (padding blocks margin collapsing), so the two stacked — measured
+   (padding blocks margin collapsing), so the two stacked - measured
    304px at a section boundary vs. the intended 96px between moments.
    Same fix .cs-chapter-content already has for its own first/last
    child: zero the edge that would double up against the section's own
@@ -221,8 +221,8 @@ body.puls-theme .cs-hero-visual.cs-artifact:hover{
   display:block;border-radius:8px;
 }
 /* min(Xrem,100%), not a bare Xrem: a fixed length doesn't shrink with its
-   own grid column, so at narrower desktop widths — where the column is
-   narrower than the cap but the layout is still 2-up — the video
+   own grid column, so at narrower desktop widths - where the column is
+   narrower than the cap but the layout is still 2-up - the video
    overflowed into the text column. */
 body.puls-theme .cs-media-pair-visual-420{max-width:min(26.25rem,100%);}
 body.puls-theme .cs-media-pair-visual-320{max-width:min(20rem,100%);}
@@ -230,7 +230,7 @@ body.puls-theme .cs-media-pair-visual-480{max-width:min(30rem,100%);}
 @media (max-width:760px){
   .cs-media-pair{grid-template-columns:minmax(0,1fr);}
   /* Same specificity as the .cs-media-pair-visual-420/-320/-480 rules
-     above (two classes) — a plain .cs-media-pair-visual rule here is a
+     above (two classes) - a plain .cs-media-pair-visual rule here is a
      lower-specificity no-op against them regardless of source order,
      which is what let the desktop caps keep forcing a mobile grid
      blowout before this was caught. */
@@ -253,14 +253,14 @@ body.puls-theme .cs-media-pair-visual-480{max-width:min(30rem,100%);}
 /* Same fix as .cs-chapter-content's own first/last-child rule: this
    margin doesn't collapse with .cs-section's own padding when the
    figure sits at a section's edge, so the two stacked instead of one
-   taking over — same bug .cs-media-pair had. */
+   taking over - same bug .cs-media-pair had. */
 .cs-section > .cs-landscape-pair:first-child{margin-top:0;}
 .cs-section > .cs-landscape-pair:last-child{margin-bottom:0;}
 .cs-landscape-pair img{width:100%;height:auto;border-radius:8px;display:block;}
 .cs-landscape-pair.cs-artifact-captioned::after{grid-column:1 / -1;}
 /* Per-image caption (used instead of the single shared
    cs-artifact-captioned label when each side of the pair needs its
-   own short explanation — e.g. the screenshots are in Czech and the
+   own short explanation - e.g. the screenshots are in Czech and the
    case study text is in English). */
 .cs-landscape-pair-item{display:flex;flex-direction:column;}
 .cs-landscape-pair-caption{
@@ -271,7 +271,7 @@ body.puls-theme .cs-media-pair-visual-480{max-width:min(30rem,100%);}
 @media (max-width:700px){
   .cs-landscape-pair{grid-template-columns:1fr;}
 }
-/* Break out of the narrow chapter-content column — a before/after
+/* Break out of the narrow chapter-content column - a before/after
    pair read as too small confined to editorial measure. Full-bleed
    the same way .cs-hero-visual does, then pad back in from the true
    viewport edge so it reads as "most of the viewport", not the
@@ -282,7 +282,7 @@ body.puls-theme .cs-landscape-pair{
   margin-right:calc(50% - 50vw);
   padding:0 4vw;
   box-sizing:border-box;
-  /* Match the .cs-media-pair rhythm — the Foundation pair is one of the
+  /* Match the .cs-media-pair rhythm - the Foundation pair is one of the
      same "moments" in this section, and the shared 2.5rem default would
      otherwise read as a smaller gap than the ones now around it. */
   margin-top:clamp(4rem,8vw,6rem);
@@ -311,7 +311,7 @@ img{max-width:100%;display:block;}
 :focus-visible{outline:2px solid var(--cs-gold-ui);outline-offset:2px;}
 
 /* ============================================================
-   SITE HEADER — bridge element to the art-hub identity (main
+   SITE HEADER - bridge element to the art-hub identity (main
    branch). Deliberately dark/emerald, not cs- tokens: this bar
    is the one place the two sites share a signature. Values are
    the main site's own --bg/--em/--gold/--ch, hardcoded here
@@ -337,7 +337,7 @@ img{max-width:100%;display:block;}
   border-bottom:1px solid var(--nav-em);
 }
 
-/* Wordmark — this IS the logo, has to carry real presence */
+/* Wordmark - this IS the logo, has to carry real presence */
 .site-header .site-brand{
   font-family:var(--font-d);font-weight:400;
   font-size:1.5rem;letter-spacing:-0.01em;
@@ -369,7 +369,7 @@ img{max-width:100%;display:block;}
 .site-header .site-nav a.is-active{color:var(--nav-ch);}
 .site-header .site-nav a.is-active::after{width:100%;}
 
-/* Collapsed lang switch — single pill, opens a small dropdown */
+/* Collapsed lang switch - single pill, opens a small dropdown */
 .site-header .lang-switch{position:relative;}
 .site-header .lang-current{
   display:flex;align-items:center;gap:.35rem;
@@ -452,7 +452,7 @@ img{max-width:100%;display:block;}
 }
 
 /* ============================================================
-   SILENT DOT NAV — recycles #section-counter pattern, light palette
+   SILENT DOT NAV - recycles #section-counter pattern, light palette
 ============================================================ */
 #cs-dots{
   position:fixed;right:2rem;top:50%;transform:translateY(-50%);
@@ -468,7 +468,7 @@ img{max-width:100%;display:block;}
 .cs-dot.active{background:var(--cs-copper);transform:scale(1.6);}
 
 /* Tooltip is a floating overlay, deliberately hardcoded outside the
-   cs- token system (like .site-header) — it must read correctly at
+   cs- token system (like .site-header) - it must read correctly at
    every scroll position, including zones where --cs-ink itself has
    flipped to a light color, so it can't inherit from the section
    currently underneath it. */
@@ -484,7 +484,7 @@ img{max-width:100%;display:block;}
 }
 .cs-dot:hover::after{opacity:1;}
 
-/* Dark-zone variant — #cs-dots sits at body level, outside the
+/* Dark-zone variant - #cs-dots sits at body level, outside the
    .cs-zone-z3 wrapper, so it can't pick up scoped tokens via the
    cascade. Toggled by the scroll-spy JS via body[data-zone]. */
 body[data-zone="z3"] .cs-dot{
@@ -497,7 +497,7 @@ body[data-zone="z3"] .cs-dot.active{
 @media (max-width:900px){ #cs-dots{display:none;} }
 
 /* ============================================================
-   CASE STUDY — header meta block
+   CASE STUDY - header meta block
 ============================================================ */
 .cs-header{
   width:min(100% - (var(--gutter) * 2), var(--media-measure));
@@ -593,7 +593,7 @@ body[data-zone="z3"] .cs-dot.active{
 .cs-cover .cs-btn.cs-btn-primary{background:var(--nav-ch);border-color:var(--nav-ch);color:var(--nav-bg);}
 .cs-cover .cs-btn.cs-btn-primary:hover{background:var(--nav-gold);border-color:var(--nav-gold);color:var(--nav-bg);}
 
-/* Enow arrival scene — isolated to the EN pilot include. */
+/* Enow arrival scene - isolated to the EN pilot include. */
 .enow-arrival{
   display:grid;
   grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
@@ -811,7 +811,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
 }
 
 /* ============================================================
-   OUTCOME PREVIEW — no heading, sits right under header
+   OUTCOME PREVIEW - no heading, sits right under header
 ============================================================ */
 .cs-outcome{
   width:min(100% - (var(--gutter) * 2), var(--intro-measure));
@@ -824,7 +824,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
 .cs-cover .cs-outcome p{color:var(--nav-ch2);}
 
 /* ============================================================
-   CASE STUDY — closing navigation
+   CASE STUDY - closing navigation
 ============================================================ */
 .cs-next{
   padding:clamp(4rem, 9vw, 8rem) var(--gutter);
@@ -919,7 +919,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
   align-items:start;
 }
 /* Stacked variant: heading full-width on its own row, content below it,
-   both left-aligned — for a section-opening block where the side-by-side
+   both left-aligned - for a section-opening block where the side-by-side
    heading|content split reads ambiguous about where to start reading
    (the heading doesn't obviously come "first" when it's just sitting
    next to the text rather than above it). Reuses .cs-chapter-grid's own
@@ -942,7 +942,7 @@ html[lang="cs"] .enow-arrival__statement{max-width:25ch;}
 /* These two headings pin a specific mid-sentence line break (via a
    .cs-hard-line span) that doesn't fit the narrow left-rail column at the
    base heading size, so they're scaled down just enough to clear it with
-   margin across the whole desktop width range — verified 800-1920px. */
+   margin across the whole desktop width range - verified 800-1920px. */
 #ideate .cs-chapter-heading h2{
   font-size:clamp(1.125rem,1.95vw,1.575rem);
 }
@@ -1022,9 +1022,9 @@ html[lang="de"] .cs-intro-copy{
 .cs-section li{margin-bottom:.4rem;}
 
 /* ============================================================
-   VISUALS — 3 media patterns
+   VISUALS - 3 media patterns
 ============================================================ */
-/* Full-bleed (Hook hero only) — breaks out of the editorial column */
+/* Full-bleed (Hook hero only) - breaks out of the editorial column */
 .cs-hero-visual{
   width:100vw;
   margin-left:calc(50% - 50vw);
@@ -1045,7 +1045,7 @@ html[lang="de"] .cs-intro-copy{
   color:var(--cs-muted);text-align:center;padding:1.5rem;
 }
 
-/* Three-up variant — same evidence-not-decoration sizing, for a
+/* Three-up variant - same evidence-not-decoration sizing, for a
    before/after/after-on-scroll trio instead of a pair. */
 .cs-dashboard-screens.cs-triple{grid-template-columns:repeat(3,9.5rem);}
 @media (max-width:760px){.cs-dashboard-screens.cs-triple{grid-template-columns:1fr;}}
@@ -1162,7 +1162,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-venek-flow-screens{grid-template-columns:1fr;gap:1.5rem;}
 }
 
-/* Inline/grid — stat blocks (Empathize), MoSCoW cards (Ideate) */
+/* Inline/grid - stat blocks (Empathize), MoSCoW cards (Ideate) */
 .cs-stat-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
   gap:1.5rem;margin-top:2.5rem;margin-bottom:2.5rem;
@@ -1219,7 +1219,7 @@ html[lang="de"] .cs-intro-copy{
 .cs-dashboard-screens.cs-artifact{overflow:visible;}
 .cs-dashboard-screens.cs-artifact-captioned::after{grid-column:1 / -1;}
 
-/* Full-width stacked image — for rich compositions (persona card,
+/* Full-width stacked image - for rich compositions (persona card,
    moodboard, journey map) that need real estate a side-by-side
    half-column can't give them. One step less dramatic than the
    full-bleed hero: fills the content column, doesn't break out
@@ -1243,7 +1243,7 @@ html[lang="de"] .cs-intro-copy{
 .cs-visual-full.cs-stack-gap img{border-radius:8px;}
 
 /* ============================================================
-   CONTACT — a dark, direct invitation rather than a form shell
+   CONTACT - a dark, direct invitation rather than a form shell
 ============================================================ */
 .cs-contact{
   min-height:calc(100svh - var(--nav-height));
@@ -1305,7 +1305,7 @@ html[lang="de"] .cs-intro-copy{
 .cs-contact-links a:hover{color:var(--nav-ch);border-color:var(--nav-ch);}
 
 /* ============================================================
-   PRIVACY — concise information, same calm editorial rhythm
+   PRIVACY - concise information, same calm editorial rhythm
 ============================================================ */
 .privacy-page{min-height:calc(100svh - var(--nav-height));padding:calc(var(--nav-height) + clamp(4rem,8vw,8rem)) 0 clamp(5rem,10vw,9rem);background:var(--cs-paper);color:var(--cs-ink);}
 .privacy-shell{width:min(100% - (var(--gutter) * 2),72rem);margin:0 auto;}
@@ -1319,41 +1319,50 @@ html[lang="de"] .cs-intro-copy{
 .privacy-updated{grid-column:1 / -1;margin-top:1.25rem;font-family:var(--font-m);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cs-muted);}
 
 /* ============================================================
-   ABOUT — product story first; portrait supports the human
-   voice rather than turning the page into a personal profile.
+   ABOUT - one human and professional story, with the CV folded in.
 ============================================================ */
 .about-shell{width:min(100% - (var(--gutter) * 2),var(--media-measure));margin:0 auto;}
 .about-hero{
-  padding:calc(var(--nav-height) + clamp(4rem,9vw,9rem)) 0 clamp(5rem,10vw,10rem);
+  padding:calc(var(--nav-height) + clamp(3rem,6vw,5.5rem)) 0 clamp(4rem,7vw,6.5rem);
   background:var(--nav-bg);color:var(--nav-ch);
 }
 .about-hero > *,.about-collaboration > *{position:relative;z-index:1;}
+.about-hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(18rem,.65fr);gap:clamp(3rem,7vw,7rem);align-items:center;}
+.about-hero-copy{max-width:48rem;}
+.about-hero-portrait{margin:0;justify-self:end;width:min(100%,27rem);}
+.about-hero-portrait img{display:block;width:100%;aspect-ratio:4 / 5;object-fit:cover;object-position:center;border-radius:8px;}
 .about-eyebrow{
   margin-bottom:1rem;font-family:var(--font-m);font-size:.67rem;font-weight:500;
   letter-spacing:.15em;text-transform:uppercase;color:var(--cs-muted);
 }
 .about-hero .about-eyebrow{color:var(--nav-ch2);}
 .about-hero h1{
-  max-width:none;font-family:var(--font-d);font-size:clamp(3.5rem,5vw,5rem);
-  font-weight:400;line-height:.98;letter-spacing:-.035em;
+  max-width:none;font-family:var(--font-d);font-size:clamp(3.4rem,5vw,5.25rem);
+  font-weight:400;line-height:1;letter-spacing:-.035em;text-wrap:balance;
 }
-.about-positioning{padding:clamp(5rem,10vw,10rem) 0;background:var(--cs-paper);}
+.about-hero-intro{max-width:42rem;margin-top:clamp(1.5rem,3vw,2.25rem);font-size:clamp(1.05rem,1.45vw,1.3rem);line-height:1.6;color:var(--nav-ch2);text-wrap:pretty;}
+.about-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:clamp(2rem,4vw,3rem);}
+.about-button{display:inline-flex;align-items:center;gap:.65rem;min-height:44px;padding:.75rem 1.35rem;border:1px solid var(--nav-ch2);border-radius:100px;font-family:var(--font-m);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,border-color .2s ease,color .2s ease;}
+.about-button:hover{text-decoration:none}.about-button span{font-size:.9rem;line-height:1;color:var(--nav-gold)}.about-button-primary{background:var(--nav-ch);border-color:var(--nav-ch);color:var(--nav-bg)}.about-button-primary span{color:inherit}.about-button-primary:hover{background:transparent;color:var(--nav-ch)}.about-button-secondary{color:var(--nav-ch)}.about-button-secondary:hover{border-color:var(--nav-gold);color:var(--nav-gold)}.about-button:focus-visible{outline:2px solid var(--nav-gold);outline-offset:3px;}
+.about-positioning{padding:clamp(4.5rem,7vw,7rem) 0;background:var(--cs-paper);}
+.about-story{display:flex;justify-content:center;}
 .about-positioning-grid{
   display:grid;grid-template-columns:minmax(15rem,.72fr) minmax(0,1.28fr);
   gap:clamp(3rem,9vw,10rem);align-items:start;
 }
 .about-portrait{margin:0;position:sticky;top:calc(var(--nav-height) + 2rem);}
 .about-portrait img{width:100%;aspect-ratio:3 / 4;object-fit:cover;object-position:center;border-radius:8px;}
-.about-positioning-copy{max-width:42rem;padding-top:clamp(.5rem,2vw,2rem);}
-.about-positioning-copy p{font-size:clamp(1.05rem,1.45vw,1.3rem);line-height:1.65;color:var(--cs-muted);}
+.about-positioning-copy{max-width:52rem;padding-top:0;}
+.about-positioning-copy p{font-size:clamp(1.05rem,1.35vw,1.22rem);line-height:1.65;color:var(--cs-muted);text-wrap:pretty;}
 .about-positioning-copy p + p{margin-top:1.4rem;}
 .about-positioning-copy .about-lead{font-size:clamp(1.3rem,2vw,1.8rem);font-weight:500;line-height:1.45;color:var(--cs-ink);}
-.about-method{padding:clamp(5rem,10vw,10rem) 0 clamp(3.5rem,6vw,6rem);background:var(--cs-surface);}
-.about-section-heading{margin-bottom:clamp(3rem,6vw,5rem);}
+.about-inline-cta{display:inline-flex;align-items:center;gap:.7rem;min-height:44px;margin-top:2rem;font-family:var(--font-m);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--cs-copper);text-decoration:none;border-bottom:1px solid var(--cs-copper)}.about-inline-cta span{color:inherit}.about-inline-cta:hover{color:var(--cs-ink);border-color:var(--cs-ink);text-decoration:none}
+.about-method{padding:clamp(4rem,7vw,6.5rem) 0 clamp(3.5rem,6vw,5.5rem);background:var(--cs-surface);}
+.about-section-heading{margin-bottom:clamp(2.5rem,4vw,3.75rem);}
 .about-section-heading .about-eyebrow{margin-bottom:1rem;}
 .about-section-heading h2,.about-collaboration h2{
   max-width:none;font-family:var(--font-d);font-size:clamp(2.4rem,3.6vw,4rem);
-  font-weight:400;line-height:1.05;letter-spacing:-.025em;
+  font-weight:400;line-height:1.05;letter-spacing:-.025em;text-wrap:balance;
 }
 .about-section-heading h2 span{display:block;}
 .about-steps{list-style:none;counter-reset:steps;}
@@ -1363,13 +1372,31 @@ html[lang="de"] .cs-intro-copy{
 }
 .about-step-number{font-family:var(--font-m);font-size:.72rem;letter-spacing:.12em;color:var(--cs-gold-ui);}
 .about-steps h3{font-family:var(--font-d);font-size:clamp(1.9rem,3vw,2.8rem);font-weight:400;line-height:1.1;}
-.about-steps p{max-width:34rem;margin-top:.75rem;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.65;color:var(--cs-muted);}
-.about-collaboration{padding:clamp(5rem,10vw,10rem) 0;background:var(--nav-bg);color:var(--nav-ch);}
+.about-steps h3{max-width:none;text-wrap:balance;}
+.about-steps p{max-width:44rem;margin-top:.75rem;font-size:clamp(1rem,1.3vw,1.15rem);line-height:1.65;color:var(--cs-muted);text-wrap:pretty;}
+.about-toolkit{padding:clamp(4rem,7vw,6rem) 0;background:var(--cs-paper);}
+.about-toolkit-list{border-top:1px solid var(--cs-border);}
+.about-toolkit-list article{display:grid;grid-template-columns:minmax(15rem,.7fr) minmax(0,1.3fr);gap:clamp(2rem,6vw,7rem);align-items:start;padding:clamp(1.75rem,3vw,2.5rem) 0;border-bottom:1px solid var(--cs-border);}
+.about-toolkit-list h2{font-family:var(--font-d);font-size:clamp(1.8rem,2.6vw,2.5rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;text-wrap:balance;}
+.about-toolkit-list p{max-width:42rem;font-size:clamp(1rem,1.2vw,1.1rem);line-height:1.65;color:var(--cs-muted);text-wrap:pretty;}
+.about-toolkit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--cs-border);border-bottom:1px solid var(--cs-border);}
+.about-toolkit-grid article{padding:clamp(1.6rem,3vw,2.5rem) clamp(1.25rem,2.5vw,2.25rem);border-right:1px solid var(--cs-border)}.about-toolkit-grid article:first-child{padding-left:0}.about-toolkit-grid article:last-child{padding-right:0;border-right:0}
+.about-card-label,.about-timeline-date{font-family:var(--font-m);font-size:.67rem;font-weight:500;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--cs-muted)}
+.about-toolkit h3,.about-timeline h3,.about-resume h3{margin-top:.75rem;font-family:var(--font-d);font-size:clamp(1.7rem,2.5vw,2.35rem);font-weight:400;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.about-toolkit-grid article>p:last-child,.about-brand-note>p:last-child,.about-timeline li>div:last-child>p:last-child,.about-resume>div:first-child>p:last-child{margin-top:.85rem;font-size:clamp(1rem,1.2vw,1.1rem);line-height:1.65;color:var(--cs-muted)}
+.about-brand-note{display:grid;grid-template-columns:minmax(10rem,.38fr) minmax(0,1.62fr);gap:clamp(2rem,6vw,7rem);padding:clamp(2rem,4vw,3.5rem) 0;border-bottom:1px solid var(--cs-border)}.about-brand-note>p:last-child{margin-top:0;max-width:48rem;color:var(--cs-ink)}
+.about-experience{padding:clamp(4rem,7vw,6.5rem) 0;background:var(--cs-surface)}
+.about-timeline{list-style:none}.about-timeline li{display:grid;grid-template-columns:minmax(10rem,.42fr) minmax(0,1.58fr);gap:clamp(2rem,6vw,7rem);padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--cs-border)}
+.about-timeline h3{margin-top:.45rem;text-wrap:balance}
+.about-resume{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(2rem,6vw,6rem);align-items:end;margin-top:clamp(2rem,4vw,3.5rem);padding:clamp(2rem,4vw,3rem);background:var(--cs-paper);border:1px solid var(--cs-border)}
+.about-resume h3{font-size:clamp(1.8rem,3vw,2.7rem)}.about-resume>div:first-child>p:last-child{max-width:34rem}
+.about-resume-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.65rem}.about-resume-links a{display:inline-flex;align-items:center;gap:.55rem;min-height:44px;padding:.65rem 1rem;border:1px solid var(--cs-border);border-radius:100px;font-family:var(--font-m);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cs-ink);text-decoration:none}.about-resume-links a span{color:var(--cs-gold-ui)}.about-resume-links a:hover{border-color:var(--cs-gold-ui);color:var(--cs-gold-ui);text-decoration:none}
+.about-collaboration{padding:clamp(4rem,7vw,6rem) 0;background:var(--nav-bg);color:var(--nav-ch);}
 .about-collaboration .about-eyebrow{color:var(--nav-ch2);}
 .about-collaboration-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(3rem,9vw,10rem);}
 .about-collaboration-copy{max-width:39rem;padding-top:.35rem;}
 .about-collaboration h2{max-width:none;font-size:clamp(2.4rem,2.8vw,3.25rem);line-height:1.08;}
-.about-collaboration-copy p{font-size:clamp(1.1rem,1.65vw,1.45rem);line-height:1.6;color:var(--nav-ch2);}
+.about-collaboration-copy p{font-size:clamp(1.1rem,1.5vw,1.35rem);line-height:1.6;color:var(--nav-ch2);text-wrap:pretty;}
 .about-cta{display:inline-flex;align-items:center;gap:.75rem;min-height:44px;margin-top:2.25rem;font-family:var(--font-m);font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--nav-gold);text-decoration:none;border-bottom:1px solid rgba(255,215,0,.6);}
 .about-cta:hover{color:var(--nav-ch);border-color:var(--nav-ch);text-decoration:none;}
 
@@ -1393,7 +1420,7 @@ html[lang="de"] .cs-intro-copy{
 .work-project{display:flex;flex-direction:column;gap:clamp(1.25rem,2vw,1.5rem);color:var(--nav-ch);text-decoration:none}.work-project:hover{text-decoration:none}
 /* Explicit opt-in for a card that always spans the full row (an external
    product link, or a case study whose source image doesn't suit the
-   narrow portrait slot) — independent of how many other cards exist. */
+   narrow portrait slot) - independent of how many other cards exist. */
 .work-project-featured{grid-column:1 / -1;}
 .work-project-visual{position:relative;border-radius:6px;box-shadow:0 0 28px 6px rgba(77,191,163,.16);cursor:pointer}
 .work-project img,.work-project video{width:100%;aspect-ratio:4 / 5;object-fit:cover;border-radius:6px;transition:transform .55s cubic-bezier(.16,1,.3,1),filter .55s ease}
@@ -1434,7 +1461,7 @@ html[lang="de"] .cs-intro-copy{
    stay visible inside the mockup. */
 .work-project-featured .work-project-puls-browser video{aspect-ratio:1800 / 1044;}
 /* Reveal-on-hover for a card whose source image is louder/more colorful than
-   the rest of the grid — dimmed at rest, full color on interaction. Same
+   the rest of the grid - dimmed at rest, full color on interaction. Same
    idea as the art portfolio's .real-art, tuned lighter (not full grayscale)
    for this palette. Gated to fine-pointer/hover-capable devices only: touch
    has no hover to reveal it, so it shows full color from the start. */
@@ -1476,7 +1503,7 @@ html[lang="de"] .cs-intro-copy{
 @media (prefers-reduced-motion:reduce){.work-art-bridge__image{animation:none;}.work-art-bridge__image:not(:first-child){display:none;}}
 
 /* ============================================================
-   CV — a working profile, not a duplicate of the About page.
+   CV - a working profile, not a duplicate of the About page.
 ============================================================ */
 .cv-shell{width:min(100% - (var(--gutter) * 2),var(--media-measure));margin:0 auto;}
 .cv-hero{padding:calc(var(--nav-height) + clamp(4rem,8vw,7rem)) 0 clamp(4rem,7vw,6rem);background:var(--nav-bg);color:var(--nav-ch);}
@@ -1542,9 +1569,11 @@ html[lang="de"] .cs-intro-copy{
   .privacy-content{grid-template-columns:1fr;gap:0;}
   .cs-contact-heading h1{max-width:13ch;}
   .contact-conversation__choices,.contact-conversation__details{grid-template-columns:1fr;}
-  .about-hero{padding-top:calc(9.5rem + 3rem);}
-  .about-hero h1{font-size:clamp(1.9rem,8vw,2.45rem);}
-  .about-positioning-grid,.about-steps li,.about-collaboration-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-hero{padding-top:calc(var(--nav-height) + 3rem);}
+  .about-hero-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .about-hero h1{font-size:clamp(2.8rem,12vw,4rem);}
+  .about-hero-portrait{justify-self:start;width:min(100%,23rem);}
+  .about-positioning-grid,.about-steps li,.about-collaboration-grid,.about-brand-note,.about-timeline li,.about-resume{grid-template-columns:1fr;gap:2rem;}
   .about-portrait{position:static;max-width:25rem;}
   .about-positioning-copy{padding-top:0;}
   .about-section-heading{margin-bottom:2.5rem;}
@@ -1552,6 +1581,7 @@ html[lang="de"] .cs-intro-copy{
   .about-collaboration h2{max-width:none;font-size:clamp(1.9rem,8.2vw,2.25rem);}
   .about-section-heading h2 span{display:inline;}
   .about-steps li{gap:1rem;}
+  .about-toolkit-list article{grid-template-columns:1fr;gap:.75rem;}.about-resume-links{justify-content:flex-start}
   .work-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}
   .work-art-bridge{padding:3rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{font-size:clamp(3.25rem,14vw,4.75rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{object-position:center 62%;}
   .cv-hero{padding-top:calc(var(--nav-height) + 3rem);}
@@ -1567,7 +1597,7 @@ html[lang="de"] .cs-intro-copy{
 @media (hover:hover) and (pointer:fine){.work-project-visual{cursor:none;}}
 
 /* ============================================================
-   HEURISTICS ACCORDION — same expand-on-hover mechanic as the
+   HEURISTICS ACCORDION - same expand-on-hover mechanic as the
    art portfolio's Aristide accordion, without its grayscale
    treatment. These exports carry no baked-in title, so each
    column gets a small live caption below the clipped thumb
@@ -1622,7 +1652,7 @@ html[lang="de"] .cs-intro-copy{
 }
 
 /* ============================================================
-   LIGHTBOX — click-to-enlarge for dense evidence images.
+   LIGHTBOX - click-to-enlarge for dense evidence images.
 ============================================================ */
 .cs-lightbox-figure{position:relative;cursor:zoom-in;}
 .cs-lightbox-figure::after{

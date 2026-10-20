@@ -4,14 +4,14 @@ layout: false
 eleventyExcludeFromCollections: true
 eleventyComputed:
   pages:
-    - { en: "/work/", de: "/de/work/" }
-    - { en: "/work/enow/", de: "/de/work/enow/" }
-    - { en: "/work/spotify/", de: "/de/work/spotify/" }
-    - { en: "/work/venek/", de: "/de/work/venek/" }
-    - { en: "/about/", de: "/de/about/" }
-    - { en: "/cv/", de: "/de/cv/" }
-    - { en: "/contact/", de: "/de/contact/" }
-    - { en: "/privacy/", de: "/de/privacy/" }
+    - { en: "/work/", de: "/de/work/", cs: "/cs/work/" }
+    - { en: "/work/enow/", de: "/de/work/enow/", cs: "/cs/work/enow/" }
+    - { en: "/work/spotify/", de: "/de/work/spotify/", cs: "/cs/work/spotify/" }
+    - { en: "/work/venek/", de: "/de/work/venek/", cs: "/cs/work/venek/" }
+    - { en: "/work/puls/", de: "/de/work/puls/", cs: "/cs/work/puls/" }
+    - { en: "/about/", de: "/de/about/", cs: "/cs/about/" }
+    - { en: "/contact/", de: "/de/contact/", cs: "/cs/contact/" }
+    - { en: "/privacy/", de: "/de/privacy/", cs: "/cs/privacy/" }
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -20,12 +20,21 @@ eleventyComputed:
 <loc>{{ siteBaseUrl }}{{ p.en | url }}</loc>
 <xhtml:link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
 <xhtml:link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ p.de | url }}"/>
+<xhtml:link rel="alternate" hreflang="cs" href="{{ siteBaseUrl }}{{ p.cs | url }}"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
 </url>
 <url>
 <loc>{{ siteBaseUrl }}{{ p.de | url }}</loc>
 <xhtml:link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
 <xhtml:link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ p.de | url }}"/>
+<xhtml:link rel="alternate" hreflang="cs" href="{{ siteBaseUrl }}{{ p.cs | url }}"/>
+<xhtml:link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
+</url>
+<url>
+<loc>{{ siteBaseUrl }}{{ p.cs | url }}</loc>
+<xhtml:link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
+<xhtml:link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ p.de | url }}"/>
+<xhtml:link rel="alternate" hreflang="cs" href="{{ siteBaseUrl }}{{ p.cs | url }}"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
 </url>
 {% endfor %}

@@ -13,12 +13,10 @@
 <title>{{ title }} · Tereza Britta Švanda</title>
 {% if description %}<meta name="description" content="{{ description }}"/>{% endif %}
 <link rel="canonical" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
-{% if deUrl %}<link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
-<link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ deUrl | url }}"/>
-<link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ page.url | url }}"/>{% endif %}
-{% if enUrl %}<link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ page.url | url }}"/>
-<link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ enUrl | url }}"/>
-<link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ enUrl | url }}"/>{% endif %}
+    <link rel="alternate" hreflang="en" href="{{ siteBaseUrl }}{{ switchEnUrl | url }}"/>
+    <link rel="alternate" hreflang="de" href="{{ siteBaseUrl }}{{ switchDeUrl | url }}"/>
+    <link rel="alternate" hreflang="cs" href="{{ siteBaseUrl }}{{ switchCsUrl | url }}"/>
+    <link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ switchEnUrl | url }}"/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Tereza Britta Švanda"/>
 <meta property="og:title" content="{{ title }} · Tereza Britta Švanda"/>
@@ -44,7 +42,6 @@
     <nav class="site-nav" aria-label="{{ 'Hlavní navigace' if isCs else 'Main navigation' }}">
       <a href="{{ (workUrl or '/work/') | url }}"{% if activeNav == 'work' %} class="is-active" aria-current="page"{% endif %}>{{ navWork or ('Práce' if isCs else 'Work') }}</a>
       <a href="{{ (aboutUrl or '/about/') | url }}"{% if activeNav == 'about' %} class="is-active" aria-current="page"{% endif %}>{{ navAbout or ('O mně' if isCs else 'About') }}</a>
-      <a href="{{ (cvUrl or '/cv/') | url }}"{% if activeNav == 'cv' %} class="is-active" aria-current="page"{% endif %}>CV</a>
       <a href="{{ (contactUrl or '/contact/') | url }}"{% if activeNav == 'contact' %} class="is-active" aria-current="page"{% endif %}>{{ navContact or ('Kontakt' if isCs else 'Contact') }}</a>
     </nav>
     <div class="lang-switch">
@@ -116,7 +113,7 @@
 </script>
 
 <script>
-/* A card's autoplaying background loop is decorative motion, not content —
+/* A card's autoplaying background loop is decorative motion, not content -
    never force it on someone who has asked for less. */
 (function(){
   function init(){
@@ -308,6 +305,24 @@
   closeBtn.addEventListener('click', close);
 })();
 </script>
+
+{% if isCs %}
+<script>
+/* Czech one-letter prepositions and conjunctions must stay with the word
+   that follows them. Applying non-breaking spaces after rendering keeps the
+   source copy readable while preventing typographic orphans at every width. */
+(function(){
+  var skipped = new Set(['SCRIPT','STYLE','PRE','CODE','TEXTAREA','INPUT']);
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(node){
+    if (!node.parentElement || skipped.has(node.parentElement.tagName)) return;
+    node.nodeValue = node.nodeValue.replace(/(^|\s)([AIKOSUVZaikosuvz]|do|na|od|po|ve|ke|se|ze)\s+(?=\S)/gi, '$1$2\u00a0');
+  });
+})();
+</script>
+{% endif %}
 
 </body>
 </html>

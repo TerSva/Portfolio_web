@@ -2,7 +2,7 @@
   "name": "uxportfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Tereza Britta Svanda — UX/UI portfolio (professional case studies)",
+  "description": "Tereza Britta Svanda - UX/UI portfolio (professional case studies)",
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",

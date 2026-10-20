@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!--
-  TEREZA BRITTA ŠVANDA — VISUAL BOOK
+  TEREZA BRITTA ŠVANDA - VISUAL BOOK
   Branch: uxportfolio
 
-  Část A dokumentuje SKUTEČNÝ stav main branch (art hub) — audit, ne návrh.
+  Část A dokumentuje SKUTEČNÝ stav main branch (art hub) - audit, ne návrh.
   Část B je odvozený Foundations systém pro uxportfolio (case studies).
   Všechny barvy v části B jsou odvozené vzorcem z tokenů části A, ne vybrané od oka.
   Všechny kontrastní poměry jsou reálně spočítané (WCAG relative luminance), ne odhadnuté.
@@ -13,14 +13,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark light">
-<meta name="description" content="Tereza Britta Švanda — Visual Book: audit main identity + odvozený Foundations systém pro uxportfolio">
-<title>Tereza — Visual Book &amp; Design System</title>
+<meta name="description" content="Tereza Britta Švanda - Visual Book: audit main identity + odvozený Foundations systém pro uxportfolio">
+<title>Tereza - Visual Book &amp; Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════
-   KNIHA — vlastní chrome dokumentu.
+   KNIHA - vlastní chrome dokumentu.
    Používá SKUTEČNÉ main tokeny (žádná třetí vymyšlená paleta).
 ═══════════════════════════════════════════════════════════ */
 :root{
@@ -31,15 +31,15 @@
   --font-s:'Space Grotesk', sans-serif;
   --font-m:'IBM Plex Mono', monospace;
 
-  /* ── Část B — odvozené case-study tokeny ──
+  /* ── Část B - odvozené case-study tokeny ──
      Vzorec je zdrojem pravdy, ne hex sám o sobě:
      paper   = mix(ch 96%, em 4%)
      surface = mix(white 80%, ch 20%)
      border  = mix(ch 85%, em 15%)
-     ink     = em (beze změny — main tmavý token použitý jako světlý ink)
+     ink     = em (beze změny - main tmavý token použitý jako světlý ink)
      muted   = mix(paper 25%, em 75%)
      copper-text = mix(copper 70%, black 30%)
-     gold-ui = mix(gold 60%, black 40%)  — gold NIKDY jako text, jen UI/hranice
+     gold-ui = mix(gold 60%, black 40%)  - gold NIKDY jako text, jen UI/hranice
   */
   --cs-paper:#EBEED6;
   --cs-surface:#FDFDF8;
@@ -158,7 +158,7 @@ tr:last-child td{border-bottom:0}
 .rule-card.never h4{color:#f87171}
 .rule-card ul{margin-left:16px;font-size:13.5px;color:var(--ch2);line-height:1.7}
 
-/* ── PART B — live světlá ukázka vnořená do tmavé knihy ── */
+/* ── PART B - live světlá ukázka vnořená do tmavé knihy ── */
 .cs-preview{background:var(--cs-paper);border-radius:16px;padding:34px;color:var(--cs-ink)}
 .cs-preview .cs-label{font-family:var(--font-m);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--cs-muted);margin-bottom:14px;display:block}
@@ -204,14 +204,14 @@ tr:last-child td{border-bottom:0}
 <nav class="sidebar" aria-label="Obsah design systému">
   <div class="sidebar-brand">Tereza<small>Visual Book · v0.1 draft</small></div>
   <a href="#cover">Úvod</a>
-  <div class="sidebar-group-label">Část A — main (audit)</div>
+  <div class="sidebar-group-label">Část A - main (audit)</div>
   <a href="#a-colors">Barvy main</a>
   <a href="#a-type">Typografie main</a>
   <a href="#a-glass">Glass efekt</a>
   <a href="#a-buttons">Buttony</a>
   <a href="#a-cards">Karty a kompozice</a>
   <a href="#a-motion">Liquid a motion</a>
-  <div class="sidebar-group-label">Část B — uxportfolio</div>
+  <div class="sidebar-group-label">Část B - uxportfolio</div>
   <a href="#b-foundations">Foundations</a>
   <a href="#b-colors">Barvy na světlém</a>
   <a href="#b-neutrals">Neutrální škála</a>
@@ -226,7 +226,7 @@ tr:last-child td{border-bottom:0}
 <section class="cover" id="cover">
   <span class="section-label">Visual Book · draft v0.1 · uxportfolio branch</span>
   <h1>Tereza Britta Švanda<br>Visual Book</h1>
-  <p>Dva díly: audit skutečného main brandu a odvozený Foundations systém pro profesní UX/UI case studies. Žádný token v části B není vybraný od oka — každý má vzorec odvození z části A a spočítaný WCAG kontrast.</p>
+  <p>Dva díly: audit skutečného main brandu a odvozený Foundations systém pro profesní UX/UI case studies. Žádný token v části B není vybraný od oka - každý má vzorec odvození z části A a spočítaný WCAG kontrast.</p>
   <div class="palette-strip">
     <span style="background:#001F1C"></span><span style="background:#004D40"></span>
     <span style="background:#FFD700"></span><span style="background:#E65C00"></span>
@@ -241,7 +241,7 @@ tr:last-child td{border-bottom:0}
 </section>
 
 <!-- ═════════════════════════════════════════════════════════
-     ČÁST A — ZDROJOVÁ IDENTITA (audit main)
+     ČÁST A - ZDROJOVÁ IDENTITA (audit main)
 ═════════════════════════════════════════════════════════ -->
 
 <section id="a-colors">
@@ -277,7 +277,7 @@ tr:last-child td{border-bottom:0}
       </tbody>
     </table>
   </div>
-  <p class="text-sm" style="margin-top:10px">⚠️ Poměry jsou vůči flat <code>--bg</code>. Reálně pod textem často leží liquid canvas + noise overlay + spotlight gradient — lokální kontrast tam může být nižší, hlavně u <code>ch3</code>. Pravidlo pro main: text nikdy přímo na živé ploše liquid bez tmavé vrstvy/scrimu pod sebou (to <code>#scroller::after</code> gradient v main už řeší pro postranní panely).</p>
+  <p class="text-sm" style="margin-top:10px">⚠️ Poměry jsou vůči flat <code>--bg</code>. Reálně pod textem často leží liquid canvas + noise overlay + spotlight gradient - lokální kontrast tam může být nižší, hlavně u <code>ch3</code>. Pravidlo pro main: text nikdy přímo na živé ploše liquid bez tmavé vrstvy/scrimu pod sebou (to <code>#scroller::after</code> gradient v main už řeší pro postranní panely).</p>
 </section>
 
 <section id="a-type">
@@ -292,11 +292,11 @@ tr:last-child td{border-bottom:0}
     <div class="card">
       <h4>Space Grotesk</h4>
       <p style="font-family:var(--font-s);font-weight:300;font-size:16px;margin:10px 0">Spojuji logiku design systémů s empatií kreativní tvůrkyně.</p>
-      <p class="text-sm">Body text, weight 300. Lehký, vzdušný — funguje na tmavém s velkým řádkováním.</p>
+      <p class="text-sm">Body text, weight 300. Lehký, vzdušný - funguje na tmavém s velkým řádkováním.</p>
     </div>
     <div class="card card-full">
       <h4>IBM Plex Mono</h4>
-      <p style="font-family:var(--font-m);font-size:14px;letter-spacing:.15em;text-transform:uppercase;margin:10px 0">01 / Případová studie — Job Timer</p>
+      <p style="font-family:var(--font-m);font-size:14px;letter-spacing:.15em;text-transform:uppercase;margin:10px 0">01 / Případová studie - Job Timer</p>
       <p class="text-sm">Labely, metadata, mikro-navigace, buttony. Nese "technický" hlas systému.</p>
     </div>
   </div>
@@ -305,7 +305,7 @@ tr:last-child td{border-bottom:0}
 <section id="a-glass">
   <span class="section-label">A3 · Audit</span>
   <h2 class="section-title">Glass efekt</h2>
-  <p class="section-desc">Jediný skutečně systematický glassmorphism vzor v main, opakovaný konzistentně na <code>.site-name</code>, <code>.site-nav</code>, <code>.lang-switch</code>, <code>#lightbox</code>. Živá ukázka níže — pozadí je reálná main textura <code>bac_liq.jpg</code>.</p>
+  <p class="section-desc">Jediný skutečně systematický glassmorphism vzor v main, opakovaný konzistentně na <code>.site-name</code>, <code>.site-nav</code>, <code>.lang-switch</code>, <code>#lightbox</code>. Živá ukázka níže - pozadí je reálná main textura <code>bac_liq.jpg</code>.</p>
   <div class="glass-stage">
     <span class="glass-pill">Práce</span>
     <span class="glass-pill">O mně</span>
@@ -324,13 +324,13 @@ border-radius: 100px;</div>
     <button class="btn-modern">Živá aplikace</button>
     <button class="btn-ghost-demo">Design systém</button>
   </div>
-  <p class="text-sm" style="margin-top:12px"><code>.btn-modern</code> — primární CTA, gold outline → gold fill. <code>.btn-ghost-demo</code> (main: <code>.btn-ghost</code>) — sekundární, emerald outline → emerald fill.</p>
+  <p class="text-sm" style="margin-top:12px"><code>.btn-modern</code> - primární CTA, gold outline → gold fill. <code>.btn-ghost-demo</code> (main: <code>.btn-ghost</code>) - sekundární, emerald outline → emerald fill.</p>
 </section>
 
 <section id="a-cards">
   <span class="section-label">A5 · Audit</span>
   <h2 class="section-title">Karty a kompozice</h2>
-  <p class="section-desc">Nejsou to klasické UI-kit karty — main používá scénické fotografické kompozice. Zjednodušená živá ukázka vějíře (skutečné obrázky z repozitáře), najeď myší.</p>
+  <p class="section-desc">Nejsou to klasické UI-kit karty - main používá scénické fotografické kompozice. Zjednodušená živá ukázka vějíře (skutečné obrázky z repozitáře), najeď myší.</p>
   <div class="card">
     <div class="collage-demo">
       <img src="jobtimer-3.jpg" alt="">
@@ -338,7 +338,7 @@ border-radius: 100px;</div>
       <img src="jobtimer-preview.jpg" alt="">
     </div>
   </div>
-  <p class="text-sm" style="margin-top:12px"><code>.collage-wrap</code> — 3 fotky, rotace ±4–6°, hover roztáhne vějíř. <code>.art-thumb</code> (galerie) — accordion, flex-grow on hover + grayscale→barva reveal. <code>.p-project</code> — celopanelová scénická "karta" s hover glow, ne ohraničený box.</p>
+  <p class="text-sm" style="margin-top:12px"><code>.collage-wrap</code> - 3 fotky, rotace ±4-6°, hover roztáhne vějíř. <code>.art-thumb</code> (galerie) - accordion, flex-grow on hover + grayscale→barva reveal. <code>.p-project</code> - celopanelová scénická "karta" s hover glow, ne ohraničený box.</p>
 </section>
 
 <section id="a-motion">
@@ -347,30 +347,30 @@ border-radius: 100px;</div>
   <div class="grid-2">
     <div class="card">
       <h4>WebGL liquid pozadí</h4>
-      <p class="text-sm"><code>#liquid-bg</code> canvas, knihovna <code>threejs-components</code> (<code>LiquidBackground</code>), texturuje <code>bac_liq.jpg</code>. Metalness 0.8, roughness 0.15, displacement 4. Desktop-only — na mobilu skrytý kvůli výkonu.</p>
+      <p class="text-sm"><code>#liquid-bg</code> canvas, knihovna <code>threejs-components</code> (<code>LiquidBackground</code>), texturuje <code>bac_liq.jpg</code>. Metalness 0.8, roughness 0.15, displacement 4. Desktop-only - na mobilu skrytý kvůli výkonu.</p>
     </div>
     <div class="card">
       <h4>Golden spotlight reveal</h4>
       <p class="text-sm">Radial-gradient sledující kurzor (<code>body::before</code>), mix-blend-mode screen, velmi jemná (opacity 0.06 max). Plus noise overlay <code>body::after</code> (SVG fractalNoise, opacity 0.032).</p>
     </div>
   </div>
-  <p class="text-sm" style="margin-top:14px">Live náhled těchto efektů (WebGL nelze čistě replikovat v tomto statickém dokumentu) — viz <code>index.html</code> na main branch.</p>
+  <p class="text-sm" style="margin-top:14px">Live náhled těchto efektů (WebGL nelze čistě replikovat v tomto statickém dokumentu) - viz <code>index.html</code> na main branch.</p>
 </section>
 
 <!-- ═════════════════════════════════════════════════════════
-     ČÁST B — ODVOZENÝ SYSTÉM PRO UXPORTFOLIO
+     ČÁST B - ODVOZENÝ SYSTÉM PRO UXPORTFOLIO
 ═════════════════════════════════════════════════════════ -->
 
 <section id="b-foundations" style="border-top:1px solid var(--border);margin-top:20px">
   <span class="section-label">B1 · Foundations</span>
   <h2 class="section-title">Pravidla před stylem</h2>
-  <p class="section-desc">Case study je primárně světlá. Foundations říká, co se z main přebírá beze změny, co se adaptuje pro světlé UI, a co se nepoužívá vůbec — kvůli skenovatelnosti a profesionálnímu tónu.</p>
+  <p class="section-desc">Case study je primárně světlá. Foundations říká, co se z main přebírá beze změny, co se adaptuje pro světlé UI, a co se nepoužívá vůbec - kvůli skenovatelnosti a profesionálnímu tónu.</p>
   <div class="rules-grid">
     <div class="rule-card keep">
       <h4>Must preserve</h4>
       <ul>
         <li>Gold jako jediný accent (CTA, underline, tag pozadí)</li>
-        <li>DM Serif Display — přísně jen jako H1 project title, vzpřímeně</li>
+        <li>DM Serif Display - přísně jen jako H1 project title, vzpřímeně</li>
         <li>IBM Plex Mono na metadata a labely</li>
         <li>7bodová anatomie case study (obsahová struktura)</li>
       </ul>
@@ -380,7 +380,7 @@ border-radius: 100px;</div>
       <ul>
         <li>Podklad: teplý kámen odvozený z main tokenů (viz B2), ne main tmavá</li>
         <li>Copper a gold: ztmavené UI varianty pro čitelnost na světlém</li>
-        <li>Space Grotesk: 400–500 váha místo 300, bez kurzívy</li>
+        <li>Space Grotesk: 400-500 váha místo 300, bez kurzívy</li>
         <li>Hustota a počet sloupců podle breakpointu</li>
       </ul>
     </div>
@@ -390,7 +390,7 @@ border-radius: 100px;</div>
         <li>Liquid canvas / glass efekt na case study obsahu</li>
         <li>Scroll-hijacking, blokující intro animace</li>
         <li>Gold nebo raw copper jako barva běžného textu</li>
-        <li>Sémantické barvy (success/warning/error) — vědomě vynechány</li>
+        <li>Sémantické barvy (success/warning/error) - vědomě vynechány</li>
       </ul>
     </div>
   </div>
@@ -399,26 +399,26 @@ border-radius: 100px;</div>
 <section id="b-colors">
   <span class="section-label">B2 · Odvozeno</span>
   <h2 class="section-title">Barvy na světlém</h2>
-  <p class="section-desc">Žádný z těchto hexů není vybraný od oka — každý má vzorec z tokenů části A. Kontrast je spočítaný přes WCAG relative luminance.</p>
+  <p class="section-desc">Žádný z těchto hexů není vybraný od oka - každý má vzorec z tokenů části A. Kontrast je spočítaný přes WCAG relative luminance.</p>
 
   <div class="grid">
     <div class="swatch"><div class="swatch-fill" style="background:#EBEED6" data-hex="#EBEED6"></div>
-      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-paper</span><span class="hex" style="color:#555">#EBEED6</span><span class="note" style="color:#666">mix(ch 96%, em 4%) — podklad stránky</span></div></div>
+      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-paper</span><span class="hex" style="color:#555">#EBEED6</span><span class="note" style="color:#666">mix(ch 96%, em 4%) - podklad stránky</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#FDFDF8;border-bottom:1px solid #ddd" data-hex="#FDFDF8"></div>
-      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-surface</span><span class="hex" style="color:#555">#FDFDF8</span><span class="note" style="color:#666">mix(white 80%, ch 20%) — karty, vystoupení</span></div></div>
+      <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-surface</span><span class="hex" style="color:#555">#FDFDF8</span><span class="note" style="color:#666">mix(white 80%, ch 20%) - karty, vystoupení</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#D0DCC5" data-hex="#D0DCC5"></div>
       <div class="info" style="background:#f0f0e8"><span class="name" style="color:#222">--cs-border</span><span class="hex" style="color:#555">#D0DCC5</span><span class="note" style="color:#666">mix(ch 85%, em 15%)</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#004D40" data-hex="#004D40"></div>
-      <div class="info"><span class="name">--cs-ink</span><span class="hex">#004D40</span><span class="note">= main --em, beze změny — primární text/nadpisy</span></div></div>
+      <div class="info"><span class="name">--cs-ink</span><span class="hex">#004D40</span><span class="note">= main --em, beze změny - primární text/nadpisy</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#3B7565" data-hex="#3B7565"></div>
-      <div class="info"><span class="name">--cs-muted</span><span class="hex">#3B7565</span><span class="note">mix(paper 25%, em 75%) — sekundární text</span></div></div>
+      <div class="info"><span class="name">--cs-muted</span><span class="hex">#3B7565</span><span class="note">mix(paper 25%, em 75%) - sekundární text</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#A14000" data-hex="#A14000"></div>
-      <div class="info"><span class="name">--cs-copper</span><span class="hex">#A14000</span><span class="note">mix(copper 70%, black 30%) — linky, drobný accent text</span></div></div>
+      <div class="info"><span class="name">--cs-copper</span><span class="hex">#A14000</span><span class="note">mix(copper 70%, black 30%) - linky, drobný accent text</span></div></div>
     <div class="swatch"><div class="swatch-fill" style="background:#998100" data-hex="#998100"></div>
-      <div class="info"><span class="name">--cs-gold-ui</span><span class="hex">#998100</span><span class="note">mix(gold 60%, black 40%) — jen hranice/ikony, nikdy text</span></div></div>
+      <div class="info"><span class="name">--cs-gold-ui</span><span class="hex">#998100</span><span class="note">mix(gold 60%, black 40%) - jen hranice/ikony, nikdy text</span></div></div>
   </div>
 
-  <h3 class="subsection-title">Kontrast — reálná čísla</h3>
+  <h3 class="subsection-title">Kontrast - reálná čísla</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Kombinace</th><th>Poměr</th><th>Verdikt</th></tr></thead>
@@ -429,19 +429,19 @@ border-radius: 100px;</div>
         <tr><td>cs-copper na cs-paper (linky)</td><td>5.45:1</td><td><span class="badge badge-aa">AA</span></td></tr>
         <tr><td>cs-copper na cs-surface</td><td>6.32:1</td><td><span class="badge badge-aaa">téměř AAA</span></td></tr>
         <tr><td>cs-gold-ui na cs-paper (hranice/ikony, práh 3:1)</td><td>3.23:1</td><td><span class="badge badge-aa">splňuje 1.4.11</span></td></tr>
-        <tr><td>raw gold #FFD700 jako TEXT na cs-paper</td><td>1.19:1</td><td><span class="badge badge-fail">FAIL — nikdy jako text</span></td></tr>
-        <tr><td>cs-ink jako text NA raw gold pozadí (tag/badge)</td><td>7.01:1</td><td><span class="badge badge-aaa">AAA — takhle gold používat</span></td></tr>
+        <tr><td>raw gold #FFD700 jako TEXT na cs-paper</td><td>1.19:1</td><td><span class="badge badge-fail">FAIL - nikdy jako text</span></td></tr>
+        <tr><td>cs-ink jako text NA raw gold pozadí (tag/badge)</td><td>7.01:1</td><td><span class="badge badge-aaa">AAA - takhle gold používat</span></td></tr>
       </tbody>
     </table>
   </div>
-  <p class="text-sm" style="margin-top:10px">Raw <code>#FFD700</code> zůstává v systému — jen ne jako linka nebo text na světlém. Správné použití: plná plocha pozadí (tag/badge) s <code>--cs-ink</code> textem na ní (7.01:1). Na hranice/ikony/underline použij <code>--cs-gold-ui</code>.</p>
-  <p class="text-sm" style="margin-top:6px">⚠️ Kontrast ověřuje čitelnost, ne harmonii. <code>--cs-copper</code> je teplý akcent na chladně nazeleněném podkladu — před finálním zamčením paletového vztahu doporučuju vizuální swatch-check vedle sebe, ne jen čísla (feedback Sebastiana).</p>
+  <p class="text-sm" style="margin-top:10px">Raw <code>#FFD700</code> zůstává v systému - jen ne jako linka nebo text na světlém. Správné použití: plná plocha pozadí (tag/badge) s <code>--cs-ink</code> textem na ní (7.01:1). Na hranice/ikony/underline použij <code>--cs-gold-ui</code>.</p>
+  <p class="text-sm" style="margin-top:6px">⚠️ Kontrast ověřuje čitelnost, ne harmonii. <code>--cs-copper</code> je teplý akcent na chladně nazeleněném podkladu - před finálním zamčením paletového vztahu doporučuju vizuální swatch-check vedle sebe, ne jen čísla (feedback Sebastiana).</p>
 </section>
 
 <section id="b-neutrals">
   <span class="section-label">B3 · Odvozeno</span>
   <h2 class="section-title">Neutrální škála v kontextu</h2>
-  <p class="section-desc">Živá ukázka — světlá case-study kompozice vnořená do tmavé knihy, aby byl vidět skutečný vztah ploch.</p>
+  <p class="section-desc">Živá ukázka - světlá case-study kompozice vnořená do tmavé knihy, aby byl vidět skutečný vztah ploch.</p>
   <div class="cs-preview">
     <span class="cs-label">01 · Případová studie</span>
     <h3 class="cs-title">Job Timer</h3>
@@ -463,36 +463,36 @@ border-radius: 100px;</div>
   <span class="section-label">B4 · Odvozeno</span>
   <h2 class="section-title">Typografie case study</h2>
   <div class="cs-preview">
-    <p style="font-family:var(--font-d);font-size:30px;color:var(--cs-ink);margin-bottom:14px">Job Timer — Design Systém</p>
-    <p class="cs-body" style="font-weight:500">Space Grotesk, 500 váha, bez kurzívy. Tohle je pracovní kůň case study — nadpisy sekcí i běžný text. Čte se čistě, profesionálně, žádný artový flourish.</p>
-    <p style="font-family:var(--font-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cs-muted);margin-top:14px">Typ · Rok · Nástroje — IBM Plex Mono, beze změny</p>
+    <p style="font-family:var(--font-d);font-size:30px;color:var(--cs-ink);margin-bottom:14px">Job Timer - Design Systém</p>
+    <p class="cs-body" style="font-weight:500">Space Grotesk, 500 váha, bez kurzívy. Tohle je pracovní kůň case study - nadpisy sekcí i běžný text. Čte se čistě, profesionálně, žádný artový flourish.</p>
+    <p style="font-family:var(--font-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cs-muted);margin-top:14px">Typ · Rok · Nástroje - IBM Plex Mono, beze změny</p>
   </div>
-  <p class="text-sm" style="margin-top:14px">Pravidlo: <strong>DM Serif Display se objevuje POUZE v project title (H1), vzpřímeně, nikdy jinde.</strong> Spojení s main je font + tenká gold linka pod titulkem (viz <code>.cs-title</code> border-bottom výše) — signatura jako dvojice rozhodnutí, ne osamocené písmo.</p>
+  <p class="text-sm" style="margin-top:14px">Pravidlo: <strong>DM Serif Display se objevuje POUZE v project title (H1), vzpřímeně, nikdy jinde.</strong> Spojení s main je font + tenká gold linka pod titulkem (viz <code>.cs-title</code> border-bottom výše) - signatura jako dvojice rozhodnutí, ne osamocené písmo.</p>
 </section>
 
 <section id="b-anatomy">
   <span class="section-label">B5 · Ze zdrojů bootcampu</span>
   <h2 class="section-title">Anatomie case study</h2>
-  <p class="section-desc">Obsahová struktura už existuje hotová v <code>portfolio/portfolio-poznatky-bootcamp.md</code> — zde jen jako referenční přehled, ne nový návrh.</p>
+  <p class="section-desc">Obsahová struktura už existuje hotová v <code>portfolio/portfolio-poznatky-bootcamp.md</code> - zde jen jako referenční přehled, ne nový návrh.</p>
   <div>
-    <div class="anatomy-item" data-n="1"><h4>Overview</h4><p>Jednovětý elevator pitch — pro koho to je, jaký byl cíl a zamýšlený výsledek.</p></div>
+    <div class="anatomy-item" data-n="1"><h4>Overview</h4><p>Jednovětý elevator pitch - pro koho to je, jaký byl cíl a zamýšlený výsledek.</p></div>
     <div class="anatomy-item" data-n="2"><h4>Problem Statement</h4><p>Proč projekt vznikl, jak se problém vyvíjel, kdo ho identifikoval.</p></div>
-    <div class="anatomy-item" data-n="3"><h4>Users &amp; Audience</h4><p>Konkrétní lidé, ne "uživatelé" — kdo přesně, jak jsi je poznala, existoval research/persony?</p></div>
+    <div class="anatomy-item" data-n="3"><h4>Users &amp; Audience</h4><p>Konkrétní lidé, ne "uživatelé" - kdo přesně, jak jsi je poznala, existoval research/persony?</p></div>
     <div class="anatomy-item" data-n="4"><h4>Roles &amp; Responsibilities</h4><p>Kdo na projektu pracoval, kolik lidí, tvoje konkrétní role, spolupráce s týmem.</p></div>
     <div class="anatomy-item" data-n="5"><h4>Scope &amp; Constraints</h4><p>Časový rámec, rozpočet, omezení, co si vyžádalo adaptaci procesu.</p></div>
     <div class="anatomy-item" data-n="6"><h4>Process &amp; What You Did</h4><p>Příběh realizace, použité metody a proč, zapojení stakeholderů.</p></div>
     <div class="anatomy-item" data-n="7"><h4>Outcomes &amp; Lessons</h4><p>Launch nebo scrapped? Lekce, co bys udělala jinak, metriky, zpětná vazba.</p></div>
   </div>
-  <p class="text-sm" style="margin-top:4px">Otevřená otázka z <code>00-strategie-a-kontext.md</code>: kolik case studies (Enow, Galerie Venek, případně Job Timer jako bonus) půjde do první verze — zatím nerozhodnuto.</p>
+  <p class="text-sm" style="margin-top:4px">Otevřená otázka z <code>00-strategie-a-kontext.md</code>: kolik case studies (Enow, Galerie Venek, případně Job Timer jako bonus) půjde do první verze - zatím nerozhodnuto.</p>
 </section>
 
 <section id="b-guidelines">
   <span class="section-label">B6 · Guidelines</span>
-  <h2 class="section-title">Použití — do / don't</h2>
+  <h2 class="section-title">Použití - do / don't</h2>
   <div class="dodont">
     <div>
       <div class="do-item">✓ Gold jen jako plná plocha (tag) s cs-ink textem, nebo jako cs-gold-ui linka/hranice</div>
-      <div class="do-item">✓ Nadpisy vždy cs-ink (main --em) — je to AAA na obou světlých plochách</div>
+      <div class="do-item">✓ Nadpisy vždy cs-ink (main --em) - je to AAA na obou světlých plochách</div>
       <div class="do-item">✓ DM Serif Display výhradně na H1 project title</div>
       <div class="do-item">✓ Odkazy v textu vždy cs-copper s podtržením</div>
     </div>
