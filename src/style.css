@@ -1473,7 +1473,7 @@ html[lang="de"] .cs-intro-copy{
 
 /* Art portfolio is a second practice, not a fifth UX project. The bridge
    gives it a deliberate, recognisable entrance after the product work. */
-.work-art-bridge{padding:clamp(4rem,8vw,7.5rem) 0;background:#09231f;color:var(--nav-ch);border-top:1px solid var(--nav-em);}
+.work-art-bridge{padding:clamp(4rem,8vw,7.5rem) 0;background:#FDF6CB;color:var(--nav-ch);border-top:1px solid #E5D77A;}
 .work-art-bridge>.work-shell{position:relative;z-index:1;}
 .work-art-bridge__link{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,.82fr);min-height:clamp(22rem,36vw,30rem);overflow:hidden;border:1px solid rgba(245,245,220,.22);color:var(--nav-ch);text-decoration:none;background:#06312c;}
 .work-art-bridge__link:hover{text-decoration:none;}
