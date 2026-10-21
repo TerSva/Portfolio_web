@@ -431,10 +431,11 @@ img{max-width:100%;display:block;}
     grid-area:nav;
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:0;
-    width:100%;
-    padding-inline:1.75rem;
+    justify-content:center;
+    gap:clamp(1.75rem,calc(13vw - 1.125rem),5rem);
+    width:calc(100% + 10vw);
+    margin-inline:-5vw;
+    padding-inline:5vw;
     padding-top:.5rem;
     border-top:1px solid var(--nav-em);
   }
@@ -447,7 +448,7 @@ img{max-width:100%;display:block;}
 }
 @media (max-width:380px){
   .site-header .site-brand{font-size:1.08rem;}
-  .site-header .site-nav{padding-inline:1.1rem;}
+  .site-header .site-nav{gap:1.5rem;}
   .site-header .site-nav a{font-size:.52rem;letter-spacing:.1em;}
 }
 
