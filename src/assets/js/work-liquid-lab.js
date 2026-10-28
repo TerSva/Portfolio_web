@@ -81,6 +81,14 @@
 
   function mount(host) {
     var settings = PALETTES[host.dataset.variant] || PALETTES.surface;
+    var mobileWorkHero = host.hasAttribute('data-work-liquid') && (
+      window.matchMedia('(max-width: 760px)').matches ||
+      window.matchMedia('(hover: none), (pointer: coarse)').matches
+    );
+    if (mobileWorkHero) {
+      host.dataset.liquidMode = 'static';
+      return function () {};
+    }
     var canvas = document.createElement('canvas');
     canvas.className = 'liquid-lab-canvas';
     canvas.setAttribute('aria-hidden', 'true');
