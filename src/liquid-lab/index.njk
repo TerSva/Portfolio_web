@@ -1,0 +1,53 @@
+---
+layout: base.njk
+title: "Liquid lab"
+description: "Dva směry pohyblivé textury pro úvodní obrazovku portfolia."
+activeNav: work
+permalink: /liquid-lab/
+bodyClass: liquid-lab-body
+---
+<section class="liquid-lab-page" aria-labelledby="liquid-lab-title">
+  <div class="liquid-lab-shell">
+    <header class="liquid-lab-intro">
+      <div>
+        <p class="liquid-lab-kicker">Design lab · Pohyb a materiál</p>
+        <h1 id="liquid-lab-title">Tekutý pohyb ve dvou směrech.</h1>
+      </div>
+      <p>Porovnání vybraného metallic směru: původní verze a tekutější B+ s jemnou reakcí na pohyb myši.</p>
+    </header>
+
+    <div class="liquid-lab-grid">
+      <article class="liquid-lab-card">
+        <div class="liquid-lab-visual" data-liquid-lab data-variant="filaments">
+          <div class="liquid-lab-hero-copy">
+            <p>Portfolio · Selected work</p>
+            <h2>Product &amp; UX/UI work.</h2>
+            <span>Different products, one starting point. How people feel when they open the screen.</span>
+          </div>
+        </div>
+        <div class="liquid-lab-copy">
+          <p class="liquid-lab-label">Metallic · kontrolní verze</p>
+          <h2>Metallic Filaments</h2>
+          <p>Původní ostřejší síť světelných vláken bez reakce na kurzor.</p>
+        </div>
+      </article>
+
+      <article class="liquid-lab-card">
+        <div class="liquid-lab-visual" data-liquid-lab data-variant="interactive">
+          <div class="liquid-lab-hero-copy">
+            <p>Portfolio · Selected work</p>
+            <h2>Product &amp; UX/UI work.</h2>
+            <span>Different products, one starting point. How people feel when they open the screen.</span>
+          </div>
+        </div>
+        <div class="liquid-lab-copy">
+          <p class="liquid-lab-label">Metallic B+ · interaktivní</p>
+          <h2>Metallic Liquid</h2>
+          <p>Měkčí tok, více žluto‑měděných odstínů a velmi jemný posun za kurzorem.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script src="{{ '/assets/js/work-liquid-lab.js' | url }}" defer></script>

@@ -1407,6 +1407,12 @@ html[lang="de"] .cs-intro-copy{
    as the page most people land on first. */
 .work-hero.cs-spotlight::before{background:radial-gradient(38rem 26rem ellipse at var(--spotlight-x) var(--spotlight-y),rgba(234,131,71,.16) 0%,rgba(234,131,71,.06) 34%,transparent 70%);}
 @media (prefers-reduced-motion:reduce){.work-hero-title-shimmer{display:none;}}
+.work-hero[data-work-liquid]{position:relative;isolation:isolate;overflow:hidden;background:#001f1c;}
+.work-hero[data-work-liquid]::before{display:none;}
+.work-hero[data-work-liquid]::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(0,31,28,.93) 0%,rgba(0,31,28,.84) 42%,rgba(0,31,28,.68) 60%,rgba(0,31,28,.24) 80%,rgba(0,31,28,.36) 100%);}
+.work-hero[data-work-liquid]>.work-shell{position:relative;z-index:2;}
+.work-hero[data-work-liquid]>.liquid-lab-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%;opacity:.9;}
+.work-hero[data-work-liquid] .work-hero-title-shimmer{display:none;}
 .work-list{padding:clamp(1.5rem,2.5vw,2.25rem) 0 clamp(5rem,9vw,9rem);background:#001512;color:var(--nav-ch)}.work-list>.work-shell{position:relative;z-index:1}
 .work-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(2rem,3.5vw,3rem);}
 .work-project{display:flex;flex-direction:column;gap:clamp(1.25rem,2vw,1.5rem);color:var(--nav-ch);text-decoration:none}.work-project:hover{text-decoration:none}
@@ -1688,3 +1694,48 @@ html[lang="de"] .cs-intro-copy{
 }
 @media (prefers-reduced-motion:reduce){.cs-lightbox-overlay{transition:none;}}
 @media (hover:none),(pointer:coarse){.cs-lightbox-figure::after{content:'Tap to enlarge';opacity:1;}}
+
+/* ============================================================
+   LIQUID LAB — local comparison before the Work hero is touched.
+============================================================ */
+.liquid-lab-page{
+  min-height:100vh;
+  padding:clamp(10rem,15vw,13rem) 4vw clamp(4rem,8vw,7rem);
+  background:#001f1c;
+  color:#f5f5dc;
+}
+.liquid-lab-shell{width:min(92rem,100%);margin:0 auto;}
+.liquid-lab-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(18rem,.85fr);gap:clamp(2rem,6vw,7rem);align-items:end;margin-bottom:clamp(2.5rem,5vw,4.5rem);}
+.liquid-lab-kicker,.liquid-lab-label{
+  margin:0 0 .85rem;
+  font-family:var(--font-m);font-size:.69rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:#ffd700;
+}
+.liquid-lab-intro h1{max-width:15ch;margin:0;font-family:var(--font-d);font-size:clamp(3.5rem,6.4vw,6.8rem);font-weight:400;line-height:.92;letter-spacing:-.035em;}
+.liquid-lab-intro > p{max-width:34rem;margin:0;color:rgba(245,245,220,.68);font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.65;}
+.liquid-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.1rem,2.5vw,2rem);}
+.liquid-lab-card{min-width:0;border:1px solid rgba(245,245,220,.16);background:#09231f;overflow:hidden;}
+.liquid-lab-visual{position:relative;isolation:isolate;height:clamp(22rem,44vw,39rem);overflow:hidden;background:radial-gradient(circle at 68% 34%,rgba(161,64,0,.24),transparent 38%),#001f1c;}
+.liquid-lab-visual::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 56%,rgba(0,31,28,.62));}
+.liquid-lab-visual[data-variant='filaments']{background:radial-gradient(circle at 62% 40%,rgba(255,215,0,.12),transparent 36%),#001f1c;}
+.liquid-lab-visual[data-fallback='true']::before{content:'WebGL2 není dostupné';position:absolute;left:1.25rem;bottom:1.25rem;z-index:2;font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,245,220,.62);}
+.liquid-lab-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;}
+.liquid-lab-visual[data-variant='surface'] .liquid-lab-canvas{filter:blur(8px) saturate(.78);transform:scale(1.035);}
+.liquid-lab-hero-copy{position:absolute;inset:auto clamp(1.4rem,3vw,2.5rem) clamp(1.5rem,3.4vw,3rem);z-index:2;max-width:32rem;text-shadow:0 2px 18px rgba(0,31,28,.55);}
+.liquid-lab-hero-copy p{margin:0 0 .8rem;font-family:var(--font-m);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#ffd700;}
+.liquid-lab-hero-copy h2{max-width:9ch;margin:0 0 1rem;font-family:var(--font-d);font-size:clamp(2.8rem,4.8vw,5.3rem);font-weight:400;line-height:.9;letter-spacing:-.035em;color:#f5f5dc;}
+.liquid-lab-hero-copy span{display:block;max-width:31rem;color:rgba(245,245,220,.76);font-size:clamp(.87rem,1.2vw,1.05rem);line-height:1.5;}
+.liquid-lab-copy{min-height:12rem;padding:clamp(1.35rem,2.6vw,2rem);border-top:1px solid rgba(245,245,220,.16);}
+.liquid-lab-copy h2{margin:0 0 .6rem;font-family:var(--font-d);font-size:clamp(2rem,3vw,3.1rem);font-weight:400;line-height:1;}
+.liquid-lab-copy p:last-child{max-width:39rem;margin:0;color:rgba(245,245,220,.65);line-height:1.55;}
+@media(max-width:760px){
+  .liquid-lab-page{padding-inline:5vw;}
+  .liquid-lab-intro,.liquid-lab-grid{grid-template-columns:1fr;}
+  .liquid-lab-intro{gap:1.4rem;}
+  .liquid-lab-intro h1{max-width:none;font-size:clamp(2.75rem,13vw,3.35rem);}
+  .liquid-lab-visual{height:min(118vw,32rem);}
+  .liquid-lab-hero-copy{inset:auto 1.25rem 1.35rem;}
+  .liquid-lab-hero-copy h2{font-size:clamp(2.65rem,13vw,3.15rem);}
+  .liquid-lab-copy{min-height:0;}
+}
+@media(prefers-reduced-motion:reduce){.liquid-lab-canvas{opacity:.78;}}
