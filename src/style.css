@@ -1359,6 +1359,7 @@ html[lang="de"] .cs-intro-copy{
   font-weight:400;line-height:1;letter-spacing:-.035em;text-wrap:balance;
 }
 .about-hero-intro{max-width:42rem;margin-top:clamp(1.5rem,3vw,2.25rem);font-size:clamp(1.05rem,1.45vw,1.3rem);line-height:1.6;color:var(--nav-ch2);text-wrap:pretty;}
+.about-hero-intro strong{display:block;margin-bottom:.25rem;color:var(--nav-ch);font-weight:500;}
 .about-hero-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:clamp(2rem,4vw,3rem);}
 .about-button{display:inline-flex;align-items:center;gap:.65rem;min-height:44px;padding:.75rem 1.35rem;border:1px solid var(--nav-ch2);border-radius:100px;font-family:var(--font-m);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,border-color .2s ease,color .2s ease;}
 .about-button:hover{text-decoration:none}.about-button span{font-size:.9rem;line-height:1;color:var(--nav-gold)}.about-button-primary{background:var(--nav-ch);border-color:var(--nav-ch);color:var(--nav-bg)}.about-button-primary span{color:inherit}.about-button-primary:hover{background:transparent;color:var(--nav-ch)}.about-button-secondary{color:var(--nav-ch)}.about-button-secondary:hover{border-color:var(--nav-gold);color:var(--nav-gold)}.about-button:focus-visible{outline:2px solid var(--nav-gold);outline-offset:3px;}
