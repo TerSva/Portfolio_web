@@ -1620,7 +1620,7 @@ html[lang="en"] .work-art-bridge h2{max-width:14ch;font-size:clamp(2.65rem,4vw,4
   .about-steps li{gap:1rem;}
   .about-toolkit-list article{grid-template-columns:1fr;gap:.75rem;}.about-resume-links{justify-content:flex-start}
   .work-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.work-hero h1{font-size:clamp(3.4rem,13.5vw,5rem);}.work-grid{grid-template-columns:1fr;}.work-project-venek-cover,.work-project-puls-cover{aspect-ratio:4 / 3;}.work-project-browser{right:auto;left:50%;width:70%;transform:translate(-50%,-50%);}.work-project-puls-browser{right:auto;left:50%;width:76%;transform:translate(-50%,-50%);}
-  .work-art-bridge{padding:2.25rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{max-width:none;font-size:clamp(2.8rem,12.5vw,4.25rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{object-position:center 62%;}
+  .work-art-bridge{padding:2.25rem 0;}.work-art-bridge__link{grid-template-columns:1fr;min-height:0;}.work-art-bridge__copy{padding:2rem;}.work-art-bridge h2{max-width:none;font-size:clamp(2.8rem,12.5vw,4.25rem);}.work-art-bridge__visual{min-height:20rem;}.work-art-bridge__visual img{inset:0;width:100%;height:100%;object-position:center 62%;}
   .cv-hero{padding-top:calc(var(--nav-height) + 3rem);}
   .cv-hero h1{font-size:clamp(2.75rem,11vw,4.7rem);}
   .cv-hero h1 .cv-role{display:block;margin-top:.3rem;font-size:clamp(1.35rem,6.2vw,1.5rem);line-height:1.08;letter-spacing:-.02em;white-space:nowrap;}
@@ -1847,6 +1847,8 @@ html[lang="en"] .work-art-bridge h2{max-width:14ch;font-size:clamp(2.65rem,4vw,4
 }
 @media(max-width:640px){
   .art-shell{width:min(90vw,78rem);}.art-hero{min-height:auto;padding-top:calc(var(--nav-height) + 3rem);}.art-hero h1{font-size:clamp(2.35rem,10.5vw,3rem);}
+  .art-title-line{white-space:normal;}
+  html[lang="en"] .art-hero h1,html[lang="de"] .art-hero h1{font-size:clamp(2.15rem,9.4vw,2.6rem);}
   .art-hero-artwork{inset:2% -38% -3% 12%;opacity:.46;}.art-hero-artwork img{opacity:.27;}
   .art-series-heading{grid-template-columns:1fr;}
   .art-series-heading{align-items:start;}.art-series-heading>div{display:block;}.art-series-heading h2{margin-top:.8rem;}
