@@ -1,6 +1,6 @@
 # Feedback lektorky: provedené změny a otevřené body
 
-Aktualizováno: 21. října 2026
+Aktualizováno: 29. října 2026
 Větev: `uxportfolio`
 
 ## Účel dokumentu
@@ -56,11 +56,11 @@ Související commit: `2a4c55f Refine localized contact flow`.
 - [x] Oddělit vstup do Art portfolia od UX/UI projektových karet jako samostatnou sekci.
 - [x] Použít světlé žluté pozadí odvozené z existující značky, aby bylo zřejmé, že začíná jiný typ práce.
 - [x] Zachovat tmavou vnitřní kartu a jasný nadpis/CTA do Art portfolia.
-- [~] Žlutý Art bridge je rychlé přechodné řešení. Pomáhá orientaci, ale stále vede do druhého, samostatného portfolia.
-- [ ] Prověřit doporučení lektorky sloučit UX/UI a Art portfolio do jednoho webu. Art práce by mohla mít vlastní přímou URL/sekci, kterou lze posílat samostatně, bez přepínání mezi dvěma různými weby.
-- [ ] Pokud portfolia zůstanou dočasně oddělená, vyřešit plynulý návrat na odpovídající stránku a sjednotit názvosloví, navigaci a hlavní CTA v obou směrech.
-- [ ] Doplnit k jednotlivým art pracím kontext nebo krátký příběh; samotná galerie čtyř obrázků podle lektorky nenaplňuje očekávání vyvolané samostatným portfoliem.
-- [ ] V Art portfoliu přesunout horizontální navigační indikátory dolů. Tečky na boku signalizují svislý, ne vodorovný pohyb.
+- [x] Sloučit UX/UI a Art portfolio do jednoho webu. Art práce mají vlastní lokalizované URL `/art/`, `/cs/art/` a `/de/art/`, které lze posílat samostatně.
+- [x] Sjednotit názvosloví, navigaci a hlavní CTA v obou směrech. Art používá společnou globální hlavičku a na konci vrací návštěvníka k UX/UI práci nebo kontaktu.
+- [x] Doplnit ke třem skupinám art prací kontext a osobní příběh: sněhové malby, kresba a ilustrace, barva a atmosféra.
+- [x] Nahradit původní horizontální galerii a její indikátory responzivním systémem rozbalovaných karet na desktopu a svislou galerií na mobilu.
+- [x] Zachovat Art bridge na Work jako jasný sekundární vstup do výtvarné části jednoho portfolia.
 
 Související commit: `50ef9ff Distinguish art portfolio section`.
 
@@ -69,14 +69,14 @@ Související commit: `50ef9ff Distinguish art portfolio section`.
 - [x] Sjednotit hlavní pořadí na `Work · About · Contact` a odstranit CV jako samostatnou položku.
 - [x] Zachovat dvouřádkovou mobilní hlavičku, ale zabránit tomu, aby se položky rozletěly k okrajům.
 - [x] Oddělit délku tyrkysové linky od rozestupů navigace a nechat mezery plynule růst podle šířky telefonu.
-- [ ] Při případném sloučení portfolií navrhnout jednu společnou globální navigaci a přímý vstup do Art sekce.
+- [x] Použít jednu společnou globální navigaci a přímé vstupy do Art sekce z Work a About. Art zůstává sekundární částí a nezatěžuje hlavní navigaci další položkou.
 
 Související commit: `8022dce Refine mobile navigation spacing`.
 
 ## 6. Témata k pozdějšímu prozkoumání
 
 - [ ] Logo: lektorka vnímala jméno v hlavičce jako prozatímní logo. Prověřit, zda vlastní značka potřebuje samostatný symbol, nebo zda má wordmark zůstat vědomým finálním řešením.
-- [ ] Signature efekt: zvážit přenesení jednoho charakteristického efektu z Art portfolia do UX/UI portfolia. Nemá jít o kopírování celé atmosféry, ale o jeden rozpoznatelný spojovací prvek mezi systémem a výtvarným přesahem.
+- [x] Signature efekt: sjednotit portfolia pomocí zlatého liquid efektu na Work, About, Contact a v přechodu z Art zpět k UX/UI.
 - [ ] Nabídka/služby: prověřit, zda část obsahu z Art portfolia popisující služby patří do About. Přidat ji jen tehdy, pokud podpoří hledanou UX/UI roli a nebude působit jako nesouvisející katalog činností.
 - [ ] Samostatně ověřit celé portfolio z pohledu recruitera: první dojem, rychlé pochopení role, skenovatelnost projektů, cesta k About a jednoduchost kontaktu.
 
@@ -85,5 +85,5 @@ Související commit: `8022dce Refine mobile navigation spacing`.
 1. Dokončit audit náhledů projektů na Work.
 2. Otestovat produkční kontaktní formulář.
 3. Projít jazyk, pomlčky a problematická zalomení ve všech třech jazycích.
-4. Rozhodnout, zda se portfolia sloučí do jednoho webu, a teprve potom řešit společnou navigaci a obsah Art sekce.
-5. Až nakonec zkoumat logo a případný společný signature efekt.
+4. Ověřit celé portfolio z pohledu recruitera: první dojem, skenovatelnost projektů, cesta k About a jednoduchost kontaktu.
+5. Až nakonec rozhodnout, zda wordmark v hlavičce potřebuje samostatný symbol.

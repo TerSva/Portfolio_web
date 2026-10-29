@@ -10,6 +10,7 @@ eleventyComputed:
     - { en: "/work/venek/", de: "/de/work/venek/", cs: "/cs/work/venek/" }
     - { en: "/work/puls/", de: "/de/work/puls/", cs: "/cs/work/puls/" }
     - { en: "/about/", de: "/de/about/", cs: "/cs/about/" }
+    - { en: "/art/", de: "/de/art/", cs: "/cs/art/" }
     - { en: "/contact/", de: "/de/contact/", cs: "/cs/contact/" }
     - { en: "/privacy/", de: "/de/privacy/", cs: "/cs/privacy/" }
 ---
@@ -38,7 +39,4 @@ eleventyComputed:
 <xhtml:link rel="alternate" hreflang="x-default" href="{{ siteBaseUrl }}{{ p.en | url }}"/>
 </url>
 {% endfor %}
-<url>
-<loc>{{ siteBaseUrl }}{{ '/art/' | url }}</loc>
-</url>
 </urlset>

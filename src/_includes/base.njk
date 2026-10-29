@@ -135,7 +135,11 @@
 <footer class="site-footer cs-footer-dark cs-spotlight">
   <span>© 2026 Tereza Britta Švanda</span>
   <nav class="footer-links" aria-label="{{ 'Navigace v patičce' if isCs else 'Footer navigation' }}">
-    <a class="footer-art-link" href="{{ ('/art/' if isCs else '/art/?lang=en') | url }}">Art portfolio</a>
+    {% if artPage %}
+    <a class="footer-art-link" href="{{ (workUrl or '/work/') | url }}">{{ 'UX/UI portfolio' if isCs else ('UX/UI-Portfolio' if isDe else 'UX/UI portfolio') }}</a>
+    {% else %}
+    <a class="footer-art-link" href="{{ ('/cs/art/' if isCs else ('/de/art/' if isDe else '/art/')) | url }}">Art portfolio</a>
+    {% endif %}
     <a class="footer-art-link" href="{{ ('/cs/privacy/' if isCs else ('/de/privacy/' if isDe else '/privacy/')) | url }}">{{ 'Ochrana soukromí' if isCs else ('Datenschutz' if isDe else 'Privacy') }}</a>
   </nav>
   <span>{{ 'Česko / Německo / mezinárodně' if isCs else 'Czech Republic / Germany / World' }}</span>
@@ -254,11 +258,44 @@
 </script>
 
 <script>
+/* The Art hero is a drawing dissolved into the page, not a separate card.
+   A restrained pointer drift gives the linework a little life without
+   competing with the gallery interaction below. */
+(function(){
+  var hero = document.querySelector('.art-hero');
+  var artwork = hero && hero.querySelector('.art-hero-artwork');
+  if (!artwork || !window.matchMedia('(hover:hover) and (pointer:fine)').matches || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  hero.addEventListener('pointermove', function(event){
+    var rect = artwork.getBoundingClientRect();
+    var nx = (event.clientX - (rect.left + rect.width / 2)) / (rect.width * .48);
+    var ny = (event.clientY - (rect.top + rect.height / 2)) / (rect.height * .46);
+    var active = nx * nx + ny * ny <= 1;
+    if (!active) {
+      delete hero.dataset.artActive;
+      artwork.style.setProperty('--art-shift-x', '0px');
+      artwork.style.setProperty('--art-shift-y', '0px');
+      return;
+    }
+    hero.dataset.artActive = 'true';
+    var x = Math.max(-1, Math.min(1, nx)) * 11;
+    var y = Math.max(-1, Math.min(1, ny)) * 7;
+    artwork.style.setProperty('--art-shift-x', x.toFixed(2) + 'px');
+    artwork.style.setProperty('--art-shift-y', y.toFixed(2) + 'px');
+  });
+  hero.addEventListener('pointerleave', function(){
+    delete hero.dataset.artActive;
+    artwork.style.setProperty('--art-shift-x', '0px');
+    artwork.style.setProperty('--art-shift-y', '0px');
+  });
+})();
+</script>
+
+<script>
 /* Click-to-enlarge for dense evidence images (e.g. a competitive
    analysis panel) that are too detailed to read at column width.
    Opt in per image with .cs-lightbox-figure on its wrapping figure. */
 (function(){
-  var figures = document.querySelectorAll('.cs-lightbox-figure');
+  var figures = document.querySelectorAll('.cs-lightbox-figure, .art-gallery-card');
   if (!figures.length) return;
 
   var overlay = document.createElement('div');
@@ -289,6 +326,18 @@
   figures.forEach(function(fig){
     var imgs = fig.querySelectorAll('img');
     if (!imgs.length) return;
+    if (fig.classList.contains('art-gallery-card')) {
+      var artImg = imgs[0];
+      var lang = document.documentElement.lang;
+      var label = lang === 'cs' ? 'Zvětšit dílo: ' : (lang === 'de' ? 'Werk vergrößern: ' : 'Enlarge artwork: ');
+      fig.setAttribute('role', 'button');
+      fig.setAttribute('aria-label', label + artImg.alt);
+      fig.addEventListener('click', function(){ open(artImg.src, artImg.alt); });
+      fig.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(artImg.src, artImg.alt); }
+      });
+      return;
+    }
     imgs.forEach(function(img){
       img.setAttribute('tabindex', '0');
       img.setAttribute('role', 'button');

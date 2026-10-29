@@ -105,9 +105,10 @@
     var isWorkHero = host.hasAttribute('data-work-liquid');
     var isAboutHero = host.hasAttribute('data-about-liquid');
     var isContactLiquid = host.hasAttribute('data-contact-liquid');
+    var isArtNext = host.classList.contains('art-next');
     var compactPointer = window.matchMedia('(max-width: 760px)').matches ||
       window.matchMedia('(hover: none), (pointer: coarse)').matches;
-    var settings = PALETTES[host.dataset.variant] || PALETTES.surface;
+    var settings = isArtNext ? PALETTES.about : (PALETTES[host.dataset.variant] || PALETTES.surface);
     if (isWorkHero && compactPointer) {
       settings = PALETTES.workMobile;
       host.dataset.liquidMode = 'mobile';
@@ -121,6 +122,10 @@
       return function () {};
     }
     if (isContactLiquid && compactPointer) {
+      host.dataset.liquidMode = 'static';
+      return function () {};
+    }
+    if (isArtNext && compactPointer) {
       host.dataset.liquidMode = 'static';
       return function () {};
     }
@@ -287,7 +292,7 @@
   }
 
   function init() {
-    var cleanups = Array.prototype.map.call(document.querySelectorAll('[data-liquid-lab], [data-work-liquid], [data-about-liquid]'), mount);
+    var cleanups = Array.prototype.map.call(document.querySelectorAll('[data-liquid-lab], [data-work-liquid], [data-about-liquid], .art-next'), mount);
     window.addEventListener('pagehide', function (event) {
       if (!event.persisted) cleanups.forEach(function (cleanup) { cleanup(); });
     }, { once: true });
