@@ -58,7 +58,22 @@
       colors: ['#001f1c', '#004d40', '#704718', '#c58a1c', '#fff0a8'],
       speed: 0.14, scale: 3.05, detail: 3.7, glow: 0.22, thickness: 0.9,
       swirl: 0.68, fold: -0.235, blackPoint: 0.012, brightness: 1.1,
-      balance: 0.54, grain: 0.012, opacity: 0.92, rotation: 3, offset: [0.025, 0], interactive: true
+      balance: 0.54, grain: 0.012, opacity: 0.92, rotation: 3, offset: [0.025, 0], interactive: true,
+      ripples: true, clickRipple: true, dpr: 1.35, maxFps: 60
+    },
+    workMobile: {
+      colors: ['#001f1c', '#004d40', '#704718', '#c58a1c', '#fff0a8'],
+      speed: 0.075, scale: 2.85, detail: 2.35, glow: 0.19, thickness: 0.92,
+      swirl: 0.58, fold: -0.19, blackPoint: 0.016, brightness: 1.02,
+      balance: 0.56, grain: 0, opacity: 0.78, rotation: 3, offset: [0.02, 0], interactive: false,
+      ripples: false, clickRipple: false, dpr: 0.7, maxFps: 24
+    },
+    about: {
+      colors: ['#001f1c', '#004d40', '#79501a', '#d4972c', '#fff0b5'],
+      speed: 0.095, scale: 3.45, detail: 3.65, glow: 0.25, thickness: 0.84,
+      swirl: 0.56, fold: -0.205, blackPoint: 0.008, brightness: 1.18,
+      balance: 0.51, grain: 0.008, opacity: 0.9, rotation: -4, offset: [0.2, -0.02], interactive: true,
+      ripples: false, clickRipple: false, dpr: 1, maxFps: 30
     }
   };
 
@@ -80,12 +95,20 @@
   }
 
   function mount(host) {
+    var isWorkHero = host.hasAttribute('data-work-liquid');
+    var isAboutHero = host.hasAttribute('data-about-liquid');
+    var compactPointer = window.matchMedia('(max-width: 760px)').matches ||
+      window.matchMedia('(hover: none), (pointer: coarse)').matches;
     var settings = PALETTES[host.dataset.variant] || PALETTES.surface;
-    var mobileWorkHero = host.hasAttribute('data-work-liquid') && (
+    if (isWorkHero && compactPointer) {
+      settings = PALETTES.workMobile;
+      host.dataset.liquidMode = 'mobile';
+    }
+    var staticAbout = isAboutHero && (
       window.matchMedia('(max-width: 760px)').matches ||
       window.matchMedia('(hover: none), (pointer: coarse)').matches
     );
-    if (mobileWorkHero) {
+    if (staticAbout) {
       host.dataset.liquidMode = 'static';
       return function () {};
     }
@@ -96,7 +119,7 @@
 
     var gl = canvas.getContext('webgl2', {
       alpha: true, antialias: false, depth: false, stencil: false,
-      premultipliedAlpha: true, powerPreference: 'high-performance'
+      premultipliedAlpha: true, powerPreference: compactPointer ? 'low-power' : 'high-performance'
     });
     if (!gl) {
       host.dataset.fallback = 'true';
@@ -138,10 +161,10 @@
     var drift = [0, 0]; var driftTarget = [0, 0];
     var ripples = []; var clock = 0; var lastRippleAt = 0; var lastRipplePoint = null;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var width = 0; var height = 0; var time = 0.4; var last = 0; var frame = 0;
+    var width = 0; var height = 0; var time = 0.4; var last = 0; var lastDraw = 0; var frame = 0;
 
     function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1 : 1.35);
+      var dpr = Math.min(window.devicePixelRatio || 1, settings.dpr || 1.35);
       var nextWidth = Math.max(1, Math.round(host.clientWidth * dpr));
       var nextHeight = Math.max(1, Math.round(host.clientHeight * dpr));
       if (nextWidth === width && nextHeight === height) return;
@@ -176,6 +199,9 @@
         if (last !== -1) { draw(); last = -1; }
         return;
       }
+      var frameInterval = settings.maxFps ? 1000 / settings.maxFps : 0;
+      if (frameInterval && lastDraw && now - lastDraw < frameInterval) return;
+      lastDraw = now;
       if (last === -1) last = now;
       var delta = last ? Math.min((now - last) / 1000, 0.1) : 0;
       last = now;
@@ -218,14 +244,14 @@
       driftTarget[1] = (0.5 - point.ny) * 0.028;
       var stamp = event.timeStamp / 1000;
       var moved = !lastRipplePoint || Math.hypot(point.nx - lastRipplePoint.nx, point.ny - lastRipplePoint.ny) > 0.018;
-      if (moved && stamp - lastRippleAt > 0.045) {
+      if (settings.ripples !== false && moved && stamp - lastRippleAt > 0.045) {
         addRipple(point, 0.036);
         lastRippleAt = stamp;
         lastRipplePoint = point;
       }
     }
     function onPointerDown(event) {
-      if (!canInteract || reduced.matches || event.pointerType !== 'mouse' || event.button !== 0) return;
+      if (!canInteract || settings.clickRipple === false || reduced.matches || event.pointerType !== 'mouse' || event.button !== 0) return;
       addRipple(pointerPoint(event), 0.085);
     }
     function onPointerLeave() { driftTarget[0] = 0; driftTarget[1] = 0; lastRipplePoint = null; }
@@ -249,7 +275,7 @@
   }
 
   function init() {
-    var cleanups = Array.prototype.map.call(document.querySelectorAll('[data-liquid-lab], [data-work-liquid]'), mount);
+    var cleanups = Array.prototype.map.call(document.querySelectorAll('[data-liquid-lab], [data-work-liquid], [data-about-liquid]'), mount);
     window.addEventListener('pagehide', function (event) {
       if (!event.persisted) cleanups.forEach(function (cleanup) { cleanup(); });
     }, { once: true });
