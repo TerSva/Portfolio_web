@@ -74,6 +74,13 @@
       swirl: 0.56, fold: -0.205, blackPoint: 0.008, brightness: 1.18,
       balance: 0.51, grain: 0.008, opacity: 0.9, rotation: -4, offset: [0.2, -0.02], interactive: true,
       ripples: false, clickRipple: false, dpr: 1, maxFps: 30
+    },
+    contact: {
+      colors: ['#001f1c', '#004d40', '#714819', '#c88923', '#fff0b5'],
+      speed: 0.1, scale: 5.7, detail: 5.3, glow: 0.3, thickness: 0.78,
+      swirl: 0.64, fold: -0.225, blackPoint: 0.005, brightness: 1.3,
+      balance: 0.5, grain: 0.008, opacity: 0.96, rotation: -10, offset: [0, 0], interactive: false,
+      ripples: false, clickRipple: false, dpr: 1, maxFps: 30
     }
   };
 
@@ -97,6 +104,7 @@
   function mount(host) {
     var isWorkHero = host.hasAttribute('data-work-liquid');
     var isAboutHero = host.hasAttribute('data-about-liquid');
+    var isContactLiquid = host.hasAttribute('data-contact-liquid');
     var compactPointer = window.matchMedia('(max-width: 760px)').matches ||
       window.matchMedia('(hover: none), (pointer: coarse)').matches;
     var settings = PALETTES[host.dataset.variant] || PALETTES.surface;
@@ -109,6 +117,10 @@
       window.matchMedia('(hover: none), (pointer: coarse)').matches
     );
     if (staticAbout) {
+      host.dataset.liquidMode = 'static';
+      return function () {};
+    }
+    if (isContactLiquid && compactPointer) {
       host.dataset.liquidMode = 'static';
       return function () {};
     }

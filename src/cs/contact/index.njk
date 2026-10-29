@@ -3,6 +3,7 @@ layout: base.njk
 title: "Kontakt"
 lang: cs
 activeNav: contact
+bodyClass: contact-page
 description: "Napište Tereze Brittě Švandě, produktové designérce a UX/UI designérce otevřené promyšlené spolupráci i pracovním příležitostem."
 ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
 homeUrl: "/cs/work/"
@@ -48,5 +49,7 @@ contactUrl: "/cs/contact/"
       <nav class="cs-contact-links" aria-label="Profesní profily"><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener">Behance</a></nav>
     </div>
   </div>
+  <div class="contact-liquid-rail" data-liquid-lab data-contact-liquid data-variant="contact" aria-hidden="true"></div>
 </section>
+<script src="{{ '/assets/js/work-liquid-lab.js' | url }}" defer></script>
 <script>(function(){var form=document.querySelector('[data-contact-chat]');if(!form)return;form.addEventListener('submit',function(event){event.preventDefault();var data=new FormData(form);var status=form.querySelector('[data-contact-status]');var name=String(data.get('name')||'').trim();var email=String(data.get('email')||'').trim();var message=String(data.get('message')||'').trim();if(!name||!email||!message){status.textContent=form.dataset.requiredMessage;return;}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent=form.dataset.emailMessage;return;}var button=form.querySelector('button[type="submit"]');button.disabled=true;status.textContent=form.dataset.sendingMessage;fetch(form.action,{method:'POST',body:data,headers:{Accept:'application/json'}}).then(function(response){if(!response.ok)throw new Error('Form submission failed');return response.json();}).then(function(){form.reset();form.querySelector('input[name="topic"]:checked').checked=true;status.textContent=form.dataset.successMessage;}).catch(function(){status.textContent=form.dataset.errorMessage;}).finally(function(){button.disabled=false;});});})();</script>

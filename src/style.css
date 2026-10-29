@@ -1247,9 +1247,28 @@ html[lang="de"] .cs-intro-copy{
    CONTACT - a dark, direct invitation rather than a form shell
 ============================================================ */
 .cs-contact{
-  min-height:calc(100svh - var(--nav-height));
-  padding:calc(var(--nav-height) + clamp(4rem,9vw,9rem)) 0 clamp(5rem,10vw,10rem);
+  min-height:auto;overflow:hidden;
+  padding:calc(var(--nav-height) + clamp(4rem,9vw,9rem)) 0 clamp(4rem,6vw,6rem);
   background:var(--nav-bg);color:var(--nav-ch);
+}
+.contact-page{min-height:100svh;display:flex;flex-direction:column;background:var(--nav-bg);}
+.contact-page main{display:flex;flex:1 0 auto;}
+.contact-page .cs-contact{flex:1 0 auto;width:100%;}
+.cs-contact.cs-spotlight>.contact-liquid-rail{
+  position:absolute;z-index:0;pointer-events:none;overflow:hidden;
+  width:min(52rem,42vw);height:100%;right:0;bottom:0;
+  -webkit-mask-image:radial-gradient(ellipse 110% 96% at 100% 100%,#000 0 60%,rgba(0,0,0,.8) 72%,transparent 96%);
+  mask-image:radial-gradient(ellipse 110% 96% at 100% 100%,#000 0 60%,rgba(0,0,0,.8) 72%,transparent 96%);
+}
+.cs-contact.cs-spotlight>.contact-liquid-rail>.liquid-lab-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.94;}
+.cs-contact.cs-spotlight>.contact-liquid-rail::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,#001f1c 0%,rgba(0,31,28,.96) 22%,rgba(0,31,28,.72) 48%,transparent 67%);
+}
+.cs-contact.cs-spotlight>.contact-liquid-rail[data-liquid-mode='static']{
+  background:
+    radial-gradient(ellipse at 82% 78%,rgba(200,137,35,.16),transparent 38%),
+    radial-gradient(ellipse at 92% 58%,rgba(0,77,64,.34),transparent 68%);
 }
 .cs-contact-grid{
   width:min(100% - (var(--gutter) * 2), var(--media-measure));
@@ -1553,6 +1572,7 @@ html[lang="de"] .cs-intro-copy{
   border-top:1px solid rgba(245,245,220,.16);
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
 }
+.contact-page .site-footer.cs-footer-dark{padding-block:1.35rem;}
 .footer-links{display:flex;align-items:center;gap:1.25rem;}
 .footer-art-link{color:var(--nav-ch2);text-decoration:none;border-bottom:1px solid rgba(245,245,220,.28);transition:color .2s ease,border-color .2s ease;}.footer-art-link:hover{color:var(--nav-gold);border-color:var(--nav-gold);text-decoration:none;}
 @media(max-width:520px){.site-footer.cs-footer-dark{align-items:flex-start;flex-direction:column;gap:.65rem;}.footer-links{gap:1rem;}}
@@ -1575,6 +1595,7 @@ html[lang="de"] .cs-intro-copy{
   .cs-intro-copy{text-align:left;}
   .cs-stat{border-radius:12px;aspect-ratio:auto;padding:1.5rem;}
   .cs-contact{padding-top:calc(var(--nav-height) + 3rem);}
+  .cs-contact.cs-spotlight>.contact-liquid-rail{width:21rem;height:28rem;right:-13rem;bottom:-4rem;opacity:.68;}
   .cs-contact-grid{grid-template-columns:1fr;grid-template-areas:"connect" "ways";gap:2.5rem;}
   .privacy-content{grid-template-columns:1fr;gap:0;}
   .contact-conversation__heading h1{font-size:clamp(2.25rem,10vw,2.75rem);white-space:normal;}

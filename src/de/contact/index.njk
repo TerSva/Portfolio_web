@@ -3,6 +3,7 @@ layout: base.njk
 title: "Kontakt"
 lang: de
 activeNav: contact
+bodyClass: contact-page
 description: "Kontaktiere Tereza Britta Švanda, Product & UX/UI Designerin, offen für Zusammenarbeit von der ersten Produktrichtung bis zur langfristigen Mitarbeit."
 ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
 enUrl: "/contact/"
@@ -43,8 +44,10 @@ navContact: "Kontakt"
       <nav class="cs-contact-links" aria-label="Berufliche Profile"><a href="https://www.linkedin.com/in/tereza-britta-%C5%A1vanda-66698b264/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.behance.net/terezabritta" target="_blank" rel="noopener">Behance</a></nav>
     </div>
   </div>
+  <div class="contact-liquid-rail" data-liquid-lab data-contact-liquid data-variant="contact" aria-hidden="true"></div>
 </section>
 
+<script src="{{ '/assets/js/work-liquid-lab.js' | url }}" defer></script>
 <script>
 (function(){
   var form = document.querySelector('[data-contact-chat]');

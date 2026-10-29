@@ -3,6 +3,7 @@ layout: base.njk
 title: "Contact"
 deUrl: "/de/contact/"
 activeNav: contact
+bodyClass: contact-page
 description: "Get in touch with Tereza Britta Švanda, a Product & UX/UI designer open to collaborations from an early product direction to a longer-term role."
 ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
 ---
@@ -51,8 +52,10 @@ ogImage: "/assets/about/tereza-britta-svanda-portrait.jpeg"
       </nav>
     </div>
   </div>
+  <div class="contact-liquid-rail" data-liquid-lab data-contact-liquid data-variant="contact" aria-hidden="true"></div>
 </section>
 
+<script src="{{ '/assets/js/work-liquid-lab.js' | url }}" defer></script>
 <script>
 (function(){
   var form = document.querySelector('[data-contact-chat]');
